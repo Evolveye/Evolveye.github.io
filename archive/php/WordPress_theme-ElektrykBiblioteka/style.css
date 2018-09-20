@@ -1,0 +1,394 @@
+/* *
+ * Theme Name:   Elektryk Biblioteka
+ * Description:  Motyw pod stronę biblioteki
+ * Version:      1.1
+ * Author:       Paweł Stolarski
+ */
+
+
+/* * Podstawa
+==================================================================================================== */
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+* {
+    margin : 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    }
+*:focus {
+    outline: none;
+}
+body {
+    font-family: Roboto, Helvetica, Arial;
+    font-size  : small;
+    background-color: #FCFCFC;
+    }
+hr {
+    display: block;
+    height : 1px;
+    border : 0;
+    margin : 2em 0;
+    border-top: 1px solid #DDD;
+    }
+a {
+    text-decoration: none;
+    color: inherit;
+    }
+.floatfix:after {
+    content: '';
+    display: block;
+    clear  : both;
+    }
+.facebook {
+    float : right;
+    width : 30px;
+    height: 30px;
+    margin: 6px;
+    background-image: url("http://zsp2.net/wp-content/uploads/2016/02/facebook-lite.png");
+    background-size: 100% 100%;
+    border-radius: 2px;
+    }
+
+
+/* * Nagłówek
+==================================================================================================== */
+header {
+    z-index : 100;
+    color   : #FFF;
+    width   : 100%;
+    height  : 44px;
+    position: fixed;
+    background-color: #0B327D;
+    box-shadow: 0 0 10px black;
+    }
+    #logo {
+        float : left;
+        width : 44px;
+        height: 44px;
+        background-image   : url("grafika/logo.png");
+        background-repeat  : no-repeat;
+        background-size    : calc(100% - 10px) calc(100% - 10px);
+        background-position: 5px 5px;
+        background-color   : #FFF;
+        }
+    #menu-naglowek li {
+        float : left;
+        cursor: pointer;
+        transition: all 0.2s;
+        }
+        #menu-naglowek li:hover {
+            background: rgba(0,0,0,0.2)
+            }
+        #menu-naglowek li a {
+            height   : 44px;
+            padding  : 13px;
+            display  : block;
+            font-size: 17px;
+            }
+    #menu_mobile {display:none;}
+        #nav_button {
+            cursor: pointer;
+            color : black;
+            float : right;
+            padding: 5px;    padding-left: 30px;    padding-right: 30px;
+            margin : 7px;    margin-left : 20px;    margin-right : 15px;
+            background-color: white;
+            letter-spacing: 1px;
+            font-size: 14px;
+            }
+        #menu_nav:hover > #nav_table_parent {display:block;}
+        #nav_table_parent {
+            width  : 100%;
+            display: none;
+            position: absolute;    top: 34px;
+            padding-top: 10px;
+            }
+            #nav_table {
+                height: 200px;
+                line-height: 22px;
+                border-top : 30px solid white;
+                background-color: #163E87;
+                }
+                .nav_menu {
+                    z-index : 1;
+                    float   : left;
+                    position: relative;    top: -26px;
+                    margin-right: 35px;
+                    }
+                    .nav_menu h2 {
+                        color: black;
+                        padding-left : 5px;
+                        margin-bottom: 5px;
+                        font-weight: normal;
+                        font-size  : 1.5vw;
+                        }
+                    .nav_menu a {
+                        display: table;
+                        font-size: 16px;
+                        margin-left : 11px;    margin-bottom: 10px;
+                        padding-left: 2px;     padding-right: 2px;
+                        border-bottom: 1px dashed #fe6a1a;
+                        }
+    .search-form {
+        float: right;
+        font-family: initial;
+        height: 100%;
+        }
+        .search-field {
+            height : 30px;
+            border : none;
+            padding: 5px;
+            margin-right: -4px;
+            }
+        .search-submit {
+            width  : 50px;
+            height : 100%;
+            outline: none;
+            border : none;
+            cursor : pointer;
+            font-weight: bold;
+            background-color   : #0B327D;
+            background-image   : url("http://zsp2.net/wp-content/uploads/2016/02/lupa.png");
+            background-repeat  : no-repeat;
+            background-size    : 30px 30px;
+            background-position: 10px 7px;
+            }
+
+
+/* * Część właściwa
+==================================================================================================== */
+main {
+    z-index : -2;
+    overflow: hidden;
+    padding-top: 44px;
+    font-size  : medium;
+    min-height : calc(100vh - 3px);
+    background-color: #E8E5D0;
+    }
+    #section-head {
+        color: white;
+        min-height: 180px;
+        position  : relative;
+        background-image : url("grafika/ksiazki.jpg");
+        background-repeat: no-repeat;
+        background-size  : cover;
+        border-bottom    : 5px solid #bd5532;
+        }
+        #exlibris {
+            width : 150px;
+            height: 150px;
+            border-radius: 15px;
+            background-image : url("grafika/exlibris.jpg");
+            background-repeat: no-repeat;
+            background-size  : cover;
+            position: absolute;    top: 15px;    right: 15px;
+            }
+    #left_column {
+        width: 300px;
+        float: left;
+        font-size: 1.2vw
+        }
+        #left_column ul {
+            background: linear-gradient(to right, #bd5532, #E8E5D0);
+            }
+        #left_column li {
+            margin-bottom: 2px;
+            }
+            #left_column li * {
+                padding: 20px;
+                display: block;
+                transition: padding-left .5s;
+                letter-spacing  : 2px;
+                background-color: #E8E5D0;
+                }
+                #left_column li *:hover {
+                    padding-left: 40px;
+                    border-right: 2px solid #bd5532;
+                    background-color: #FAFAFA;
+                    }
+        .widget {
+            padding: 20px;
+            background-color: rgba(0,0,0,0.2);
+            }
+        .widget2 {
+            background: none
+            border-top: 5px solid #bd5532;
+            margin-top: -2px;    margin-bottom: 100px;
+            }
+            .widget2 ul {
+                margin-left: -20px;   margin-right: -20px;
+                }
+    #section-body {
+        float: right;
+        width: calc(100% - 400px);
+        min-height: calc(100% - 40px);
+        margin-left : 50px;    margin-right: 50px;
+        }
+        #main-post {
+            position: relative;
+            }
+        #lada {
+            float : right;
+            width : 420px;
+            height: 260px;
+            border-radius: 15px;
+            background-image : url("grafika/lada.jpg");
+            background-repeat: no-repeat;
+            background-size  : cover;
+            }
+        article {
+            color  : #656e7f;
+            margin : 20px auto;
+            padding: 15px;
+            overflow  : hidden;
+            border-top: 8px solid #bd5532;
+            text-align: justify;
+            background: #FAFAFA;
+            transition: all 0.3s;
+            }
+            article h1 {
+                color : #bd5532;
+                margin: 20px;
+                font-size  : 40px;
+                font-family: Arial;
+                font-weight: normal;
+                text-align : center;
+                }
+            .article-content {
+                margin-top: 10px;
+                }
+                .article-content img {
+                    max-width: 100%;
+                    height: auto;
+                    }
+            .meta {
+                font-size: small;
+                color: #888;
+                }
+        .category-main {
+            border-left: 8px solid #bd5532;    border-top: none;
+            }
+            .category-main:hover {
+                background-color: #F6F6F6;
+                }
+            .category-main h1 {
+                text-align: left;
+                font-size : 25px;
+                margin: 0;
+                }
+        #nav-link {
+            margin: 20px;    margin-left: 50px;
+            font-size: small;
+            }
+            #nav-link a {
+                color: #FFF;
+                font-weight: bold;
+                border-radius: 5px;
+                background-color: #bd5532;
+                padding: 15px;    padding-top: 7px;    padding-bottom: 7px;
+                }
+            #nav-link-separator {
+                width  : 50px;
+                display: inline-block;
+                }
+
+
+/* * Stopka
+==================================================================================================== */
+footer {
+    color: #d7c8a1;
+    overflow: hidden;
+    position: relative;
+    padding : 30px;    padding-top: 7px;
+    border-top: 3px double #e60000;
+    background-color: #0B2169;
+    }
+    #main-footer {border-top: none;}
+    .copyright {
+        position: absolute;    bottom: 10px;    right: 10px;
+        font-weight: bold;
+        }
+    .cookies {
+        position: absolute;    bottom: 10px;    left: 10px;
+        }
+        .cookies a {
+            text-decoration: underline;
+        }
+
+/* * * * * * * * * * * * * * *
+/* RESPONSYWNOŚĆ */
+@media screen and (max-width: 1000px){
+    .facebook {
+        width : 50px;
+        height: 50px;
+        position: absolute;    right:3px;    top:83px;
+        border-radius: 0;
+        }
+    header {
+        height  : 80px;
+        position: absolute;
+        }
+    #logo {
+        width : 80px;
+        height: 80px;
+        background-position: 10px 10px;
+        background-size    : 60px 60px;
+        }
+	#menu-naglowek li {
+            height: 80px;
+            padding-top : 25px;
+            margin-right: 10px;
+            }
+        #menu-naglowek li a {
+            font-size: 2.5vw;
+            }
+        .search-form {
+            float : none;
+            height: 70px;
+            margin: 0px;
+            position: absolute;    top: 80px;    right: 0;
+            padding: 10px;    padding-right: 70px;
+            background-color: #0B327D;
+            border-radius   : 0 0 0 10px;
+            }
+            .search-field {
+                width : 150px;
+                height: 50px;
+                transition: all 0.2s;
+                }
+                .search-field:focus {
+                    width: 500px;
+                }
+            .search-submit {
+                height: 50px;
+                }
+    main {
+        padding-top: 80px;
+        font-size  : small;
+        }
+        #left_column {
+            width: 250px;
+            font-size: large;
+            }
+            #left_column li *:hover {
+                padding-left: 20px;
+                }
+        #section-body {
+            width: calc(100% - 250px);
+            }
+            #section-article {
+                margin-left: 10px;    margin-right: 10px;
+                }
+            #nav-link {
+                font-size: x-small;
+                }
+                #nav-link a {
+                    padding: 18px;    padding-top: 13px;    padding-bottom: 13px;
+                    }
+    footer {
+        font-weight: bold;
+        font-size  : 20px;
+        padding: 30px;    padding-top: 10px;
+        }
+}

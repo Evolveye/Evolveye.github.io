@@ -1,0 +1,10 @@
+{
+  "contentType" : "HTML",
+  "title" : "Improved HTML",
+
+  "content" : [
+    "Textarea",
+    "Nav",
+    "Hashes"
+  ]
+}

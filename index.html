@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>This is empty space?</title>
+
+  <style>
+    body {
+      background-color: #fefefe;
+      margin: 0;
+      font-family: monospace;
+    }
+
+    div {
+      position: absolute;
+      top: 50%;
+      transform: translateY( -50% );
+      width: 100%;
+      padding: 5px 0;
+      border-top: 1px solid #E0E0E0;
+      border-bottom: 1px solid #E0E0E0;
+      background: #f7f7f7;
+      text-align: center;
+    }
+      div::after {
+        content: attr( data-after );
+        position: absolute;
+        bottom: -100%;
+        left: 50%;
+        transform: translateX( -50% );
+        opacity: 0.2;
+      }
+  </style>
+</head>
+<body>
+  <div data-after="(yet)">This is empty space, nothing is here.</div>
+</body>
+</html>

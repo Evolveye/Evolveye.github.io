@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{background:#f2f2f2; margin:0;}
+header > a{text-decoration:none; color:#BBB;}
+p{text-align:center;}
+canvas{background:#FFF; display:block; margin: 15px auto 20px; border: 1px solid #333; box-shadow: 0 0 16px 2px #000;}
+</style>
+</head>
+<body>
+
+<header style="font-family:'Arial Black'; background:black; color:#BBB;">
+	<img src="index/logo.png" style="vertical-align: middle; width:25px; height:25px;">
+	<a href="index.htm">Pawel w internetach</a>
+</header>
+
+  <canvas id="myCanvas"></canvas>
+  <p id="ekran"></p>
+<script>
+// Ustawienie zmiennych
+// Pole canvas, klawisze[keys], gracz[player], ściany[boxes], X2/Y2[width/height]
+var canvas = document.getElementById("myCanvas"),
+	c = canvas.getContext("2d"),
+	height = 800,
+	width = 1000,
+	speed = 10,
+	keys = [],
+	player ={
+		X : 150,
+		Y : 670,
+		X2: 10,
+		Y2: 10,
+	},
+	pl_right ={X: player.X, X2: player.X2,}
+	pl_up ={Y: player.Y, Y2: player.Y2,}
+	right_left = 0,
+	up_down = 0,
+
+	//Ustawienie ścian
+	boxes = [],
+	triangles = [];
+	
+//Krawędzie canvas
+boxes.push({X: 0,       Y: 0,        X2: 5,     Y2: height}); //lewa
+boxes.push({X: 0,       Y: height-5, X2: width, Y2: 5     }); //dolna
+boxes.push({X: width-5, Y: 0,        X2: 5,     Y2: height}); //prawa
+boxes.push({X: 0,       Y: 0,        X2: width, Y2: 5,    }); //górna
+
+//Boxy, trójkąty
+boxes.push({X: 100, Y: 700,
+			X2: 20, Y2: 50,
+});
+boxes.push({X: 200, Y: 700,
+			X2: 20, Y2: 50,
+});
+boxes.push({X: 100, Y: 600,
+			X2: 20, Y2: 50,
+});
+boxes.push({X: 200, Y: 600,
+			X2: 20, Y2: 50,
+});
+triangles.push({M : 200, M2: 500,
+				L : 200, L2: 450,
+				L3: 100, L4: 475,
+})
+//Rozpoczęcie skryptu
+function start(){
+requestAnimationFrame(start);
+canvas.height = height;
+canvas.width = width;
+
+kolizja();
+gracz();
+box();
+}
+
+//Wszystko co dotyczy gracza
+function gracz(){
+c.clearRect(0, 0, width, height);	
+
+c.fillStyle = "red";
+c.fillRect(player.X, pl_up.Y, player.X2, player.Y2);
+pl_up.Y -= 1000
+
+c.fillStyle = "red";
+c.fillRect(player.X, player.Y, player.X2, pl_up.Y2);
+pl_up.Y2 += 1000
+
+c.fillStyle = "red";
+c.fillRect(pl_right.X, player.Y, player.X - pl_right.X + pl_right.X2, player.Y2);
+pl_right.X2 += 1000
+pl_right.X -= 1000
+
+c.fillStyle = "blue";
+c.fillRect(player.X, player.Y, player.X2, player.Y2);
+
+	//Kierunek prawo/lewo
+	if(keys[68] || keys[65]){
+	 if(keys[68]){
+		if(pl_right.X2 - player.X2 - 1000 > speed){right_left = speed}
+		else{right_left = pl_right.X2 - player.X2 - 1000}
+	 }if(keys[65]){
+		if(player.X - pl_right.X - 1000 > speed){right_left = -speed}
+		else{right_left = -(player.X - pl_right.X - 1000)}
+	}}else{right_left = 0}
+	
+	//Kierunek góra/dół
+	if(keys[83] || keys[87]){
+	 if(keys[83]){
+		if(pl_up.Y2 - player.Y2 - 1000 > speed){up_down = speed}
+		else{up_down = pl_up.Y2 - player.Y2 - 1000}
+	 }if(keys[87]){
+		if(player.Y - pl_up.Y - 1000 > speed){up_down = -speed}
+		else{up_down = -(player.Y - pl_up.Y - 1000)}
+	}}else{up_down = 0}
+	
+player.X += right_left
+player.Y += up_down
+}
+
+//Sprawdzanie kolizji obiektów
+function kolizja(){
+for(var i = 0; i < boxes.length; i++){
+	//Lewo
+	if(player.X + pl_right.X2 > boxes[i].X && player.X < boxes[i].X && player.Y + player.Y2 > boxes[i].Y && player.Y < boxes[i].Y + boxes[i].Y2)
+		{pl_right.X2 = boxes[i].X - player.X}
+	//Prawo
+	if(pl_right.X < boxes[i].X + boxes[i].X2 && player.X + player.X2 > boxes[i].X + boxes[i].X2 && player.Y + player.Y2 > boxes[i].Y && player.Y < boxes[i].Y + boxes[i].Y2)
+		{pl_right.X = boxes[i].X + boxes[i].X2}
+	//Dół
+	if(pl_up.Y < boxes[i].Y + boxes[i].Y2 && player.Y + player.Y2 > boxes[i].Y + boxes[i].Y2 && player.X + player.X2 > boxes[i].X && player.X < boxes[i].X + boxes[i].X2)
+		{pl_up.Y = boxes[i].Y + boxes[i].Y2}
+	//Góra
+	if(player.Y + pl_up.Y2 > boxes[i].Y && player.Y < boxes[i].Y && player.X + player.X2 > boxes[i].X && player.X < boxes[i].X + boxes[i].X2)
+		{pl_up.Y2 = boxes[i].Y - player.Y}
+}
+for(var i = 0; i < triangles.length; i++){
+//Zmienne: trian_M2L4 + elstrian_M2L4 - co jest wyżej: M2 czy L4 || playtrian_L4 - gracz nad wysokością L4, mnoztrian - mnożnik
+//Dół
+if(triangles[i].M2 >= triangles[i].L4){var trian_M2L4 = (player.X + player.X2), elstrian_M2L4 = triangles[i].M2;}
+	else{var trian_M2L4 = player.X, elstrian_M2L4 = triangles[i].L4;}
+//Lewo
+if(player.Y + player.Y2 > triangles[i].L4){playtrian_L4 = player.Y, mnoztrian = 1, trian_ML = triangles[i].M}
+	else{playtrian_L4 = player.Y + player.Y2, mnoztrian = -1, trian_ML = triangles[i].L}
+	//Lewo
+	if(player.X + pl_right.X2 > triangles[i].L3 && player.X < triangles[i].M && player.Y + player.Y2 > triangles[i].L2 && player.Y < triangles[i].M2 && (player.Y < triangles[i].L4 - player.Y2 || player.Y > triangles[i].L4))
+		{pl_right.X2 = (triangles[i].L3 - player.X) + (trian_ML - triangles[i].L3)/(triangles[i].M2 - triangles[i].L4)*(playtrian_L4 - triangles[i].L4)*mnoztrian}
+	   else if(player.X + pl_right.X2 > triangles[i].L3 + player.Y - triangles[i].L2 && player.X < triangles[i].L3 + player.Y - triangles[i].L2 && player.Y + player.Y2 > triangles[i].L4 && player.Y < triangles[i].M2)
+		{pl_right.X2 = triangles[i].L3 - player.X}
+	//Dół
+	if(pl_up.Y < triangles[i].M2 && player.Y + player.Y2 > triangles[i].L4 && trian_M2L4 > triangles[i].L3 && trian_M2L4 < triangles[i].M)
+		{pl_up.Y = (triangles[i].L4) + (triangles[i].M2 - triangles[i].L4)/(triangles[i].M - triangles[i].L3)*(trian_M2L4 - triangles[i].L3)}
+	   else if(pl_up.Y < triangles[i].M2 && player.Y + player.Y2 > triangles[i].L4 && player.X + player.X2 > triangles[i].L3 && player.X < triangles[i].M)
+		{pl_up.Y = elstrian_M2L4}
+	//Góra
+	if(player.Y + pl_up.Y2 > triangles[i].L2 && player.Y + player.Y2 < triangles[i].L4 && player.X + player.X2 > triangles[i].L3 && player.X < triangles[i].L)
+		{pl_up.Y2 = (triangles[i].L4 - player.Y) + (triangles[i].L2 - triangles[i].L4)/(triangles[i].L - triangles[i].L3)*(trian_M2L4 - triangles[i].L3)}
+//	   else if(pl_up.Y < triangles[i].M2 && player.Y + player.Y2 > triangles[i].L4 && player.X + player.X2 > triangles[i].L3 && player.X < triangles[i].M)
+//		{pl_up.Y = elstrian_M2L4}
+}
+}
+
+//Tworzenie ścian
+function box(){
+	//Prostokąty
+	for (var i = 0; i < boxes.length; i++) {
+		c.fillStyle = "#000";
+		c.fillRect(boxes[i].X, boxes[i].Y, boxes[i].X2, boxes[i].Y2);
+}
+	//Trójkąty
+	for (var i = 0; i < triangles.length; i++) {
+		c.beginPath();
+        c.moveTo(triangles[i].M,triangles[i].M2);
+        c.lineTo(triangles[i].L,triangles[i].L2);
+        c.lineTo(triangles[i].L3,triangles[i].L4);
+        c.fill();
+}	}
+
+//Klawisz wciśnięty = true  &&  Klawisz podniesiony = false  &&  Uruchomienie skryptu
+document.body.addEventListener("keydown", function(e){keys[e.keyCode] = true});
+document.body.addEventListener("keyup", function(e){keys[e.keyCode] = false});
+start();
+</script>
+<script>
+//Skrypt pomocniczy
+ekran();
+function ekran(){
+requestAnimationFrame(ekran);
+var i = 0;
+document.getElementById("ekran").innerHTML = "Góra: W"
++ " || " + "Prawo: D"
++ " || " + "Lewo: A"
++ " || " + "Dół: S"
+}
+</script>
+</body>
+</html>

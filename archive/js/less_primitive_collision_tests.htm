@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<style>
+</style>
+ 
+<canvas id="canvas"></canvas>
+<div id="display"></div>
+<div>Press G to activate god mode</div>
+ 
+<script>
+var canvas = document.getElementById('canvas'),
+	img = new Image();
+	img.src = 'minka.png';
+	canvas.width = 1000;
+	canvas.height = 700;
+
+var	ctx = canvas.getContext("2d"),
+    display = document.getElementById('display'),
+	player ={solid:1, x: 245, y: 325, w: 15, h: 15,},
+	keys = [],
+	speed = 100, 
+	D=0, A=0, S=0, W=0, a = 0.2, b = 0.1,
+	boxes =[
+		wall=[2, {x:0, y:0},{x:0, y:canvas.height}],
+		wall=[2, {x:canvas.width, y:0},{x:canvas.width, y:canvas.height}],
+		wall=[2, {x:0, y:canvas.height},{x:canvas.width, y:canvas.height}],
+		wall=[2, {x:0, y:0},{x:canvas.width, y:0}],
+		pol4=[1, {x:300, y:100},{x:350, y:50 },{x:400, y:100},{x:350, y:150}],
+		pol4=[1, {x:300, y:400},{x:350, y:400},{x:350, y:450},{x:300, y:450}],
+	];
+
+function playerLogic(){
+	if(keys[68]){if(D<speed) D+=a} else D>a ? D-=b : D=Math.round(D)
+	if(keys[65]){if(A<speed) A+=a} else A>a ? A-=b : A=Math.round(A)
+	nextPos ={x:player.x, y:player.y, w:player.w, h:player.h};
+	nextPos.x += D - A
+	collDetect(nextPos, player,'X')
+	
+	if(keys[83]){if(S<speed) S+=a} else S>a ? S-=b : S=Math.round(S)
+	if(keys[87]){if(W<speed) W+=a} else W>a ? W-=b : W=Math.round(W)
+	nextPos ={x:player.x, y:player.y, w:player.w, h:player.h};
+	nextPos.y += S - W
+	collDetect(nextPos, player,'Y')
+
+	ctx.drawImage(img, player.x, player.y, player.w, player.h);
+	if(player.solid==2){
+		ctx.beginPath(); ctx.lineWidth=5;
+		ctx.arc(player.x+player.w/2, player.y+player.h/2, 15, 0, 2*Math.PI);
+		ctx.stroke();
+	}
+}
+
+function collDetect(obj, obj2, XY){
+objPoints =[{x:obj.x, y:obj.y},{x:obj.x+obj.w, y:obj.y},
+			{x:obj.x+obj.w, y:obj.y},{x:obj.x+obj.w, y:obj.y+obj.h},
+			{x:obj.x+obj.w, y:obj.y+obj.h},{x:obj.x, y:obj.y+obj.h},
+			{x:obj.x, y:obj.y+obj.h},{x:obj.x, y:obj.y},
+			{x:obj.x, y:obj.y},{x:obj2.x, y:obj2.y},
+			{x:obj.x+obj.w, y:obj.y+obj.h},{x:obj2.x+obj2.w, y:obj2.y+obj2.h}
+		];
+for(i=0; i < boxes.length; i++) //Długość boxes
+for (var j=1, k; j < boxes[i].length; j++) //Wyciąganie punktów z kolejnych boxów
+for (var l=0, m; l < objPoints.length; l+=2){ // Wyciąganie kolejnych par objPoints
+	if(j+1 == boxes[i].length)k=1; else k=j+1
+	if(l+1 == objPoints.length)m=0; else m=l+1
+	if(boxes[i][0] < player.solid) continue; //Mniejszy solid - pomijana kolizja
+
+	var p11 = objPoints[l], p12 = objPoints[m], p21 = boxes[i][j],  p22 = boxes[i][k],
+		denominator, a, b, numerator1, numerator2, result = {
+			x: null,
+			y: null,
+			onLine1: false,
+			onLine2: false
+		};
+	denominator = ((p12.y - p11.y) * (p22.x - p21.x)) - ((p12.x - p11.x) * (p22.y - p21.y));
+	a = p21.y - p11.y;
+	b = p21.x - p11.x;
+	numerator1 = ((p12.x - p11.x) * a) - ((p12.y - p11.y) * b);
+	numerator2 = ((p22.x - p21.x) * a) - ((p22.y - p21.y) * b);
+	a = numerator1 / denominator;
+	b = numerator2 / denominator;
+
+	result.x = p21.x + (a * (p22.x - p21.x));
+	result.y = p21.y + (a * (p22.y - p21.y));
+
+	// Jeżeli nieskończone odcinki przechodzą przez punkt przecięcia wykrywa kolizję
+	if (a > 0 && a < 1) result.onLine1 = true;
+	if (b > 0 && b < 1) result.onLine2 = true;
+	if(result.onLine1 == true && result.onLine2 == true){
+		if(XY == 'X'){
+			D=0;A=0;
+		}
+		if(XY == 'Y'){
+			S=0;W=0;
+		}
+		//break
+		return
+	}
+}obj2.x = obj.x; obj2.y = obj.y; return};
+
+function draw() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.beginPath();
+	ctx.strokeStyle = "black";
+	ctx.lineWidth=1;
+	for(i=0; i < boxes.length; i++){
+		ctx.moveTo(boxes[i][1].x, boxes[i][1].y);
+		for (var j=1; j < boxes[i].length; j++)
+			ctx.lineTo(boxes[i][j].x, boxes[i][j].y);
+		ctx.lineTo(boxes[i][1].x, boxes[i][1].y);
+		ctx.stroke();
+		ctx.fillStyle = '#CCC';
+		ctx.fill()
+}}
+
+function mainLoop() {
+    draw();
+    playerLogic();
+    requestAnimationFrame(mainLoop);
+}
+
+mainLoop();
+document.body.addEventListener("keydown", function(e){
+	if(e.keyCode == 71){player.solid==1 ? player.solid=2 : player.solid=1}
+	keys[e.keyCode] = true;
+});
+document.body.addEventListener("keyup", function(e){keys[e.keyCode] = false});
+</script>
+</body>
+</html>

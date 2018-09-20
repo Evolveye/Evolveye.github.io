@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>R ≡ Dynamic site library</title>
+    <!--  -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--  -->
+    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./styles/main.css"> 
+    <link rel="stylesheet" href="./styles/960.css" media="screen and (max-width:960px)">
+    <link rel="stylesheet" href="./styles/480.css" media="screen and (max-width:480px)">
+    <!--  -->
+    <script src="./scripts/R.js"></script>
+    <script src="./scripts/RNav.js"></script>
+    <script src="./scripts/RHashes.js"></script>
+    <script src="./scripts/RTextarea.js"></script>
+    <!--  -->
+  </head>
+  <body>
+
+    <div id="desktop">
+      <header id="header">
+        <div class="RLogo big">
+          <span class="l"><i>{ ( &lt; </i>R<i> &gt; ) }</i></span>
+          <span class="b s"><i>{ ( </i>&lt; <i>R </i>&gt;<i> ) }</i></span>
+          <span class="b r"><i>{ </i>( <i>&lt; R &gt;</i> )<i> }</i></span>
+          <span class="b c">{ <i>( &lt; R &gt; )</i> }</span>
+        </div>
+        <div class="item langs">
+          <select onchange="RHashes.set('lang',this.value)">
+            <option></option>
+            <option>pl</option>
+            <option>en</option>
+          </select>
+        </div>
+      </header>
+      <script> R.getFile('./desktop.htm') </script>
+    </div>
+
+    <nav id="nav">
+      <div class="action">
+        <a href="https://paweleks.github.io/">
+          <b class="RLogo">{(<span class="s">&lt;</span> R <span class="s">&gt;</span>)}</b>
+        </a>
+      </div>
+      <div class="items">
+        <div class="item">
+          <h3 data-r-tr="Projects under the R sign"></h3>
+          <p>
+            <span data-r-tr="Improved markups"></span>
+            <span class="outdated" data-r-tr="Simplified canvas"></span>
+            <span class="outdated" data-r-tr="Script constructor"></span>
+          </p>
+        </div>
+      </div>
+      <div class="other">
+        <p><i data-r-tr="Version of library"></i>: <span class="version_alpha">Alpha</span></p>
+        <p data-r-tr="motto"></p>
+      </div>
+      <div class="eraser"></div>
+    </nav>
+
+    <main id="main">
+      <nav data-r name="contentNav">
+        <ul name="iTags" title='<i data-r-tr="Improved markups"></i>'></ul>
+      </nav>
+      <article id="content"></article>
+      <article id="defaultContent" hidden>
+        <script> R.getFile('./content.htm') </script>
+      </article>
+    </main>
+
+    <footer id="footer">
+      <script>
+        function contentBuilder() {
+         // If extension isn't included - include it
+            if(eval(`typeof R${extension} == "undefined"`)) R.getFile(`./RAddons/${extension}/addon.js`,false)
+
+         // Get extension presentation
+            R.getFile(`./RAddons/${extension}/prezi.htm`, false, prezi => {
+              if(!prezi) return
+
+              //* Variables: info, template, header, sections
+                let info = prezi.querySelector('template.info')
+                if(!info) return
+
+                info = JSON.parse(`{${info.content.textContent}}`)
+                if(!info._lang) return
+
+                let template = prezi.querySelector(`template.${document.documentElement.lang}`)
+                info.Lang = document.documentElement.lang
+                
+                if(!template) {
+                  template = prezi.querySelector(`template.${info._lang}`)
+                  info.Lang = info._lang
+                }
+
+                delete info._lang
+
+                let header   = template.content.querySelector('header')
+                let sections = template.content.querySelectorAll('section')
+
+              //* Content 
+                content.innerHTML = ''
+                if(header) {
+                  let infos   = ''
+                  for(let i in info)
+                    infos += `
+                      <div>
+                        <span class="property"><i data-r-tr=>${i}</i></span>
+                        <span class="value">${info[i]}</span>
+                      </div>
+                    `
+
+                  content.innerHTML += `
+                    <header>
+                      <div class="project-data">${infos}</div>
+                      ${header.innerHTML}
+                    </header>
+                  `
+                }
+
+                for(let section of sections)
+                  content.appendChild(section.cloneNode(true))
+
+              R.tags.__constructor(content,true)
+            })
+        }
+
+        let screens = desktop.querySelectorAll('aside')
+        for(let screen of screens) {
+         // Create item inside header
+            let title   = screen.querySelector('h1')
+            let content = document.createElement('div')
+                content.innerHTML = `
+                  <h3>${title ? title.textContent : ''}</h3>
+                  <p>${screen.getAttribute('data-desc') || ''}</p>
+                `
+    
+            let item = document.createElement('div')
+                item.className  = 'item screen'
+                item.style.left = '20px'
+                item.style.top  = '20px'
+                item.style.backgroundImage = `url(${screen.querySelector('img').getAttribute('src')})`
+                item.appendChild(content)
+                item.onclick = e => {
+                  if(screen.style.left == '0px') {
+                    let position = screen.getAttribute('data-position') || 'left'
+                    screen.style.left = position == 'left' ? '-100vw' : '100vw'
+                  } else {
+                    screen.style.left = 0
+                  }
+                }
+    
+            header.appendChild(item)
+          
+         // Create screen close button
+            let close = document.createElement('div')
+                close.className = 'screenClose'
+                close.onclick = e => {
+                  let position = screen.getAttribute('data-position')
+                  screen.style.left = position == 'left' ? '-100vw' : '100vw'
+                }
+
+            screen.appendChild(close)
+        }
+
+        let extension
+        content.innerHTML = defaultContent.innerHTML
+        R.getFile('./RAddons/index.json', false ,json => {
+          // General things
+            let config     = JSON.parse(json)
+            let extensions = config.content
+
+            content.className += `${config.contentType}`
+            document.title = `R ≡ ${config.title}`
+
+          // Build nav
+            for(let extension of extensions)
+              RNav.item_insert('contentNav','iTags',
+                `<a onclick="RHashes.set('extension','${extension}')">${extension}</a>`
+              )
+
+          // Build content
+            RHashes.onchange('extension', newExtension => {
+              if(extensions.includes(newExtension))
+                RNav.item_active('contentNav',RNav.get('contentNav','iTags',newExtension))
+              else {
+                content.innerHTML = defaultContent.innerHTML
+                RNav.item_active('contentNav')
+                return
+              }
+
+              extension = newExtension
+              contentBuilder()
+            },true)
+        })
+
+        RHashes.onchange('lang', (lang='pl') => {
+          if(!lang) return
+          R.translate(lang,'./langs')
+          document.documentElement.lang = lang
+          if(extension) contentBuilder()
+        },true)
+      </script>
+    </footer>
+
+  </body>
+</html>

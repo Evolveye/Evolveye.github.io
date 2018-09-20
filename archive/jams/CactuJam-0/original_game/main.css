@@ -1,0 +1,139 @@
+/* Evolution game */
+.evolution_game {
+  overflow: hidden;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate( -50%, -50% );
+  background-image: url( ./bgr.gif );
+  font-family: monospace;
+}
+  /* init */
+  .evolution_game * {
+    user-select: none;
+    image-rendering: pixelated;
+  }
+  .evolution_game > *,
+  .evolution_game .animations img,
+  .evolution_game .entities-a img,
+  .evolution_game .lands img,
+  .evolution_game .entities-b img {
+    position: absolute;
+  }
+  .evolution_game .button {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #111;
+    background-color: rgb(255, 254, 240);
+    border-radius: 10px;
+    margin: 10px;
+    transition: .1s;
+    cursor: pointer;
+  }
+    .evolution_game .button.disabled {
+      background-color: #AAA;
+      filter: grayscale(70%);
+      cursor: no-drop;
+    }
+    .evolution_game .button.active {
+      border-color: #f0b513;
+    }
+    .evolution_game .button.active,
+    .evolution_game .button:active,
+    .evolution_game .button:not(.disabled):hover {
+      width: 60px;
+      height: 60px;
+      margin: 5px;
+    }
+
+  /* menu */
+  .evolution_game [data-function="nextStage"] {
+    right: 0;
+    background-image: url( ./ingame_graphics/next_stage.png );
+    background-size: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .evolution_game [data-function="refresh"] {
+    left: 0;
+    background-image: url( ./ingame_graphics/refresh.png );
+    background-size: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* tiles */
+  .evolution_game .tiles {
+    width: 700px;
+    height: 700px;
+  }
+
+  /* options */
+  .evolution_game .options {
+    width: max-content;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX( -50% );
+  }
+    .evolution_game .option {
+      position: relative;
+      float: left;
+      bottom: 10px;
+    }
+      .evolution_game .option.hidden {
+        display: none;
+      }
+      .evolution_game .option::after {
+        content: attr( data-count );
+        width: 15px;
+        height: 15px;
+        display: block;
+        position: absolute;
+        top: 0;
+        background-color: #f0b513;
+        border: 3px solid #111;
+        border-radius: 50%;
+        text-align: center;
+        color: #333;
+      }
+      .evolution_game .option::before {
+        content: attr( data-name );
+        display: block;
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX( -50% );
+        width: max-content;
+        padding: 0 3px;
+        background-color: rgb(255, 254, 240);
+        border: 3px solid #111;
+        border-radius: 7px;
+        text-align: center;
+        color: #333;
+      }
+
+  /* end screen */
+  .evolution_game .endscreen {
+    position: relative;
+    padding: 20px 50px 100px 50px;
+    margin: 50px;
+    border: 3px solid #111;
+    background-color: rgb(255, 254, 240);
+    border-radius: 7px;
+    text-align: center;
+  }
+    .evolution_game .endscreen .button {
+      position: absolute;
+      left: 50%;
+      bottom: 25px;
+      transform: translateX( -50% );
+      margin: 0;
+      background-color: #f0b513;
+      background-image: url( ./ingame_graphics/refresh.png );
+      background-size: 30px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+      .evolution_game .endscreen .button:hover {
+        margin: 0;
+      }

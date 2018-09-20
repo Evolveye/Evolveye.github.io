@@ -1,0 +1,121 @@
+/* Evolution game */
+* {
+  max-width: 100vw;
+}
+.evolution_game {
+  overflow: hidden;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate( -50%, -50% );
+  background-image: url( ../img/bgr.gif );
+  background-repeat: repeat;
+  font-family: monospace;
+}
+  /* init */
+  .evolution_game * {
+    user-select: none;
+    image-rendering: pixelated;
+  }
+  .evolution_game > *,
+  .evolution_game > section > img {
+    position: absolute;
+  }
+
+  /* Menu */
+  .evolution_game-menu {
+    top: 0;
+    width: 100%;
+  }
+    .evolution_game-restart {
+      float: left;
+      margin: 11px;
+    }
+    .evolution_game-next_stage {
+      float: right;
+      margin: 11px;
+    }
+
+  /* options */
+  .evolution_game-options {
+    width: max-content;
+    max-width: 100%;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX( -50% );
+  }
+    .evolution_game-option {
+      position: relative;
+      float: left;
+      bottom: 10px;
+      margin: 11px;
+    }
+      .evolution_game-option .sign-image {
+        width: 85%;
+        height: 85%;
+      }
+      .evolution_game-option::after {
+        content: attr( data-count );
+        width: 20px;
+        height: 20px;
+        display: block;
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        background-color: #f0b513;
+        border: 3px solid #111;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 12px;
+        color: #333;
+        cursor: inherit;
+      }
+
+  /* end screen */
+  .evolution_game-endscreen {
+    position: relative;
+    padding: 20px 50px 100px 50px;
+    margin: 50px;
+    border: 3px solid #111;
+    background-color: rgb(255, 254, 240);
+    border-radius: 7px;
+    text-align: center;
+  }
+    .evolution_game-endscreen h3 {
+      font-size: 20px;
+    }
+    .evolution_game-endscreen h4 {
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+    .evolution_game-endscreen .sign {
+      position: absolute;
+      left: 50%;
+      bottom: 25px;
+      transform: translateX( -50% );
+      margin: 0;
+    }
+      .evolution_game-endscreen .button:hover {
+        margin: 0;
+      }
+
+  /* is-small */
+  body.is-small .evolution_game {
+    padding: 70px 0 140px;
+  }
+    body.is-small,
+    body.is-small .evolution_game-menu,
+    body.is-small .evolution_game-options {
+      background: black;
+      width: 100%;
+    }
+    body.is-small .evolution_game-menu {
+      height: 70px;
+    }
+    body.is-small .evolution_game-options {
+      height: 140px;
+      bottom: 0;
+    }
+    body.is-small .evolution_game-endscreen {
+      margin: 50px 0;
+    }

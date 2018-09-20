@@ -1,0 +1,11 @@
+#chromeMenu {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: -99px;
+	height: 100px;
+	background-color: white;
+	}
+	#chromeMenu:hover {
+		top:0;
+		}

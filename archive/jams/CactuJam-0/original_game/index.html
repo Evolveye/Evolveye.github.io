@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script defer async src="./main.js"></script>
+
+  <link rel="stylesheet" href="./main.css">
+
+  <title>CactuJam 1</title>
+</head>
+<body>
+  <div>
+    Chcesz wykonać akcję na blokach (podnieść coś)?<br>
+    Zdezaktywuj wszystkie opcje<br>
+    <br>
+    Gra posiada 5 zakończeń<br>
+    Odkryjesz je wszystkie? ;]<br>
+    <br>
+    Swoją droga to kaktusy bywają... <br>
+    ... w pewnych warunkach delikatne<br>
+    Chyba boją się myszy<br>
+    Albo zeberów. Najlepiej jakby je topić<br>
+    <br>
+    <small>Wydanie premierowe okrojono z fabuły</small><br>
+    <small>oraz kilku ścieżek rozwoju</small><br>
+    <small> + jest bardzo podatna na oszukiwanie</small>
+  </div>
+
+  <article class="evolution_game">
+
+    <section class="animations"></section>
+
+    <section class="entities-a"></section>
+
+    <section class="lands"></section>
+
+    <section class="entities-b"></section>
+
+    <canvas></canvas>
+
+    <button data-function="refresh" class="button"></button>
+    <button data-function="nextStage" class="button"></button>
+    
+    <section class="options">
+      <div data-count="6" data-name="Ląd" class="option">
+        <img data-function="options" class="button" src="./options/land.png" alt="land">
+      </div>
+      <div data-count="1" data-name="Oczko wodne" class="option">
+        <img data-function="options" class="button" src="./options/pond.png" alt="pond">
+      </div>
+      <div data-count="0" data-name="Rzeka" class="option hidden">
+        <img data-function="options" class="button disabled" src="./options/river.png" alt="river">
+      </div>
+      <div data-count="1" data-name="Kaktus" class="option">
+        <img data-function="options" class="button" src="./options/cactus.png" alt="cactus">
+      </div>
+      <div data-count="0" data-name="Kwiat życia" class="option hidden">
+        <img data-function="options" class="button disabled" src="./options/flower.png" alt="flower">
+      </div>
+      <div data-count="1" data-name="Zwierz" class="option">
+        <img data-function="options" class="button" src="./options/animal.png" alt="animal">
+      </div>
+      <div data-count="0" data-name="Zebra" class="option hidden">
+        <img data-function="options" class="button disabled" src="./options/zebra.png" alt="zebra">
+      </div>
+      <div data-count="0" data-name="Zaraza" class="option hidden">
+        <img data-function="options" class="button disabled" src="./options/plague.png" alt="plague">
+      </div>
+      <div data-count="1" data-name="Żywa zaraza" class="option hidden">
+        <img data-function="options" class="button" src="./ingame_graphics/plague-life.png" alt="live plague">
+      </div>
+    </section>
+  </article>
+  
+</body>
+</html>

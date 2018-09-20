@@ -1,0 +1,70 @@
+@import "./css/sanitize.css";
+
+
+/* global classes */
+.sign {
+  display: inline-flex;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #111;
+  border-radius: 10px;
+  background-color: #ffdd77;
+  margin: 10px 25px 35px;
+  transition: .1s;
+  cursor: pointer;
+}
+  .sign-content {
+    display: block;
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translateX( -50% );
+    max-width: 100px;
+    padding: 1px 2px;
+    background-color: rgb(255, 254, 240);
+    border: 3px solid #111;
+    border-radius: 7px;
+    text-align: center;
+    font-size: 12px;
+    color: #333;
+    cursor: inherit;
+  }
+  .sign-image {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate( -50%, -50% );
+    width: 55%;
+    height: 55%;
+    cursor: inherit;
+  }
+  .sign.is-disabled {
+    background-color: #AAA;
+    filter: grayscale(70%);
+    cursor: no-drop;
+  }
+  
+  .sign:hover {
+    background-color: #ffee99;
+  }
+  .sign:active {
+    background-color: #dfcc6d;
+  }
+  .sign.is-active {
+    background-color: #fff2b1;
+    border-color: #49aaf7;
+  }
+
+.nav {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate( -50%, -50% );
+  text-align: center;
+}
+
+.is-hidden {
+  display: none;
+}
