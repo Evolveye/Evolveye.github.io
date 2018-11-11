@@ -13,77 +13,77 @@
   await asyncPause( 2 )
 
   // Hi
-  // await asyncPause( 3 )
-  // sendMessage( `Witaj kapitanie!` )
-  // await asyncPause( 3 )
-  // sendMessage( `Wiesz dlaczego tu jesteś prawda?`)
-  // await asyncPause( 3 )
-  // sendMessage( `Twój poprzednik się rozbił i...` )
-  // await asyncPause( 2 )
-  // sendMessage( `...` )
-  // await asyncPause( 1 )
-  // sendMessage( `no sam rozumiesz.` )
-  // await asyncPause( 6 )
+  await asyncPause( 3 )
+  sendMessage( `Witaj kapitanie!` )
+  await asyncPause( 3 )
+  sendMessage( `Wiesz dlaczego tu jesteś prawda?`)
+  await asyncPause( 3 )
+  sendMessage( `Twój poprzednik się rozbił i...` )
+  await asyncPause( 2 )
+  sendMessage( `...` )
+  await asyncPause( 1 )
+  sendMessage( `no sam rozumiesz.` )
+  await asyncPause( 6 )
 
-  // sendMessage( `Zacznijmy więc:` )
-  // await asyncPause( 3 )
-  // sendMessage( ``
-  //   + `Przeleć  się trochę po kosmosie. `
-  //   + `Pamiętaj, że mozesz się rozbić bądź spalić. `
-  //   + `Nie grożą Ci promienie słoneczne ani pole magnetyczne planety ale mimo to musisz uważać gdzie i jak leciesz.`
-  // )
-  // sendMessage( `Użyj strzałek bądź klawiszy W, S, A, lub D aby się poruszać`, `system` )
-  // player.sterable = true
-  // await asyncPause( 20 )
+  sendMessage( `Zacznijmy więc:` )
+  await asyncPause( 3 )
+  sendMessage( ``
+    + `Przeleć  się trochę po kosmosie. `
+    + `Pamiętaj, że mozesz się rozbić bądź spalić. `
+    + `Nie grożą Ci promienie słoneczne ani pole magnetyczne planety ale mimo to musisz uważać gdzie i jak leciesz.`
+  )
+  sendMessage( `Użyj strzałek bądź klawiszy W, S, A, lub D aby się poruszać`, `system` )
+  player.sterable = true
+  await asyncPause( 20 )
 
-  // // First meteorite
-  // spawnMeteorite( -30, 20, 2, 0, 20 )
-  // sendMessage( `Widzisz nadlatujący meteoryt?` )
-  // await asyncPause( 3 )
-  // sendMessage( ``
-  //   + `Skała żelaza, Twoim zadaniem jest ściągnąć tę skałę do pola amgnetycznego planety. `
-  //   + `TYLKO UWAŻAJ! Jeśli ten kosmiczny śmieć uderzy w planetę to zginiemy!`
-  //   + `No ewentualnie sam w nią wlecisz...`
-  // )
-  // sendMessage( `Użyj spacji aby włączyć/wyłączyć magnes`, `system` )
-  // player.magnetismable = true
-  // await asyncPause( 20 )
-  // sendMessage( `Ciesz się, że ten meteor leci tak wolno. Dobry okaz na naukę.` )
-  // await asyncPause( () => {
-  //   if (meteorites[0])
-  //     return
+  // First meteorite
+  spawnMeteorite( -30, 20, 2, 0, 20 )
+  sendMessage( `Widzisz nadlatujący meteoryt?` )
+  await asyncPause( 3 )
+  sendMessage( ``
+    + `Skała żelaza, Twoim zadaniem jest ściągnąć tę skałę do pola amgnetycznego planety. `
+    + `TYLKO UWAŻAJ! Jeśli ten kosmiczny śmieć uderzy w planetę to zginiemy!`
+    + `No ewentualnie sam w nią wlecisz...`
+  )
+  sendMessage( `Użyj spacji aby włączyć/wyłączyć magnes`, `system` )
+  player.magnetismable = true
+  await asyncPause( 20 )
+  sendMessage( `Ciesz się, że ten meteor leci tak wolno. Dobry okaz na naukę.` )
+  await asyncPause( () => {
+    if (meteorites[0])
+      return
    
-  //   if (game.earthLife != 100) {
-  //     sendMessage( ``
-  //       + `IDIOTA! W taki właśnie sposób możesz doprowadzić do naszego wyginięcia!\n`
-  //       + `Te meteory służą do powiększania pola bezpieczeństwa a nie do przeprowadzania hekatomby! `
-  //     )
-  //   }
-  //   else if (game.earthMagnetism != 25)
-  //     sendMessage( ``
-  //       + `Cudownie! W taki właśnie sposób musisz powiększac nasze pole magnetyczne.\n`
-  //       + `Z większym polem będzie łatwiej przechwytywać meteory oraz będziemy mieć lepsza ochronę przed słońcem`
-  //     )
-  //   else
-  //     sendMessage( ``
-  //       + `Na prawdę przepuściłeś taką okazję na powiększenie pola? `
-  //       + `Skandal, skandal a ponadto wstyd!\n`
-  //       + `Pamiętaj, że promienie słoneczne będa coraz groźniejsze, a wolne meteory się kończą. Nikt tu nie chce zginać.`
-  //     )
+    if (game.earthLife != 100) {
+      sendMessage( ``
+        + `IDIOTA! W taki właśnie sposób możesz doprowadzić do naszego wyginięcia!\n`
+        + `Te meteory służą do powiększania pola bezpieczeństwa a nie do przeprowadzania hekatomby! `
+      )
+    }
+    else if (game.earthMagnetism != 25)
+      sendMessage( ``
+        + `Cudownie! W taki właśnie sposób musisz powiększac nasze pole magnetyczne.\n`
+        + `Z większym polem będzie łatwiej przechwytywać meteory oraz będziemy mieć lepsza ochronę przed słońcem`
+      )
+    else
+      sendMessage( ``
+        + `Na prawdę przepuściłeś taką okazję na powiększenie pola? `
+        + `Skandal, skandal a ponadto wstyd!\n`
+        + `Pamiętaj, że promienie słoneczne będa coraz groźniejsze, a wolne meteory się kończą. Nikt tu nie chce zginać.`
+      )
 
-  //   return true
-  // } )
-  // await asyncPause( 10 )
+    return true
+  } )
+  await asyncPause( 10 )
 
-  // // Round 1
-  // game.round = 1
-  // sendMessage( `Popatrz, w oddali widać kolejne meteory. Ściągaj je` )
-  // spawnMeteorite( -30, 30, 2, 0, 20 )
-  // await asyncPause( 2 )
-  // spawnMeteorite( -30, h - 30, 2, -10, 20 )
-  // await asyncPause( 5 )
-  // spawnMeteorite( w + 30, h / 2 + 50, 2, 190, 20 )
-  // await asyncPause( () => !(meteorites.filter( m => !!m )).length )
+  // Round 1
+  game.round = 1
+  sendMessage( `Popatrz, w oddali widać kolejne meteory. Ściągaj je` )
+  spawnMeteorite( -30, 30, 2, 0, 20 )
+  await asyncPause( 2 )
+  spawnMeteorite( -30, h - 30, 2, -10, 20 )
+  await asyncPause( 5 )
+  spawnMeteorite( w + 30, h / 2 + 50, 2, 190, 20 )
+  await asyncPause( () => !(meteorites.filter( m => !!m )).length )
 
   // Round 2
   game.round = 2
