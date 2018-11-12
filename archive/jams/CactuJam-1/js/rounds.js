@@ -10,10 +10,14 @@
     game.earthMagnetism = 40
   }
 
-  await asyncPause( 2 )
-
   // Hi
-  await asyncPause( 3 )
+  game.round = 0
+  sendMessage( ``
+    + `Aby skrócić czas między wiadomościami przytrzymaj klawisz x `
+    + `(klawisz musi być wciśnięty podczas wyświetlania wiadomości)`
+    , `system`
+  )
+  await asyncPause( 5 )
   sendMessage( `Witaj kapitanie!` )
   await asyncPause( 3 )
   sendMessage( `Wiesz dlaczego tu jesteś prawda?`)

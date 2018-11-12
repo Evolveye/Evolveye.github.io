@@ -177,7 +177,7 @@ async function asyncPause( secondsOrCb ) {
     } )
   }
   else
-    return new Promise( resolve => setTimeout( resolve, secondsOrCb * 1000))
+    return new Promise( resolve => setTimeout( resolve, (keys[88]  ?  1  :  secondsOrCb) * 1000))
 }
 
 
