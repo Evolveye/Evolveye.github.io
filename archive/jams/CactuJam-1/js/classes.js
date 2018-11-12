@@ -69,7 +69,7 @@ class Player {
     this.rotation = -90
 
     this.magnets = false
-    this.magnetPower = 10
+    this.magnetPower = 13
 
     this.sterable = false
     this.magnetismable = false
