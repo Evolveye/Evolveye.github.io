@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>CactuJam 2!</title>
+    <link href="./main.css" rel="stylesheet">
+  </head>
+  <body>
+    <canvas id="background"></canvas>
+    <canvas id="map"></canvas>
+    <canvas id="entities"></canvas>
+    <aside id="info">
+      <h2>Instrukcja</h2>
+      <p>Sterujesz strzałkami bądź klawiszami W, S, A, oraz D</p>
+      <p>Aby podnieść prezent - zjedz go</p>
+      <p>Każdy prezent przyspiesza</p>
+      <p>Po oczyszczeniu poziomu przyspieszenie się zapisuje, a poziom na stałe czyści</p>
+      <p>Aby używać przejść wciśnij enter będąc nad nimi</p>
+      <p>Aby wrócić na mapę jaskiń klikając "r"</p>
+      <p>Gra tak na prawdę kończy się wyczyszczeniem wszystkich jaskiń z prezentów</p>
+      <p>
+        W edytorze możesz edytować liczby następująco:<br>
+        2: spawn<br>
+        31-35: przeciwnicy z prędkościami<br>
+        idk ale nie mam czasu...
+      </p>
+
+      <div id="loadAndPlay">
+        <h2>Załaduj i zagraj</h2>
+        <textarea id="mapCode" placeholder="Kod mapy..."></textarea>
+        <span id="play" onclick="playInCustomMap( document.querySelector( `#mapCode` ).value )">Załaduj i zagraj</span>
+        <span id="edit" onclick="openEditor()">Stwórz mapę</span>
+      </div>
+    </aside>
+    <ul id="editorTiles">
+      <li><img data-value="1"  src="./img/cave-0.0.0.0-0.png"></li>
+      <li><img data-value="31" src="./img/enemy.png"></li>
+      <li><img data-value="2"  src="./img/playerIcon.png"></li>
+      <li><img data-value="6"  src="./img/gift.png"></li>
+      <li><img data-value="0"  src="./img/nothing.png"></li>
+      <li>
+        <label>X<input id="editorX" type="number" min="1" max="20" value="1"></label>
+      </li>
+      <li>
+        <label>Y<input id="editorY" type="number" min="1" max="15" value="1"></label>
+      </li>
+      <li>
+        <textarea id="mapFromEditor"></textarea>
+      </li>
+    </ul>
+    <footer>
+      <script src="./js/maps.js"></script>
+      <script src="./js/classes.js"></script>
+      <script src="./js/functions.js"></script>
+      <script src="./js/main.js"></script>
+    </footer>
+  </body>
+</html>

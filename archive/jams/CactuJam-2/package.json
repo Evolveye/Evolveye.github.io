@@ -1,0 +1,24 @@
+{
+  "name": "cactujam-2",
+  "version": "1.0.0",
+  "description": "Game created on CactuJam tournament",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo test",
+    "start": "electron ."
+  },
+  "keywords": [
+    "CactuJam",
+    "Cactu",
+    "cactus",
+    "game",
+    "jam",
+    "tournament"
+  ],
+  "author": "PawelekS",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^4.0.0",
+    "electron-packager": "^13.0.1"
+  }
+}
