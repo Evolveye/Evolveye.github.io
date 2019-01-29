@@ -6,6 +6,7 @@ You can find here my old and/or deprecated codes.
  * `+` Added new things
  * `-` Removed things
  * `^` Improved things
+ * `*` Rewriting/Refactoring/(Big changes)
 
  `!` before above signs means debug mode.
 
