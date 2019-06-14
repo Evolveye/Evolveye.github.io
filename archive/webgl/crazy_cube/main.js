@@ -11,7 +11,7 @@ let wallsChangerTime = 50
   canvas.width = 500
   canvas.height = 500
 
-  header.insertAdjacentElement( 'afterend', canvas )
+  document.body.insertAdjacentElement( 'afterend', canvas )
 
   const gl = canvas.getContext( 'experimental-webgl' )
 
@@ -51,7 +51,7 @@ let wallsChangerTime = 50
       .5,  .5, -.5,
      -.5,  .5, -.5,
      -.5,  .5,  .5,
- 
+
       .5, -.5,  .5,
       .5, -.5, -.5,
      -.5, -.5, -.5,
@@ -192,7 +192,7 @@ let wallsChangerTime = 50
     gl.uniformMatrix4fv( u_projMatrix, false, projMatrix )
     gl.uniformMatrix4fv( u_viewMatrix, false, viewMatrix )
     gl.uniformMatrix4fv( u_moveMatrix, false, moveMatrix )
-    
+
     gl.bindBuffer( gl.ELEMENT_ARRAY_BUFFER, indicesBuffer )
     gl.bufferData( gl.ELEMENT_ARRAY_BUFFER, new Uint16Array( data.indices ), gl.STATIC_DRAW )
 
