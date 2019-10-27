@@ -1,0 +1,27 @@
+
+body {
+  background-color: #2b292e;
+  margin: 0;
+  font-family: monospace;
+  color: #d8d7e1;
+}
+
+div {
+  position: absolute;
+  top: 50%;
+  transform: translateY( -50% );
+  width: 100%;
+  padding: 5px 0;
+  border-top: 1px solid #E0E0E0;
+  border-bottom: 1px solid #E0E0E0;
+  background: #3f3c45;
+  text-align: center;
+}
+  div::after {
+    content: attr( data-after );
+    position: absolute;
+    bottom: -100%;
+    left: 50%;
+    transform: translateX( -50% );
+    opacity: 0.2;
+  }
