@@ -6,6 +6,12 @@ body {
   color: #d8d7e1;
 }
 
+.body-background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
 div {
   position: absolute;
   top: 50%;
