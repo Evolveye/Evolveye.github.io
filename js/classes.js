@@ -33,7 +33,7 @@ class MovingCircle extends Point {
   tick() {
     const { x, y, pointToMove, size, maxAnglePerTick } = this
 
-    if (this.distanceTo( pointToMove ) > size) {
+    if (this.pointToMove) if (this.distanceTo( pointToMove ) > size) {
       const angle = Math.atan2( pointToMove.y - y, pointToMove.x - x ) * 180 / Math.PI
       const positiveAngle = angle > 0 ? angle : 360 + angle
       const angleToRotate = clockwiseAngle( this.angle, positiveAngle )
@@ -41,6 +41,6 @@ class MovingCircle extends Point {
       this.angle += rangedCeilFloor( angleToRotate, maxAnglePerTick, -maxAnglePerTick )
       this.x += Math.cos( this.angle * Math.PI / 180 )
       this.y += Math.sin( this.angle * Math.PI / 180 )
-    }
+    } else this.pointToMove = null
   }
 }

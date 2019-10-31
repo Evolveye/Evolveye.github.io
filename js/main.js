@@ -11,13 +11,18 @@ let temp = 0
 const circles = []
 /** @type {Point[]} */
 const points = []
+/** @type {string[]} */
+const colors = [
+  `#5123ad`,
+  `#f00`
+]
 
 canvas.width = width
 canvas.height = height
 
-// for (let fails = 0; fails < 10;) {
-for (let fails = 0; fails < 2; fails++ ) {
-  const point = new Point( random( 0, width ), random( 0, height ) )
+for (let fails = 0; fails < 10;) {
+// for (let fails = 0; fails < 2; fails++ ) {
+  const point = new Point( random( -100, width + 100 ), random( -100, height + 100 ) )
   let addIt = true
 
   for (const pointInArr of points) if (point.distanceTo( pointInArr ) < 100) {
@@ -29,9 +34,8 @@ for (let fails = 0; fails < 2; fails++ ) {
   else fails++
 }
 
-const circle = new MovingCircle( width / 2, height / 2 )
-circle.pointToMove = points[ random( 0, points.length - 1 ) ]
-circles.push( circle )
+for (let circlesCount = 5; circlesCount; --circlesCount )
+  circles.push( new MovingCircle( width / 2, height / 2 ) )
 
 setInterval( () => {
   circles.forEach( circle => circle.tick() )
