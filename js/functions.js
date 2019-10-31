@@ -32,24 +32,25 @@ function draw() {
 
   ctx.clearRect( 0, 0, width, height )
 
-  // ctx.fillStyle = `#f00`
+  ctx.fillStyle = `#777`
 
-  // for (const { x, y } of points) {
-  //   ctx.beginPath()
-  //   ctx.arc( x, y, 5, 0, Math.PI * 2 )
-  //   ctx.fill()
-  // }
+  for (const { x, y } of points) {
+    ctx.beginPath()
+    ctx.arc( x, y, 2, 0, Math.PI * 2 )
+    ctx.fill()
+  }
 
-  ctx.strokeStyle = `#5123ad`
-  ctx.lineWidth = 3
+  ctx.lineWidth = 7
 
   for (const circle of circles) {
-    const { x, y } = circle
+    const { x, y, color } = circle
 
     if (!circle.pointToMove) circle.pointToMove = points[ random( 0, points.length - 1 ) ]
 
+    ctx.strokeStyle = color
+
     ctx.beginPath()
-    ctx.arc( x, y, 5, 0, Math.PI * 2 )
+    ctx.arc( x, y, 10, 0, Math.PI * 2 )
     ctx.stroke()
   }
 }
