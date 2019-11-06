@@ -19,18 +19,18 @@ class MovingCircle extends Point {
   /** @type {Point} */
   pointToMove = null
   angle = 0
-  size = 5
   maxAnglePerTick = 2
 
   /**
    * @param {number} x
    * @param {number} y
    */
-  constructor( x, y, { color=`#fff`, speed=3 } ) {
+  constructor( x, y, { color=`#fff`, speed=3, size=5 } ) {
     super( x, y )
 
     this.color = color
     this.speed = speed
+    this.size = size
   }
 
   tick() {

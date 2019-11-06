@@ -32,7 +32,7 @@ function draw() {
 
   ctx.clearRect( 0, 0, width, height )
 
-  ctx.fillStyle = `#777`
+  ctx.fillStyle = dotColor
 
   for (const { x, y } of points) {
     ctx.beginPath()
@@ -43,14 +43,14 @@ function draw() {
   ctx.lineWidth = 7
 
   for (const circle of circles) {
-    const { x, y, color } = circle
+    const { x, y, color, size } = circle
 
     if (!circle.pointToMove) circle.pointToMove = points[ random( 0, points.length - 1 ) ]
 
     ctx.strokeStyle = color
 
     ctx.beginPath()
-    ctx.arc( x, y, 10, 0, Math.PI * 2 )
+    ctx.arc( x, y, size, 0, Math.PI * 2 )
     ctx.stroke()
   }
 }
