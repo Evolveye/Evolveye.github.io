@@ -9,11 +9,54 @@ body {
 }
 
 .header {
-  height: 100px;
+  height: 145px;
+  padding: 20px 0;
   background-color: var( --color-white );
   border-top: 5px solid var( --color-green );
 }
 
 .content {
   border-top: 3px double var( --color-white );
+  color: #ddd5c8;
 }
+
+.content_section {
+  margin: 20px 5%;
+  padding: 25px;
+  padding-top: 0;
+}
+  .content_section-title {
+    margin: 10px;
+    padding-top: 10px;
+    font-size: 17px;
+  }
+  .content_section-content {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 20px;
+  }
+
+
+.link_box {
+  display: block;
+  flex-grow: 1;
+  max-width: 325px;
+  min-width: 200px;
+  margin: 15px;
+  padding: 20px;
+  border: 1px solid #ffffff1a;
+  border-top: 2px solid #4169e1;
+  transition: .05s;
+}
+  .link_box:hover {
+    background-color: #00000015;
+    transform: scale( 1.01 );
+  }
+  .link_box-title {
+    letter-spacing: 1px;
+    font-size: 17px;
+  }
+  .link_box-description {
+    margin: 10px;
+    font-size: 14px;
+  }
