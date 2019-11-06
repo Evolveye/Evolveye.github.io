@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #181a1b;
+  font-family: monospace;
+  color: #d8d7e1;
+}
+
+canvas.background {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+div, p,
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
