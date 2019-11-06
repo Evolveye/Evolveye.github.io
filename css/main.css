@@ -10,10 +10,13 @@ body {
 
 .header {
   height: 145px;
-  padding: 20px 0;
+  padding: 20px 15%;
   background-color: var( --color-white );
   border-top: 5px solid var( --color-green );
 }
+  .header-avatar {
+    height: 100%;
+  }
 
 .content {
   border-top: 3px double var( --color-white );
