@@ -1,18 +1,12 @@
 
 body {
-  background-color: #2b292e;
+  background-color: #181a1b;
   margin: 0;
   font-family: monospace;
   color: #d8d7e1;
 }
 
-.body-background {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-}
-
-div {
+.info {
   position: absolute;
   top: 50%;
   transform: translateY( -50% );
@@ -23,11 +17,41 @@ div {
   background: #3f3c45;
   text-align: center;
 }
-  div::after {
+  .info::after {
     content: attr( data-after );
     position: absolute;
     bottom: -100%;
     left: 50%;
     transform: translateX( -50% );
     opacity: 0.2;
+  }
+
+
+.body-background {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+.button_on_background {
+  margin: 100px;
+  width: 100px;
+  height: 100px;
+}
+
+
+.button {
+  background: none;
+  border: none;
+  padding: 0;
+  background-color: #0009;
+  color: white;
+}
+  .button:hover {
+    background-color: #000b;
+  }
+  .button:focus {
+    outline: none;
   }
