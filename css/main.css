@@ -27,7 +27,11 @@ body {
   margin: 20px 5%;
   padding: 25px;
   padding-top: 0;
+  opacity: .8;
 }
+  .content_section:hover {
+    opacity: 1;
+  }
   .content_section-title {
     margin: 10px;
     padding-top: 10px;
