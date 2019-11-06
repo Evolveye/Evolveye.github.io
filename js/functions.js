@@ -55,7 +55,15 @@ function draw() {
   }
 }
 
-document.onclick = ({ clientX, clientY }) => {
-  const angle = Math.atan2( points[ 0 ].y - clientY, points[ 0 ].x - clientX ) * 180 / Math.PI
-  console.log( angle, rangedCeilFloor( angle, 6, -6 ) )
-}
+window.addEventListener( `resize`, () => {
+  width = window.innerWidth
+  height = window.innerHeight
+
+  canvas.width = width
+  canvas.height = height
+} )
+
+// document.onclick = ({ clientX, clientY }) => {
+//   const angle = Math.atan2( points[ 0 ].y - clientY, points[ 0 ].x - clientX ) * 180 / Math.PI
+//   console.log( angle, rangedCeilFloor( angle, 6, -6 ) )
+// }

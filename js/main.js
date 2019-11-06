@@ -2,8 +2,8 @@
 const canvas = document.querySelector( `.background` )
 const ctx = canvas.getContext( `2d` )
 
-const width = window.innerWidth
-const height = window.innerHeight
+let width = window.innerWidth
+let height = window.innerHeight
 
 const padding = 10
 /** @type {MovingCircle[]} */
