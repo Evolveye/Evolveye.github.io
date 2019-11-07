@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--  -->
     <link rel="shortcut icon" href="./favicon.ico">
-    <link rel="stylesheet" href="./styles/main.css"> 
+    <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/960.css" media="screen and (max-width:960px)">
     <link rel="stylesheet" href="./styles/480.css" media="screen and (max-width:480px)">
     <!--  -->
@@ -30,9 +30,8 @@
         </div>
         <div class="item langs">
           <select onchange="RHashes.set('lang',this.value)">
-            <option></option>
-            <option>pl</option>
             <option>en</option>
+            <option>pl</option>
           </select>
         </div>
       </header>
@@ -91,7 +90,7 @@
 
                 let template = prezi.querySelector(`template.${document.documentElement.lang}`)
                 info.Lang = document.documentElement.lang
-                
+
                 if(!template) {
                   template = prezi.querySelector(`template.${info._lang}`)
                   info.Lang = info._lang
@@ -102,7 +101,7 @@
                 let header   = template.content.querySelector('header')
                 let sections = template.content.querySelectorAll('section')
 
-              //* Content 
+              //* Content
                 content.innerHTML = ''
                 if(header) {
                   let infos   = ''
@@ -138,7 +137,7 @@
                   <h3>${title ? title.textContent : ''}</h3>
                   <p>${screen.getAttribute('data-desc') || ''}</p>
                 `
-    
+
             let item = document.createElement('div')
                 item.className  = 'item screen'
                 item.style.left = '20px'
@@ -153,9 +152,9 @@
                     screen.style.left = 0
                   }
                 }
-    
+
             header.appendChild(item)
-          
+
          // Create screen close button
             let close = document.createElement('div')
                 close.className = 'screenClose'
@@ -204,6 +203,9 @@
           document.documentElement.lang = lang
           if(extension) contentBuilder()
         },true)
+
+        // 2019 addon
+        RHashes.set( `lang`, `pl` )
       </script>
     </footer>
 
