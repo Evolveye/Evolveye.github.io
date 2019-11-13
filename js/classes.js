@@ -14,7 +14,6 @@ class Point {
     return Math.sqrt( (this.x - x) ** 2 + (this.y - y) ** 2 )
   }
 }
-
 class MovingCircle extends Point {
   /** @type {Point} */
   pointToMove = null
