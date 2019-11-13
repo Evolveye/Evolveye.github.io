@@ -1,3 +1,7 @@
+/** @type {HTMLCanvasElement} */
+const canvas = document.querySelector( '.canvas-main' )
+const ctx = canvas.getContext( '2d' )
+
 const width = 300
 const height = 300
 const qtree = new Quadtree( new Rect( 0, 0, width, height ) )
@@ -6,52 +10,16 @@ const buttons = {
   generate: document.querySelector( '[data-action="generate"' )
 }
 
+let drawAreaX
+let drawAreaY
 
-
-function clear() {
-  const drawAreaX = (canvas.width  - width)  / 2
-  const drawAreaY = (canvas.height - height) / 2
-
-  ctx.fillStyle = '#ccc'
-
-  ctx.fillRect( drawAreaX, drawAreaY, width, height )
-}
-function onResize() {
-  const drawAreaX = (canvas.width  - width)  / 2
-  const drawAreaY = (canvas.height - height) / 2
-
-  clear()
-
-  qtree.show( ctx, drawAreaX, drawAreaY )
-}
-function generatePoints( count ) {
-  for (let i = 0; i < count; i++) {
-    const point = new Point( random( width ), random( height ) )
-
-    qtree.insert( point )
-  }
-}
-
-
+resize()
 
 buttons.generate.addEventListener( 'click', () => {
-  const drawAreaX = (canvas.width  - width)  / 2
-  const drawAreaY = (canvas.height - height) / 2
-
   generatePoints( 100 )
   qtree.show( ctx, drawAreaX, drawAreaY )
 } )
 buttons.clear.addEventListener( 'click', () => {
   qtree.clear()
   clear()
-} )
-
-window.addEventListener( `click`, ({ clientX:x, clientY:y }) => {
-  const drawAreaX = (canvas.width  - width)  / 2
-  const drawAreaY = (canvas.height - height) / 2
-
-  if (x - drawAreaX >= 0 && y - drawAreaY >= 0) {
-    qtree.insert( new Point( x - drawAreaX, y - drawAreaY ) )
-    qtree.show( ctx, drawAreaX, drawAreaY )
-  }
 } )
