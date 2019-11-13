@@ -66,14 +66,16 @@ class Quadtree {
 
     if (points.length < capacity) {
       points.push( point )
+
+      return true
     }
     else {
       if (!this.divided) this.subdivide()
 
-      this.northeast.insert( point )
-      this.northwest.insert( point )
-      this.southeast.insert( point )
-      this.southwest.insert( point )
+      return this.northeast.insert( point ) ||
+        this.northwest.insert( point ) ||
+        this.southeast.insert( point ) ||
+        this.southwest.insert( point )
     }
   }
 
@@ -92,5 +94,31 @@ class Quadtree {
     this.southwest = new Quadtree( sw, capacity )
 
     this.divided = true
+  }
+
+  /**
+   * @param {CanvasRenderingContext2D} ctx
+   */
+  show( ctx, startX, startY ) {
+    const { x, y, width, height } = this.boundary
+
+    ctx.strokeStyle = `#000`
+
+    ctx.strokeRect( startX + x, startY + y, width, height )
+
+    if (this.divided) {
+      this.northeast.show( ctx, startX, startY )
+      this.northwest.show( ctx, startX, startY )
+      this.southeast.show( ctx, startX, startY )
+      this.southwest.show( ctx, startX, startY )
+    }
+
+    ctx.fillStyle = '#c22'
+
+    this.points.forEach( ({ x, y }) => {
+      ctx.beginPath()
+      ctx.arc( startX + x, startY + y, 1, 0, Math.PI * 2 )
+      ctx.fill()
+    } )
   }
 }

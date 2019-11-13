@@ -11,11 +11,8 @@ function resizeCanvas() {
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
 
-  width = canvas.width
-  height = canvas.height
+  if (typeof onResize != 'undefined') onResize()
 }
 
-window.addEventListener( `resize`, () => {
-  width = window.innerWidth
-  height = window.innerHeight
-} )
+window.addEventListener( `resize`, resizeCanvas )
+window.addEventListener( `load`, resizeCanvas )
