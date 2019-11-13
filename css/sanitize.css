@@ -9,7 +9,7 @@ body {
 }
 
 canvas.game,
-canvas.main,
+canvas.canvas-main,
 canvas.background {
   position: fixed;
   top: 0;
