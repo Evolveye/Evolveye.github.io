@@ -99,7 +99,7 @@ class Quadtree {
   /**
    * @param {CanvasRenderingContext2D} ctx
    */
-  show( ctx, startX, startY ) {
+  show( ctx, startX=0, startY=0 ) {
     const { x, y, width, height } = this.boundary
 
     ctx.strokeStyle = `#000`
@@ -120,5 +120,18 @@ class Quadtree {
       ctx.arc( startX + x, startY + y, 1, 0, Math.PI * 2 )
       ctx.fill()
     } )
+  }
+
+  clear() {
+    this.points.splice( 0 )
+
+    if (this.divided) {
+      this.northeast = null
+      this.northwest = null
+      this.southeast = null
+      this.southwest = null
+
+      this.divided = false
+    }
   }
 }
