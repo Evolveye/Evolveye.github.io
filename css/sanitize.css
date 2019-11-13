@@ -8,6 +8,8 @@ body {
   color: #d8d7e1;
 }
 
+canvas.game,
+canvas.main,
 canvas.background {
   position: fixed;
   top: 0;
