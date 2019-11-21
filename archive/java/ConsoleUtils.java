@@ -1,12 +1,21 @@
 package com.company;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+interface MenuLambda {
+    void MenuLambda();
+}
+
 public class Utils {
+    private static boolean running = true;
     private static Scanner input = new Scanner( System.in );
+    private static ArrayList<String> menuTitles = new ArrayList<>();
+    private static ArrayList<MenuLambda> menuLambdas = new ArrayList<>();
 
     public static double getDouble() {
         String d;
@@ -61,26 +70,40 @@ public class Utils {
         System.out.println( " |  - wyświetlić Twój wiek, po osiągnięciu celowej kwoty" );
         System.out.println( " |\n" );
     }
-    public static int optionFromMenu( String[] options ) {
-        ArrayList<String> indices = new ArrayList<>();
+
+    public static void addMenuItem( String title, MenuLambda menuLambda ) {
+        menuTitles.add( title );
+        menuLambdas.add( menuLambda );
+    }
+    public static void generateMenu() {
+        int index = 1;
+        String[] optionsIndices = new String[ menuTitles.size() ];
 
         System.out.print( "# Co chcesz zrobić?" );
 
-        for (String option : options) {
-            indices.add( "" + indices.size() + 1 );
+        for (String menuTitle : menuTitles) {
+            optionsIndices[ index - 1 ] = "" + index;
 
-            System.out.print( "\n# [ " + indices.size() + " ]: " + option );
+            System.out.print( "\n# [ " + index++ + " ]: " + menuTitle );
         }
 
         System.out.print( "\n# > Twój wybór: " );
         String response = input.nextLine();
 
-        while (!goodResponse( response, indices.toArray( new String[ 0 ] ) )) {
-            System.out.print( "Podałeś niepoprawną odpowiedź. Odpowiedz jeszcze raz. [" + String.join( "/", indices ) + "]:" );
+        while (!goodResponse( response, optionsIndices )) {
+            System.out.print( "Podałeś niepoprawną odpowiedź. Ponów wybór: " );
             response = input.nextLine();
         }
 
-        return Integer.parseInt( response );
+        menuLambdas.get( Integer.parseInt( response ) - 1 ).MenuLambda();
+    }
+    public static void startMenuLoop() {
+        do {
+            Utils.generateMenu();
+        } while( running );
+    }
+    public static void endMenuLoop() {
+        running = false;
     }
 
     public static String waitForResponse( String title ) {
