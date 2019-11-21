@@ -1,65 +1,17 @@
 package com.company;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 interface MenuLambda {
     void MenuLambda();
 }
 
-public class Utils {
+public class ConsoleUtils {
     private static boolean running = true;
-    private static Scanner input = new Scanner( System.in );
     private static ArrayList<String> menuTitles = new ArrayList<>();
     private static ArrayList<MenuLambda> menuLambdas = new ArrayList<>();
-
-    public static double getDouble() {
-        String d;
-
-        d = input.next();
-
-        while (!isDouble( d )) {
-            System.out.print( "Niepoprawny format liczby! Wpisz jeszcze raz: " );
-            d = input.next();
-        }
-
-        return Double.parseDouble( d );
-    }
-    public static int getInt() {
-        String d;
-
-        d = input.next();
-
-        while (!isInt( d )) {
-            System.out.print( "Niepoprawny format liczby! Wpisz jeszcze raz: " );
-            d = input.next();
-        }
-
-        return Integer.parseInt( d );
-    }
-
-    private static boolean isDouble( String string ) {
-        try {
-            Double.parseDouble( string );
-            return true;
-        }
-        catch( Exception e ) {
-            return false;
-        }
-    }
-    private static boolean isInt( String string ) {
-        try {
-            Integer.parseInt( string );
-            return true;
-        }
-        catch( Exception e ) {
-            return false;
-        }
-    }
 
     public static void printInfo() {
         System.out.println( " |" );
@@ -79,67 +31,31 @@ public class Utils {
         int index = 1;
         String[] optionsIndices = new String[ menuTitles.size() ];
 
-        System.out.print( "# Co chcesz zrobić?" );
+        System.out.print( "\n | Co chcesz zrobić?" );
 
         for (String menuTitle : menuTitles) {
             optionsIndices[ index - 1 ] = "" + index;
 
-            System.out.print( "\n# [ " + index++ + " ]: " + menuTitle );
+            System.out.print( "\n [ " + index++ + " ]: " + menuTitle );
         }
 
-        System.out.print( "\n# > Twój wybór: " );
-        String response = input.nextLine();
+        System.out.print( "\n |> Twój wybór: " );
+        String response = ConsoleInputUtils.readLine();
 
-        while (!goodResponse( response, optionsIndices )) {
-            System.out.print( "Podałeś niepoprawną odpowiedź. Ponów wybór: " );
-            response = input.nextLine();
+        while (!ConsoleInputUtils.isGoodResponse( response, optionsIndices )) {
+            System.out.print( " |> Niepoprawną odpowiedź. Ponów wybór: " );
+            response = ConsoleInputUtils.readLine();
         }
 
         menuLambdas.get( Integer.parseInt( response ) - 1 ).MenuLambda();
     }
     public static void startMenuLoop() {
         do {
-            Utils.generateMenu();
+            ConsoleUtils.generateMenu();
         } while( running );
     }
     public static void endMenuLoop() {
         running = false;
-    }
-
-    public static String waitForResponse( String title ) {
-        System.out.print( title );
-        String response = input.nextLine();
-
-        return response;
-    }
-    public static String waitForResponse( String title, String... responses ) {
-        System.out.print( title + " [" + String.join( "/", responses ) + "]: " );
-        String response = input.nextLine();
-
-        while (!goodResponse( response, responses )) {
-            System.out.print( "Podałeś niepoprawną odpowiedź. Odpowiedz jeszcze raz. [" + String.join( "/", responses ) + "]:" );
-            response = input.nextLine();
-        }
-
-        return response;
-    }
-    public static String waitForResponse( String title, Pattern pattern ) {
-        System.out.print( title + " [ Wzór: " + pattern + "]: " );
-        String response = input.nextLine();
-
-        while (!pattern.matcher( response ).matches()) {
-            System.out.print( "Podałeś niepoprawną odpowiedź. Odpowiedz jeszcze raz. [ Wzór: " + pattern + "]: " );
-            response = input.nextLine();
-        }
-
-        return response;
-    }
-
-    public static boolean goodResponse( String response, String... responses ) {
-        for ( String res : responses )
-            if (res.equals( response )) return true;
-
-        return false;
     }
 
     public static boolean goodTimes(LocalDateTime startDate, LocalDateTime endDate ) {
@@ -163,5 +79,20 @@ public class Utils {
         if (s.length() == 1) s = "0" + s;
 
         return h + ":" + m; // + ":" + s;
+    }
+
+    public static String padStarString( String str, int length, char character ) {
+        for (int i = str.length(); i < length; i++ ) {
+            str = character + str;
+        }
+
+        return str;
+    }
+    public static String padEndString( String str, int length, char character ) {
+        for (int i = str.length(); i < length; i++ ) {
+            str += character;
+        }
+
+        return str;
     }
 }
