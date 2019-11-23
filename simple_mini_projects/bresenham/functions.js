@@ -60,8 +60,7 @@ function resize() {
   drawAreaX = (canvas.width  - width)  / 2
   drawAreaY = (canvas.height - height) / 2
 
-  clear()
-  draw()
+  redraw()
 }
 function clickOnDrawableArea( clientX, clientY ) {
   return clientX > drawAreaX && clientX < drawAreaX + width
