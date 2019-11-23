@@ -2,9 +2,8 @@
 const canvas = document.querySelector( '.canvas-main' )
 const ctx = canvas.getContext( '2d' )
 
-const width = 300
-const height = 300
-const qtree = new Quadtree( new Rect( 0, 0, width, height ) )
+const drawableAreaSize = 500
+const qtree = new Quadtree( new Rect( 0, 0, drawableAreaSize, drawableAreaSize ) )
 const buttons = {
   clear: document.querySelector( '[data-action="clear"' ),
   generate: document.querySelector( '[data-action="generate"' )

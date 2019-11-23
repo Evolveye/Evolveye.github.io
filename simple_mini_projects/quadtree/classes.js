@@ -113,12 +113,12 @@ class Quadtree {
       this.southwest.show( ctx, startX, startY )
     }
 
-    ctx.fillStyle = '#c22'
+    ctx.strokeStyle = '#f00'
 
     this.points.forEach( ({ x, y }) => {
       ctx.beginPath()
-      ctx.arc( startX + x, startY + y, 1, 0, Math.PI * 2 )
-      ctx.fill()
+      ctx.arc( startX + x, startY + y, 2, 0, Math.PI * 2 )
+      ctx.stroke()
     } )
   }
 
