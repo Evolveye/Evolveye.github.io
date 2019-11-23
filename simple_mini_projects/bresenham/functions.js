@@ -12,9 +12,7 @@ function bresenham( { x:xA, y:yA }, { x:xB, y:yB } ) {
 
   let err = deltaX - deltaY
 
-  ctx.fillRect( x1 + drawAreaX, y1 + drawAreaY, rectSideLength, rectSideLength )
-
-  while (x1 != x2 || y1 != y2) {
+  do  {
     ctx.fillRect( x1 + drawAreaX, y1 + drawAreaY, rectSideLength, rectSideLength )
 
     const doubledErr = err * 2
@@ -27,7 +25,9 @@ function bresenham( { x:xA, y:yA }, { x:xB, y:yB } ) {
       err += deltaX
       y1 += stepY
     }
-  }
+  } while (x1 != x2 || y1 != y2)
+
+  ctx.fillRect( x1 + drawAreaX, y1 + drawAreaY, rectSideLength, rectSideLength )
 }
 function draw() {
   for (const { pointA, pointB, color='#f00' } of lines) {
@@ -49,6 +49,10 @@ function clear() {
 
   ctx.fillRect( drawAreaX, drawAreaY, width, height )
 }
+function redraw() {
+  clear()
+  draw()
+}
 function resize() {
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
@@ -59,12 +63,17 @@ function resize() {
   clear()
   draw()
 }
+function clickOnDrawableArea( clientX, clientY ) {
+  return clientX > drawAreaX && clientX < drawAreaX + width
+    && clientY > drawAreaY && clientY < drawAreaY + height
+}
 
 window.addEventListener( 'resize', resize )
-document.addEventListener( 'mouseup', () => {
+document.addEventListener( 'mouseup', ({ clientX, clientY }) => {
+  if (!mouseDown || !clickOnDrawableArea( clientX, clientY )) return
+
   mouseDown = false
 
-  // console.log( {
   lines.push( {
     pointA: new Point( pointMouseDown.x - drawAreaX, pointMouseDown.y - drawAreaY, true ),
     pointB: new Point( pointMouseMove.x - drawAreaX, pointMouseMove.y - drawAreaY, true )
@@ -76,10 +85,11 @@ document.addEventListener( 'mouseup', () => {
   pointMouseMove.x = null
   pointMouseMove.y = null
 
-  clear()
-  draw()
+  redraw()
 } )
 document.addEventListener( 'mousedown', ({ clientX, clientY }) => {
+  if (!clickOnDrawableArea( clientX, clientY )) return
+
   mouseDown = true
 
   pointMouseDown.x = clientX
@@ -89,15 +99,14 @@ document.addEventListener( 'mousedown', ({ clientX, clientY }) => {
   pointMouseMove.y = clientY
 } )
 document.addEventListener( 'mousemove', ({ clientX, clientY }) => {
-  if (!mouseDown) return
+  if (!mouseDown || !clickOnDrawableArea( clientX, clientY )) return
 
   const { x, y } = pointMouseDown
 
   pointMouseMove.x = clientX
   pointMouseMove.y = clientY
 
-  clear()
-  draw()
+  redraw()
 
   ctx.strokeStyle = '#00f'
   ctx.beginPath()
