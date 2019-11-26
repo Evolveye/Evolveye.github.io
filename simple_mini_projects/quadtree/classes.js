@@ -34,6 +34,7 @@ class Rect {
   }
 }
 
+
 class Quadtree {
   /** @type {Quadtree} */
   northeast = null
@@ -51,8 +52,9 @@ class Quadtree {
    * @param {Rect} boundary
    * @param {number} capacity
    */
-  constructor( boundary, capacity=4 ) {
+  constructor( boundary, pointsOnlyInLeaves=true, capacity=4 ) {
     this.boundary = boundary
+    this.pointsOnlyInLeaves = pointsOnlyInLeaves
     this.capacity = capacity
   }
 
@@ -62,15 +64,15 @@ class Quadtree {
   insert( point ) {
     if (!this.boundary.contains( point )) return false
 
-    const { points, capacity } = this
+    const { points, capacity, pointsOnlyInLeaves, divided } = this
 
-    if (points.length < capacity) {
+    if (points.length < capacity && !divided) {
       points.push( point )
 
       return true
     }
     else {
-      if (!this.divided) this.subdivide()
+      if (!divided) this.subdivide()
 
       return this.northeast.insert( point ) ||
         this.northwest.insert( point ) ||
@@ -81,7 +83,7 @@ class Quadtree {
 
   subdivide() {
     const { x, y, width, height } = this.boundary
-    const { capacity } = this
+    const { capacity, pointsOnlyInLeaves } = this
 
     const ne = new Rect( x + width / 2, y,              width / 2, height / 2 )
     const nw = new Rect( x,             y,              width / 2, height / 2 )
@@ -94,6 +96,11 @@ class Quadtree {
     this.southwest = new Quadtree( sw, capacity )
 
     this.divided = true
+
+    if (pointsOnlyInLeaves) {
+      this.points.forEach( point => this.insert( point ) )
+      this.points = []
+    }
   }
 
   /**
@@ -113,12 +120,12 @@ class Quadtree {
       this.southwest.show( ctx, startX, startY )
     }
 
-    ctx.strokeStyle = '#f00'
+    ctx.fillStyle = '#c22'
 
     this.points.forEach( ({ x, y }) => {
       ctx.beginPath()
-      ctx.arc( startX + x, startY + y, 2, 0, Math.PI * 2 )
-      ctx.stroke()
+      ctx.arc( startX + x, startY + y, 1, 0, Math.PI * 2 )
+      ctx.fill()
     } )
   }
 
