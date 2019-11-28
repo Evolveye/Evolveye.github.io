@@ -1,0 +1,4 @@
+{
+  "title": "Template quadtree structure",
+  "description": "Quadtree storing regions and lines. With implemented (like here) Bresenham algo, it is great for games"
+}

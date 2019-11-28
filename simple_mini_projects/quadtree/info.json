@@ -1,4 +1,4 @@
 {
-  "title": "Quadtree algorithm",
-  "description": "Quadtree (unfortunately) only for points"
+  "title": "Quadtree structure",
+  "description": "Quadtree structure storing only points"
 }
