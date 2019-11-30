@@ -68,20 +68,19 @@ function resize() {
 
   clear()
 
-  qTree.show( ctx, drawAreaX, drawAreaY )
+  // qTree.show( ctx, drawAreaX, drawAreaY )
 }
 
 window.addEventListener( `resize`, resize )
-window.addEventListener( `load`, resize )
 document.addEventListener( 'mouseup', ({ clientX, clientY }) => {
   if (!mouseDown || !clickOnDrawableArea( clientX, clientY )) return
 
   mouseDown = false
 
-  // qTree.insert( [
-  //   new Point( pointMouseDown.x - drawAreaX, pointMouseDown.y - drawAreaY, true ),
-  //   new Point( pointMouseMove.x - drawAreaX, pointMouseMove.y - drawAreaY, true )
-  //  ] )
+  qTree.insertPointSequence(
+    new Point( pointMouseDown.x - drawAreaX, pointMouseDown.y - drawAreaY, true ),
+    new Point( pointMouseMove.x - drawAreaX, pointMouseMove.y - drawAreaY, true )
+  )
 
   pointMouseDown.x = null
   pointMouseDown.y = null
@@ -89,7 +88,8 @@ document.addEventListener( 'mouseup', ({ clientX, clientY }) => {
   pointMouseMove.x = null
   pointMouseMove.y = null
 
-  // qTree.show()
+  clear()
+  qTree.show( ctx, drawAreaX, drawAreaY )
 } )
 document.addEventListener( 'mousedown', ({ clientX, clientY }) => {
   if (!clickOnDrawableArea( clientX, clientY )) return
@@ -110,7 +110,8 @@ document.addEventListener( 'mousemove', ({ clientX, clientY }) => {
   pointMouseMove.x = clientX
   pointMouseMove.y = clientY
 
-  // qTree.show()
+  clear()
+  qTree.show( ctx, drawAreaX, drawAreaY )
 
   ctx.strokeStyle = '#00f'
   ctx.beginPath()

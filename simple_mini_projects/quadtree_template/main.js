@@ -18,10 +18,10 @@ let rectSideLength = resolution.value
 let drawAreaX
 let drawAreaY
 
-// createQTree()
-// resize()
+createQTree()
+resize()
 
-buttons.clear.addEventListener( 'click', () => {
-  // qTree.clear()
-  // clear()
+ui.clear.addEventListener( 'click', () => {
+  qTree.clear()
+  clear()
 } )

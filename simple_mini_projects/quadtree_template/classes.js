@@ -49,12 +49,27 @@ class Quadtree {
 
   /**
    * @param {Rect} boundary
-   * @param {number} capacity
+   * @param {number} resolution
    */
   constructor( boundary, resolution=1 ) {
     this.boundary = boundary
-    this.pointsOnlyInLeaves = pointsOnlyInLeaves
-    this.capacity = capacity
+    this.resolution = resolution
+    this.maxDeph = Math.floor( Math.log2( boundary.width / resolution ) )
+  }
+
+  /**
+   * @param {Point[]} points
+   */
+  insertPointSequence( ...points ) {
+    if (!points.length) return
+
+    if (points.length == 1) this.insert( point )
+    else for (let i = 1; i < points.length; i++) {
+      const pointA = points[ i - 1 ]
+      const pointB = points[ i     ]
+
+      Quadtree.bresenham( pointA, pointB, this.resolution ).forEach( point => this.insert( point ) )
+    }
   }
 
   /**
@@ -63,9 +78,9 @@ class Quadtree {
   insert( point ) {
     if (!this.boundary.contains( point )) return false
 
-    const { points, capacity, pointsOnlyInLeaves, divided } = this
+    const { points, divided, maxDeph } = this
 
-    if (points.length < capacity && !divided) {
+    if (maxDeph == 0) {
       points.push( point )
 
       return true
@@ -82,24 +97,22 @@ class Quadtree {
 
   subdivide() {
     const { x, y, width, height } = this.boundary
-    const { capacity, pointsOnlyInLeaves } = this
+    const { resolution } = this
 
     const ne = new Rect( x + width / 2, y,              width / 2, height / 2 )
     const nw = new Rect( x,             y,              width / 2, height / 2 )
     const se = new Rect( x + width / 2, y + height / 2, width / 2, height / 2 )
     const sw = new Rect( x,             y + height / 2, width / 2, height / 2 )
 
-    this.northeast = new Quadtree( ne, capacity )
-    this.northwest = new Quadtree( nw, capacity )
-    this.southeast = new Quadtree( se, capacity )
-    this.southwest = new Quadtree( sw, capacity )
+    this.northeast = new Quadtree( ne, resolution )
+    this.northwest = new Quadtree( nw, resolution )
+    this.southeast = new Quadtree( se, resolution )
+    this.southwest = new Quadtree( sw, resolution )
 
     this.divided = true
 
-    if (pointsOnlyInLeaves) {
-      this.points.forEach( point => this.insert( point ) )
-      this.points = []
-    }
+    this.points.forEach( point => this.insert( point ) )
+    this.points = []
   }
 
   /**
@@ -107,6 +120,7 @@ class Quadtree {
    */
   show( ctx, startX=0, startY=0 ) {
     const { x, y, width, height } = this.boundary
+    const { resolution, points } = this
 
     ctx.strokeStyle = `#000`
 
@@ -119,13 +133,14 @@ class Quadtree {
       this.southwest.show( ctx, startX, startY )
     }
 
-    ctx.strokeStyle = '#f00'
+    ctx.fillStyle = '#f00'
 
-    this.points.forEach( ({ x, y }) => {
-      ctx.beginPath()
-      ctx.arc( startX + x, startY + y, 2, 0, Math.PI * 2 )
-      ctx.stroke()
-    } )
+    if (points.length) ctx.fillRect( startX + x, startY + y, resolution, resolution )
+    // this.points.forEach( ({ x, y }) => {
+    //   ctx.beginPath()
+    //   ctx.arc( startX + x, startY + y, 2, 0, Math.PI * 2 )
+    //   ctx.stroke()
+    // } )
   }
 
   clear() {
@@ -139,5 +154,45 @@ class Quadtree {
 
       this.divided = false
     }
+  }
+
+  static bresenham( { x:xA, y:yA }, { x:xB, y:yB }, rectSideLength=1 ) {
+    const coordinates = []
+
+    let x1 = this.floorToDivisible( xA, rectSideLength )
+    let y1 = this.floorToDivisible( yA, rectSideLength )
+    const x2 = this.floorToDivisible( xB, rectSideLength )
+    const y2 = this.floorToDivisible( yB, rectSideLength )
+
+    const deltaX = Math.abs( x1 - x2 )
+    const deltaY = Math.abs( y1 - y2 )
+
+    const stepX = (x1 < x2 ? 1 : -1) * rectSideLength
+    const stepY = (y1 < y2 ? 1 : -1) * rectSideLength
+
+    let err = deltaX - deltaY
+
+    do  {
+      coordinates.push( new Point( x1, y1 ) )
+
+      const doubledErr = err * 2
+
+      if (doubledErr > -deltaY) {
+        err -= deltaY
+        x1 += stepX
+      }
+      if (doubledErr < deltaX) {
+        err += deltaX
+        y1 += stepY
+      }
+    } while (x1 != x2 || y1 != y2)
+
+    coordinates.push( new Point( x1, y1 ) )
+
+    return coordinates
+  }
+
+  static floorToDivisible( number, divider ) {
+    return Math.floor( number / divider ) * divider
   }
 }
