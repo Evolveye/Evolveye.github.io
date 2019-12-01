@@ -18,7 +18,7 @@ let rectSideLength = resolution.value
 let drawAreaX
 let drawAreaY
 
-createQTree()
+createQTree( ui.resolution.value )
 resize()
 
 ui.clear.addEventListener( 'click', () => {

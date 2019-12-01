@@ -28,8 +28,8 @@ class Rect {
    */
   contains( { x, y } ) {
     return (
-      x > this.x && x < this.x + this.width &&
-      y > this.y && y < this.y + this.height
+      x >= this.x && x <= this.x + this.width &&
+      y >= this.y && y <= this.y + this.height
     )
   }
 }
@@ -51,10 +51,13 @@ class Quadtree {
    * @param {Rect} boundary
    * @param {number} resolution
    */
-  constructor( boundary, resolution=1 ) {
+  constructor( boundary, approximateResolution=2 ) {
     this.boundary = boundary
-    this.resolution = resolution
-    this.maxDeph = Math.floor( Math.log2( boundary.width / resolution ) )
+    this.maxDeph = Math.round( Math.log2( 500 / approximateResolution ) )
+    this.resolution = 500 / (2 ** this.maxDeph)
+
+    // this.resolution = 2 ** Math.round( Math.log( approximateResolution ) / Math.log( 2 ) )
+    // this.maxDeph = 1 + Math.floor( Math.log2( boundary.width / this.resolution ) )
   }
 
   /**
@@ -78,9 +81,9 @@ class Quadtree {
   insert( point ) {
     if (!this.boundary.contains( point )) return false
 
-    const { points, divided, maxDeph } = this
+    const { points, divided, boundary, resolution } = this
 
-    if (maxDeph == 0) {
+    if (boundary.width == resolution) {
       points.push( point )
 
       return true
@@ -156,24 +159,24 @@ class Quadtree {
     }
   }
 
-  static bresenham( { x:xA, y:yA }, { x:xB, y:yB }, rectSideLength=1 ) {
+  static bresenham( { x:xA, y:yA }, { x:xB, y:yB }, resolution=1 ) {
     const coordinates = []
 
-    let x1 = this.floorToDivisible( xA, rectSideLength )
-    let y1 = this.floorToDivisible( yA, rectSideLength )
-    const x2 = this.floorToDivisible( xB, rectSideLength )
-    const y2 = this.floorToDivisible( yB, rectSideLength )
+    let x1 = this.floorToDivisible( xA, resolution )
+    let y1 = this.floorToDivisible( yA, resolution )
+    const x2 = this.floorToDivisible( xB, resolution )
+    const y2 = this.floorToDivisible( yB, resolution )
 
     const deltaX = Math.abs( x1 - x2 )
     const deltaY = Math.abs( y1 - y2 )
 
-    const stepX = (x1 < x2 ? 1 : -1) * rectSideLength
-    const stepY = (y1 < y2 ? 1 : -1) * rectSideLength
+    const stepX = (x1 < x2 ? 1 : -1) * resolution
+    const stepY = (y1 < y2 ? 1 : -1) * resolution
 
     let err = deltaX - deltaY
 
     do  {
-      coordinates.push( new Point( x1, y1 ) )
+      coordinates.push( new Point( x1 + resolution / 2, y1 + resolution / 2 ) )
 
       const doubledErr = err * 2
 
@@ -187,7 +190,7 @@ class Quadtree {
       }
     } while (x1 != x2 || y1 != y2)
 
-    coordinates.push( new Point( x1, y1 ) )
+    coordinates.push( new Point( x1 + resolution / 2, y1 + resolution / 2 ) )
 
     return coordinates
   }
