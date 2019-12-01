@@ -10,6 +10,8 @@ const buttons = {
   switchMode: document.querySelector( '[data-action="switch mode"' )
 }
 
+const queryRect = new Rect( 100, 100, 100, 75 )
+
 /** @type {Quadtree} */
 let qTree
 let drawAreaX
@@ -22,18 +24,16 @@ modeViewer.textContent = qTree.pointsOnlyInLeaves
 
 buttons.generate.addEventListener( 'click', () => {
   generatePoints( 100 )
-  qTree.show( ctx, drawAreaX, drawAreaY )
+  draw()
 } )
 buttons.clear.addEventListener( 'click', () => {
   qTree.clear()
   clear()
 } )
 buttons.switchMode.addEventListener( 'click', () => {
-  clear()
-
   createQTree( !qTree.pointsOnlyInLeaves )
 
-  modeViewer.textContent = qTree.pointsOnlyInLeaves
+  draw()
 
-  qTree.show( ctx, drawAreaX, drawAreaY )
+  modeViewer.textContent = qTree.pointsOnlyInLeaves
 } )

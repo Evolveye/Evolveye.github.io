@@ -32,8 +32,16 @@ class Rect {
       y > this.y && y < this.y + this.height
     )
   }
-}
 
+  intersects( { x, y, width, height } ) {
+    return !(
+      x > this.x + this.width ||
+      x + width < this.x ||
+      y > this.y + this.height ||
+      y + height < this.y
+    )
+  }
+}
 
 class Quadtree {
   /** @type {Quadtree} */
@@ -127,6 +135,29 @@ class Quadtree {
       ctx.arc( startX + x, startY + y, 2, 0, Math.PI * 2 )
       ctx.stroke()
     } )
+  }
+
+  /**
+   * @param {Rect} rect
+   */
+  query( rect ) {
+    /** @type {Point[]} */
+    const foundedPoints = []
+
+    if (!this.boundary.intersects( rect )) return foundedPoints
+
+    const { points, divided, northeast, northwest, southeast, southwest } = this
+
+    for (const point of points) if (rect.contains( point )) foundedPoints.push( point )
+
+    if (divided) foundedPoints.push(
+        ...northeast.query( rect ),
+        ...northwest.query( rect ),
+        ...southeast.query( rect ),
+        ...southwest.query( rect )
+      )
+
+    return foundedPoints
   }
 
   clear() {
