@@ -81,38 +81,38 @@ class Quadtree {
   /**
    * @param {Point[]} points
    */
-  insertPointSequence( ...points ) {
+  insertPointSequence( object, ...points ) {
     if (!points.length) return
 
-    if (points.length == 1) this.insert( point )
+    if (points.length == 1) this.insert( object, point )
     else for (let i = 1; i < points.length; i++) {
       const pointA = points[ i - 1 ]
       const pointB = points[ i     ]
 
-      Quadtree.bresenham( pointA, pointB, this.resolution ).forEach( point => this.insert( point ) )
+      Quadtree.bresenham( pointA, pointB, this.resolution ).forEach( point => this.insert( object, point ) )
     }
   }
 
   /**
    * @param {Point} point
    */
-  insert( point ) {
+  insert( object, point ) {
     if (!this.boundary.contains( point )) return false
 
     const { points, divided, boundary, resolution } = this
 
     if (boundary.width == resolution) {
-      points.push( point )
+      points.push( object )
 
       return true
     }
     else {
       if (!divided) this.subdivide()
 
-      return this.northeast.insert( point ) ||
-        this.northwest.insert( point ) ||
-        this.southeast.insert( point ) ||
-        this.southwest.insert( point )
+      return this.northeast.insert( object, point ) ||
+        this.northwest.insert( object, point ) ||
+        this.southeast.insert( object, point ) ||
+        this.southwest.insert( object, point )
     }
   }
 
