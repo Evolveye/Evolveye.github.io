@@ -17,15 +17,17 @@
 <body>
   <canvas class="canvas-main"></canvas>
 
-  <p>
-    Press the left mouse button on the white area and move to create the line. <br>
-    Line will be stored inside quadtree structure
-  </p>
-  <br>
-  <br>
-  Resolution: <input id=resolution min=1 max=15 type=number value=13 onchange="createQTree( this.value ); clear()">
-  <br>
-  <br>
-  <button id=clear>Clear</button>
+  <aside class="ui-panel">
+    <p>
+      Press the left mouse button on the white area and move to create the line. <br>
+      Line will be stored inside quadtree structure
+    </p>
+    <br>
+    Resolution: <input id=resolution min=1 max=15 type=number value=5> <br>
+    <br>
+    <button id=clear>Clear</button> <br>
+    <br>
+    Show mesh: <input id=show-mesh type=checkbox checked> <br>
+  </aside>
 </body>
 </html>

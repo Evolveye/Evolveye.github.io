@@ -121,29 +121,24 @@ class Quadtree {
   /**
    * @param {CanvasRenderingContext2D} ctx
    */
-  show( ctx, startX=0, startY=0 ) {
+  show( ctx, { meshShowing=true, drawAreaX=0, drawAreaY=0 } ) {
     const { x, y, width, height } = this.boundary
     const { resolution, points } = this
 
     ctx.strokeStyle = `#000`
 
-    ctx.strokeRect( startX + x, startY + y, width, height )
+    if (meshShowing) ctx.strokeRect( drawAreaX + x, drawAreaY + y, width, height )
 
     if (this.divided) {
-      this.northeast.show( ctx, startX, startY )
-      this.northwest.show( ctx, startX, startY )
-      this.southeast.show( ctx, startX, startY )
-      this.southwest.show( ctx, startX, startY )
+      this.northeast.show( ctx, { meshShowing, drawAreaX, drawAreaY } )
+      this.northwest.show( ctx, { meshShowing, drawAreaX, drawAreaY } )
+      this.southeast.show( ctx, { meshShowing, drawAreaX, drawAreaY } )
+      this.southwest.show( ctx, { meshShowing, drawAreaX, drawAreaY } )
     }
 
     ctx.fillStyle = '#f00'
 
-    if (points.length) ctx.fillRect( startX + x, startY + y, resolution, resolution )
-    // this.points.forEach( ({ x, y }) => {
-    //   ctx.beginPath()
-    //   ctx.arc( startX + x, startY + y, 2, 0, Math.PI * 2 )
-    //   ctx.stroke()
-    // } )
+    if (points.length) ctx.fillRect( drawAreaX + x, drawAreaY + y, resolution, resolution )
   }
 
   clear() {

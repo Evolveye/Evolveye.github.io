@@ -35,12 +35,10 @@ function resize() {
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
 
-  drawAreaX = (canvas.width  - drawableAreaSize)  / 2
+  drawAreaX = (canvas.width  - drawableAreaSize) / 2
   drawAreaY = (canvas.height - drawableAreaSize) / 2
 
   clear()
-
-  // qTree.show( ctx, drawAreaX, drawAreaY )
 }
 
 window.addEventListener( `resize`, resize )
@@ -61,12 +59,10 @@ document.addEventListener( 'mouseup', ({ clientX, clientY }) => {
   pointMouseMove.y = null
 
   clear()
-  qTree.show( ctx, drawAreaX, drawAreaY )
+  qTree.show( ctx, { meshShowing, drawAreaX, drawAreaY } )
 } )
 document.addEventListener( 'mousedown', ({ clientX, clientY }) => {
   if (!clickOnDrawableArea( clientX, clientY )) return
-
-  // console.log( { x:(clientX - drawAreaX), y:(clientY - drawAreaY) } )
 
   mouseDown = true
 
@@ -85,7 +81,7 @@ document.addEventListener( 'mousemove', ({ clientX, clientY }) => {
   pointMouseMove.y = clientY
 
   clear()
-  qTree.show( ctx, drawAreaX, drawAreaY )
+  qTree.show( ctx, { meshShowing, drawAreaX, drawAreaY } )
 
   ctx.strokeStyle = '#00f'
   ctx.beginPath()
