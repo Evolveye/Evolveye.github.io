@@ -9,8 +9,10 @@ const ui = {
   meshShower: document.querySelector( '#show-mesh' )
 }
 
-const pointMouseDown = { x:null, y:null }
-const pointMouseMove = { x:null, y:null }
+const pointMouseDown = new Point( null, null, true )
+const pointMouseMove = new Point( null, null, true )
+
+const objects = []
 
 /** @type {Quadtree} */
 let qTree

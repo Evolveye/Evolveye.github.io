@@ -47,16 +47,14 @@ document.addEventListener( 'mouseup', ({ clientX, clientY }) => {
 
   mouseDown = false
 
-  qTree.insertPointSequence(
-    new Point( pointMouseDown.x - drawAreaX, pointMouseDown.y - drawAreaY, true ),
-    new Point( pointMouseMove.x - drawAreaX, pointMouseMove.y - drawAreaY, true )
-  )
+  if (pointMouseDown.equal( pointMouseMove )) qTree.insert( pointMouseDown )
+  else qTree.insertPointSequence( pointMouseDown, pointMouseMove )
 
-  pointMouseDown.x = null
-  pointMouseDown.y = null
+  pointMouseDown.newX = null
+  pointMouseDown.newY = null
 
-  pointMouseMove.x = null
-  pointMouseMove.y = null
+  pointMouseMove.newX = null
+  pointMouseMove.newY = null
 
   clear()
   qTree.show( ctx, { meshShowing, drawAreaX, drawAreaY } )
@@ -66,26 +64,26 @@ document.addEventListener( 'mousedown', ({ clientX, clientY }) => {
 
   mouseDown = true
 
-  pointMouseDown.x = clientX
-  pointMouseDown.y = clientY
+  pointMouseDown.newX = clientX - drawAreaX
+  pointMouseDown.newY = clientY - drawAreaY
 
-  pointMouseMove.x = clientX
-  pointMouseMove.y = clientY
+  pointMouseMove.newX = clientX - drawAreaX
+  pointMouseMove.newY = clientY - drawAreaY
 } )
 document.addEventListener( 'mousemove', ({ clientX, clientY }) => {
   if (!mouseDown || !clickOnDrawableArea( clientX, clientY )) return
 
   const { x, y } = pointMouseDown
 
-  pointMouseMove.x = clientX
-  pointMouseMove.y = clientY
+  pointMouseMove.newX = clientX - drawAreaX
+  pointMouseMove.newY = clientY - drawAreaY
 
   clear()
   qTree.show( ctx, { meshShowing, drawAreaX, drawAreaY } )
 
   ctx.strokeStyle = '#00f'
   ctx.beginPath()
-  ctx.moveTo( x, y )
+  ctx.moveTo( x + drawAreaX, y + drawAreaY )
   ctx.lineTo( clientX, clientY )
   ctx.stroke()
 } )

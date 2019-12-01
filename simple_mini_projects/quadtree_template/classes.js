@@ -3,9 +3,30 @@ class Point {
    * @param {number} x
    * @param {number} y
    */
-  constructor( x, y ) {
-    this.x = x
-    this.y = y
+  constructor( x, y, alwaysInteger=false ) {
+    this.x = alwaysInteger ? x | 1 : x
+    this.y = alwaysInteger ? y | 1 : y
+    this.alwaysInteger = alwaysInteger
+  }
+
+  /**
+   * @param {number} x
+   */
+  set newX( x ) {
+    this.x = this.alwaysInteger ? x | 1 : x
+  }
+  /**
+   * @param {number} y
+   */
+  set newY( y ) {
+    this.y = this.alwaysInteger ? y | 1 : y
+  }
+
+  /**
+   * @param {Point} point
+   */
+  equal( { x, y } ) {
+    return this.x == x && this.y == y
   }
 }
 
@@ -55,9 +76,6 @@ class Quadtree {
     this.boundary = boundary
     this.maxDeph = Math.round( Math.log2( 500 / approximateResolution ) )
     this.resolution = 500 / (2 ** this.maxDeph)
-
-    // this.resolution = 2 ** Math.round( Math.log( approximateResolution ) / Math.log( 2 ) )
-    // this.maxDeph = 1 + Math.floor( Math.log2( boundary.width / this.resolution ) )
   }
 
   /**
