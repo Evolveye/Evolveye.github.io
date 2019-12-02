@@ -30,7 +30,7 @@ public class Utils {
         int index = 1;
         String[] optionsIndices = new String[ menuTitles.size() ];
 
-        System.out.print( "\n | Co chcesz zrobić?" );
+        System.out.print( "\n | What you want to do?" );
 
         for (String menuTitle : menuTitles) {
             optionsIndices[ index - 1 ] = "" + index;
@@ -38,11 +38,11 @@ public class Utils {
             System.out.print( "\n [ " + index++ + " ]: " + menuTitle );
         }
 
-        System.out.print( "\n |> Twój wybór: " );
+        System.out.print( "\n |> Your response: " );
         String response = InputUtils.readLine();
 
         while (!InputUtils.isGoodResponse( response, optionsIndices )) {
-            System.out.print( " |> Niepoprawną odpowiedź. Ponów wybór: " );
+            System.out.print( " |> Wrong response! Try again: " );
             response = InputUtils.readLine();
         }
 

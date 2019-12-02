@@ -22,7 +22,7 @@ public class InputUtils {
         d = input.nextLine();
 
         while (!isDouble( d )) {
-            System.out.print( "Niepoprawny format liczby! Wpisz jeszcze raz: " );
+            System.out.print( "Wrong number format. Try again: " );
             d = input.nextLine();
         }
 
@@ -40,7 +40,7 @@ public class InputUtils {
         d = input.nextLine();
 
         while (!isInt( d )) {
-            System.out.print( "Niepoprawny format liczby! Wpisz jeszcze raz: " );
+            System.out.print( "Wrong number format. Try again: " );
             d = input.nextLine();
         }
 
@@ -58,7 +58,7 @@ public class InputUtils {
         String response = input.nextLine();
 
         while (!isGoodResponse( response, responses )) {
-            System.out.print( "Podałeś niepoprawną odpowiedź. Odpowiedz jeszcze raz. [" + String.join( "/", responses ) + "]:" );
+            System.out.print( "Wrong response. Try again. [" + String.join( "/", responses ) + "]:" );
             response = input.nextLine();
         }
 
@@ -69,7 +69,7 @@ public class InputUtils {
         String response = input.nextLine();
 
         while (!pattern.matcher( response ).matches()) {
-            System.out.print( "Podałeś niepoprawną odpowiedź. Odpowiedz jeszcze raz. [ Wzór: " + pattern + "]: " );
+            System.out.print( "Wrong response. Try again. [ Wzór: " + pattern + "]: " );
             response = input.nextLine();
         }
 
