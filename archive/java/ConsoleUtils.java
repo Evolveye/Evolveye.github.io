@@ -1,25 +1,24 @@
-package com.company;
+package io.github.evolveye;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 interface MenuLambda {
-    void MenuLambda();
+    void doMenuAction();
 }
 
-public class ConsoleUtils {
+public class Utils {
     private static boolean running = true;
     private static ArrayList<String> menuTitles = new ArrayList<>();
     private static ArrayList<MenuLambda> menuLambdas = new ArrayList<>();
 
-    public static void printInfo() {
+    public static void printInfo( String[] labels ) {
         System.out.println( " |" );
-        System.out.println( " | Ten zaawansowany program potrafi liczyć pieniądze!" );
-        System.out.println( " | Program jest w stanie:" );
-        System.out.println( " |  - pokazać ile miesięcy musisz oszczędzać do wymarzonej kwoty" );
-        System.out.println( " |  - przedstawić comiesięczne kwoty" );
-        System.out.println( " |  - wyświetlić Twój wiek, po osiągnięciu celowej kwoty" );
+
+        for (int i = 0; i < labels.length; i++) {
+            System.out.println( " | " + labels[ i ] );
+        }
+
         System.out.println( " |\n" );
     }
 
@@ -40,36 +39,46 @@ public class ConsoleUtils {
         }
 
         System.out.print( "\n |> Twój wybór: " );
-        String response = ConsoleInputUtils.readLine();
+        String response = InputUtils.readLine();
 
-        while (!ConsoleInputUtils.isGoodResponse( response, optionsIndices )) {
+        while (!InputUtils.isGoodResponse( response, optionsIndices )) {
             System.out.print( " |> Niepoprawną odpowiedź. Ponów wybór: " );
-            response = ConsoleInputUtils.readLine();
+            response = InputUtils.readLine();
         }
 
-        menuLambdas.get( Integer.parseInt( response ) - 1 ).MenuLambda();
+        menuLambdas.get( Integer.parseInt( response ) - 1 ).doMenuAction();
     }
     public static void startMenuLoop() {
         do {
-            ConsoleUtils.generateMenu();
+            Utils.generateMenu();
         } while( running );
     }
     public static void endMenuLoop() {
         running = false;
     }
 
-    public static boolean goodTimes(LocalDateTime startDate, LocalDateTime endDate ) {
-        int hoursStart = startDate.getHour();
-        int hoursEnd = endDate.getHour();
+    public static boolean goodTimes(LocalTime startTime, LocalTime endTime, LocalTime startLimit, LocalTime endLimit ) {
+        int hoursStart = startTime.getHour();
+        int hoursEnd = endTime.getHour();
 
-        int minutesStart = startDate.getMinute();
-        int minutesEnd = endDate.getMinute();
+        int minutesStart = startTime.getMinute();
+        int minutesEnd = endTime.getMinute();
 
-        if (hoursStart > hoursEnd || hoursStart == hoursEnd && minutesStart >= minutesEnd) return false;
+        int hoursStartLimit = startLimit.getHour();
+        int hoursEndLimit = endLimit.getHour();
 
-        return true;
+        int minutesStartLimit = startLimit.getMinute();
+        int minutesEndLimit = endLimit.getMinute();
+
+        if (hoursStart > hoursStartLimit || hoursStart == hoursStartLimit && minutesStart >= minutesStartLimit) return false;
+        if (hoursEndLimit > hoursEnd || hoursEndLimit == hoursEnd && minutesEndLimit >= minutesEnd) return false;
+
+        return hoursStart <= hoursEnd && (hoursStart != hoursEnd || minutesStart < minutesEnd);
     }
-    public static String getTime( LocalDateTime date ) {
+    public static boolean goodTimes(LocalTime startTime, LocalTime endTime ) {
+        return goodTimes( startTime, endTime, startTime, endTime );
+    }
+    public static String getTime( LocalTime date ) {
         String h = "" + date.getHour();
         String m = "" + date.getMinute();
         String s = "" + date.getSecond();
@@ -78,7 +87,7 @@ public class ConsoleUtils {
         if (m.length() == 1) m = "0" + m;
         if (s.length() == 1) s = "0" + s;
 
-        return h + ":" + m; // + ":" + s;
+        return h + ":" + m + ":" + s;
     }
 
     public static String padStarString( String str, int length, char character ) {
