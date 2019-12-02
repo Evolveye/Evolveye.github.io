@@ -57,7 +57,7 @@ public class Utils {
         running = false;
     }
 
-    public static boolean goodTimes(LocalTime startTime, LocalTime endTime, LocalTime startLimit, LocalTime endLimit ) {
+    public static boolean goodTimes( LocalTime startTime, LocalTime endTime, LocalTime startLimit, LocalTime endLimit ) {
         int hoursStart = startTime.getHour();
         int hoursEnd = endTime.getHour();
 
@@ -75,7 +75,7 @@ public class Utils {
 
         return hoursStart <= hoursEnd && (hoursStart != hoursEnd || minutesStart < minutesEnd);
     }
-    public static boolean goodTimes(LocalTime startTime, LocalTime endTime ) {
+    public static boolean goodTimes( LocalTime startTime, LocalTime endTime ) {
         return goodTimes( startTime, endTime, startTime, endTime );
     }
     public static String getTime( LocalTime date ) {

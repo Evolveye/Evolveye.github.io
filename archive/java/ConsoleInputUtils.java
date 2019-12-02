@@ -1,9 +1,9 @@
-package com.company;
+package io.github.evolveye;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class ConsoleInputUtils {
+public class InputUtils {
     private static boolean running = true;
     private static Scanner input = new Scanner( System.in );
 
@@ -11,6 +11,11 @@ public class ConsoleInputUtils {
         return input.nextLine();
     }
 
+    public static double getDouble( String title ) {
+        System.out.print( title + ": " );
+
+        return getDouble();
+    }
     public static double getDouble() {
         String d;
 
@@ -22,6 +27,12 @@ public class ConsoleInputUtils {
         }
 
         return Double.parseDouble( d );
+    }
+
+    public static double getInt( String title ) {
+        System.out.print( title + ": " );
+
+        return getInt();
     }
     public static int getInt() {
         String d;
