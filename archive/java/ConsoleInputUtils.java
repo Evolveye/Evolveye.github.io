@@ -65,11 +65,11 @@ public class InputUtils {
         return response;
     }
     public static String waitForResponse( String title, Pattern pattern ) {
-        System.out.print( title + " [ Wzór: " + pattern + "]: " );
+        System.out.print( title + " [ Pattern: " + pattern + "]: " );
         String response = input.nextLine();
 
         while (!pattern.matcher( response ).matches()) {
-            System.out.print( "Wrong response. Try again. [ Wzór: " + pattern + "]: " );
+            System.out.print( "Wrong response. Try again. [ Pattern: " + pattern + "]: " );
             response = input.nextLine();
         }
 
