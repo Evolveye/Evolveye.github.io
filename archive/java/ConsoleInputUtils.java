@@ -77,7 +77,7 @@ public class InputUtils {
     }
 
     public static boolean isGoodResponse(String response, String... responses ) {
-        for ( String res : responses )
+        for (String res : responses)
             if (res.equals( response )) return true;
 
         return false;

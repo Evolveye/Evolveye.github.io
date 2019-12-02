@@ -51,7 +51,7 @@ public class Utils {
     public static void startMenuLoop() {
         do {
             Utils.generateMenu();
-        } while( running );
+        } while (running);
     }
     public static void endMenuLoop() {
         running = false;
@@ -91,14 +91,14 @@ public class Utils {
     }
 
     public static String padStarString( String str, int length, char character ) {
-        for (int i = str.length(); i < length; i++ ) {
+        for (int i = str.length(); i < length; i++) {
             str = character + str;
         }
 
         return str;
     }
     public static String padEndString( String str, int length, char character ) {
-        for (int i = str.length(); i < length; i++ ) {
+        for (int i = str.length(); i < length; i++) {
             str += character;
         }
 
