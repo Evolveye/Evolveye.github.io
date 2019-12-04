@@ -79,6 +79,28 @@ class Quadtree {
   }
 
   /**
+   * @param {Point[]} vertices
+   */
+  insertPolygon( object, ...vertices ) {
+    if (!vertices.length < 3) return
+
+    this.insertPointSequence( object, vertices )
+
+    const point1 = vertices[ 0 ]
+    const point2 = vertices[ 1 ]
+    const pointNearFirstLine = new Point(
+      point1.x + (point2.x - point1.x) / 2 + (point1.y != point2.y ? this.resolution : 0),
+      point1.y + (point2.y - point1.y) / 2 + (point1.y == point2.y ? this.resolution : 0),
+    )
+
+    const maxX = Math.max( ...vertices.map( v => v.x ) )
+
+    // find all leaves on line between pointNearFirstLine.x and maxX
+
+    // next steps...
+  }
+
+  /**
    * @param {Point[]} points
    */
   insertPointSequence( object, ...points ) {
