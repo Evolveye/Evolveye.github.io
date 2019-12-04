@@ -74,7 +74,7 @@ class Quadtree {
   /** @type {Quadtree} */
   southwest = null
 
-  points = []
+  references = []
   divided = false
 
   /**
@@ -131,10 +131,10 @@ class Quadtree {
   insert( object, point ) {
     if (!this.boundary.contains( point )) return false
 
-    const { points, divided, boundary, resolution } = this
+    const { references, divided, boundary, resolution } = this
 
     if (boundary.width == resolution) {
-      points.push( object )
+      references.push( object )
 
       return true
     }
@@ -164,8 +164,8 @@ class Quadtree {
 
     this.divided = true
 
-    this.points.forEach( point => this.insert( point ) )
-    this.points = []
+    this.references.forEach( point => this.insert( point ) )
+    this.references = []
   }
 
   /**
@@ -178,9 +178,9 @@ class Quadtree {
 
     if (!this.boundary.intersects( rect )) return foundedLeaves
 
-    const { points, divided, northeast, northwest, southeast, southwest, resolution } = this
+    const { references, divided, northeast, northwest, southeast, southwest, resolution } = this
 
-    if (rect.intersects( new Rect( boundary.x, boundary.y, resolution, resolution ) )) foundedLeaves.push( points )
+    if (rect.intersects( new Rect( boundary.x, boundary.y, resolution, resolution ) )) foundedLeaves.push( references )
 
     if (divided) foundedLeaves.push(
       ...northeast.query( rect ),
@@ -197,7 +197,7 @@ class Quadtree {
    */
   show( ctx, { meshShowing=true, drawAreaX=0, drawAreaY=0 } ) {
     const { x, y, width, height } = this.boundary
-    const { resolution, points } = this
+    const { resolution, references: points } = this
 
     ctx.strokeStyle = `#000`
 
@@ -216,7 +216,7 @@ class Quadtree {
   }
 
   clear() {
-    this.points.splice( 0 )
+    this.references.splice( 0 )
 
     if (this.divided) {
       this.northeast = null
