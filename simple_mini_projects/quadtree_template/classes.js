@@ -141,10 +141,10 @@ class Quadtree {
     else {
       if (!divided) this.subdivide()
 
-      return this.northeast.insert( object, point ) ||
-        this.northwest.insert( object, point ) ||
-        this.southeast.insert( object, point ) ||
-        this.southwest.insert( object, point )
+      return this.northeast.insert( object, point )
+        || this.northwest.insert( object, point )
+        || this.southeast.insert( object, point )
+        || this.southwest.insert( object, point )
     }
   }
 
@@ -171,16 +171,16 @@ class Quadtree {
   /**
    * @param {Rect} rect
    */
-  query( rect ) {
-    /** @type {Point[]} */
+  queryLeaves( rect ) {
+    /** @type {Quadtree[]} */
     const foundedLeaves = []
     const { boundary } = this
 
     if (!this.boundary.intersects( rect )) return foundedLeaves
 
-    const { references, divided, northeast, northwest, southeast, southwest, resolution } = this
+    const { divided, northeast, northwest, southeast, southwest, resolution } = this
 
-    if (rect.intersects( new Rect( boundary.x, boundary.y, resolution, resolution ) )) foundedLeaves.push( references )
+    if (rect.intersects( new Rect( boundary.x, boundary.y, resolution, resolution ) )) foundedLeaves.push( this )
 
     if (divided) foundedLeaves.push(
       ...northeast.query( rect ),
@@ -190,6 +190,12 @@ class Quadtree {
     )
 
     return foundedLeaves
+  }
+
+  query( rect ) {
+    return this.queryLeaves( rect )
+      .map( qTree => qTree.references )
+      .filter( (reference, i, arr) => arr.indexOf( reference ) === i )
   }
 
   /**
