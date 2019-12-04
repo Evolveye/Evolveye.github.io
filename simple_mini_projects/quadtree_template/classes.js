@@ -53,6 +53,15 @@ class Rect {
       y >= this.y && y <= this.y + this.height
     )
   }
+
+  intersects( { x, y, width, height } ) {
+    return !(
+      x > this.x + this.width ||
+      x + width < this.x ||
+      y > this.y + this.height ||
+      y + height < this.y
+    )
+  }
 }
 
 class Quadtree {
@@ -94,6 +103,7 @@ class Quadtree {
     )
 
     const maxX = Math.max( ...vertices.map( v => v.x ) )
+    const rect = new Rect( Math.min( x1, x2 ), Math.min( y1, y2 ), Math.abs( x2 - x1 ), Math.abs( y2 - y1 ) )
 
     // find all leaves on line between pointNearFirstLine.x and maxX
 
@@ -156,6 +166,30 @@ class Quadtree {
 
     this.points.forEach( point => this.insert( point ) )
     this.points = []
+  }
+
+  /**
+   * @param {Rect} rect
+   */
+  query( rect ) {
+    /** @type {Point[]} */
+    const foundedLeaves = []
+    const { boundary } = this
+
+    if (!this.boundary.intersects( rect )) return foundedLeaves
+
+    const { points, divided, northeast, northwest, southeast, southwest, resolution } = this
+
+    if (rect.intersects( new Rect( boundary.x, boundary.y, resolution, resolution ) )) foundedLeaves.push( points )
+
+    if (divided) foundedLeaves.push(
+      ...northeast.query( rect ),
+      ...northwest.query( rect ),
+      ...southeast.query( rect ),
+      ...southwest.query( rect ),
+    )
+
+    return foundedLeaves
   }
 
   /**
