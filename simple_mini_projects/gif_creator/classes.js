@@ -14,15 +14,15 @@ class Gif {
 
   /**
    * @param {Any} colorsDefinitions object with properties ised in imageData meaning colors in hex; { r:"FF 00 00" }
-   * @param {string[][]} imageData userfriendly image data
+   * @param {string[][][]} imageData userfriendly gif frames data
    */
   constructor( colorsDefinitions, imageData ) {
     const colorsAliases = Object.keys( colorsDefinitions )
 
     this.globalColorDefinitions = colorsDefinitions
 
-    this.width = Gif.get2ByteCode( imageData[ 0 ].length )
-    this.height = Gif.get2ByteCode( imageData.length.toString( 16 ) )
+    this.width = Gif.get2ByteCode( imageData[ 0 ][ 0 ].length )
+    this.height = Gif.get2ByteCode( imageData[ 0 ].length.toString( 16 ) )
     this.globalColorTableFlag = 1
     this.colorResolution = (this.globalColorTableFlag ? ~~Math.log2( colorsAliases.length ) - 1 : 0)
     this.sortColorsFlag = 0
@@ -31,7 +31,10 @@ class Gif {
     this.pixelAspectRatio = Gif.get1ByteCode( 0 )
     this.delay = Gif.get2ByteCode( 0 )
 
+    // HEADER
     this.bufferData = `47 49 46 38 39 61 `
+
+    // LOGICAL SCREEN
     this.bufferData += `${this.width} ${this.height} `
     this.bufferData += parseInt( ``
       + this.globalColorTableFlag
@@ -41,15 +44,38 @@ class Gif {
     , 2 ).toString( 16 ).toUpperCase()
     this.bufferData += ` ${this.backgroundColorIndex} ${this.pixelAspectRatio}`
 
+    // GLOBAL COLOR TABLE
     colorsAliases.forEach( alias => this.bufferData += ` ${colorsDefinitions[ alias ]}` )
 
-    this.bufferData += ` 21 F9 04 00 ${this.delay} 00 00 `
-    this.bufferData += `2C 00 00 00 00 ${this.width} ${this.height} 00`
+    // APPLICATION EXTENSION
+    if ( imageData.length > 1 ) {
+      const loops = Infinity
+      this.bufferData += ` 21 FF 0B 4E 45 54 53 43 41 50 45 32 2E 30 03 01 ${loops == Infinity ? "00 00" : Gif.get2ByteCode( loops )} 00`
+    }
 
-    this.addFrame( imageData )
+    imageData.forEach( data => {
+      // GRAPHICS CONTROL EXTENSION
+      //    BITS:  1-3:(future)  4-6:(what happens to the current image data when you move onto the next)  7:(user input flag, 0 recommended)  8:transparency
+      //                            0 - no disposal method - no animations
+      //                            1 - draw on previus frame
+      //                            2 - clear to background color
+      //                            3 - back to state before that frame
+      //                            4-7 are yet to be defined
+      //
+      //                             ^
+      //                             |                       000 001 0 0
+      this.bufferData += ` 21 F9 04 ${imageData.length > 1 ? "04" : "00"} ${this.delay} 00 00`
 
+      // IMAGE DESCRIPTOR
+      this.bufferData += ` 2C 00 00 00 00 ${this.width} ${this.height} 00`
+
+      // IMAGE DATA
+      this.addFrame( data )
+    } )
+
+    // TRAILER
     this.bufferData += ` 3B`
-    this.bufferDataBinary = this.bufferData.replace( / /g, `` )
+    this.bufferData = this.bufferData.replace( / /g, `` )
   }
   /**
    * @param {string[][]} imageData userfriendly image data
