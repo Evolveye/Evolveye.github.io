@@ -1,4 +1,8 @@
-const gifHandler = document.querySelector( `#gif` )
+// import https from "https";
+// import fs from "fs";
+// import { strict } from "assert";
+
+
 const gif = new Gif( { w:`FF FF FF`, r:`FF 00 00`, b:`00 00 FF`, k:`00 00 00` }, [
   [
     [ `r`,`r`,`r`,`r`,`r`,`b`,`b`,`b`,`b`,`b` ],
@@ -25,4 +29,8 @@ const gif = new Gif( { w:`FF FF FF`, r:`FF 00 00`, b:`00 00 FF`, k:`00 00 00` },
   ]
 ] )
 
-gifHandler.appendChild( gif.getImgTag() )
+document.querySelector( `#gif` ).appendChild( gif.getImgTag() )
+
+// fs.writeFileSync( `test.gif`, Buffer.from( gif.bufferData, `hex` ) )
+
+// console.log( new Png( fs.readFileSync( `test.png` ) ).data )

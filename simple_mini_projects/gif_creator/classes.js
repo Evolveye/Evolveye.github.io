@@ -177,3 +177,57 @@ class Gif {
     return number.toString( radix ).padStart( length, `0` )
   }
 }
+class Png {
+  /**
+   * @param {Buffer} buffer
+   */
+  constructor( buffer ) {
+    this.signature = buffer.slice( 0, 8 )
+    this.header = {}
+    this.data = {}
+    this.end = null
+
+    let i = 8
+    while (i < buffer.length) {
+      const length = Png.bufferToNum( buffer.slice( i,     i + 4 ) )
+      const type = buffer.slice( i + 4, i + 8 ).toString()
+      const data = buffer.slice( i + 8, i + 8 + length )
+      const crc = buffer.slice( i + 8 + length, i + 8 + length + 4 )
+
+      if (type === `IHDR`) {
+        this.header.width = Png.bufferToNum( data.slice( 0, 4 ) )
+        this.header.height = Png.bufferToNum( data.slice( 4, 8 ) )
+        this.header.bitDepth = buffer[ 8 ]
+        this.header.color = buffer[ 9 ]
+        this.header.compression = buffer[ 10 ]
+        this.header.filter = buffer[ 11 ]
+        this.header.interlace = buffer[ 12 ]
+      } else if (type === `IDAT`) {
+        this.data.windowSize = data[ 0 ] >> 4
+        this.data.method = data[ 0 ] & 15
+        this.data.level = data[ 1 ] >> 6
+        this.data.dict = data[ 1 ] >> 5 & 1
+        this.data.checksum = Png.bufferToNum( data.slice( 0, 2 ) ) % 31
+        this.data.lastBlock = data[ 3 ] & 1
+        this.data.blockType = data[ 3 ] >> 1 & 3
+        this.data.dataLength = Png.bufferToNum( data.slice( 3, 5 ).reverse() )
+        this.data.length = Png.bufferToNum( data.slice( 5, 7 ).reverse() )
+        this.data.lineFilter = data[ 7 ]
+
+        //...and problem, because I have weird values in buffer
+           console.log( data )
+        // <Buffer 18 57 63 cf f8 f0 c0 1f 00 05 00 01 ff>
+      } else if (type === `IEND`) {
+      }
+
+      i += 8 + length + 4
+    }
+  }
+
+  /**
+   * @param {Buffer} buffer
+   */
+  static bufferToNum( buffer ) {
+    return buffer.reduceRight( (a, b, i, { length }) => a + b * 256 ** (length - 1 - i) )
+  }
+}
