@@ -24,6 +24,7 @@ body {
   color: #ddd5c8;
 }
 
+.canvas-subpage,
 .page-home,
 .subpage {
   position: absolute;

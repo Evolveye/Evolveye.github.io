@@ -1,6 +1,10 @@
 const importer = document.querySelector( `.importer` )
+/** @type {HTMLCanvasElement} */
 const canvas = document.querySelector( `.canvas-simpleMiniProjects` )
+const ctx = canvas.getContext( `2d` )
 const siteConfig = {
+  canvasX: 0,
+  canvasY: 0,
   mouse: { down:{ x:null, y:null }, up:{ x:null, y:null }, current:{ x:null, y:null }, pressed:false },
   onResize() {},
   onMouseMove() {},
@@ -23,18 +27,24 @@ async function importScript( src ) {
   siteConfig.onMouseDown = config.onMouseDown || null
   siteConfig.onMouseUp = config.onMouseUp || null
   siteConfig.onClick = config.onClick || null
-  siteConfig.draw = config.draw || null
 
   console.log( `%cScript has been imported %c(${src})`, `font-weight:bold`, `font-weight:normal` )
+
+  if (config.run) {
+    config.run( ctx, clear )
+    resize()
+  }
 }
 function clear() {
-  ctx.fillStyle = '#eee'
-
-  ctx.fillRect( drawAreaX, drawAreaY, drawableAreaSize, drawableAreaSize )
+  ctx.clearRect( 0, 0, canvas.width, canvas.height )
 }
-function resize( width=window.innerWidth, height=window.innerHeight ) {
+function resize( width=canvas.clientWidth, height=canvas.clientHeight ) {
   canvas.width = width
   canvas.height = height
+
+  const { x, y } = canvas.getBoundingClientRect()
+  siteConfig.canvasX = x
+  siteConfig.canvasY = y
 
   if (siteConfig.onResize) siteConfig.onResize()
 
@@ -56,21 +66,21 @@ function clickOnCenteredRectangle( clientX, clientY, { width=canvas.width, heigh
 window.addEventListener( 'resize', resize )
 document.addEventListener( 'mouseup', ({ clientX, clientY }) => {
   const { mouse, onMouseUp } = siteConfig
-  const { up } = mouse
+  const { down, up } = mouse
 
-  up.x = clientX
-  up.y = clientY
+  up.x = clientX - siteConfig.canvasX
+  up.y = clientY - siteConfig.canvasY
 
   mouse.pressed = false
 
-  if (onMouseUp) onMouseUp( up )
+  if (onMouseUp) onMouseUp( up, down )
 } )
 document.addEventListener( 'mousedown', ({ clientX, clientY }) => {
   const { mouse, onMouseDown } = siteConfig
   const { down } = mouse
 
-  down.x = clientX
-  down.y = clientY
+  down.x = clientX - siteConfig.canvasX
+  down.y = clientY - siteConfig.canvasY
 
   mouse.pressed = true
 
@@ -78,12 +88,12 @@ document.addEventListener( 'mousedown', ({ clientX, clientY }) => {
 } )
 document.addEventListener( 'mousemove', ({ clientX, clientY }) => {
   const { mouse, onMouseMove } = siteConfig
-  const { current } = mouse
+  const { pressed, current, down } = mouse
 
-  current.x = clientX
-  current.y = clientY
+  current.x = clientX - siteConfig.canvasX
+  current.y = clientY - siteConfig.canvasY
 
-  if (onMouseMove) onMouseMove( current )
+  if (onMouseMove) onMouseMove( pressed, current.x, current.y, down )
 } )
 document.addEventListener( 'click', () => {
   const { mouse, onClick } = siteConfig
@@ -91,4 +101,4 @@ document.addEventListener( 'click', () => {
 
   if (onClick && up.x === down.x && up.y == down.y) onClick( up )
 } )
-importer.addEventListener( `click`, () => importScript( `/simple_mini_projects/main_script_placeholder.js` ) )
+importer.addEventListener( `click`, () => importScript( `/simple_mini_projects/bresenham-copy/main.js` ) )

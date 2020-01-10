@@ -1,5 +1,5 @@
 /** @type {HTMLCanvasElement} */
-const canvas = document.querySelector( `.background` )
+const canvas = document.querySelector( `.canvas-main` )
 const ctx = canvas.getContext( `2d` )
 
 let width = window.innerWidth
