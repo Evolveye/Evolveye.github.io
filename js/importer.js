@@ -1,5 +1,5 @@
 const importer = document.querySelector( `.importer` )
-const canvas = document.querySelector( `canvas` )
+const canvas = document.querySelector( `.canvas-simpleMiniProjects` )
 const siteConfig = {
   mouse: { down:{ x:null, y:null }, up:{ x:null, y:null }, current:{ x:null, y:null }, pressed:false },
   onResize() {},
@@ -11,7 +11,10 @@ const siteConfig = {
 }
 
 async function importScript( src ) {
+  const subpage = document.querySelector( `.subpage` )
   const config = (await import( src )).default
+
+  subpage.classList.add( `is-showed` )
 
   if (!config) return console.warn( `That file haven't default data object` )
 

@@ -19,9 +19,33 @@ body {
   }
 
 .content {
-  border-top: 3px double var( --color-white );
+  position: relative;
+  border-top: 4px double var( --color-white );
   color: #ddd5c8;
 }
+
+.page-home,
+.subpage {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  min-height: calc( 100vh - 145px );
+  background-color: var( --color-background );
+}
+  .subpage {
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s;
+  }
+    .subpage.is-showed {
+      visibility: visible;
+      opacity: 1;
+    }
+    .subpage-close {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
 
 .content_section {
   margin: 20px 5%;
