@@ -30,12 +30,12 @@ body {
   top: 0;
   width: 100%;
   min-height: calc( 100vh - 145px );
-  background-color: var( --color-background );
 }
   .subpage {
     visibility: hidden;
     opacity: 0;
     transition: all .3s;
+    background-color: var( --color-background );
   }
     .subpage.is-showed {
       visibility: visible;
