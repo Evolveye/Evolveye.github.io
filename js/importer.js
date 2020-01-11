@@ -1,20 +1,25 @@
+import { subCanvas } from "./functions.js";
+
 const siteConfig = {
-  mouse: { down:{ x:null, y:null }, up:{ x:null, y:null }, current:{ x:null, y:null }, pressed:false },
-  onResize() {},
-  onMouseMove() {},
-  onMouseDown() {},
-  onMouseUp() {},
-  onClick() {},
-  draw() {},
+  modules: new Map,
+  activeModule: {},
+  mouse: { down:{ x:null, y:null }, up:{ x:null, y:null }, current:{ x:null, y:null }, pressed:false }
+}
+
+function activeModule( src ) {
+  if (!siteConfig.modules.has( src )) siteConfig.modules.set( src, {
+    onResize: null,
+    onMouseMove: null,
+    onMouseDown: null,
+    onMouseUp: null,
+    onClick: null,
+  } )
+
+  siteConfig.activeModule = siteConfig.modules.get( src )
 }
 
 export async function importScript( src ) {
-  siteConfig.onResize = null
-  siteConfig.onMouseMove = null
-  siteConfig.onMouseDown = null
-  siteConfig.onMouseUp = null
-  siteConfig.onClick =  null
-
+  activeModule( src )
   await import( src )
 
   console.log( `%cScript has been imported %c(${src})`, `font-weight:bold`, `font-weight:normal` )
@@ -26,7 +31,7 @@ export async function importScript( src ) {
  * @param {onResizeHandler} handler
  */
 export function setOnResize( handler ) {
-  siteConfig.onResize = handler
+  siteConfig.activeModule.onResize = handler
 }
 /**
  * @callback onMouseMoveHandler
@@ -39,7 +44,7 @@ export function setOnResize( handler ) {
  * @param {onMouseMoveHandler} handler
  */
 export function setOnMouseMove( handler ) {
-  siteConfig.onMouseMove = handler
+  siteConfig.activeModule.onMouseMove = handler
 }
 /**
  * @callback onMouseDownHandler
@@ -49,7 +54,7 @@ export function setOnMouseMove( handler ) {
  * @param {onMouseDownHandler} handler
  */
 export function setOnMouseDown( handler ) {
-  siteConfig.onMouseDown = handler
+  siteConfig.activeModule.onMouseDown = handler
 }
 /**
  * @callback onMouseUpHandler
@@ -60,7 +65,7 @@ export function setOnMouseDown( handler ) {
  * @param {onMouseUpHandler} handler
  */
 export function setOnMouseUp( handler ) {
-  siteConfig.onMouseUp = handler
+  siteConfig.activeModule.onMouseUp = handler
 }
 /**
  * @callback onClickHandler
@@ -69,22 +74,24 @@ export function setOnMouseUp( handler ) {
  * @param {onClickHandler} handler
  */
 export function setOnClick( handler ) {
-  siteConfig.onClick = handler
+  siteConfig.activeModule.onClick = handler
 }
 
-document.addEventListener( 'mouseup', ({ offsetX, offsetY }) => {
-  const { mouse, onMouseUp } = siteConfig
+document.addEventListener( 'mouseup', ({ offsetX, offsetY, target }) => {
+  const { mouse, activeModule } = siteConfig
   const { down, up } = mouse
+
+  if (!mouse.pressed) return
 
   up.x = offsetX
   up.y = offsetY
 
   mouse.pressed = false
 
-  if (onMouseUp) onMouseUp( up, down )
+  if (target === subCanvas && activeModule.onMouseUp) activeModule.onMouseUp( up, down )
 } )
 document.addEventListener( 'mousedown', ({ offsetX, offsetY }) => {
-  const { mouse, onMouseDown } = siteConfig
+  const { mouse, activeModule } = siteConfig
   const { down } = mouse
 
   down.x = offsetX
@@ -92,21 +99,23 @@ document.addEventListener( 'mousedown', ({ offsetX, offsetY }) => {
 
   mouse.pressed = true
 
-  if (onMouseDown) onMouseDown( down )
+  if (activeModule.onMouseDown) activeModule.onMouseDown( down )
 } )
-document.addEventListener( 'mousemove', ({ offsetX, offsetY }) => {
-  const { mouse, onMouseMove } = siteConfig
+document.addEventListener( 'mousemove', ({ offsetX, offsetY, target }) => {
+  const { mouse, activeModule } = siteConfig
   const { pressed, current, down } = mouse
+
+  if (target !== subCanvas) mouse.pressed = false
 
   current.x = offsetX
   current.y = offsetY
 
-  if (onMouseMove) onMouseMove( pressed, current.x, current.y, down )
+  if (activeModule.onMouseMove) activeModule.onMouseMove( pressed, current.x, current.y, down )
 } )
 document.addEventListener( 'click', () => {
-  const { mouse, onClick } = siteConfig
+  const { mouse, activeModule } = siteConfig
   const { up, down } = mouse
 
-  if (onClick && up.x === down.x && up.y == down.y) onClick( up )
+  if (activeModule.onClick && up.x === down.x && up.y == down.y) activeModule.onClick( up )
 } )
-window.addEventListener( `resize`, () => siteConfig.onResize && siteConfig.onResize() )
+window.addEventListener( `resize`, () => siteConfig.activeModule.onResize && siteConfig.activeModule.onResize() )

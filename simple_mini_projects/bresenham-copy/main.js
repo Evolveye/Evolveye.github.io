@@ -59,9 +59,9 @@ function redraw() {
 }
 
 setOnMouseMove( ( pressed, clientX, clientY, down ) => {
-  if (!pressed) return
-
   redraw()
+
+  if (!pressed) return
 
   ctx.lineWidth = 5
   ctx.strokeStyle = '#f00'
