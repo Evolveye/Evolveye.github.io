@@ -72,3 +72,36 @@ export class MovingCircle extends Point {
       : num
   }
 }
+export class Rect {
+  /**
+   * @param {number} x
+   * @param {number} y
+   * @param {number} width
+   * @param {number} height
+   */
+  constructor( x, y, width, height ) {
+    this.x = x
+    this.y = y
+    this.width = width
+    this.height = height
+  }
+
+  /**
+   * @param {Point|Rect} param0
+   */
+  contains( { x, y, width=0, height=0 } ) {
+    return (
+      x > this.x && x + width < this.x + this.width &&
+      y > this.y && y + height < this.y + this.height
+    )
+  }
+
+  intersects( { x, y, width, height } ) {
+    return !(
+      x > this.x + this.width ||
+      x + width < this.x ||
+      y > this.y + this.height ||
+      y + height < this.y
+    )
+  }
+}

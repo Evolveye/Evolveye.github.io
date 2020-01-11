@@ -13,7 +13,7 @@ import { importScript, addDescription, addInput } from "./importer.js";
 
 const importer = document.querySelector( `.importer` )
 importer.addEventListener( `click`, () => {
-  importScript( `/simple_mini_projects/bresenham-copy/main.js` )
+  importScript( `/simple_mini_projects/quadtree-copy/main.js` )
   const subpage = document.querySelector( `.subpage` )
   subpage.classList.add( `is-showed` )
 } )

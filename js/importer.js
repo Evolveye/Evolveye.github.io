@@ -91,6 +91,7 @@ export function setOnMouseUp( handler ) {
 }
 /**
  * @callback onClickHandler
+ * @param {{x:number y:number}} up
  */
 /**
  * @param {onClickHandler} handler
@@ -132,7 +133,8 @@ document.addEventListener( 'mousemove', ({ offsetX, offsetY, target }) => {
   current.x = offsetX
   current.y = offsetY
 
-  if (activeModule.onMouseMove) activeModule.onMouseMove( pressed, current.x, current.y, down )
+  if (activeModule.onMouseMove)
+  activeModule.onMouseMove( pressed, current.x, current.y, down )
 } )
 document.addEventListener( 'click', () => {
   const { mouse, activeModule } = siteConfig
