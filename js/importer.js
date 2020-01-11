@@ -1,4 +1,8 @@
-import { subCanvas } from "./functions.js";
+import {
+  subCanvas,
+  addDescription as baseAddDescription,
+  addInput as baseAddInput,
+} from "./functions.js";
 
 const siteConfig = {
   modules: new Map,
@@ -6,23 +10,41 @@ const siteConfig = {
   mouse: { down:{ x:null, y:null }, up:{ x:null, y:null }, current:{ x:null, y:null }, pressed:false }
 }
 
-function activeModule( src ) {
-  if (!siteConfig.modules.has( src )) siteConfig.modules.set( src, {
-    onResize: null,
-    onMouseMove: null,
-    onMouseDown: null,
-    onMouseUp: null,
-    onClick: null,
-  } )
+export function addDescription( description ) {
+  siteConfig.activeModule.description = description
+  baseAddDescription( description )
+}
+export function addInput( type, shortDescription, properties ) {
+  siteConfig.activeModule.inputs.push( { type, shortDescription, properties } )
 
-  siteConfig.activeModule = siteConfig.modules.get( src )
+  return baseAddInput( type, shortDescription, properties )
 }
 
 export async function importScript( src ) {
-  activeModule( src )
-  await import( src )
+  if (!siteConfig.modules.has( src )) {
+    siteConfig.modules.set( src, {
+      onResize: null,
+      onMouseMove: null,
+      onMouseDown: null,
+      onMouseUp: null,
+      onClick: null,
+      description: null,
+      inputs: [],
+    } )
 
-  console.log( `%cScript has been imported %c(${src})`, `font-weight:bold`, `font-weight:normal` )
+    siteConfig.activeModule = siteConfig.modules.get( src )
+
+    await import( src )
+
+    console.log( `%cScript has been imported %c(${src})`, `font-weight:bold`, `font-weight:normal` )
+  } else {
+    siteConfig.activeModule = siteConfig.modules.get( src )
+
+    baseAddDescription( siteConfig.activeModule.description )
+    siteConfig.activeModule.inputs.forEach( ({ type, shortDescription, properties }) => baseAddInput( type, shortDescription, properties ) )
+
+    console.log( `%cPreviously imported script has been initialized %c(${src})`, `font-weight:bold`, `font-weight:normal` )
+  }
 }
 /**
  * @callback onResizeHandler

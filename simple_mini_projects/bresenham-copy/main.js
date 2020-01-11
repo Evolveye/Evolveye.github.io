@@ -2,15 +2,18 @@ import { Point } from "../../js/classes.js";
 import {
   setOnResize,
   setOnMouseMove,
-  setOnMouseUp
+  setOnMouseUp,
+  addDescription,
+  addInput,
 } from "../../js/importer.js";
 import {
   clearSubcanvas as clear,
-  subCtx as ctx
+  subCtx as ctx,
 } from "../../js/functions.js";
 
+let rectSideLength = 3
+const { input } = addInput( `number`, `Resolution`, { min:1, max:20, value:rectSideLength, onchange() { rectSideLength = input.value } } )
 const lines = [ { pointA:new Point( 150, 100 ), pointB:new Point( 400, 200 ), color:'#f00' } ]
-let rectSideLength = 5
 
 function bresenham( { x:xA, y:yA }, { x:xB, y:yB } ) {
   let x1 = floorToDivisible( xA, rectSideLength )
@@ -80,4 +83,5 @@ setOnMouseUp( ( up, down ) => {
 } )
 setOnResize( draw )
 
+addDescription( `Just draw a line on canvas` )
 draw()

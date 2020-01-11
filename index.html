@@ -11,31 +11,33 @@
   <link rel="stylesheet" href="./css/sanitize.css">
   <link rel="stylesheet" href="./css/main.css">
 
-  <script type="module" src="js/importer.js"></script>
-  <script defer src="js/functions.js"></script>
-  <script defer src="js/classes.js"></script>
-  <script defer src="js/main.js"></script>
+  <script type="module" src="js/main.js"></script>
 </head>
 <body>
   <header class="header">
     <img class="header-avatar" src="https://avatars1.githubusercontent.com/u/28712303" alt="My github avatar">
+
+    <section class="ui">
+      <p class="ui-description"></p>
+      <div class="ui-inputs"></div>
+    </section>
     <button class="importer">import</button>
   </header>
 
   <main class="content">
-    <article class="page-home">
+    <article class="homepage">
       <section class="content_section">
         <h2 class="content_section-title">Simple mini projects</h2>
 
         <div class="content_section-content"></div>
       </section>
 
-      <canvas class="background"></canvas>
+      <canvas class="homepage-canvas background"></canvas>
     </article>
 
     <article class="subpage page-simpleMiniProjects">
       <button class="subpage-close button">&lt;--back--</button>
-      <canvas class="canvas-simpleMiniProjects"></canvas>
+      <canvas class="subpage-canvas"></canvas>
     </article>
   </main>
 </body>

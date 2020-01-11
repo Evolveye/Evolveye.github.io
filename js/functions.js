@@ -5,6 +5,14 @@ export const bgrCanvas = document.querySelector( `.homepage-canvas` )
 export const subCanvas = document.querySelector( `.subpage-canvas` )
 export const bgrCtx = bgrCanvas.getContext( `2d` )
 export const subCtx = subCanvas.getContext( `2d` )
+const ui = {
+  description: document.querySelector( `.ui-description` ),
+  inputs: document.querySelector( `.ui-inputs` ),
+}
+
+// /
+// UI
+//
 
 export function addItemToSection( sectionName, item ) {
   const section = Array.from( document.querySelectorAll( `.content_section-title`) )
@@ -34,32 +42,31 @@ export function createSectionItem( title, description, link ) {
 
   return linkBoxElement
 }
-/**
- * @return {Promise<GithubApiDirectoryInfo[]>}
- */
-export async function getDirectoryInfoFromGithubApi( repository, path='' ) {
-  return await fetch( `https://api.github.com/repos/evolveye/${repository}/contents/${path}` )
-    .then( data => data.json() )
-}
-export async function getProjectAsSectionItem( repository, pathToProjects ) {
-  const pathEndedWithSlash = pathToProjects.endsWith( `/` ) ? pathToProjects : `${pathToProjects}/`
-  const { title, description } = await getDirectoryInfoFromGithubApi( repository, `${pathEndedWithSlash}info.json` )
-    .then( info => atob( info.content ) )
-    .then( info => JSON.parse( info ) )
+export function addInput( type, shortDescription, properties ) {
+  const span = document.createElement( `span` )
+  const input = document.createElement( `input` )
+  const label = document.createElement( `label` )
 
-  return createSectionItem( title, description, pathEndedWithSlash )
+  span.innerHTML = shortDescription
+  span.className = `ui-input_description`
+  input.type = type
+  input.className = `ui-input is-${type}`
+  label.className = `ui-input_label`
+  label.appendChild( span )
+  label.appendChild( input )
+
+  for (const property in properties) input[ property ] = properties[ property ]
+
+  ui.inputs.appendChild( label )
+
+  return { label, input }
 }
-export function random( min, max ) {
-  return Math.floor( Math.random() * (max - min + 1) ) + min
-}
-export function rangedCeilFloor( num, max, min=0 ) {
-  return num < min ? min
-    : num > max ? max
-    : num
+export function addDescription( description ) {
+  ui.description.innerHTML = description
 }
 
 // /
-// Canvas functions
+// Canvas
 //
 
 export function clear() {
@@ -89,7 +96,40 @@ export function clickOnCenteredRectangle( clientX, clientY, { width=canvas.width
     && clientY > y + borderY && clientY < y + height - borderY
 }
 
+// /
+// Others
+//
+
+/**
+ * @return {Promise<GithubApiDirectoryInfo[]>}
+ */
+export async function getDirectoryInfoFromGithubApi( repository, path='' ) {
+  return await fetch( `https://api.github.com/repos/evolveye/${repository}/contents/${path}` )
+    .then( data => data.json() )
+}
+export async function getProjectAsSectionItem( repository, pathToProjects ) {
+  const pathEndedWithSlash = pathToProjects.endsWith( `/` ) ? pathToProjects : `${pathToProjects}/`
+  const { title, description } = await getDirectoryInfoFromGithubApi( repository, `${pathEndedWithSlash}info.json` )
+    .then( info => atob( info.content ) )
+    .then( info => JSON.parse( info ) )
+
+  return createSectionItem( title, description, pathEndedWithSlash )
+}
+export function random( min, max ) {
+  return Math.floor( Math.random() * (max - min + 1) ) + min
+}
+export function rangedCeilFloor( num, max, min=0 ) {
+  return num < min ? min
+    : num > max ? max
+    : num
+}
+
 window.addEventListener( `resize`, () => onResize() )
+document.querySelectorAll( `.subpage-close` ).forEach( closer => closer.addEventListener( `click`, () => {
+  ui.description.innerHTML = ``
+  ui.inputs.innerHTML = ``
+  closer.parentElement.classList.remove( `is-showed` )
+} ) )
 
 // document.onclick = ({ clientX, clientY }) => {
 //   const angle = Math.atan2( points[ 0 ].y - clientY, points[ 0 ].x - clientX ) * 180 / Math.PI

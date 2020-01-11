@@ -8,7 +8,7 @@ import {
   getProjectAsSectionItem,
   addItemToSection
 } from "./functions.js"
-import { importScript } from "./importer.js";
+import { importScript, addDescription, addInput } from "./importer.js";
 
 
 const importer = document.querySelector( `.importer` )
@@ -49,7 +49,6 @@ getDirectoryInfoFromGithubApi( `Evolveye.github.io`, `simple_mini_projects/` ).t
     addItemToSection( `Simple mini projects`, projectSectionItem )
   } )
 } )
-document.querySelectorAll( `.subpage-close` ).forEach( closer => closer.addEventListener( `click`, () => closer.parentElement.classList.remove( `is-showed` ) ) )
 
 function generatePoints() {
   const width = window.innerWidth
