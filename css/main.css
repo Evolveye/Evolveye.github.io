@@ -54,7 +54,10 @@ body {
   min-height: calc( 100vh - 145px );
 }
   .subpage {
+    display: flex;
     visibility: hidden;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
     transition: all .3s;
     background-color: var( --color-background );

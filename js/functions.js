@@ -5,6 +5,7 @@ export const bgrCanvas = document.querySelector( `.homepage-canvas` )
 export const subCanvas = document.querySelector( `.subpage-canvas` )
 export const bgrCtx = bgrCanvas.getContext( `2d` )
 export const subCtx = subCanvas.getContext( `2d` )
+const subpage = document.querySelector( `.subpage-elements` )
 const ui = {
   description: document.querySelector( `.ui-description` ),
   inputs: document.querySelector( `.ui-inputs` ),
@@ -66,6 +67,12 @@ export function addInput( type, shortDescription, properties ) {
 }
 export function addDescription( description ) {
   ui.description.innerHTML = description
+}
+export function addElementToPage( element ) {
+  subpage.appendChild( element )
+}
+export function clearSubpageStructure() {
+  subpage.innerHTML = ``
 }
 
 // /

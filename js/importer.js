@@ -2,6 +2,8 @@ import {
   subCanvas,
   addDescription as baseAddDescription,
   addInput as baseAddInput,
+  addElementToPage as baseAddElementToPage,
+  clearSubpageStructure
 } from "./functions.js";
 
 const siteConfig = {
@@ -19,8 +21,15 @@ export function addInput( type, shortDescription, properties ) {
 
   return baseAddInput( type, shortDescription, properties )
 }
+export function addElementToPage( element ) {
+  siteConfig.activeModule.elements.push( element )
+
+  baseAddElementToPage( element )
+}
 
 export async function importScript( src ) {
+  clearSubpageStructure()
+
   if (!siteConfig.modules.has( src )) {
     siteConfig.modules.set( src, {
       onResize: null,
@@ -29,6 +38,7 @@ export async function importScript( src ) {
       onMouseUp: null,
       onClick: null,
       description: null,
+      elements: [],
       inputs: [],
     } )
 
@@ -42,6 +52,7 @@ export async function importScript( src ) {
 
     baseAddDescription( siteConfig.activeModule.description )
     siteConfig.activeModule.inputs.forEach( ({ type, shortDescription, properties }) => baseAddInput( type, shortDescription, properties ) )
+    siteConfig.activeModule.elements.forEach( element => baseAddElementToPage( element ) )
 
     console.log( `%cPreviously imported script has been initialized %c(${src})`, `font-weight:bold`, `font-weight:normal` )
   }

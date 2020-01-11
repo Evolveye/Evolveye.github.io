@@ -35,6 +35,10 @@ a {
   text-decoration: none;
 }
 
+img {
+  image-rendering: pixelated;
+}
+
 button {
   cursor: pointer;
   background-color: unset;
