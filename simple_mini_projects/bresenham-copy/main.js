@@ -1,9 +1,16 @@
-const lines = [ { pointA:new Point( 50, 70 ), pointB:new Point( 150, 120 ), color:'#f00' } ]
+import { Point } from "../../js/classes.js";
+import {
+  setOnResize,
+  setOnMouseMove,
+  setOnMouseUp
+} from "../../js/importer.js";
+import {
+  clearSubcanvas as clear,
+  subCtx as ctx
+} from "../../js/functions.js";
+
+const lines = [ { pointA:new Point( 150, 100 ), pointB:new Point( 400, 200 ), color:'#f00' } ]
 let rectSideLength = 5
-/** @type {Function} */
-let clear = null
-/** @type {CanvasRenderingContext2D} */
-let ctx = null
 
 function bresenham( { x:xA, y:yA }, { x:xB, y:yB } ) {
   let x1 = floorToDivisible( xA, rectSideLength )
@@ -51,69 +58,26 @@ function redraw() {
   draw()
 }
 
-export default {
-  onResize() {
-    draw()
-  },
+setOnMouseMove( ( pressed, clientX, clientY, down ) => {
+  if (!pressed) return
 
-  /**
-   * @param {boolean} pressed
-   * @param {number} clientX
-   * @param {number} clientY
-   * @param {object} down
-   * @param {number} down.x
-   * @param {number} down.y
-   */
-  onMouseMove( pressed, clientX, clientY, down ) {
-    if (!pressed) return
+  redraw()
 
-    redraw()
+  ctx.lineWidth = 5
+  ctx.strokeStyle = '#f00'
+  ctx.beginPath()
+  ctx.moveTo( down.x, down.y )
+  ctx.lineTo( clientX, clientY )
+  ctx.stroke()
+} )
+setOnMouseUp( ( up, down ) => {
+  lines.push( {
+    pointA: new Point( down.x, down.y, true ),
+    pointB: new Point( up.x, up.y, true )
+  } )
 
-    ctx.lineWidth = 5
-    ctx.strokeStyle = '#f00'
-    ctx.beginPath()
-    ctx.moveTo( down.x, down.y )
-    ctx.lineTo( clientX, clientY )
-    ctx.stroke()
-  },
+  redraw()
+} )
+setOnResize( draw )
 
-  /**
-   * @param {object} param0
-   * @param {number} param0.x
-   * @param {number} param0.y
-   */
-  onMouseDown( { x, y } ) {},
-
-  /**
-   * @param {object} up
-   * @param {number} up.x
-   * @param {number} up.y
-   * @param {object} down
-   * @param {number} down.x
-   * @param {number} down.y
-   */
-  onMouseUp( up, down ) {
-    lines.push( {
-      pointA: new Point( down.x, down.y, true ),
-      pointB: new Point( up.x, up.y, true )
-    } )
-
-    redraw()
-  },
-
-  /**
-   * @param {object} param0
-   * @param {number} param0.x
-   * @param {number} param0.y
-   */
-  onClick( { x, y } ) {},
-
-  /**
-   * @param {CanvasRenderingContext2D} ctx
-   * @param {Function} clear
-   */
-  run( context, clearCanvas ) {
-    clear = clearCanvas
-    ctx = context
-  }
-}
+draw()

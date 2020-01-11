@@ -81,6 +81,13 @@ export function onResize() {
 
   clear()
 }
+export function clickOnCenteredRectangle( clientX, clientY, { width=canvas.width, height=canvas.height, borderX=0, borderY=0 } ) {
+  const x = (canvas.width - width) / 2
+  const y = (canvas.height - height) / 2
+
+  return clientX > x + borderX && clientX < x + width - borderX
+    && clientY > y + borderY && clientY < y + height - borderY
+}
 
 window.addEventListener( `resize`, () => onResize() )
 

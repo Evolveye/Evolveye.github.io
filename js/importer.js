@@ -1,10 +1,4 @@
-const importer = document.querySelector( `.importer` )
-/** @type {HTMLCanvasElement} */
-const canvas = document.querySelector( `.canvas-simpleMiniProjects` )
-const ctx = canvas.getContext( `2d` )
 const siteConfig = {
-  canvasX: 0,
-  canvasY: 0,
   mouse: { down:{ x:null, y:null }, up:{ x:null, y:null }, current:{ x:null, y:null }, pressed:false },
   onResize() {},
   onMouseMove() {},
@@ -14,84 +8,98 @@ const siteConfig = {
   draw() {},
 }
 
-async function importScript( src ) {
-  const subpage = document.querySelector( `.subpage` )
-  const config = (await import( src )).default
+export async function importScript( src ) {
+  siteConfig.onResize = null
+  siteConfig.onMouseMove = null
+  siteConfig.onMouseDown = null
+  siteConfig.onMouseUp = null
+  siteConfig.onClick =  null
 
-  subpage.classList.add( `is-showed` )
-
-  if (!config) return console.warn( `That file haven't default data object` )
-
-  siteConfig.onResize = config.onResize || null
-  siteConfig.onMouseMove = config.onMouseMove || null
-  siteConfig.onMouseDown = config.onMouseDown || null
-  siteConfig.onMouseUp = config.onMouseUp || null
-  siteConfig.onClick = config.onClick || null
+  await import( src )
 
   console.log( `%cScript has been imported %c(${src})`, `font-weight:bold`, `font-weight:normal` )
-
-  if (config.run) {
-    config.run( ctx, clear, addInput )
-    resize()
-  }
 }
-function clear() {
-  ctx.clearRect( 0, 0, canvas.width, canvas.height )
+/**
+ * @callback onResizeHandler
+ */
+/**
+ * @param {onResizeHandler} handler
+ */
+export function setOnResize( handler ) {
+  siteConfig.onResize = handler
 }
-function resize( width=canvas.clientWidth, height=canvas.clientHeight ) {
-  canvas.width = width
-  canvas.height = height
-
-  const { x, y } = canvas.getBoundingClientRect()
-  siteConfig.canvasX = x
-  siteConfig.canvasY = y
-
-  if (siteConfig.onResize) siteConfig.onResize()
-
-  clear()
+/**
+ * @callback onMouseMoveHandler
+ * @param {boolean} pressed
+ * @param {number} clientX
+ * @param {number} clientY
+ * @param {{x:number y:number}} down
+ */
+/**
+ * @param {onMouseMoveHandler} handler
+ */
+export function setOnMouseMove( handler ) {
+  siteConfig.onMouseMove = handler
 }
-function toggleCanvas() {
-  const { style } = canvas
-
-  style.display = style.display === `none` ? `block` : `none`
+/**
+ * @callback onMouseDownHandler
+ * @param {{x:number y:number}} down
+ */
+/**
+ * @param {onMouseDownHandler} handler
+ */
+export function setOnMouseDown( handler ) {
+  siteConfig.onMouseDown = handler
 }
-function clickOnCenteredRectangle( clientX, clientY, { width=canvas.width, height=canvas.height, borderX=0, borderY=0 } ) {
-  const x = (canvas.width - width) / 2
-  const y = (canvas.height - height) / 2
-
-  return clientX > x + borderX && clientX < x + width - borderX
-    && clientY > y + borderY && clientY < y + height - borderY
+/**
+ * @callback onMouseUpHandler
+ * @param {{x:number y:number}} up
+ * @param {{x:number y:number}} down
+ */
+/**
+ * @param {onMouseUpHandler} handler
+ */
+export function setOnMouseUp( handler ) {
+  siteConfig.onMouseUp = handler
+}
+/**
+ * @callback onClickHandler
+ */
+/**
+ * @param {onClickHandler} handler
+ */
+export function setOnClick( handler ) {
+  siteConfig.onClick = handler
 }
 
-window.addEventListener( 'resize', resize )
-document.addEventListener( 'mouseup', ({ clientX, clientY }) => {
+document.addEventListener( 'mouseup', ({ offsetX, offsetY }) => {
   const { mouse, onMouseUp } = siteConfig
   const { down, up } = mouse
 
-  up.x = clientX - siteConfig.canvasX
-  up.y = clientY - siteConfig.canvasY
+  up.x = offsetX
+  up.y = offsetY
 
   mouse.pressed = false
 
   if (onMouseUp) onMouseUp( up, down )
 } )
-document.addEventListener( 'mousedown', ({ clientX, clientY }) => {
+document.addEventListener( 'mousedown', ({ offsetX, offsetY }) => {
   const { mouse, onMouseDown } = siteConfig
   const { down } = mouse
 
-  down.x = clientX - siteConfig.canvasX
-  down.y = clientY - siteConfig.canvasY
+  down.x = offsetX
+  down.y = offsetY
 
   mouse.pressed = true
 
   if (onMouseDown) onMouseDown( down )
 } )
-document.addEventListener( 'mousemove', ({ clientX, clientY }) => {
+document.addEventListener( 'mousemove', ({ offsetX, offsetY }) => {
   const { mouse, onMouseMove } = siteConfig
   const { pressed, current, down } = mouse
 
-  current.x = clientX - siteConfig.canvasX
-  current.y = clientY - siteConfig.canvasY
+  current.x = offsetX
+  current.y = offsetY
 
   if (onMouseMove) onMouseMove( pressed, current.x, current.y, down )
 } )
@@ -101,4 +109,4 @@ document.addEventListener( 'click', () => {
 
   if (onClick && up.x === down.x && up.y == down.y) onClick( up )
 } )
-importer.addEventListener( `click`, () => importScript( `/simple_mini_projects/bresenham-copy/main.js` ) )
+window.addEventListener( `resize`, () => siteConfig.onResize && siteConfig.onResize() )
