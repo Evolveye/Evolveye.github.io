@@ -1,4 +1,4 @@
-class Point {
+export class Point {
   /**
    * @param {number} x
    * @param {number} y
@@ -14,7 +14,7 @@ class Point {
     return Math.sqrt( (this.x - x) ** 2 + (this.y - y) ** 2 )
   }
 }
-class MovingCircle extends Point {
+export class MovingCircle extends Point {
   /** @type {Point} */
   pointToMove = null
   angle = 0
@@ -38,11 +38,37 @@ class MovingCircle extends Point {
     if (this.pointToMove) if (this.distanceTo( pointToMove ) > size) {
       const angle = Math.atan2( pointToMove.y - y, pointToMove.x - x ) * 180 / Math.PI
       const positiveAngle = angle > 0 ? angle : 360 + angle
-      const angleToRotate = clockwiseAngle( this.angle, positiveAngle )
+      const angleToRotate = MovingCircle.clockwiseAngle( this.angle, positiveAngle )
 
-      this.angle += rangedCeilFloor( angleToRotate, maxAnglePerTick, -maxAnglePerTick )
+      this.angle += MovingCircle.rangedCeilFloor( angleToRotate, maxAnglePerTick, -maxAnglePerTick )
       this.x += Math.cos( this.angle * Math.PI / 180 ) * Math.sqrt( speed * .1 )
       this.y += Math.sin( this.angle * Math.PI / 180 ) * Math.sqrt( speed * .1 )
     } else this.pointToMove = null
+  }
+
+
+  static clockwiseAngle( angleA, angleB ) {
+    let biggerAngle, smallerAngle, sign
+
+    if (angleA > angleB) {
+      biggerAngle = angleA
+      smallerAngle = angleB
+      sign = 1
+    } else {
+      biggerAngle = angleB
+      smallerAngle = angleA
+      sign = -1
+    }
+
+    const clockwiseMove = biggerAngle - smallerAngle
+    const anticlockwiseMove = smallerAngle + 360 - biggerAngle
+
+    if (anticlockwiseMove < clockwiseMove) return anticlockwiseMove * sign
+    else return clockwiseMove * -sign
+  }
+  static rangedCeilFloor( num, max, min=0 ) {
+    return num < min ? min
+      : num > max ? max
+      : num
   }
 }

@@ -31,7 +31,7 @@ async function importScript( src ) {
   console.log( `%cScript has been imported %c(${src})`, `font-weight:bold`, `font-weight:normal` )
 
   if (config.run) {
-    config.run( ctx, clear )
+    config.run( ctx, clear, addInput )
     resize()
   }
 }

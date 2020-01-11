@@ -1,4 +1,12 @@
-function addItemToSection( sectionName, item ) {
+
+/** @type {HTMLCanvasElement} */
+export const bgrCanvas = document.querySelector( `.homepage-canvas` )
+/** @type {HTMLCanvasElement} */
+export const subCanvas = document.querySelector( `.subpage-canvas` )
+export const bgrCtx = bgrCanvas.getContext( `2d` )
+export const subCtx = subCanvas.getContext( `2d` )
+
+export function addItemToSection( sectionName, item ) {
   const section = Array.from( document.querySelectorAll( `.content_section-title`) )
     .find( title => title.textContent == sectionName )
 
@@ -6,26 +14,7 @@ function addItemToSection( sectionName, item ) {
 
   sectionItems.appendChild( item )
 }
-function clockwiseAngle( angleA, angleB ) {
-  let biggerAngle, smallerAngle, sign
-
-  if (angleA > angleB) {
-    biggerAngle = angleA
-    smallerAngle = angleB
-    sign = 1
-  } else {
-    biggerAngle = angleB
-    smallerAngle = angleA
-    sign = -1
-  }
-
-  const clockwiseMove = biggerAngle - smallerAngle
-  const anticlockwiseMove = smallerAngle + 360 - biggerAngle
-
-  if (anticlockwiseMove < clockwiseMove) return anticlockwiseMove * sign
-  else return clockwiseMove * -sign
-}
-function createSectionItem( title, description, link ) {
+export function createSectionItem( title, description, link ) {
 
   const linkBoxElement = document.createElement( `a` )
   const titleElement = document.createElement( `h5` )
@@ -45,40 +34,14 @@ function createSectionItem( title, description, link ) {
 
   return linkBoxElement
 }
-function draw() {
-
-  ctx.clearRect( 0, 0, width, height )
-
-  ctx.fillStyle = dotColor
-
-  for (const { x, y } of points) {
-    ctx.beginPath()
-    ctx.arc( x, y, 2, 0, Math.PI * 2 )
-    ctx.fill()
-  }
-
-  ctx.lineWidth = 7
-
-  for (const circle of circles) {
-    const { x, y, color, size } = circle
-
-    if (!circle.pointToMove) circle.pointToMove = points[ random( 0, points.length - 1 ) ]
-
-    ctx.strokeStyle = color
-
-    ctx.beginPath()
-    ctx.arc( x, y, size, 0, Math.PI * 2 )
-    ctx.stroke()
-  }
-}
 /**
  * @return {Promise<GithubApiDirectoryInfo[]>}
  */
-async function getDirectoryInfoFromGithubApi( repository, path='' ) {
+export async function getDirectoryInfoFromGithubApi( repository, path='' ) {
   return await fetch( `https://api.github.com/repos/evolveye/${repository}/contents/${path}` )
     .then( data => data.json() )
 }
-async function getProjectAsSectionItem( repository, pathToProjects ) {
+export async function getProjectAsSectionItem( repository, pathToProjects ) {
   const pathEndedWithSlash = pathToProjects.endsWith( `/` ) ? pathToProjects : `${pathToProjects}/`
   const { title, description } = await getDirectoryInfoFromGithubApi( repository, `${pathEndedWithSlash}info.json` )
     .then( info => atob( info.content ) )
@@ -86,24 +49,44 @@ async function getProjectAsSectionItem( repository, pathToProjects ) {
 
   return createSectionItem( title, description, pathEndedWithSlash )
 }
-function random( min, max ) {
+export function random( min, max ) {
   return Math.floor( Math.random() * (max - min + 1) ) + min
 }
-function rangedCeilFloor( num, max, min=0 ) {
+export function rangedCeilFloor( num, max, min=0 ) {
   return num < min ? min
     : num > max ? max
     : num
 }
 
-window.addEventListener( `resize`, () => {
-  width = window.innerWidth
-  height = window.innerHeight
+// /
+// Canvas functions
+//
 
-  canvas.width = width
-  canvas.height = height
-} )
+export function clear() {
+  clearBgrCanvas()
+  clearSubcanvas()
+}
+export function clearBgrCanvas() {
+  bgrCtx.clearRect( 0, 0, bgrCanvas.width, bgrCanvas.height )
+}
+export function clearSubcanvas() {
+  subCtx.clearRect( 0, 0, subCanvas.width, subCanvas.height )
+}
+export function onResize() {
+  bgrCanvas.width = bgrCanvas.clientWidth
+  bgrCanvas.height = bgrCanvas.clientHeight
+
+  subCanvas.width = subCanvas.clientWidth
+  subCanvas.height = subCanvas.clientHeight
+
+  clear()
+}
+
+window.addEventListener( `resize`, () => onResize() )
 
 // document.onclick = ({ clientX, clientY }) => {
 //   const angle = Math.atan2( points[ 0 ].y - clientY, points[ 0 ].x - clientX ) * 180 / Math.PI
 //   console.log( angle, rangedCeilFloor( angle, 6, -6 ) )
 // }
+
+onResize()
