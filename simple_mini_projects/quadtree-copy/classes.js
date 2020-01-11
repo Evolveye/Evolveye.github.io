@@ -73,7 +73,7 @@ export default class Quadtree {
   show( ctx, startX=0, startY=0 ) {
     const { x, y, width, height } = this.boundary
 
-    ctx.strokeStyle = `#000`
+    ctx.strokeStyle = `#444`
 
     ctx.strokeRect( startX + x, startY + y, width, height )
 

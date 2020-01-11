@@ -1,5 +1,5 @@
 import { Point, Rect } from "../../js/classes.js";
-import { clearSubcanvas as clear, subCtx as ctx, } from "../../js/functions.js";
+import { clearSubcanvas, subCtx as ctx, } from "../../js/functions.js";
 import {
   setOnMouseUp,
   setOnMouseMove,
@@ -16,6 +16,7 @@ let qTree
 let pointsOnlyInLeaves = false
 
 createQTree()
+draw()
 
 addInput( `button`, `Clear`, { onclick() {
   qTree.clear()
@@ -25,8 +26,10 @@ addInput( `button`, `Generate 100`, { onclick() {
   generatePoints( 100 )
   draw()
 } } )
-addInput( `button`, `Switch "only leaves" mode`, { onclick() {
+addInput( `button`, `Switch "only leaves" mode: ${pointsOnlyInLeaves}`, { onclick() {
   pointsOnlyInLeaves = !qTree.pointsOnlyInLeaves
+
+  this.value = `Switch "only leaves" mode: ${pointsOnlyInLeaves}`
 
   createQTree( )
   draw()
@@ -64,19 +67,29 @@ setOnMouseMove( (pressed, x, y) => {
 function createQTree() {
   qTree = new Quadtree( new Rect( 0, 0, qTreeSize, qTreeSize ), pointsOnlyInLeaves )
 }
-const drawAreaX = (ctx.canvas.width - qTreeSize) / 2
-const drawAreaY = (ctx.canvas.height - qTreeSize) / 2
+function clear() {
+  const drawAreaX = (ctx.canvas.width - qTreeSize) / 2
+  const drawAreaY = (ctx.canvas.height - qTreeSize) / 2
+    
+  clearSubcanvas()
+  
+  ctx.fillStyle = '#222'
+  ctx.fillRect( drawAreaX, drawAreaY, qTreeSize, qTreeSize )
+}
 function draw() {
   clear()
 
-  qTree.show( ctx, drawAreaX, drawAreaY )
-
+  const drawAreaX = (ctx.canvas.width - qTreeSize) / 2
+  const drawAreaY = (ctx.canvas.height - qTreeSize) / 2
   const { x, y, width, height } = queryRect
 
-  ctx.fillStyle = '#0f0'
+  qTree.show( ctx, drawAreaX, drawAreaY )
+  
+
   ctx.strokeStyle = '#0f0'
   ctx.strokeRect( x + drawAreaX, y + drawAreaY, width, height )
 
+  ctx.fillStyle = '#0f0'
   qTree.query( queryRect ).forEach( ({ x, y }) => {
     ctx.beginPath()
     ctx.arc( x + drawAreaX, y + drawAreaY, 2, 0, Math.PI * 2 )

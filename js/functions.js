@@ -52,7 +52,10 @@ export function addInput( type, shortDescription, properties ) {
   input.type = type
   input.className = `ui-input is-${type}`
   label.className = `ui-input_label`
-  label.appendChild( span )
+
+  if (type === `button`) input.value = shortDescription
+  else label.appendChild( span )
+
   label.appendChild( input )
 
   for (const property in properties) input[ property ] = properties[ property ]
