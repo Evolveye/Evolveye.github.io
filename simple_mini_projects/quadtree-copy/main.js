@@ -70,9 +70,9 @@ function createQTree() {
 function clear() {
   const drawAreaX = (ctx.canvas.width - qTreeSize) / 2
   const drawAreaY = (ctx.canvas.height - qTreeSize) / 2
-    
+
   clearSubcanvas()
-  
+
   ctx.fillStyle = '#222'
   ctx.fillRect( drawAreaX, drawAreaY, qTreeSize, qTreeSize )
 }
@@ -84,7 +84,6 @@ function draw() {
   const { x, y, width, height } = queryRect
 
   qTree.show( ctx, drawAreaX, drawAreaY )
-  
 
   ctx.strokeStyle = '#0f0'
   ctx.strokeRect( x + drawAreaX, y + drawAreaY, width, height )

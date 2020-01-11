@@ -11,7 +11,7 @@ import { importScript } from "./importer.js";
 
 
 document.querySelector( `.importer` ).addEventListener( `click`, () => {
-  importScript( `/simple_mini_projects/gif_creator-copy/main.js` )
+  importScript( `/simple_mini_projects/quadtree_template-copy/main.js` )
   const subpage = document.querySelector( `.subpage` )
   subpage.classList.add( `is-showed` )
 } )

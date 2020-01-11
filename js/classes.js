@@ -7,11 +7,31 @@ export class Point {
     this.x = x
     this.y = y
   }
+
+  /**
+   * @param {number} x
+   */
+  set newX( x ) {
+    this.x = this.alwaysInteger ? x | 1 : x
+  }
+  /**
+   * @param {number} y
+   */
+  set newY( y ) {
+    this.y = this.alwaysInteger ? y | 1 : y
+  }
+
   /** Get distance to point
    * @param {Point} param0
    */
   distanceTo({ x, y }) {
     return Math.sqrt( (this.x - x) ** 2 + (this.y - y) ** 2 )
+  }
+  /**
+   * @param {Point} point
+   */
+  equal( { x, y } ) {
+    return this.x == x && this.y == y
   }
 }
 export class MovingCircle extends Point {

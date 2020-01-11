@@ -91,9 +91,11 @@ class Quadtree {
    * @param {Point[]} vertices
    */
   insertPolygon( object, ...vertices ) {
-    if (!vertices.length < 3) return
+    if (vertices.length < 3) return
 
-    this.insertPointSequence( object, vertices )
+    vertices.push( vertices[ 0 ] )
+
+    this.insertPointSequence( object, ...vertices )
 
     const point1 = vertices[ 0 ]
     const point2 = vertices[ 1 ]
@@ -103,11 +105,42 @@ class Quadtree {
     )
 
     const maxX = Math.max( ...vertices.map( v => v.x ) )
-    const rect = new Rect( Math.min( x1, x2 ), Math.min( y1, y2 ), Math.abs( x2 - x1 ), Math.abs( y2 - y1 ) )
+    const rect = new Rect( pointNearFirstLine.x, pointNearFirstLine.y, maxX - pointNearFirstLine.x, 1 )
+    const numberOfEdgesCrossing = this.queryLeaves( rect ).filter( (qTree, i, arr) => {
+      if (qTree.references.length == 0) return false
 
-    // find all leaves on line between pointNearFirstLine.x and maxX
+      const nextTree = arr[ i + 1 ]
 
-    // next steps...
+      return !nextTree || qTree.boundary.x + this.resolution != nextTree.boundary.x
+
+    } ).length
+
+    if (numberOfEdgesCrossing % 2 == 1) this.fillEmptyArea( object, pointNearFirstLine )
+  }
+
+  fillEmptyArea( object, point, direction=null ) {
+    if (!this.divided) {
+
+      if (this.references.find( ref => ref == object )) return { left:false, right:false, top:false, bottom:false }
+
+      this.references.push( object )
+
+      return { left:true, right:true, top:true, bottom:true }
+
+      // sprawdzam czy zajęty czy nie
+      // jeśli nie, to wypełniam referencją i zwracam tablicę punktów wskazujących na każdego sąsiada
+      // w przeciwnym razie zwracam pustą tablicę
+
+    } else {
+      const siblingstoTest = this.fillEmptyArea( object, point )
+
+      // iteruję punkty i sprawdzam pasujace potomki
+      // otrzymane tablice filtruję względem położenia potomka w strukturze
+      // np północne nie mogą wskazać na południe (bo w strukturze mają na południu sąsiada)
+      //    wschodnie nie moga wskazać na zachodnie
+
+      // po otrzymaniu wszystkich odpowiedni i przefiltrowaniu tablicy wysyłam ją do rodzica na dalsze sprawdzanie
+    }
   }
 
   /**
@@ -116,7 +149,7 @@ class Quadtree {
   insertPointSequence( object, ...points ) {
     if (!points.length) return
 
-    if (points.length == 1) this.insert( object, point )
+    if (points.length == 1) this.insert( object, points[ 0 ] )
     else for (let i = 1; i < points.length; i++) {
       const pointA = points[ i - 1 ]
       const pointB = points[ i     ]
@@ -183,10 +216,10 @@ class Quadtree {
     if (rect.intersects( new Rect( boundary.x, boundary.y, resolution, resolution ) )) foundedLeaves.push( this )
 
     if (divided) foundedLeaves.push(
-      ...northeast.query( rect ),
-      ...northwest.query( rect ),
-      ...southeast.query( rect ),
-      ...southwest.query( rect ),
+      ...northeast.queryLeaves( rect ),
+      ...northwest.queryLeaves( rect ),
+      ...southeast.queryLeaves( rect ),
+      ...southwest.queryLeaves( rect ),
     )
 
     return foundedLeaves

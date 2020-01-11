@@ -48,12 +48,17 @@ document.addEventListener( 'mouseup', ({ clientX, clientY }) => {
   mouseDown = false
 
   if (pointMouseDown.equal( pointMouseMove )) {
-    const obj = { type:'point', ...pointMouseDown }
+    const obj = { type:'point', ...new Point( pointMouseDown.x, pointMouseDown.y ) }
     objects.push( obj )
     qTree.insert( obj, pointMouseDown )
   }
   else {
-    const obj = { type: 'line', startPoint:pointMouseDown, endPoint:pointMouseMove }
+    const obj = {
+      type: 'line',
+      startPoint: new Point( pointMouseDown.x, pointMouseDown.y ),
+      endPoint: new Point( pointMouseMove.x, pointMouseMove.y )
+    }
+
     objects.push( obj )
     qTree.insertPointSequence( obj, pointMouseDown, pointMouseMove )
   }
