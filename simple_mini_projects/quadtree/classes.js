@@ -1,49 +1,5 @@
-class Point {
-  /**
-   * @param {number} x
-   * @param {number} y
-   */
-  constructor( x, y ) {
-    this.x = x
-    this.y = y
-  }
-}
-
-class Rect {
-  /**
-   * @param {number} x
-   * @param {number} y
-   * @param {number} width
-   * @param {number} height
-   */
-  constructor( x, y, width, height ) {
-    this.x = x
-    this.y = y
-    this.width = width
-    this.height = height
-  }
-
-  /**
-   * @param {Point} param0
-   */
-  contains( { x, y } ) {
-    return (
-      x > this.x && x < this.x + this.width &&
-      y > this.y && y < this.y + this.height
-    )
-  }
-
-  intersects( { x, y, width, height } ) {
-    return !(
-      x > this.x + this.width ||
-      x + width < this.x ||
-      y > this.y + this.height ||
-      y + height < this.y
-    )
-  }
-}
-
-class Quadtree {
+import { Point, Rect } from "../../js/classes.js";
+export default class Quadtree {
   /** @type {Quadtree} */
   northeast = null
   /** @type {Quadtree} */
@@ -117,7 +73,7 @@ class Quadtree {
   show( ctx, startX=0, startY=0 ) {
     const { x, y, width, height } = this.boundary
 
-    ctx.strokeStyle = `#000`
+    ctx.strokeStyle = `#444`
 
     ctx.strokeRect( startX + x, startY + y, width, height )
 

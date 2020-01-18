@@ -1,4 +1,4 @@
-class Gif {
+export class Gif {
   /*\
    *                                     ,,,----------,
    *                                     |||          |
@@ -146,10 +146,15 @@ class Gif {
 
     return `data:image/gif;base64,${btoa( String.fromCharCode( ...charCodes ) )}`
   }
-  getImgTag() {
+  getImgTag( width, height ) {
     const img = document.createElement( `img` )
 
     img.src = this.getSrc()
+
+    if (width && height) {
+      img.width = width
+      img.height = height
+    }
 
     return img
   }
@@ -177,7 +182,7 @@ class Gif {
     return number.toString( radix ).padStart( length, `0` )
   }
 }
-class Png {
+export class Png {
   /**
    * @param {Buffer} buffer
    */
