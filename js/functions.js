@@ -45,26 +45,28 @@ export function createSectionItemLink( title, description, link ) {
 }
 export function addItemToSection( sectionName, item ) {
   const sectionsParent = ui.content
-  let section = Array.from( sectionsParent.querySelectorAll( `.content_section-title`) )
+  let sectionTitle = Array.from( sectionsParent.querySelectorAll( `.content_section-title`) )
     .find( title => title.textContent == sectionName )
 
-  if (!section) {
+  if (!sectionTitle) {
     const title = document.createElement( `h2` )
     const content = document.createElement( `div` )
+    const section = document.createElement( `section` )
 
     title.innerText = sectionName
     title.className = `content_section-title`
     content.className = `content_section-content`
 
-    section = document.createElement( `section` )
     section.className = `content_section`
     section.appendChild( title )
     section.appendChild( content )
 
     sectionsParent.insertAdjacentElement( `afterbegin`, section )
+
+    sectionTitle = title
   }
 
-  const sectionItems = section.nextElementSibling
+  const sectionItems = sectionTitle.nextElementSibling
 
   sectionItems.appendChild( item )
 }
@@ -177,6 +179,8 @@ export async function getAllUserReposWebiteConfigJson( username ) {
 }
 export async function buildProjects( username=`Evolveye` ) {
   const websiteConfigs = await getAllUserReposWebiteConfigJson( username )
+
+  console.log( websiteConfigs )
 
   websiteConfigs.forEach( config => config.forEach( ({ section, type, src, title, description }) => {
     const elementTag = (() => { switch (type) {
