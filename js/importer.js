@@ -50,9 +50,9 @@ export async function importScript( src ) {
   } else {
     siteConfig.activeModule = siteConfig.modules.get( src )
 
-    baseAddDescription( siteConfig.activeModule.description )
-    siteConfig.activeModule.inputs.forEach( ({ type, shortDescription, properties }) => baseAddInput( type, shortDescription, properties ) )
-    siteConfig.activeModule.elements.forEach( element => baseAddElementToPage( element ) )
+    addDescriptionToHeaderUi( siteConfig.activeModule.description )
+    siteConfig.activeModule.inputs.forEach( ({ type, shortDescription, properties }) => addInputToHeaderUi( type, shortDescription, properties ) )
+    siteConfig.activeModule.elements.forEach( element => addElementToSubpage( element ) )
 
     console.log( `%cPreviously imported script has been initialized %c(${src})`, `font-weight:bold`, `font-weight:normal` )
   }
