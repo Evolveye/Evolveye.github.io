@@ -1,12 +1,12 @@
 import { Point, Rect } from "../../js/classes.js";
 import { clearSubcanvas, subCtx as ctx, } from "../../js/functions.js";
+import Quadtree from "./classes.js";
 import {
   setOnMouseUp,
   setOnMouseMove,
   addDescription,
   addInput,
 } from "../../js/importer.js";
-import Quadtree from "./classes.js.js";
 
 const qTreeSize = 500
 const objects = []
@@ -80,7 +80,7 @@ setOnMouseMove( (pressed, x, y, down) => {
 
   if (!pressed || !qTree.boundary.contains( pointCurrent )) return
 
-  ctx.strokeStyle = '#00f'
+  ctx.strokeStyle = '#b00'
   ctx.beginPath()
   ctx.moveTo( pointDown.x + drawAreaX, pointDown.y + drawAreaY )
   ctx.lineTo( x, y )

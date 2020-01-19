@@ -174,7 +174,7 @@ export default class Quadtree {
     const { x, y, width, height } = this.boundary
     const { resolution, references: points } = this
 
-    ctx.strokeStyle = `#000`
+    ctx.strokeStyle = `#444`
 
     if (meshShowing) ctx.strokeRect( drawAreaX + x, drawAreaY + y, width, height )
 
@@ -185,7 +185,7 @@ export default class Quadtree {
       this.southwest.show( ctx, { meshShowing, drawAreaX, drawAreaY } )
     }
 
-    ctx.fillStyle = '#f00'
+    ctx.fillStyle = '#0b0'
 
     if (points.length) ctx.fillRect( drawAreaX + x, drawAreaY + y, resolution, resolution )
   }

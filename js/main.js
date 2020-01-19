@@ -1,19 +1,10 @@
-import { Point, MovingCircle } from "./classes.js";
+import { Point, MovingCircle } from "./classes.js"
 import {
   random,
   bgrCtx as ctx,
   clearBgrCanvas,
   buildProjects,
 } from "./functions.js"
-import { importScript } from "./importer.js";
-
-
-document.querySelector( `.importer` ).addEventListener( `click`, () => {
-  importScript( `/simple_mini_projects/quadtree_template-copy/main.js` )
-  const subpage = document.querySelector( `.subpage` )
-  subpage.classList.add( `is-showed` )
-} )
-
 
 const padding = 10
 /** @type {MovingCircle[]} */

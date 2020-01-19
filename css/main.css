@@ -2,6 +2,7 @@
   --color-background: #171718;
   --color-white: #fdfdfd;
   --color-green: #62a01b;
+  --header-height: 145px;
 }
 
 body {
@@ -10,7 +11,7 @@ body {
 
 .header {
   display: flex;
-  height: 145px;
+  height: var( --header-height );
   padding: 20px 15%;
   background-color: var( --color-white );
   border-top: 5px solid var( --color-green );
@@ -45,22 +46,27 @@ body {
   color: #ddd5c8;
 }
 
-.subpage-canvas,
-.homepage,
 .subpage {
   position: absolute;
-  top: 0;
+  top: var( --header-height );
+  display: flex;
+  visibility: hidden;
   width: 100%;
-  min-height: calc( 100vh - 145px );
+  min-height: calc( 100vh - var( --header-height ) );
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all .3s;
+  background-color: var( --color-background );
+  border-top: 4px double var( --color-white );
 }
+  .subpage-canvas {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    min-height: calc( 100vh - var( --header-height ) );
+  }
   .subpage {
-    display: flex;
-    visibility: hidden;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: all .3s;
-    background-color: var( --color-background );
   }
     .subpage.is-showed {
       visibility: visible;

@@ -1,24 +1,34 @@
+import { importScript } from "./importer.js"
 
 /** @type {HTMLCanvasElement} */
-export const bgrCanvas = document.querySelector( `.homepage-canvas` )
+export const bgrCanvas = document.querySelector( `.canvas` )
 /** @type {HTMLCanvasElement} */
 export const subCanvas = document.querySelector( `.subpage-canvas` )
 export const bgrCtx = bgrCanvas.getContext( `2d` )
 export const subCtx = subCanvas.getContext( `2d` )
+
+const githubApiHelperAddress = `https://europe-west1-evolveye-serverless-265611.cloudfunctions.net/githubApi`
 const ui = {
   content: document.querySelector( `.content` ),
   subpage: document.querySelector( `.subpage-elements` ),
   description: document.querySelector( `.ui-description` ),
   inputs: document.querySelector( `.ui-inputs` ),
 }
-const githubApiHelperAddress = `https://europe-west1-evolveye-serverless-265611.cloudfunctions.net/githubApi`
 
 // /
 // UI
 //
 
-function createSectionItem( element, title, description, action ) {
-  const activeElement = document.createElement( element == `button` ? `button` : `a` )
+function runSubpage( scriptSrc ) {
+  subCtx.clearRect( 0, 0, subCanvas.width, subCanvas.height )
+
+  subCtx.lineWidth = 1
+
+  importScript( scriptSrc.charAt( 0 ) == `/` ? scriptSrc : `/${scriptSrc}` )
+  document.querySelector( `.subpage` ).classList.add( `is-showed` )
+}
+function createSectionItem( elementTag, title, description, action ) {
+  const activeElement = document.createElement( elementTag == `button` ? `button` : `a` )
   const titleElement = document.createElement( `h5` )
   const descriptionElement = document.createElement( `p` )
 
@@ -28,8 +38,8 @@ function createSectionItem( element, title, description, action ) {
   descriptionElement.className = `link_box-description`
   descriptionElement.textContent = description
 
-  if (element ==`button`) activeElement.onclick = action
-  else if (element ==`a`) activeElement.href = action
+  if (elementTag ==`button`) activeElement.onclick = action
+  else if (elementTag ==`a`) activeElement.href = action
 
   activeElement.className = `link_box`
   activeElement.appendChild( titleElement )
@@ -70,7 +80,7 @@ export function addItemToSection( sectionName, item ) {
 
   sectionItems.appendChild( item )
 }
-export function addInput( type, shortDescription, properties ) {
+export function addInputToHeaderUi( type, shortDescription, properties ) {
   const span = document.createElement( `span` )
   const input = document.createElement( `input` )
   const label = document.createElement( `label` )
@@ -92,10 +102,10 @@ export function addInput( type, shortDescription, properties ) {
 
   return { label, input }
 }
-export function addDescription( description ) {
+export function addDescriptionToHeaderUi( description ) {
   ui.description.innerHTML = description
 }
-export function addElementToPage( element ) {
+export function addElementToSubpage( element ) {
   ui.subpage.appendChild( element )
 }
 export function clearSubpageStructure() {
@@ -180,15 +190,21 @@ export async function getAllUserReposWebiteConfigJson( username ) {
 export async function buildProjects( username=`Evolveye` ) {
   const websiteConfigs = await getAllUserReposWebiteConfigJson( username )
 
-  console.log( websiteConfigs )
-
   websiteConfigs.forEach( config => config.forEach( ({ section, type, src, title, description }) => {
-    const elementTag = (() => { switch (type) {
-      case `external`: return `a`
-      case `module`: return `button`
-    } } ) ()
+    let elementTag, action
 
-    addItemToSection( section, createSectionItem( elementTag, title, description, src ) )
+    switch (type) {
+      case `external`:
+        elementTag = `a`
+        action = src
+        break
+
+      case `module`:
+        elementTag = `button`
+        action = () => runSubpage( src )
+    }
+
+    addItemToSection( section, createSectionItem( elementTag, title, description, action ) )
   } ) )
 }
 export function random( min, max ) {

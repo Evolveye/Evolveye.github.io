@@ -13,7 +13,7 @@ import {
 
 let rectSideLength = 3
 const { input } = addInput( `number`, `Resolution`, { min:1, max:20, value:rectSideLength, onchange() { rectSideLength = input.value } } )
-const lines = [ { pointA:new Point( 150, 100 ), pointB:new Point( 400, 200 ), color:'#f00' } ]
+const lines = [ { pointA:new Point( 150, 100 ), pointB:new Point( 400, 200 ) } ]
 
 function bresenham( { x:xA, y:yA }, { x:xB, y:yB } ) {
   let x1 = floorToDivisible( xA, rectSideLength )
@@ -47,7 +47,7 @@ function bresenham( { x:xA, y:yA }, { x:xB, y:yB } ) {
   ctx.fillRect( x1, y1, rectSideLength, rectSideLength )
 }
 function draw() {
-  for (const { pointA, pointB, color='#f00' } of lines) {
+  for (const { pointA, pointB, color='#0b0' } of lines) {
     ctx.fillStyle = color
 
     bresenham( pointA, pointB )
@@ -67,7 +67,7 @@ setOnMouseMove( ( pressed, clientX, clientY, down ) => {
   if (!pressed) return
 
   ctx.lineWidth = 5
-  ctx.strokeStyle = '#f00'
+  ctx.strokeStyle = '#b00'
   ctx.beginPath()
   ctx.moveTo( down.x, down.y )
   ctx.lineTo( clientX, clientY )

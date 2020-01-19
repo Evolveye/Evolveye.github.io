@@ -1,8 +1,8 @@
 import {
   subCanvas,
-  addDescription as baseAddDescription,
-  addInput as baseAddInput,
-  addElementToPage as baseAddElementToPage,
+  addDescriptionToHeaderUi,
+  addInputToHeaderUi,
+  addElementToSubpage,
   clearSubpageStructure
 } from "./functions.js";
 
@@ -14,17 +14,17 @@ const siteConfig = {
 
 export function addDescription( description ) {
   siteConfig.activeModule.description = description
-  baseAddDescription( description )
+  addDescriptionToHeaderUi( description )
 }
 export function addInput( type, shortDescription, properties ) {
   siteConfig.activeModule.inputs.push( { type, shortDescription, properties } )
 
-  return baseAddInput( type, shortDescription, properties )
+  return addInputToHeaderUi( type, shortDescription, properties )
 }
 export function addElementToPage( element ) {
   siteConfig.activeModule.elements.push( element )
 
-  baseAddElementToPage( element )
+  addElementToSubpage( element )
 }
 
 export async function importScript( src ) {
