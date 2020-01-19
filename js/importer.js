@@ -26,7 +26,6 @@ export function addElementToPage( element ) {
 
   addElementToSubpage( element )
 }
-
 export async function importScript( src ) {
   clearSubpageStructure()
 

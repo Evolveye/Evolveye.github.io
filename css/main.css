@@ -2,16 +2,17 @@
   --color-background: #171718;
   --color-white: #fdfdfd;
   --color-green: #62a01b;
-  --header-height: 145px;
+  --header-height: 150px;
 }
 
 body {
   background-color: var( --color-background );
+  overflow-y: scroll;
 }
 
 .header {
   display: flex;
-  height: var( --header-height );
+  height: calc( var( --header-height ) - 5px );
   padding: 20px 15%;
   background-color: var( --color-white );
   border-top: 5px solid var( --color-green );
@@ -58,7 +59,6 @@ body {
   opacity: 0;
   transition: all .3s;
   background-color: var( --color-background );
-  border-top: 4px double var( --color-white );
 }
   .subpage-canvas {
     position: absolute;
@@ -66,18 +66,16 @@ body {
     width: 100%;
     min-height: calc( 100vh - var( --header-height ) );
   }
-  .subpage {
-  }
-    .subpage.is-showed {
+  .subpage.is-showed {
       visibility: visible;
       opacity: 1;
-    }
-    .subpage-close {
+  }
+  .subpage-close {
       position: absolute;
       top: 20px;
       left: 20px;
       z-index: 1;
-    }
+  }
 
 .content_section {
   margin: 20px 5%;
@@ -114,6 +112,9 @@ body {
   .link_box:hover {
     background-color: #00000015;
     transform: scale( 1.01 );
+  }
+  .link_box:active {
+    border-color: #4169e1;
   }
   .link_box-title {
     letter-spacing: 1px;

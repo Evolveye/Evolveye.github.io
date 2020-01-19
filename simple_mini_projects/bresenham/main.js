@@ -12,7 +12,6 @@ import {
 } from "../../js/functions.js";
 
 let rectSideLength = 3
-const { input } = addInput( `number`, `Resolution`, { min:1, max:20, value:rectSideLength, onchange() { rectSideLength = input.value } } )
 const lines = [ { pointA:new Point( 150, 100 ), pointB:new Point( 400, 200 ) } ]
 
 function bresenham( { x:xA, y:yA }, { x:xB, y:yB } ) {
@@ -83,5 +82,7 @@ setOnMouseUp( ( up, down ) => {
 } )
 setOnResize( draw )
 
+addInput( `button`, `Clear`, { onclick() { lines.splice( 0 ); redraw() } } )
+addInput( `number`, `Resolution`, { min:1, max:20, value:rectSideLength, onchange() { rectSideLength = this.value; redraw() } } )
 addDescription( `Just draw a line on canvas` )
 draw()
