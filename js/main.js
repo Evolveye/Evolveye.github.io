@@ -3,9 +3,7 @@ import {
   random,
   bgrCtx as ctx,
   clearBgrCanvas,
-  getDirectoryInfoFromGithubApi,
-  getProjectAsSectionItem,
-  addItemToSection
+  buildProjects,
 } from "./functions.js"
 import { importScript } from "./importer.js";
 
@@ -40,13 +38,7 @@ setInterval( () => {
 
   requestAnimationFrame( () => draw() )
 }, 1000 / 60 )
-getDirectoryInfoFromGithubApi( `Evolveye.github.io`, `simple_mini_projects/` ).then( project => {
-  project.forEach( async folder => {
-    const projectSectionItem = await getProjectAsSectionItem( `Evolveye.github.io`, `simple_mini_projects/${folder.name}` )
-
-    addItemToSection( `Simple mini projects`, projectSectionItem )
-  } )
-} )
+buildProjects()
 
 function generatePoints() {
   const width = window.innerWidth

@@ -5,27 +5,20 @@ export const bgrCanvas = document.querySelector( `.homepage-canvas` )
 export const subCanvas = document.querySelector( `.subpage-canvas` )
 export const bgrCtx = bgrCanvas.getContext( `2d` )
 export const subCtx = subCanvas.getContext( `2d` )
-const subpage = document.querySelector( `.subpage-elements` )
 const ui = {
+  content: document.querySelector( `.content` ),
+  subpage: document.querySelector( `.subpage-elements` ),
   description: document.querySelector( `.ui-description` ),
   inputs: document.querySelector( `.ui-inputs` ),
 }
+const githubApiHelperAddress = `https://europe-west1-evolveye-serverless-265611.cloudfunctions.net/githubApi`
 
 // /
 // UI
 //
 
-export function addItemToSection( sectionName, item ) {
-  const section = Array.from( document.querySelectorAll( `.content_section-title`) )
-    .find( title => title.textContent == sectionName )
-
-  const sectionItems = section.nextElementSibling
-
-  sectionItems.appendChild( item )
-}
-export function createSectionItem( title, description, link ) {
-
-  const linkBoxElement = document.createElement( `a` )
+function createSectionItem( element, title, description, action ) {
+  const activeElement = document.createElement( element == `button` ? `button` : `a` )
   const titleElement = document.createElement( `h5` )
   const descriptionElement = document.createElement( `p` )
 
@@ -35,13 +28,45 @@ export function createSectionItem( title, description, link ) {
   descriptionElement.className = `link_box-description`
   descriptionElement.textContent = description
 
+  if (element ==`button`) activeElement.onclick = action
+  else if (element ==`a`) activeElement.href = action
 
-  linkBoxElement.href = link
-  linkBoxElement.className = `link_box`
-  linkBoxElement.appendChild( titleElement )
-  linkBoxElement.appendChild( descriptionElement )
+  activeElement.className = `link_box`
+  activeElement.appendChild( titleElement )
+  activeElement.appendChild( descriptionElement )
 
-  return linkBoxElement
+  return activeElement
+}
+export function createSectionItemButton( title, description, link ) {
+  return createSectionItem( `button`, title, description, link )
+}
+export function createSectionItemLink( title, description, link ) {
+  return createSectionItem( `a`, title, description, link )
+}
+export function addItemToSection( sectionName, item ) {
+  const sectionsParent = ui.content
+  let section = Array.from( sectionsParent.querySelectorAll( `.content_section-title`) )
+    .find( title => title.textContent == sectionName )
+
+  if (!section) {
+    const title = document.createElement( `h2` )
+    const content = document.createElement( `div` )
+
+    title.innerText = sectionName
+    title.className = `content_section-title`
+    content.className = `content_section-content`
+
+    section = document.createElement( `section` )
+    section.className = `content_section`
+    section.appendChild( title )
+    section.appendChild( content )
+
+    sectionsParent.insertAdjacentElement( `afterbegin`, section )
+  }
+
+  const sectionItems = section.nextElementSibling
+
+  sectionItems.appendChild( item )
 }
 export function addInput( type, shortDescription, properties ) {
   const span = document.createElement( `span` )
@@ -69,10 +94,10 @@ export function addDescription( description ) {
   ui.description.innerHTML = description
 }
 export function addElementToPage( element ) {
-  subpage.appendChild( element )
+  ui.subpage.appendChild( element )
 }
 export function clearSubpageStructure() {
-  subpage.innerHTML = ``
+  ui.subpage.innerHTML = ``
 }
 
 // /
@@ -110,20 +135,57 @@ export function clickOnCenteredRectangle( clientX, clientY, { width=canvas.width
 // Others
 //
 
-/**
- * @return {Promise<GithubApiDirectoryInfo[]>}
- */
-export async function getDirectoryInfoFromGithubApi( repository, path='' ) {
-  return await fetch( `https://api.github.com/repos/evolveye/${repository}/contents/${path}` )
+export async function getRateLimits() {
+  return await fetch( `${githubApiHelperAddress}?address=/rate_limit` )
+    .then( data => data.json() )
+    .then( limits => {
+      for (const resource in limits.resources)
+        limits.resources[ resource ].resetString = new Date( limits.resources[ resource ].reset * 1000 ).toLocaleTimeString()
+
+      return limits
+     } )
+}
+export async function getRepositories( username ) {
+  return await fetch( `${githubApiHelperAddress}?address=/users/${username}/repos` )
     .then( data => data.json() )
 }
-export async function getProjectAsSectionItem( repository, pathToProjects ) {
-  const pathEndedWithSlash = pathToProjects.endsWith( `/` ) ? pathToProjects : `${pathToProjects}/`
-  const { title, description } = await getDirectoryInfoFromGithubApi( repository, `${pathEndedWithSlash}info.json` )
-    .then( info => atob( info.content ) )
-    .then( info => JSON.parse( info ) )
+export async function getAllUserReposWebiteConfigJson( username ) {
+  /** @type {string[]} */
+  const websiteConfigRawAddresses = (await getRepositories( username ))
+    .map( repo => repo.name )
+    .map( reponame => `https://raw.githubusercontent.com/${username}/${reponame}/master/website_config.json` )
 
-  return createSectionItem( title, description, pathEndedWithSlash )
+  console.groupCollapsed( `Responses from website_config.json fetcher (404 is not an error)` )
+
+  /**
+   * @typedef {Object} WebsiteConfig
+   * @property {string} section
+   * @property {"module"|"external"} type
+   * @property {string} src
+   * @property {string} title
+   * @property {string} description
+   */
+
+  /** @type {WebsiteConfig[][]} */
+  const fetchedConfigs = (await Promise.all( websiteConfigRawAddresses.map(
+    rawAddress => fetch( rawAddress ).then( res => res.ok ? res.json() : false )
+  ) ) ).filter( config => config )
+
+  console.groupEnd()
+
+  return fetchedConfigs
+}
+export async function buildProjects( username=`Evolveye` ) {
+  const websiteConfigs = await getAllUserReposWebiteConfigJson( username )
+
+  websiteConfigs.forEach( config => config.forEach( ({ section, type, src, title, description }) => {
+    const elementTag = (() => { switch (type) {
+      case `external`: return `a`
+      case `module`: return `button`
+    } } ) ()
+
+    addItemToSection( section, createSectionItem( elementTag, title, description, src ) )
+  } ) )
 }
 export function random( min, max ) {
   return Math.floor( Math.random() * (max - min + 1) ) + min
