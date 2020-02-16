@@ -75,6 +75,8 @@ const gif = new Gif( { w:"FF FF FF", r:"FF 00 00", b:"00 00 FF", k:"00 00 00" },
 ]
 `.replace( /\n/g, `<br>` ).replace( / /g, `&nbsp;` )
 
+img.className = `pixelart`
+
 div.appendChild( p )
 div.appendChild( img )
 
