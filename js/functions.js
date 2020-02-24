@@ -187,10 +187,23 @@ export async function getAllUserReposWebiteConfigJson( username ) {
 
   return fetchedConfigs
 }
-export async function buildProjects( username=`Evolveye` ) {
-  const websiteConfigs = await getAllUserReposWebiteConfigJson( username )
 
-  websiteConfigs.forEach( config => config.forEach( ({ section, type, src, title, description }) => {
+/**
+ * @typedef {Object} ProjectField
+ * @property {string} section
+ * @property {"external"|"module"} type
+ * @property {string} src
+ * @property {string} title
+ * @property {string} description
+ */
+/**
+ *
+ * @param {string} username
+ * @param {ProjectField[]} ownDefinedFields
+ */
+export async function buildProjects( username=`Evolveye`, ownDefinedFields=[] ) {
+  const websiteConfigs = await getAllUserReposWebiteConfigJson( username )
+  const builder = ({ section, type, src, title, description }) => {
     let elementTag, action
 
     switch (type) {
@@ -205,7 +218,10 @@ export async function buildProjects( username=`Evolveye` ) {
     }
 
     addItemToSection( section, createSectionItem( elementTag, title, description, action ) )
-  } ) )
+  }
+
+  websiteConfigs.forEach( config => config.forEach( builder ) )
+  ownDefinedFields.forEach( builder )
 }
 export function random( min, max ) {
   return Math.floor( Math.random() * (max - min + 1) ) + min
