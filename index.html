@@ -87,5 +87,18 @@
           -1  0   -2.3  -0.5     -3  -1.2   -0.6  -0.6     -6  -1.5  -11.9  -1.9     -6  -0.5  -12.6  -1.1  -14.8  -1.4   -2.2  -0.3
         -4.8  0    -5.8  0.6z"/> -->
   </svg>
+  <script>
+    const str = background.getAttribute( `d` )
+    const arr = str.match( /\w[-. \d\n]+/g )
+    const newStr = str.match( /\w[-. \d\n]+/g ).map( line => {
+      if (line.charAt( 0 ) != `c`) return line
+
+      return `c` + line.match( /[-.\d]+/g )
+        .map( numStr => Number( numStr ) )
+        .map( num => Math.random() > .5 ? num + 1 : num - 1 )
+        .reduce( (str, num) => `${str} ${num}`, `` )
+    } )
+    setInterval( () => background.setAttribute( `d`, Math.random() > .5 ? newStr : str ), 1000 * .5 )
+  </script>
 </body>
 </html>
