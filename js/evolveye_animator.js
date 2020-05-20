@@ -1,3 +1,4 @@
+
 /*\
  *  Simple SVG avatar animator
 \*/
@@ -47,24 +48,38 @@ const pathD = `
 // update()
 // setInterval( update, 1000 * 2 )
 
-const avatars = document.querySelectorAll( `.avatar-evolveye` )
+const avatars = document.querySelectorAll( `svg.avatar-evolveye` )
 const elements = []
-
+const [ originalWidth, originalHeight ] = [ 440, 440 ]
+window.elements = elements
 avatars.forEach( svg => {
-  svg.insertAdjacentHTML( `beforeend`, `<path fill="#33d" d="${pathD}"/>` )
-  svg.insertAdjacentHTML( `beforeend`, `<ellipse cx="254" cy="189" rx="114" ry="123" fill="#fff"/>` )
-  svg.insertAdjacentHTML( `beforeend`, `<ellipse cx="290" cy="179" rx="44"  ry="60"  fill="#000"/>` )
+  const svgBoundings = svg.getBoundingClientRect()
+  const factor = svgBoundings.width / originalWidth
+
+  const pathData = shapeModifier( pathD, factor )
+  const pupilCX = 298 * factor
+  const pupilCY = 179 * factor
+  const pupilRX = 44 * factor
+  const pupilRY = 60 * factor
+
+  svg.insertAdjacentHTML( `beforeend`, `<path fill="#33d" d="${pathData}"/>` )
+  svg.insertAdjacentHTML( `beforeend`, `<ellipse cx="${254 * factor}" cy="${189 * factor}" rx="${114 * factor}" ry="${123 * factor}" fill="#fff"/>` )
+  svg.insertAdjacentHTML( `beforeend`, `<ellipse cx="${pupilCX}" cy="${pupilCY}" rx="${pupilRX}"  ry="${pupilRY}"  fill="#000"/>` )
 
   const pupil = svg.querySelector( `ellipse[fill="#000"]` )
-  const { x, y, width, height } = pupil.getBoundingClientRect()
+  const { x, y, width, height, left, top } = pupil.getBoundingClientRect()
 
   elements.push( {
     path: svg.querySelector( `path` ),
+    pathData,
     pupil,
-    pupilCX: x + width / 3,
-    pupilCY: y + height / 3,
-    pupilWidth: width,
-    pupilHeight: height,
+    factor,
+    pupilCX,
+    pupilCY,
+    pupilTop: top,
+    pupilLeft: left,
+    pupilWidth: pupilRX * 2,
+    pupilHeight: pupilRY * 2,
   } )
 } )
 
@@ -82,25 +97,25 @@ function mapNumber( num, numRange, destinationRange ) {
   return ((validatedNum - numRange[ 0 ]) / numRLen) * destRLen + destinationRange[ 0 ]
 }
 
-function reshapeHelper() {
-  const factor = .5
+function shapeModifier( path, factor=null, forceRandom=false) {
+  const random = i => .5 * (Math.random() > .5 ? 1 : -1) * (i < 10 ? 5 : 1)
+  const pathFragments = path.match( /\w[-. \d\n]+/g ).map( fragment => ({
+    symbol: fragment.charAt( 0 ),
+    data: fragment.match( /[-.\d]+/g )?.map( numStr => Number( numStr ) )
+  }))
 
-  return pathD.match( /\w[-. \d\n]+/g ).map( line => {
-    switch (line.charAt( 0 )) {
-      // case `M`: return `M ${Math.random() * jump + 300} ${Math.random() * jump + 70}`
-      case `c`: return `c` + line.match( /[-.\d]+/g )
-        .map( numStr => Number( numStr ) )
-        .map( (num, i) => num + factor * (Math.random() > .5 ? 1 : -1) * (i < 10 ? 5 : 1) )
-        .reduce( (str, num) => `${str} ${num}`, `` )
-      default: return line
+  return pathFragments.map( ({ symbol, data=[] }) => {
+    if (symbol == `c` && (!factor || forceRandom)) {
+      return `c` + data.map( (num, i) => (num + random( i )) * (factor || 1) ).join( ` ` )
     }
-  } )
+
+    return symbol + ` ` + (factor ? data.map( num => num * factor ) : data).join( ` ` )
+  } ).reduce( (str, line) => `${str} ${line}`, ``)
 }
 
 function reshape() {
-  for (const { path } of elements) {
-    path.setAttribute( `d`, reshapeHelper() )
-  }
+  for (const { path, factor } of elements) path.setAttribute( `d`, shapeModifier( pathD, factor, true ) )
+
   setTimeout( reshape, 1000 * 2 )
 }
 
@@ -108,13 +123,13 @@ document.addEventListener( `mousemove`, ({ clientX, clientY }) => {
   const { sign, abs, sqrt } = Math
 
   const addition = num => (sqrt( abs( num ) ) * (-1 / ((.05 * num) ** 2 + 1) + 1)) * sign( num )
-  const position = (client, pupil, dimension) => (client - pupil) < dimension * 5 ? (client - pupil) : dimension * 5
+  const position = (clienPos, pupilPos, dimension) => (clienPos - pupilPos) < dimension * 5 ? (clienPos - pupilPos) : dimension * 5
 
-  for (const { pupil, pupilCX, pupilCY, pupilWidth, pupilHeight } of elements) {
-    const x = position( clientX, pupilCX, pupilWidth )
-    const y = position( clientY, pupilCY, pupilHeight )
+  for (const { pupil, pupilCX, pupilCY, pupilWidth, pupilHeight, pupilTop, pupilLeft, factor } of elements) {
+    const x = position( clientX, pupilLeft + pupilWidth / 2, pupilWidth )
+    const y = position( clientY, pupilTop + pupilHeight / 2, pupilHeight )
 
-    pupil.setAttribute( `cx`, pupilCX + addition( x ) )
-    pupil.setAttribute( `cy`, pupilCY + addition( y ) )
+    pupil.setAttribute( `cx`, pupilCX + addition( x ) * factor )
+    pupil.setAttribute( `cy`, pupilCY + addition( y ) * factor )
   }
 } )
