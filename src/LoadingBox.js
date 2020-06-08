@@ -14,8 +14,7 @@ export default class LoadingBox extends React.Component {
 
     this.contentHeight = 0
 
-    /** @type {HTMLCanvasElement} */
-    this.canvas = null
+    this.ref = React.createRef()
     /** @type {CanvasRenderingContext2D} */
     this.ctx = null
   }
@@ -23,7 +22,7 @@ export default class LoadingBox extends React.Component {
   configureObject( object={}, randomX=false ) {
     const { floor, random } = Math
 
-    object.x = randomX ? floor( random() * (this.canvas.width - 40) ) + 20 : 22
+    object.x = randomX ? floor( random() * (this.ref.current.width - 40) ) + 20 : 22
     object.y = (floor( random() * (this.contentHeight / 30 - 1) ) + 1) * 30
     object.color = LoadingBox.colors[ floor( random() * LoadingBox.colors.length ) ]
 
@@ -33,15 +32,15 @@ export default class LoadingBox extends React.Component {
   /**
    * @param {HTMLCanvasElement} canvas
    */
-  handleRef = canvas => {
+  componentDidMount() {
     const { title } = this.props
+    const canvas = this.ref.current
     const objects = []
 
-    this.ctx = canvas.getContext( `2d` )
-    this.canvas = canvas
-    this.canvas.width = canvas.clientWidth
-    this.canvas.height = canvas.clientHeight
+    canvas.width = canvas.clientWidth
+    canvas.height = canvas.clientHeight
 
+    this.ctx = canvas.getContext( `2d` )
     this.contentHeight = canvas.height - (title ? 50 : 20)
 
     for (let i = 0; i < this.contentHeight / 10; i++) objects.push( this.configureObject( {}, true ) )
@@ -52,8 +51,12 @@ export default class LoadingBox extends React.Component {
   }
 
   animate = () => {
+    const canvas = this.ref.current
+
+    if (!canvas) return
+
     const { ctx, contentHeight } = this
-    const { width, height } = this.canvas
+    const { width, height } = canvas
 
     ctx.clearRect( 0, 0, width, height )
 
@@ -85,5 +88,5 @@ export default class LoadingBox extends React.Component {
     requestAnimationFrame( this.animate )
   }
 
-  render = () => <canvas className="loading_box" ref={this.handleRef} />
+  render = () => <canvas className="loading_box" ref={this.ref} />
 }
