@@ -117,7 +117,7 @@ export default class EvolveyeAvatar extends React.Component {
   }
 
   render = () => <svg
-    className="Evolveye-avatar"
+    className="evolveye_avatar"
     width={EvolveyeAvatar.originalWidth}
     height={EvolveyeAvatar.originalHeight}
     ref={this.refCallback}

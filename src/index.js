@@ -1,12 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
+import React from "react"
+import ReactDOM from "react-dom"
+import EvolveyeAvatar from "./EvolveyeAvatar.js"
 
-import './index.css'
+import "./index.css"
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <EvolveyeAvatar />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById( `content` )
 )

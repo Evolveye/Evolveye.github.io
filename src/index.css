@@ -1,3 +1,16 @@
 body {
   background-color: #112;
+  margin: 0;
+}
+
+#content {
+  min-height: 100vh;
+}
+
+.evolveye_avatar {
+  position: absolute;
+  left: 100px;
+  bottom: 100px;
+  width: 200px;
+  height: 200px;
 }
