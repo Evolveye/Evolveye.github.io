@@ -1,6 +1,7 @@
 body {
   background-color: #112;
   margin: 0;
+  color: #eee;
 }
 
 #content {
@@ -13,4 +14,9 @@ body {
   bottom: 100px;
   width: 200px;
   height: 200px;
+}
+
+.loading_box {
+  height: 150px;
+  width: 400px;
 }
