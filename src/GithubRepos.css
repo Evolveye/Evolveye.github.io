@@ -1,0 +1,29 @@
+
+.github_repos > * {
+  display: block;
+  margin: 20px auto;
+}
+.github_repos-item {
+  padding: 20px;
+  background: repeating-linear-gradient(
+    90deg, #0002 0%, rgba(52, 52, 122, 0.333) 50%, #0002 100%
+  );
+  width: 100%;
+  background-size: 300% auto;
+  background-position: 0 100%;
+  transition: background-position .5s;
+  cursor: pointer;
+}
+
+.github_repos-item:hover {
+  background-position: -100% 0%;
+}
+
+.github_repos-title {
+  margin: 0 20px;
+  font-size: 17px;
+}
+
+.github_repos-description {
+  font-size: 14px;
+}

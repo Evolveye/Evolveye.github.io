@@ -1,11 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #112;
   margin: 0;
-  color: #eee;
+  color: #ddd5c8;
+  font-family: sans-serif;
 }
 
 #content {
   min-height: 100vh;
+  display: grid;
+  grid-template:
+    "space github" / auto 500px
 }
 
 .evolveye_avatar {
@@ -16,7 +24,16 @@ body {
   height: 200px;
 }
 
-.loading_box {
-  height: 150px;
-  width: 400px;
+.github_repos {
+  grid-area: github
 }
+  .github_repos-item,
+  .loading_box {
+    height: 100px;
+    width: 325px;
+    border-top: 2px solid #4169e1;
+    opacity: 0.8;
+  }
+  .github_repos-item:hover {
+    opacity: 1;
+  }
