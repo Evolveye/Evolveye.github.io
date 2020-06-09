@@ -1,6 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 
+import DynamicBackground from "./DynamicBackground.js"
 import EvolveyeAvatar from "./EvolveyeAvatar.js"
 import GithubRepos from "./GithubRepos.js"
 import FavTechs from "./FavTechs.js"
@@ -10,6 +11,7 @@ import "./index.css"
 
 ReactDOM.render(
   <React.StrictMode>
+    <DynamicBackground />
     <div className="fav_techs-wrapper">
       <FavTechs
         JavaScript="because is simple and is everywhere"
