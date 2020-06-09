@@ -5,6 +5,7 @@ import DynamicBackground from "./DynamicBackground.js"
 import EvolveyeAvatar from "./EvolveyeAvatar.js"
 import GithubRepos from "./GithubRepos.js"
 import FavTechs from "./FavTechs.js"
+import Links from "./Links.js"
 
 import "./normalize.css"
 import "./index.css"
@@ -27,6 +28,7 @@ ReactDOM.render(
     </div>
     <GithubRepos />
     <EvolveyeAvatar />
+    <Links />
   </React.StrictMode>,
   document.getElementById( `content` )
 )

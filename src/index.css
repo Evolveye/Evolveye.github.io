@@ -12,16 +12,19 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template:
-    ". .     github" 50px
-    ". space github" / 100px 1fr 1fr
+    ". .     .     github" 50px
+    ". space space github" calc( 100vh - 50px - 200px )
+    ". links links github"
+    / 250px 200px 1fr 1fr
 }
 
 .evolveye_avatar {
+  grid-area: avatar;
   position: fixed;
   left: 50px;
   bottom: 50px;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
 }
 
 .github_repos {
@@ -48,4 +51,23 @@ body {
     color: #55a5;
     width: 450px;
     text-align: center;
+  }
+
+.links {
+  grid-area: links;
+  padding: 20px;
+  min-width: 550px;
+  height: 150px;
+  background-color: #eee;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #0006 inset;
+  color: black;
+}
+  .links-link {
+    border-bottom: 1px dashed transparent;
+    margin: 2px 0;
+  }
+  .links-link:hover {
+    border-bottom-color: #4169e1;
+    color: #4169e1;
   }
