@@ -72,6 +72,9 @@ export default class GithubRepos extends React.Component {
       }
     }
 
-    return <div className="github_repos">{content}</div>
+    return <div className="github_repos">
+      <h2 className="fav_techs-title">Some of my handy projects</h2>
+      {content}
+    </div>
   }
 }

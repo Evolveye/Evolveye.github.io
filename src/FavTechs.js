@@ -40,7 +40,7 @@ export default class FavTechs extends React.Component {
           logo = logoOfRust
           break
 
-        default: break
+        default: continue
       }
 
       techs.push( <li key={prop} className="fav_techs-item" style={{ marginLeft:(i++ * 20) }}>
@@ -48,11 +48,14 @@ export default class FavTechs extends React.Component {
           <img className="fav_techs-tech fav_techs-logo" src={logo} alt={`Logo of ${prop}`}/>
           {subTechs.length ? <div className="fav_techs-sub_techs">{subTechs}</div> : null}
         </div>
-        <h3 className="fav_techs-title">{prop}</h3>
+        <h3 className="fav_techs-tech_name">{prop}</h3>
         {typeof value === "string" ? <p className="fav_techs-description">{value}</p> : null}
       </li> )
     }
 
-    return <ul className="fav_techs">{techs}</ul>
+    return <ul className="fav_techs">
+      <h2 className="fav_techs-title">My favourite programming languages</h2>
+      {techs}
+    </ul>
   }
 }

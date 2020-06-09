@@ -41,7 +41,7 @@
         height: 40px;
         direction: rtl;
       }
-  .fav_techs-title {
+  .fav_techs-tech_name {
     position: absolute;
     left: calc( var( --main_logo-size ) + 20px );
   }

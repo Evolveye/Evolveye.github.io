@@ -11,7 +11,6 @@ import "./index.css"
 ReactDOM.render(
   <React.StrictMode>
     <div className="fav_techs-wrapper">
-      <h2>My favourite programming languages</h2>
       <FavTechs
         JavaScript="because is simple and is everywhere"
         Java="because is simple and employers require it"
