@@ -6,6 +6,9 @@
   align-items: center;
   margin-right: 20px;
 }
+  .links-item:last-child {
+    margin-right: 0;
+  }
   .links-logo {
     min-width: 50px;
     min-height: 50px;

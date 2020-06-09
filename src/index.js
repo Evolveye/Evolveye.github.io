@@ -9,10 +9,14 @@ import Links from "./Links.js"
 
 import "./normalize.css"
 import "./index.css"
+import "./index-1400.css"
+import "./index-1220.css"
+import "./index-950.css"
 
 ReactDOM.render(
   <React.StrictMode>
     <DynamicBackground />
+    <GithubRepos />
     <div className="fav_techs-wrapper">
       <FavTechs
         JavaScript="because is simple and is everywhere"
@@ -26,7 +30,6 @@ ReactDOM.render(
         or they are not giving me much fun.
       </small>
     </div>
-    <GithubRepos />
     <EvolveyeAvatar />
     <Links />
   </React.StrictMode>,

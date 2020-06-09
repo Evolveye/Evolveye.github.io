@@ -1,0 +1,20 @@
+@media only screen and (max-width: 1400px) {
+  #content {
+    grid-template:
+      ". .     github" 50px
+      ". space github" calc( 100vh - 50px - 200px )
+      ". links github"
+      / 150px 1fr 450px
+  }
+
+  .evolveye_avatar {
+    left: 0;
+    width: 150px;
+    height: 150px;
+  }
+
+  .links {
+    padding: 20px 10px;
+    min-width: unset;
+  }
+}

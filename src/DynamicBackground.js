@@ -104,5 +104,5 @@ export default class DynamicBackground extends React.Component {
     requestAnimationFrame( this.draw )
   }
 
-  render = () => <canvas style={{ zIndex:-1 }} ref={this.ref}/>
+  render = () => <canvas style={{ zIndex:-1, position:`fixed` }} ref={this.ref}/>
 }
