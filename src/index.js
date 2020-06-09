@@ -15,12 +15,13 @@ ReactDOM.render(
     <div className="fav_techs-wrapper">
       <FavTechs
         JavaScript="because is simple and is everywhere"
-        Java="because is simple and employers require it"
-        Rust="because is simple and fast"
+        Java="because is awful and popular in job ofers"
+        Rust="because is overthinked and fast"
       />
       <small  className="fav_techs-addition">
-        Other propositions are not a problem,
-        but they are not simple as technologies above,
+        Other technologies are not a problem.
+        All of them are easy for me,
+        but they are not intuitive as technologies above,
         or they are not giving me much fun.
       </small>
     </div>
