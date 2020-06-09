@@ -1,0 +1,60 @@
+@media only screen and (max-width: 950px) {
+  * {
+    font-size: 20px !important;
+    /* max-width: 270px !important; */
+  }
+  #content {
+    grid-template:
+      "github"
+      "space"
+      "links"
+      ".";
+    padding-top: 200px;
+  }
+  .fav_techs-wrapper,
+  .github_repos {
+    margin-bottom: 100px;
+  }
+  .github_repos-section {
+    width: unset;
+  }
+  .github_repos-item {
+    width: unset;
+    margin: 20px;
+  }
+  .github_repos-section-title {
+    margin: 0;
+    text-align: center;
+  }
+
+  .fav_techs-wrapper {
+    padding: 0;
+  }
+  .fav_techs-title {
+    text-align: center;
+  }
+  .fav_techs-addition {
+    margin: 0;
+    width: unset;
+  }
+
+  .evolveye_avatar {
+    top: 25px;
+    left: 40px;
+    margin-bottom: 0;
+  }
+
+  .fav_techs-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .fav_techs-item {
+    width: unset;
+  }
+
+  .links {
+    margin: 0;
+    border-radius: 0;
+    padding: 20px;
+  }
+}
