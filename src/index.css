@@ -1,5 +1,8 @@
 body {
   background-color: #112;
+  background: repeating-linear-gradient(
+    -125deg, #112 0%, rgb(28, 28, 59) 100%
+  );
   margin: 0;
   color: #ddd5c8;
   font-family: sans-serif;
@@ -9,14 +12,14 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template:
-    ".     github" 50px
-    "space github" / auto 500px
+    ". .     github" 50px
+    ". space github" / 100px 1fr 1fr
 }
 
 .evolveye_avatar {
-  position: absolute;
-  left: 100px;
-  bottom: 100px;
+  position: fixed;
+  left: 50px;
+  bottom: 50px;
   width: 200px;
   height: 200px;
 }
@@ -35,6 +38,14 @@ body {
     opacity: 1;
   }
 
-.fav_techs-addition {
-  color: #55a5
+.fav_techs-wrapper {
+  padding: 20px;
+  grid-area: space;
 }
+  .fav_techs-addition {
+    display: block;
+    margin: 20px 0 0 70px;
+    color: #55a5;
+    width: 450px;
+    text-align: center;
+  }

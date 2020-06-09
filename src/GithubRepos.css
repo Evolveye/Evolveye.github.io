@@ -11,7 +11,7 @@
   width: 100%;
   background-size: 300% auto;
   background-position: 0 100%;
-  transition: background-position .5s;
+  transition: background-position .25s;
   cursor: pointer;
 }
 

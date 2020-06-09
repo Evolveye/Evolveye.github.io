@@ -122,7 +122,7 @@ export default class EvolveyeAvatar extends React.Component {
     height={EvolveyeAvatar.originalHeight}
     ref={this.refCallback}
     >
-    <path d={this.state.path} style={{ transition:`${this.state.interval}s` }} fill="#22d"/>
+    <path d={this.state.path} style={{ transition:`${this.state.interval}s` }} fill="#03c"/>
 
     <ellipse cx={0} cy={0} rx={0} ry={0} fill="#fff"/>
     <ellipse cx={0} cy={0} rx={0} ry={0} fill="#000"/>
