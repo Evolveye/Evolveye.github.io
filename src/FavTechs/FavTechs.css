@@ -1,0 +1,50 @@
+.fav_techs-item {
+  position: relative;
+  display: flex;
+  width: 450px;
+  background: repeating-linear-gradient(
+    90deg, #0002 0%, rgba(52, 52, 122, 0.333) 50%, #0002 100%
+  );
+  background-size: 300% auto;
+  margin: 10px;
+  padding: 10px;
+
+  --main_logo-size: 70px;
+}
+  .fav_techs-logos {
+    width: min-content;
+  }
+    .fav_techs-logo {
+      background-color: white;
+      border-radius: 50%;
+      padding: 5px;
+    }
+    .fav_techs-tech {
+      display: block;
+      width: var( --main_logo-size );
+      height: var( --main_logo-size );
+      margin: 0 auto;
+    }
+    .fav_techs-sub_techs {
+      position: absolute;
+      bottom: 20px;
+      left: var( --main_logo-size );
+      display: flex;
+      flex-direction: row-reverse;
+      padding: 0;
+      list-style: none;
+      z-index: -1;
+    }
+      .fav_techs-sub_tech {
+        margin: -10px;
+        width: 40px;
+        height: 40px;
+        direction: rtl;
+      }
+  .fav_techs-title {
+    position: absolute;
+    left: calc( var( --main_logo-size ) + 20px );
+  }
+  .fav_techs-description {
+    margin-top: 30px;
+  }
