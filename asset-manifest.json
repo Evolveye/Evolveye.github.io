@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.257ecac0.chunk.css",
+    "main.js": "/static/js/main.02a04f57.chunk.js",
+    "main.js.map": "/static/js/main.02a04f57.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.118059e6.js",
+    "runtime-main.js.map": "/static/js/runtime-main.118059e6.js.map",
+    "static/js/2.3f6f6d1b.chunk.js": "/static/js/2.3f6f6d1b.chunk.js",
+    "static/js/2.3f6f6d1b.chunk.js.map": "/static/js/2.3f6f6d1b.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.0283e5a837c9a4e9581d56fbb95be05e.js": "/precache-manifest.0283e5a837c9a4e9581d56fbb95be05e.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.257ecac0.chunk.css.map": "/static/css/main.257ecac0.chunk.css.map",
+    "static/js/2.3f6f6d1b.chunk.js.LICENSE.txt": "/static/js/2.3f6f6d1b.chunk.js.LICENSE.txt",
+    "static/media/javascript.png": "/static/media/javascript.0e4fdce8.png",
+    "static/media/kotlin.png": "/static/media/kotlin.e8c4671b.png",
+    "static/media/mail.png": "/static/media/mail.647bb273.png",
+    "static/media/node.js.png": "/static/media/node.js.4ffafe9b.png",
+    "static/media/rust.png": "/static/media/rust.7bb33c16.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.118059e6.js",
+    "static/js/2.3f6f6d1b.chunk.js",
+    "static/css/main.257ecac0.chunk.css",
+    "static/js/main.02a04f57.chunk.js"
+  ]
+}
