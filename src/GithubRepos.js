@@ -55,6 +55,7 @@ export default class GithubRepos extends React.Component {
 
   render() {
     const { loadedRepos } = this.state
+    const sections = {}
     const content = []
     const iteratorLimit = (this.props.loaders ?? 3) > loadedRepos.length
       ? (this.props.loaders ?? 3)
@@ -63,17 +64,26 @@ export default class GithubRepos extends React.Component {
     for (let i = 1; i <= iteratorLimit; i++) {
       if (loadedRepos.length < i) content.push( <LoadingBox key={i} title /> )
       else {
-        const { title, description } = loadedRepos[ i - 1 ]
+        const { title, description, section } = loadedRepos[ i - 1 ]
 
-        content.push( <div className="github_repos-item" key={i}>
-          <h3 className="github_repos-title">{title}</h3>
-          <p className="github_repos-description">{description}</p>
+        if (!(section in sections)) sections[ section ] = []
+
+        sections[ section ].push( <div className="github_repos-item" key={i}>
+          <h4 className="github_repos-item-title">{title}</h4>
+          <p className="github_repos-item-description">{description}</p>
         </div> )
       }
     }
 
+    for (const section in sections) {
+      content.push( <div key={section} className="github_repos-section">
+        <h3 className="github_repos-section-title">{section}</h3>
+        {sections[ section ]}
+      </div> )
+    }
+
     return <div className="github_repos">
-      <h2 className="fav_techs-title">Some of my handy projects</h2>
+      <h2 className="github_repos-title">Some of my handy projects</h2>
       {content}
     </div>
   }
