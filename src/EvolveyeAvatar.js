@@ -67,14 +67,18 @@ export default class EvolveyeAvatar extends React.Component {
       interval: 1,
       animationInterval: null,
     }
+
+    this.ref = React.createRef()
   }
 
-  refCallback = async ref => {
-    const path = ref.querySelector( `path` )
-    const white = ref.querySelector( `ellipse[fill="#fff"]` )
-    const pupil = ref.querySelector( `ellipse[fill="#000"]` )
+  async componentDidMount() {
+    const svg = this.ref.current
 
-    const svgBoundings = ref.getBoundingClientRect()
+    const path = svg.querySelector( `path` )
+    const white = svg.querySelector( `ellipse[fill="#fff"]` )
+    const pupil = svg.querySelector( `ellipse[fill="#000"]` )
+
+    const svgBoundings = svg.getBoundingClientRect()
     const factor = svgBoundings.width / EvolveyeAvatar.originalWidth
 
     const pupilCX = 298 * factor
@@ -120,7 +124,7 @@ export default class EvolveyeAvatar extends React.Component {
     className="evolveye_avatar"
     width={EvolveyeAvatar.originalWidth}
     height={EvolveyeAvatar.originalHeight}
-    ref={this.refCallback}
+    ref={this.ref}
     >
     <path d={this.state.path} style={{ transition:`${this.state.interval}s` }} fill="#03c"/>
 
