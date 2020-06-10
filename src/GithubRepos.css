@@ -13,6 +13,7 @@
       margin: 30px 0 20px -20px;
     }
     .github_repos-item {
+      display: block;
       padding: 20px;
       background: repeating-linear-gradient(
         90deg, #0002 0%, rgba(52, 52, 122, 0.333) 50%, #0002 100%

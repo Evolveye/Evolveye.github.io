@@ -1,37 +1,22 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
-import DynamicBackground from "./DynamicBackground.js"
-import EvolveyeAvatar from "./EvolveyeAvatar.js"
+import Homepage from "./Homepage.js"
 import GithubRepos from "./GithubRepos.js"
-import FavTechs from "./FavTechs.js"
-import Links from "./Links.js"
 
 import "./normalize.css"
 import "./index.css"
-import "./index-1400.css"
-import "./index-1220.css"
-import "./index-950.css"
 
 ReactDOM.render(
   <React.StrictMode>
-    <DynamicBackground />
-    <GithubRepos />
-    <div className="fav_techs-wrapper">
-      <FavTechs
-        JavaScript="because is simple and is everywhere"
-        Java="because is awful and popular in job ofers"
-        Rust="because is overthinked and fast"
-      />
-      <small  className="fav_techs-addition">
-        Other technologies are not a problem.
-        All of them are easy for me,
-        but they are not intuitive as technologies above,
-        or they are not giving me much fun.
-      </small>
-    </div>
-    <EvolveyeAvatar />
-    <Links />
+    <Router>
+      <GithubRepos />
+      <Switch>
+        <Route path="/" exact component={Homepage}/>
+        {/* <Route path="/projects/:section/:projectName" component={Project}/> */}
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById( `content` )
 )

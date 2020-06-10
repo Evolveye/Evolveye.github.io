@@ -14,19 +14,12 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template:
-    ". .     github" 50px
-    ". space github" calc( 100vh - 50px - 200px )
-    ". links github"
+    "page page github"
     / 250px 1fr 1fr
 }
 
-.evolveye_avatar {
-  grid-area: avatar;
-  position: absolute;
-  left: 50px;
-  bottom: 50px;
-  width: 150px;
-  height: 150px;
+#page {
+  grid-area: page
 }
 
 .github_repos {
@@ -43,33 +36,51 @@ body {
     opacity: 1;
   }
 
-.fav_techs-wrapper {
-  padding: 20px;
-  grid-area: space;
+@media only screen and (max-width: 1400px) {
+  #content {
+    grid-template:
+      "page github"
+      / 1fr 450px
+  }
 }
-  .fav_techs-addition {
-    display: block;
-    margin: 20px 0 0 70px;
-    color: #55a5;
-    width: 450px;
-    text-align: center;
+
+@media only screen and (max-width: 1220px) {
+  #content {
+    min-height: 100vh;
+    display: grid;
+    grid-template:
+      "page github"
+      / 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  * {
+    font-size: 20px !important;
   }
 
-.links {
-  grid-area: links;
-  padding: 20px;
-  min-width: 550px;
-  height: 150px;
-  background-color: #eee;
-  border-radius: 20px;
-  box-shadow: 0 0 10px #0006 inset;
-  color: black;
+  #content {
+    grid-template:
+      "github"
+      "page";
+    padding-top: 200px;
+  }
+
+  .github_repos {
+    margin-bottom: 100px;
+  }
+
+  .github_repos-section {
+    width: unset;
+  }
+
+  .github_repos-item {
+    width: unset;
+    margin: 20px;
+  }
+
+  .github_repos-section-title {
+    margin: 0;
+    text-align: center;
+  }
 }
-  .links-link {
-    border-bottom: 1px dashed transparent;
-    margin: 2px 0;
-  }
-  .links-link:hover {
-    border-bottom-color: #4169e1;
-    color: #4169e1;
-  }

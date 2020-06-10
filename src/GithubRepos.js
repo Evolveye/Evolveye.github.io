@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 import LoadingBox from "./LoadingBox.js"
 
@@ -68,10 +69,19 @@ export default class GithubRepos extends React.Component {
 
         if (!(section in sections)) sections[ section ] = []
 
-        sections[ section ].push( <div className="github_repos-item" key={i}>
-          <h4 className="github_repos-item-title">{title}</h4>
-          <p className="github_repos-item-description">{description}</p>
-        </div> )
+        const sectionParam = section.replace( / /g, `_`).toLowerCase()
+        const titleParam   =   title.replace( / /g, `_`).toLowerCase()
+
+        sections[ section ].push(
+          <Link
+            key={i}
+            className="github_repos-item"
+            to={`/projects/${sectionParam}/${titleParam}`}
+            >
+            <h4 className="github_repos-item-title">{title}</h4>
+            <p className="github_repos-item-description">{description}</p>
+          </Link>
+        )
       }
     }
 
