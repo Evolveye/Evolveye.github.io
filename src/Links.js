@@ -11,9 +11,7 @@ export default class Links extends React.Component {
     super( props )
 
     this.state = {}
-  }
-  render = () => {
-    const data = [
+    this.data = [
       { name: `GitHub`,
         logo: logoOfGithub,
         links: [
@@ -33,9 +31,15 @@ export default class Links extends React.Component {
       },
     ]
 
+    for (const { reversedMail } of this.data) {
+      if (reversedMail && !(reversedMail in this.state)) this.state[ reversedMail ] = false
+    }
+
+  }
+  render = () => {
     const items = []
 
-    for (const { name, logo, links, reversedMail } of data) {
+    for (const { name, logo, links, reversedMail } of this.data) {
       const linksItems = []
 
       if (links) {
@@ -48,8 +52,6 @@ export default class Links extends React.Component {
           <div className="links-wrapper">{linksItems}</div>
         </div> )
       } else if (reversedMail) {
-        if (!(reversedMail in this.state)) this.setState( { [reversedMail]:false } )
-
         const showMail = () => this.setState( { [reversedMail]:true } )
 
         items.push( <div key={name} className="links-item">
