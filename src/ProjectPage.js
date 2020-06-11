@@ -18,7 +18,7 @@ export default class ProjectPage extends React.Component {
     const { href } = window.location
 
     if (href in projects) {
-      projects[ href ].run()
+      projects[ href ].mount()
     } else {
       const script = document.createElement( `script` )
 
