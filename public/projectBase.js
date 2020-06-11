@@ -15,6 +15,19 @@ export default class ProjectBase {
   }
 
   constructor() {
+    let wrapper = document.querySelector( `#project_wrapper` )
+
+    if (!wrapper) {
+      const div = document.createElement( `div` )
+
+      div.id = `project_wrapper`
+
+      document.body.appendChild( div )
+
+      wrapper = document.querySelector( `#project_wrapper` )
+    }
+
+
     this.wrapper = document.querySelector( `#project_wrapper` )
     this.eventListeners
 
