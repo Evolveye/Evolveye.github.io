@@ -18,7 +18,11 @@ export default class ProjectPage extends React.Component {
     const { href } = window.location
 
     if (href in projects) {
-      projects[ href ].mount()
+      try {
+        projects[ href ].mount()
+      } catch(err) {
+        console.log( err )
+      }
     } else {
       const script = document.createElement( `script` )
 
