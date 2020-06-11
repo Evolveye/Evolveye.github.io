@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 import Homepage from "./Homepage.js"
 import GithubRepos from "./GithubRepos.js"
+import ProjectPage from "./ProjectPage.js"
 
 import "./normalize.css"
 import "./index.css"
@@ -14,7 +15,7 @@ ReactDOM.render(
       <GithubRepos />
       <Switch>
         <Route path="/" exact component={Homepage}/>
-        {/* <Route path="/projects/:section/:projectName" component={Project}/> */}
+        <Route path="/projects" component={ProjectPage}/>
       </Switch>
     </Router>
   </React.StrictMode>,

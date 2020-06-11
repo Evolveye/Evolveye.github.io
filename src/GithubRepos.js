@@ -35,13 +35,16 @@ export default class GithubRepos extends React.Component {
     /** @type {string[]} */
     const websiteConfigRawAddresses = (await this.getRepositories( username ))
       .map( repo => repo.name )
-      .map( reponame => `https://raw.githubusercontent.com/${username}/${reponame}/master/website_config.json` )
+      .map( reponame => `https://raw.githubusercontent.com/${username}/${reponame}/master` )
 
     console.groupCollapsed( `Responses from website_config.json fetcher (404 is not an error)` )
 
     /** @type {WebsiteConfig[]} */
     const fetchedConfigs = (await Promise.all( websiteConfigRawAddresses.map(
-      rawAddress => fetch( rawAddress ).then( res => res.ok ? res.json() : false )
+      rawAddress => fetch( `${rawAddress}/website_config.json` )
+        .then( res => { if (!res.ok) throw new Error(); else return res.json() } )
+        .then( arr => arr.map( obj => ({ ...obj, src:`${rawAddress}/${obj.src}` }) ) )
+        .catch( () => {} )
     ) ) ).filter( config => config ).flat()
 
     console.groupEnd()
@@ -65,18 +68,15 @@ export default class GithubRepos extends React.Component {
     for (let i = 1; i <= iteratorLimit; i++) {
       if (loadedRepos.length < i) content.push( <LoadingBox key={i} title /> )
       else {
-        const { title, description, section } = loadedRepos[ i - 1 ]
+        const { title, description, section, src } = loadedRepos[ i - 1 ]
 
         if (!(section in sections)) sections[ section ] = []
-
-        const sectionParam = section.replace( / /g, `_`).toLowerCase()
-        const titleParam   =   title.replace( / /g, `_`).toLowerCase()
 
         sections[ section ].push(
           <Link
             key={i}
             className="github_repos-item"
-            to={`/projects/${sectionParam}/${titleParam}`}
+            to={`/projects?src=${src}`}
             >
             <h4 className="github_repos-item-title">{title}</h4>
             <p className="github_repos-item-description">{description}</p>

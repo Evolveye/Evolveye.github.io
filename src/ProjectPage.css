@@ -1,0 +1,26 @@
+.project_page-homepage_link {
+  position: relative;
+  display: block;
+  padding: 10px 20px;
+  margin: 10px;
+  width: max-content;
+  height: 40px;
+  background: repeating-linear-gradient(
+    90deg, #2f72cabb 0%, #3358b1bb 50%, #2f72cabb 100%
+  );
+  background-size: 300% auto;
+  background-position: 0 100%;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px 2px #0003;
+  font-family: consolas;
+  font-weight: bold;
+  transition: background-position .25s;
+}
+
+.project_page-homepage_link:hover {
+  background-position: -100% 0%;
+}
+
+.project_page-homepage_link:active {
+  box-shadow: 0 2px 5px 2px #0003 inset;
+}

@@ -1,4 +1,4 @@
-#page {
+.homepage {
   display: grid;
   grid-template:
     ". ." 50px
@@ -47,7 +47,7 @@
   }
 
 @media only screen and (max-width: 1400px) {
-  #page {
+  .homepage {
     grid-template-columns: 150px 1fr;
   }
 
@@ -64,7 +64,7 @@
 }
 
 @media only screen and (max-width: 1220px) {
-  #page {
+  .homepage {
     grid-template:
       ". ." 50px
       "favTechs favTechs"
@@ -86,7 +86,7 @@
 }
 
 @media only screen and (max-width: 1000px) {
-  #page {
+  .homepage {
     grid-template:
       "favTechs"
       "links"

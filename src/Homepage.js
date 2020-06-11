@@ -7,7 +7,7 @@ import Links from "./Links.js"
 
 import "./Homepage.css"
 
-export default () => <div id="page">
+export default () => <div className="homepage">
   <DynamicBackground />
   <div className="fav_techs-wrapper">
     <FavTechs
