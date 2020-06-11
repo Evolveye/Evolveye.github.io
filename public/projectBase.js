@@ -7,10 +7,8 @@ export default class ProjectBase {
       window.importedProjectInstances[ window.location.href ] = instance
       instance.mount()
     } catch(err) {
-      console.log( err )
+      console.error( new Error( err ) )
     }
-
-    console.log( window.importedProjectInstances )
   }
 
   constructor() {
