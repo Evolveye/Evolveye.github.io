@@ -35,7 +35,7 @@ export default class GithubRepos extends React.Component {
     /** @type {string[]} */
     const websiteConfigRawAddresses = (await this.getRepositories( username ))
       .map( repo => repo.name )
-      .map( reponame => `https://raw.githubusercontent.com/${username}/${reponame}/master` )
+      .map( reponame => `https://${username}.github.io/${reponame}` )
 
     console.groupCollapsed( `Responses from website_config.json fetcher (404 is not an error)` )
 

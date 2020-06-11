@@ -11,22 +11,23 @@ export default class ProjectPage extends React.Component {
     this.ref = React.createRef()
   }
 
-  async componentDidMount() {
-    this.src = `https://evolveye.github.io/random-codes/archive-useful/test2-evolveye.github.io/test.js`
-    console.log( await React.lazy( () => import( `${this.src}` ) ) )
-    // console.log( await React.lazy( () => import( `${"./module.js"}` ) ) )
-    // console.log( `./module.js` )
-    // const script = await fetch( this.src, { mode:`cors` } ).then( data => data.text() )
-    // const scriptTag = document.createElement( `script` )
+  componentDidMount() {
+    if (!window.importedProjectInstances) window.importedProjectInstances = {}
 
-    // scriptTag.textContent = `window.projectPageModule = (function() {
-    //   ${script};if(this.main===undefined)this.main=null;if(this.clear===undefined)this.clear=null;return{main,clear};
-    // })()`
+    const projects = window.importedProjectInstances
+    const { href } = window.location
 
-    // this.ref.current.appendChild( scriptTag )
+    if (href in projects) {
+      projects[ href ].run()
+    } else {
+      const script = document.createElement( `script` )
 
-    // if (typeof window.projectPageModule !== `object`) return
-    // if (typeof window.projectPageModule.main === `function`) window.projectPageModule.main()
+      script.type = `module`
+      script.async = true
+      script.src = this.src
+
+      this.ref.current.appendChild( script )
+    }
   }
 
   render() {
