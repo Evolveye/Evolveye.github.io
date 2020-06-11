@@ -2,7 +2,13 @@ export default class ProjectBase {
   #events = []
 
   static run( instance ) {
-    window.importedProjectInstances[ window.location.href ] = instance
+    try {
+      window.importedProjectInstances[ window.location.href ] = instance
+    } catch(err) {
+      console.log( err )
+    }
+
+    instance.mount()
   }
 
   constructor() {
