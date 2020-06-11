@@ -30,6 +30,13 @@ export default class ProjectPage extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    const projects = window.importedProjectInstances
+    const { href } = window.location
+
+    if (href in projects) projects[ href ].unmount()
+  }
+
   render() {
 
     return <div className="project_page" ref={this.ref}>
