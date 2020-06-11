@@ -1,5 +1,8 @@
+#project_wrapper {
+  height: 100%;
+}
 .project_page-homepage_link {
-  position: relative;
+  position: absolute;
   display: block;
   padding: 10px 20px;
   margin: 10px;
