@@ -12,7 +12,7 @@ export default class ProjectPage extends React.Component {
   }
 
   async componentDidMount() {
-    // this.src = `https://evolveye.github.io/random-codes/archive-useful/test2-evolveye.github.io/test.js`
+    this.src = `https://evolveye.github.io/random-codes/archive-useful/test2-evolveye.github.io/test.js`
     console.log( await React.lazy( () => import( `${this.src}` ) ) )
     // console.log( await React.lazy( () => import( `${"./module.js"}` ) ) )
     // console.log( `./module.js` )
