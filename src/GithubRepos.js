@@ -43,7 +43,9 @@ export default class GithubRepos extends React.Component {
     const fetchedConfigs = (await Promise.all( websiteConfigRawAddresses.map(
       rawAddress => fetch( `${rawAddress}/website_config.json` )
         .then( res => { if (!res.ok) throw new Error(); else return res.json() } )
-        .then( arr => arr.map( obj => ({ ...obj, src:`${rawAddress}/${obj.src}` }) ) )
+        .then( arr => arr.map( obj => obj.type === `module`
+          ? { ...obj, src:`${rawAddress}/${obj.src}` }
+          : obj ) )
         .catch( () => {} )
     ) ) ).filter( config => config ).flat()
 
@@ -68,11 +70,12 @@ export default class GithubRepos extends React.Component {
     for (let i = 1; i <= iteratorLimit; i++) {
       if (loadedRepos.length < i) content.push( <LoadingBox key={i} title /> )
       else {
-        const { title, description, section, src } = loadedRepos[ i - 1 ]
+        const { title, description, section, src, type } = loadedRepos[ i - 1 ]
+
+        console.log( src )
 
         if (!(section in sections)) sections[ section ] = []
-
-        sections[ section ].push(
+        if (type === `module`) sections[ section ].push(
           <Link
             key={i}
             className="github_repos-item"
@@ -81,6 +84,16 @@ export default class GithubRepos extends React.Component {
             <h4 className="github_repos-item-title">{title}</h4>
             <p className="github_repos-item-description">{description}</p>
           </Link>
+        )
+        else if (type === `external`) sections[ section ].push(
+          <a
+            key={i}
+            className="github_repos-item"
+            href={src}
+            >
+            <h4 className="github_repos-item-title">{title}</h4>
+            <p className="github_repos-item-description">{description}</p>
+          </a>
         )
       }
     }
