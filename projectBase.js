@@ -8,7 +8,7 @@ export default class ProjectBase {
     }
 
     try {
-      window.importedProjectInstances[ window.location.href ] = projectClass
+      window.importedProjectClasses[ window.location.href ] = projectClass
       window.importedProjectInstance = new projectClass()
     } catch(err) {
       console.error( new Error( err ) )
