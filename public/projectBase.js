@@ -27,7 +27,7 @@ export default class ProjectBase {
       controls.className = `project_page-controls`
 
       document.body.appendChild( description )
-      document.body.appendChild( dcontrolsiv )
+      document.body.appendChild( controls )
       document.body.appendChild( div )
 
       wrapper = document.querySelector( `#project_wrapper` )
