@@ -19,16 +19,24 @@ export default class ProjectBase {
 
     if (!wrapper) {
       const div = document.createElement( `div` )
+      const description = document.createElement( `p` )
+      const controls = document.createElement( `div` )
 
       div.id = `project_wrapper`
+      didescriptionv.className = `project_page-description`
+      controls.className = `project_page-controls`
 
+      document.body.appendChild( description )
+      document.body.appendChild( dcontrolsiv )
       document.body.appendChild( div )
 
       wrapper = document.querySelector( `#project_wrapper` )
     }
 
 
-    this.wrapper = document.querySelector( `#project_wrapper` )
+    this.wrapper = wrapper
+    this.description = document.querySelector( `.project_page-description` )
+    this.controls = document.querySelector( `.project_page-controls` )
     this.eventListeners
 
     /** @type {CanvasRenderingContext2D} */
@@ -77,7 +85,19 @@ export default class ProjectBase {
       input[ prop ] = typeof p == `function` ? input => p( input ) : p
     }
 
-    this.wrapper.appendChild( input )
+    if (type === `button`) {
+      input.value = label
+
+      this.controls.appendChild( input )
+    } else {
+      const l = document.createElement( `label` )
+
+      l.textContent = label
+      l.appendChild( input )
+
+      this.controls.appendChild( l )
+    }
+
 
     return input
   }
