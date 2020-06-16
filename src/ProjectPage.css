@@ -1,9 +1,10 @@
 .project_page {
+  grid-area: page;
   display: grid;
   grid-template:
-    "back  desc"
-    "ctrls ctrls"
-    "proj  proj"
+    "back  desc" max-content
+    "ctrls ctrls" max-content
+    "proj  proj" 1fr
     / max-content 1fr;
 }
 .project_page-homepage_link {
@@ -35,10 +36,19 @@
 
 .project_page-description {
   grid-area: desc;
+  display: flex;
+  align-items: center;
 }
 .project_page-controls {
   grid-area: ctrls;
+  padding: 10px 0;
 }
+  .project_page-controls > * {
+    margin-left: 25px;
+  }
+  .project_page-controls > label > input {
+    margin-left: 5px;
+  }
 #project_wrapper {
   grid-area: proj;
 }
