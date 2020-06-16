@@ -79,11 +79,7 @@ export default class ProjectBase {
 
     input.type = type
 
-    for (const prop in props) {
-      const p = props[ prop ]
-
-      input[ prop ] = typeof p == `function` ? input => p( input ) : p
-    }
+    for (const prop in props) input[ prop ] = props[ prop ]
 
     if (type === `button`) {
       input.value = label
