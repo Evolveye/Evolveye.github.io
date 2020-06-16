@@ -86,15 +86,15 @@ export default class GithubRepos extends React.Component {
     }
 
     for (const section in sections) {
-      content.push( <div key={section} className="github_repos-section">
+      content.push( <section key={section} className="github_repos-section">
         <h3 className="github_repos-section-title">{section}</h3>
         {sections[ section ]}
-      </div> )
+      </section> )
     }
 
-    return <div className="github_repos">
+    return <article className="github_repos">
       <h2 className="github_repos-title">Some of my handy projects</h2>
       {content}
-    </div>
+    </article>
   }
 }

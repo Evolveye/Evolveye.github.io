@@ -7,9 +7,9 @@ import Links from "./Links.js"
 
 import "./Homepage.css"
 
-export default () => <div className="homepage">
+export default () => <main className="homepage">
   <DynamicBackground />
-  <div className="fav_techs-wrapper">
+  <article className="fav_techs-wrapper">
     <FavTechs
       JavaScript="because is simple and is everywhere"
       Java="because is awful and popular in job ofers"
@@ -21,7 +21,7 @@ export default () => <div className="homepage">
       but they are not intuitive as technologies above,
       or they are not giving me much fun.
     </small>
-  </div>
+  </article>
   <EvolveyeAvatar />
   <Links />
-</div>
+</main>

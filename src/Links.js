@@ -71,6 +71,6 @@ export default class Links extends React.Component {
 
     }
 
-    return <div className="links">{items}</div>
+    return <article className="links">{items}</article>
   }
 }
