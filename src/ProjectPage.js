@@ -7,7 +7,7 @@ export default class ProjectPage extends React.Component {
   constructor( props ) {
     super( props )
 
-    this.src = this.props.location.search.split( `=` )[ 1 ]
+    this.src = window.location.hash.match( /project\/(.*)/ )[ 1 ]
     this.ref = React.createRef()
   }
 

@@ -76,7 +76,7 @@ export default class GithubRepos extends React.Component {
           <Link
             key={i}
             className="github_repos-item"
-            to={`/projects?src=${src}`}
+            to={`/project/${src}`}
             >
             <h4 className="github_repos-item-title">{title}</h4>
             <p className="github_repos-item-description">{description}</p>

@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { HashRouter as Router, Switch, Route } from "react-router-dom"
 
 import Homepage from "./Homepage.js"
 import GithubRepos from "./GithubRepos.js"
@@ -14,8 +14,8 @@ ReactDOM.render(
     <Router>
       <GithubRepos />
       <Switch>
-        <Route path="/" exact component={Homepage}/>
-        <Route path="/projects" component={ProjectPage}/>
+        <Route exact path="/" component={Homepage}/>
+        <Route apath="/project/:src" component={ProjectPage}/>
       </Switch>
     </Router>
   </React.StrictMode>,
