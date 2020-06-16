@@ -44,7 +44,7 @@ export default class Links extends React.Component {
 
       if (links) {
         for (const { text, link } of links) {
-          linksItems.push(  <a key={link} className="links-link" href={link}>{text}</a> )
+          linksItems.push( <a key={link} className="links-link" href={link}>{text}</a> )
         }
 
         items.push( <div key={name} className="links-item">

@@ -7,11 +7,12 @@ export default class ProjectPage extends React.Component {
   constructor( props ) {
     super( props )
 
-    this.src = window.location.hash.match( /project\/(.*)/ )[ 1 ]
+    // this.props.history.push()
+
     this.ref = React.createRef()
   }
 
-  componentDidMount() {
+  loadProject() {
     if (!(`importedProjectClasses` in window)) {
       window.importedProjectClasses = {}
       window.importedProjectInstance = null
@@ -20,6 +21,7 @@ export default class ProjectPage extends React.Component {
     const classes = window.importedProjectClasses
     const { href } = window.location
 
+    if (window.importedProjectInstance) window.importedProjectInstance.destroy()
     if (href in classes) {
       try {
         window.importedProjectInstance = new classes[ href ]()
@@ -27,14 +29,23 @@ export default class ProjectPage extends React.Component {
         console.error( new Error( err ) )
       }
     } else {
+      const src = window.location.hash.match( /project\/(.*)/ )[ 1 ]
       const script = document.createElement( `script` )
 
       script.type = `module`
       script.async = true
-      script.src = this.src
+      script.src = src
 
       this.ref.current.appendChild( script )
     }
+  }
+
+  componentDidUpdate() {
+    this.loadProject()
+  }
+
+  componentDidMount() {
+    this.loadProject()
   }
 
   componentWillUnmount() {
