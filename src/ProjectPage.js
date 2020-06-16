@@ -47,6 +47,8 @@ export default class ProjectPage extends React.Component {
       <Link className="project_page-homepage_link" to="/">
         &lt;- back to homepage -
       </Link>
+      <p className="project_page-description" />
+      <div className="project_page-controls" />
       <div id="project_wrapper" />
     </div>
   }

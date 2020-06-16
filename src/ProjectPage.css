@@ -1,8 +1,13 @@
-#project_wrapper {
-  height: 100%;
+.project_page {
+  display: grid;
+  grid-template:
+    "back  desc"
+    "ctrls ctrls"
+    "proj  proj"
+    / max-content 1fr;
 }
 .project_page-homepage_link {
-  position: absolute;
+  grid-area: back;
   display: block;
   padding: 10px 20px;
   margin: 10px;
@@ -26,4 +31,14 @@
 
 .project_page-homepage_link:active {
   box-shadow: 0 2px 5px 2px #0003 inset;
+}
+
+.project_page-description {
+  grid-area: desc;
+}
+.project_page-controls {
+  grid-area: ctrls;
+}
+#project_wrapper {
+  grid-area: proj;
 }
