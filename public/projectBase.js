@@ -1,14 +1,15 @@
 export default class ProjectBase {
   #events = []
 
-  static run( instance ) {
-    if (!(`importedProjectInstances` in window)) {
-      window.importedProjectInstances = {}
+  static set projectClass( projectClass ) {
+    if (!(`importedProjectClasses` in window)) {
+      window.importedProjectClasses = {}
+      window.importedProjectInstance = null
     }
 
     try {
-      window.importedProjectInstances[ window.location.href ] = instance
-      instance.mount()
+      window.importedProjectInstances[ window.location.href ] = projectClass
+      window.importedProjectInstance = new projectClass()
     } catch(err) {
       console.error( new Error( err ) )
     }
@@ -32,7 +33,6 @@ export default class ProjectBase {
 
       wrapper = document.querySelector( `#project_wrapper` )
     }
-
 
     this.wrapper = wrapper
     this.description = document.querySelector( `.project_page-description` )
@@ -101,8 +101,10 @@ export default class ProjectBase {
     this.description.innerHTML = description
   }
 
-  unmount() {
+  destroy() {
     this.removeEvents()
+    this.description.innerHTML = ``
+    this.controls.innerHTML = ``
+    this.wrapper.innerHTML = ``
   }
-  mount() {}
 }

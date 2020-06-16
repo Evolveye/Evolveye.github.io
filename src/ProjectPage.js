@@ -12,14 +12,17 @@ export default class ProjectPage extends React.Component {
   }
 
   componentDidMount() {
-    if (!window.importedProjectInstances) window.importedProjectInstances = {}
+    if (!(`importedProjectClasses` in window)) {
+      window.importedProjectClasses = {}
+      window.importedProjectInstance = null
+    }
 
-    const projects = window.importedProjectInstances
+    const classes = window.importedProjectClasses
     const { href } = window.location
 
-    if (href in projects) {
+    if (href in classes) {
       try {
-        projects[ href ].mount()
+        window.importedProjectInstance = new classes[ href ]()
       } catch(err) {
         console.error( new Error( err ) )
       }
@@ -35,14 +38,10 @@ export default class ProjectPage extends React.Component {
   }
 
   componentWillUnmount() {
-    const projects = window.importedProjectInstances
-    const { href } = window.location
-
-    if (href in projects) projects[ href ].unmount()
+    if (window.importedProjectInstance) window.importedProjectInstance.destroy()
   }
 
   render() {
-
     return <div className="project_page" ref={this.ref}>
       <Link className="project_page-homepage_link" to="/">
         &lt;- back to homepage -
