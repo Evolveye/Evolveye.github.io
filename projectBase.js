@@ -23,7 +23,7 @@ export default class ProjectBase {
       const controls = document.createElement( `div` )
 
       div.id = `project_wrapper`
-      didescriptionv.className = `project_page-description`
+      description.className = `project_page-description`
       controls.className = `project_page-controls`
 
       document.body.appendChild( description )
