@@ -97,6 +97,9 @@ export default class ProjectBase {
 
     return input
   }
+  setDescription( description ) {
+    this.description.innerHTML = description
+  }
 
   unmount() {
     this.removeEvents()
