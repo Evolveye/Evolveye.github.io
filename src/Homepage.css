@@ -85,7 +85,7 @@
   }
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 950px) {
   .homepage {
     grid-template:
       "favTechs"

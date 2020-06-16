@@ -11,7 +11,7 @@ export default class DynamicBackground extends React.Component {
       circles: [],
       padding: 10,
       colors: [
-        `#1125`
+        `#aaf2`
         // `#f33`,
         // `#5a5`,
         // `#55f`,
@@ -66,7 +66,7 @@ export default class DynamicBackground extends React.Component {
       circles.push( new MovingCircle( random( padding, width - padding ), random( padding, height - padding ), {
         color: colors[ random( 0, colors.length - 1 ) ],
         speed: random( 20, 50 ),
-        size: 5
+        size: random( 3, 6 )
       } ) )
   }
 
@@ -87,7 +87,7 @@ export default class DynamicBackground extends React.Component {
       ctx.fill()
     }
 
-    ctx.lineWidth = 7
+    ctx.lineWidth = 6
 
     for (const circle of circles) {
       const { x, y, color, size } = circle
