@@ -41,14 +41,12 @@ export default class ProjectPage extends React.Component {
     if (window.importedProjectInstance) window.importedProjectInstance.destroy()
   }
 
-  render() {
-    return <div className="project_page" ref={this.ref}>
-      <Link className="project_page-homepage_link" to="/">
-        &lt;- back to homepage -
-      </Link>
-      <p className="project_page-description" />
-      <div className="project_page-controls" />
-      <div id="project_wrapper" />
-    </div>
-  }
+  render = () => <div className="project_page" ref={this.ref}>
+    <Link className="project_page-homepage_link" to="/">
+      &lt;- back to homepage -
+    </Link>
+    <p className="project_page-description" />
+    <div className="project_page-controls" />
+    <div id="project_wrapper" />
+  </div>
 }
