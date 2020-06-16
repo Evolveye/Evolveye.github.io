@@ -12,7 +12,7 @@ export default () => <main className="homepage">
   <article className="fav_techs-wrapper">
     <FavTechs
       JavaScript="because is simple and is everywhere"
-      Java="because is awful and popular in job ofers"
+      Java="because is popular and is create with specific logic"
       Rust="because is overthinked and fast"
     />
     <small  className="fav_techs-addition">
