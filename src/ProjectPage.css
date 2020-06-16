@@ -50,5 +50,6 @@
     margin-left: 5px;
   }
 #project_wrapper {
+  position: relative;
   grid-area: proj;
 }
