@@ -6,12 +6,12 @@ body {
   margin: 0;
   color: #ddd5c8;
   font-family: sans-serif;
-  overflow-x: hidden
+  overflow: hidden
 }
 
 #content {
   position: relative;
-  min-height: 100vh;
+  /* height: 100vh; */
   display: grid;
   grid-template:
     "page page github"
@@ -23,7 +23,9 @@ body {
 }
 
 .github_repos {
-  grid-area: github
+  grid-area: github;
+  padding: 0 10px 0 30px;
+  overflow-y: auto;
 }
   .github_repos-item,
   .loading_box {
@@ -50,13 +52,17 @@ body {
     display: grid;
     grid-template:
       "page github"
-      / 1fr 1fr;
+      / 1fr max-content;
   }
 }
 
 @media only screen and (max-width: 950px) {
   * {
     font-size: 20px !important;
+  }
+
+  body {
+    overflow: unset;
   }
 
   #content {
@@ -68,6 +74,7 @@ body {
 
   .github_repos {
     margin-bottom: 100px;
+    padding: unset;
   }
 
   .github_repos-section {
