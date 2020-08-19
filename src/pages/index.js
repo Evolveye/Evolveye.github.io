@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
+import { PostsEntries } from "../components/posts"
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
@@ -14,6 +15,7 @@ export default () => (
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />
     </div>
+    <PostsEntries />
     <Link to="/page-2/">Go to page 2</Link> <br />
     <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
   </Layout>
