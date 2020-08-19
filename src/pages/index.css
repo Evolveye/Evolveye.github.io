@@ -1,0 +1,41 @@
+@font-face {
+  font-family: Lato;
+  src: url( ../fonts/Lato-Regular.ttf )
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --dark: #252525;
+  --grey: #555;
+  --green: #61c925;
+  --dark-green: #579c2f;
+}
+
+body {
+  font-family: Lato;
+}
+
+body,
+div, p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: unset;
+  transition: color .2s;
+}
+a:hover {
+  color: var( --green );
+}
+
+.homepage {
+  display: grid;
+  grid-template:
+    "header" 100px
+    "main" 1fr
+    "footer" 100px;
+}
