@@ -1,0 +1,7 @@
+.content {
+  padding: 50px;
+  box-shadow: 0 0 10px 0px #0005 inset;
+  border-radius: 7px;
+  background-color: #fdfdfd;
+  z-index: 1;
+}

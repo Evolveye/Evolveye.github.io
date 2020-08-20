@@ -8,7 +8,8 @@
 }
 
 :root {
-  --dark: #252525;
+  --darkest: #1d1d1d;
+  --dark: #272727;
   --grey: #555;
   --green: #61c925;
   --dark-green: #579c2f;
@@ -16,6 +17,7 @@
 
 body {
   font-family: Lato;
+  background-color: var( --dark );
 }
 
 body,
@@ -35,7 +37,8 @@ a:hover {
 .homepage {
   display: grid;
   grid-template:
-    "header" 100px
-    "main" 1fr
-    "footer" 100px;
+    "header header" 100px
+    "aside  main"
+    "footer footer"  /
+    20% 1fr;
 }
