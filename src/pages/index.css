@@ -3,7 +3,7 @@
 
   display: grid;
   grid-template:
-    "header header header" 100px
+    "header header header" 0
     "aside  main   main"
     "footer footer  footer";
 

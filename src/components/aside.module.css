@@ -1,5 +1,6 @@
 .aside {
   grid-area: aside;
+  padding-top: 200px;
 }
 
 .columns {
