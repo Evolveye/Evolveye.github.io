@@ -1,5 +1,5 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
 
 /**
  * @typedef {Object} Node
@@ -10,6 +10,8 @@ import { useStaticQuery, graphql } from "gatsby"
  * @property {string} frontmatter.title
  * @property {string} frontmatter.author
  * @property {string} frontmatter.categories
+ * @property {Object} fields
+ * @property {string} fields.slug
  */
 
 /**
@@ -34,6 +36,9 @@ export function PostsEntries() {
           date( formatString:"DD-MM-YYYY" )
           categories
         }
+        fields {
+          slug
+        }
       }
     }
   }` )
@@ -43,12 +48,14 @@ export function PostsEntries() {
 
   console.log( nodes )
 
-  for (const { id, excerpt, frontmatter } of nodes) {
+  for (const { id, excerpt, frontmatter, fields } of nodes) {
     const { date, author, categories, title } = frontmatter
+
+    console.log( fields )
 
     excerpts.push( <article key={id} className="posts_entries-entry">
       <article className="posts_entries-main">
-        <h3 className="posts_entries-title">{title}</h3>
+        <h3 className="posts_entries-title"><Link to={fields.slug}>{title}</Link></h3>
         <div className="posts_entries-content">{excerpt}</div>
       </article>
       <aside className="posts_entries-aside" >
