@@ -20,7 +20,7 @@ import { useStaticQuery, graphql, Link } from "gatsby"
  * @property {Node[]} allMdx.nodes
  */
 
-export function PostsEntries() {
+export default () => {
   /** @type {PostData} */
   const postsData = useStaticQuery( graphql`query Posts {
     allMdx(
@@ -45,8 +45,6 @@ export function PostsEntries() {
 
   const { nodes } = postsData.allMdx
   const excerpts = []
-
-  console.log( nodes )
 
   for (const { id, excerpt, frontmatter, fields } of nodes) {
     const { date, author, categories, title } = frontmatter

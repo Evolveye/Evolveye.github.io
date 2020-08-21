@@ -1,21 +1,12 @@
 import React from "react"
 
-import SEO from "../components/seo"
+import PostsEntries from "../components/postsEntries"
 
-import Header from "../components/header"
-import Aside from "../components/aside"
-import { PostsEntries } from "../components/posts"
-import Footer from "../components/footer"
+import Layout from "../components/layout"
 
 import "./normalize.css"
 import "./index.css"
 
-export default () => <div className="homepage">
-  <SEO title="Home" />
-  <Header />
-  <Aside />
-  <main className="main">
-    <PostsEntries />
-  </main>
-  <Footer />
-</div>
+export default () => <Layout className="homepage">
+  <PostsEntries />
+</Layout>
