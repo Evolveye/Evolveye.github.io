@@ -6,8 +6,10 @@ import { useStaticQuery, graphql } from "gatsby"
  * @property {string} id
  * @property {string} excerpt
  * @property {Object} frontmatter
- * @property {string} frontmatter.title
  * @property {string} frontmatter.date
+ * @property {string} frontmatter.title
+ * @property {string} frontmatter.author
+ * @property {string} frontmatter.categories
  */
 
 /**
@@ -28,7 +30,9 @@ export function PostsEntries() {
         excerpt( pruneLength:255 )
         frontmatter {
           title
+          author
           date( formatString:"DD-MM-YYYY" )
+          categories
         }
       }
     }
@@ -40,14 +44,20 @@ export function PostsEntries() {
   console.log( nodes )
 
   for (const { id, excerpt, frontmatter } of nodes) {
-    const { date } = frontmatter
+    const { date, author, categories, title } = frontmatter
 
-    excerpts.push( <article key={id}>
-      <h3>{frontmatter.title}</h3>
-      <time dateTime={date}>{date.replace( /-/g, `.` )}</time>
-      <p>{excerpt}</p>
+    excerpts.push( <article key={id} className="posts_entries-entry">
+      <article className="posts_entries-main">
+        <h3 className="posts_entries-title">{title}</h3>
+        <div className="posts_entries-content">{excerpt}</div>
+      </article>
+      <aside className="posts_entries-aside" >
+        <span className="posts_entries-author">{author}</span>
+        <time className="posts_entries-date" dateTime={date}>{date.replace( /-/g, `.` )}</time>
+        <span className="posts_entries-categories">{categories.split( /, /g ).join( `  •  ` )}</span>
+      </aside>
     </article> )
   }
 
-  return <section>{excerpts}</section>
+  return <section className="posts_entries">{excerpts}</section>
 }

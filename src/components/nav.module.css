@@ -1,4 +1,4 @@
-.aside {
-  grid-area: asideL;
+.nav {
+  grid-area: nav;
   background-color: var( --dark );
 }

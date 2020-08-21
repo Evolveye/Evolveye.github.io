@@ -1,0 +1,43 @@
+@font-face {
+  font-family: Lato;
+  src: url( ../fonts/Lato-Regular.ttf )
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --dark: #1d1d1d;
+  /* --dark: #272727; */
+  --grey: #777;
+  --dark-grey: #555;
+  /* --green: #56932d; */
+  /* --dark-green: #579c2f; */
+  --green: #62a01b;
+  --red: #e44d26;
+  --blue: #0070ba;
+  --yellow: #d6ba32;
+  --background-color: #f7f7f7;
+  --aside-color: #f1efef;
+}
+
+body {
+  font-family: Lato;
+  background-color: var( --background-color );
+}
+
+body,
+div, p,
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: unset;
+  transition: color .2s;
+}
+a:hover {
+  color: var( --green );
+}

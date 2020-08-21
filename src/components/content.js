@@ -1,12 +1,12 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import Image from "../components/image"
-import { PostsEntries } from "../components/posts"
+import Image from "./image"
+import { PostsEntries } from "./posts"
 
 import styles from "./content.module.css"
 
-export default () => <main className={styles.content}>
+export default () => <>
   <h1>Hi people</h1>
   <p>Welcome to your new Gatsby site.</p>
   <p>Now go build something great.</p>
@@ -15,4 +15,4 @@ export default () => <main className={styles.content}>
   </div>
   <PostsEntries />
   <Link to="/page-2/">Go to page 2</Link> <br/>
-</main>
+</>

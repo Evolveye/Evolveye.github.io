@@ -19,28 +19,59 @@ import styles from "./footer.module.css"
  * @property {QueryFlow} envelopeIcon
  */
 
-const query = graphql`
-  query Footer {
+// const queryForDarkTheme = graphql`
+// query Footer {
+//   site {
+//     siteMetadata {
+//       author
+//     }
+//   }
+//   githubLogo: file( relativePath:{ eq:"logo-github-light.png" } ) {
+//     childImageSharp {
+//       fluid( maxWidth:32 ) {
+//         ...GatsbyImageSharpFluid
+//       }
+//     }
+//   }
+//   linkedinLogo: file( relativePath:{ eq:"logo-linkedin-white.png" } ) {
+//     childImageSharp {
+//       fluid( maxWidth:32 ) {
+//         ...GatsbyImageSharpFluid
+//       }
+//     }
+//   }
+//   envelopeIcon: file( relativePath:{ eq:"envelope.png" } ) {
+//     childImageSharp {
+//       fluid( maxWidth:32 ) {
+//         ...GatsbyImageSharpFluid
+//       }
+//     }
+//   }
+// }
+// `
+
+const queryForLightTheme = graphql`
+  query FooterLight {
     site {
       siteMetadata {
         author
       }
     }
-    githubLogo: file( relativePath:{ eq:"logo-github-light.png" } ) {
+    githubLogo: file( relativePath:{ eq:"logo-github.png" } ) {
       childImageSharp {
         fluid( maxWidth:32 ) {
           ...GatsbyImageSharpFluid
         }
       }
     }
-    linkedinLogo: file( relativePath:{ eq:"logo-linkedin-white.png" } ) {
+    linkedinLogo: file( relativePath:{ eq:"logo-linkedin.png" } ) {
       childImageSharp {
         fluid( maxWidth:32 ) {
           ...GatsbyImageSharpFluid
         }
       }
     }
-    envelopeIcon: file( relativePath:{ eq:"envelope.png" } ) {
+    envelopeIcon: file( relativePath:{ eq:"icon-mail.png" } ) {
       childImageSharp {
         fluid( maxWidth:32 ) {
           ...GatsbyImageSharpFluid
@@ -52,7 +83,7 @@ const query = graphql`
 
 export default () => {
   /** @type {QueryData} */
-  const dataFromQuery = useStaticQuery( query )
+  const dataFromQuery = useStaticQuery( queryForLightTheme )
 
   const [ showMail, setMailVisibility ] = useState( false )
   const { author } = dataFromQuery.site.siteMetadata
