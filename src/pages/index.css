@@ -4,10 +4,10 @@
   display: grid;
   grid-template:
     "header header header" 100px
-    "nav    main   main"
-    "empty  empty  footer";
+    "aside  main   main"
+    "aside  empty  footer";
 
-  grid-template-columns: 100px 400px 1fr;
+  grid-template-columns: 200px 400px 1fr;
 }
 .main {
   grid-area: main;

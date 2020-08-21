@@ -3,7 +3,7 @@ import React from "react"
 import SEO from "../components/seo"
 
 import MainHeader from "../components/main_header"
-import Nav from "../components/nav"
+import Aside from "../components/aside"
 import { PostsEntries } from "../components/posts"
 import Footer from "../components/footer"
 
@@ -13,7 +13,7 @@ import "./index.css"
 export default () => <div className="homepage">
   <SEO title="Home" />
   <MainHeader />
-  <Nav />
+  <Aside />
   <main className="main">
     <PostsEntries />
   </main>

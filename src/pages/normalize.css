@@ -39,7 +39,9 @@ a {
   text-decoration: unset;
   transition: color .2s;
   border-bottom: 1px dashed transparent;
+
+  --border-color: var( --cyan )
 }
 a:hover {
-  border-bottom-color: var( --cyan );
+  border-bottom-color: var( --border-color );
 }
