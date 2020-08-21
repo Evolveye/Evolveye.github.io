@@ -5,28 +5,16 @@
   grid-template:
     "header header header" 100px
     "nav    main   main"
-    "empty  empty  footer"  /
-    100px 400px 1fr;
+    "empty  empty  footer";
+
+  grid-template-columns: 100px 400px 1fr;
 }
-/* .main {
-  padding: 50px;
-  box-shadow: 0 0 10px 0px #0005 inset;
-  border-radius: 7px;
-  background-color: var( --background-color );
-  z-index: 1;
-} */
 .main {
   grid-area: main;
   background-color: var( --background-color );
-  z-index: 1;
 }
-.empty {
-  grid-area: empty;
-  background: var( --dark );
-}
-.posts_entries {
-  position: relative;
-}
+/* .empty { grid-area: empty; } */
+/* .posts_entries {} */
   .posts_entries-entry {
     position: relative;
     display: flex;
@@ -35,7 +23,8 @@
     content: "";
     position: absolute;
     display: block;
-    width: 60%;
+    width: 80%;
+    /* left: calc( 50% - 150px ); */
     left: 50%;
     bottom: 0;
     transform: translateX( -50% );
@@ -47,9 +36,9 @@
     grid-template:
       "author     date" 92px
       "categories categories" /
-      300px       100px;
-    width: 400px;
-    background: var( --dark );
+      1fr       100px;
+    width: calc( 50vw - 500px - 100px );
+    min-width: 300px;
     color: var( --grey );
     order: 1;
   }
@@ -81,24 +70,16 @@
     }
   .posts_entries-main {
     position: relative;
-    width: calc( 100% - 500px );
+    width: 1000px;
+    max-width: 50%;
     padding: 60px 20px;
     order: 2;
   }
     .posts_entries-title {
-      position: relative;
       width: max-content;
-      margin: 0 0 20px 20px;
+      margin-bottom: 20px;
+      padding: 0 100px 0 20px;
       font-size: 30px;
       font-weight: normal;
-      color: var( --red );
-    }
-    .posts_entries-title:hover::after {
-      content: "";
-      position: absolute;
-      display: block;
-      width: calc( 100% + 100px );
-      left: -20px;
-      bottom: -5px;
-      border-bottom: 3px solid var( --red );
+      color: var( --cyan );
     }

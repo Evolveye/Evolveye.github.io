@@ -17,6 +17,7 @@
   --green: #62a01b;
   --red: #e44d26;
   --blue: #0070ba;
+  --cyan: #18b6fc;
   --yellow: #d6ba32;
   --background-color: #f7f7f7;
   --aside-color: #f1efef;
@@ -34,10 +35,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: inherit;
+  color: var( --cyan );
   text-decoration: unset;
   transition: color .2s;
+  border-bottom: 1px dashed transparent;
 }
 a:hover {
-  color: var( --green );
+  border-bottom-color: var( --cyan );
 }
