@@ -12,8 +12,6 @@ import styles from "./aside.module.css"
 
 /**
  * @typedef {Object} QueryData
- * @property {Object} site
- * @property {Object} site.siteMetadata
  * @property {QueryFlow} githubLogo
  * @property {QueryFlow} linkedinLogo
  * @property {QueryFlow} envelopeIcon
@@ -52,11 +50,6 @@ import styles from "./aside.module.css"
 
 const queryForLightTheme = graphql`
   query AsideDght {
-    site {
-      siteMetadata {
-        author
-      }
-    }
     githubLogo: file( relativePath:{ eq:"logo-github.png" } ) {
       childImageSharp {
         fluid( maxWidth:32 ) {
@@ -86,7 +79,6 @@ export default () => {
   const dataFromQuery = useStaticQuery( queryForLightTheme )
 
   const [ showMail, setMailVisibility ] = useState( false )
-  const { author } = dataFromQuery.site.siteMetadata
   const columns = []
   const links = [
     {

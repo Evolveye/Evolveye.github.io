@@ -5,7 +5,7 @@
   grid-template:
     "header header header" 100px
     "aside  main   main"
-    "aside  empty  footer";
+    "footer footer  footer";
 
   grid-template-columns: 200px 400px 1fr;
 }
