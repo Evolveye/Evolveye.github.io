@@ -8,7 +8,7 @@ export default ({ mdxData:{ frontmatter, body } }) => {
 
   return <article className={styles.entry}>
     <article className={styles.main}>
-      <h3 className={styles.title}>{title}</h3>
+      <h1 className={styles.title}>{title}</h1>
       <MDXRenderer className={styles.content}>{body}</MDXRenderer>
     </article>
     <aside className={`${styles.aside} ${styles.isSticky}`}>

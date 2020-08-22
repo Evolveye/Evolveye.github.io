@@ -17,7 +17,7 @@
   --green: #62a01b;
   --red: #e44d26;
   --blue: #0070ba;
-  --cyan: #18b6fc;
+  --light-blue: #0494ff;
   --yellow: #d6ba32;
   --background-color: #f7f7f7;
   --aside-color: #f1efef;
@@ -30,18 +30,65 @@ body {
 
 body,
 div, p,
+ul, ol,
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
 a {
-  color: var( --cyan );
+  color: var( --light-blue );
   text-decoration: unset;
   transition: color .2s;
   border-bottom: 1px dashed transparent;
 
-  --border-color: var( --cyan )
+  --border-color: var( --light-blue )
 }
 a:hover {
   border-bottom-color: var( --border-color );
+}
+
+
+/*\
+ *
+ *   Clear tags -- tag:not( [class] )
+ *   Mostly used inside content/post content (html version of markdown)
+ *
+\*/
+
+p:not( [class] ),
+ul:not( [class] ), ol:not( [class] ) {
+  line-height: 1.7em;
+  margin-bottom: 2em;
+}
+
+h1:not( [class] ) {
+  font-weight: normal;
+  margin-bottom: 20px;
+  padding: 0 100px 0 20px;
+}
+h2:not( [class] ) {
+  font-weight: normal;
+  margin: 30px 0 15px;
+  padding: 0 100px 0 20px;
+}
+/*
+h3:not( [class] ) {}
+h4:not( [class] ) {}
+h5:not( [class] ) {}
+h6:not( [class] ) {}
+*/
+
+li:not( [class] ) {
+  position: relative;
+  margin-bottom: 1em;
+  list-style: none;
+}
+li:not( [class] )::before {
+  content: "¤";
+  position: absolute;
+  left: -20px;
+  top: 1px;
+  color: var( --green );
+  font-weight: bold;
+  font-size: 20px;
 }
