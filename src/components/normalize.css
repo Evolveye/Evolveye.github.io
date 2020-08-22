@@ -15,7 +15,7 @@
   /* --green: #56932d; */
   /* --dark-green: #579c2f; */
   --green: #62a01b;
-  --red: #e44d26;
+  --red: #dd3b29;
   --blue: #0070ba;
   --light-blue: #0494ff;
   --yellow: #d6ba32;
@@ -91,4 +91,10 @@ li:not( [class] )::before {
   color: var( --green );
   font-weight: bold;
   font-size: 20px;
+}
+
+code:not( [class] ) {
+  background-color: var( --dark-grey );
+  color: var( --background-color );
+  padding: 2px 4px;
 }

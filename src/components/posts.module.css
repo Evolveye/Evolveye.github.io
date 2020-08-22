@@ -67,8 +67,29 @@
     font-size: 30px;
     font-weight: normal;
   }
+  .postbox {
+    display: block;
+    padding: 20px;
+    margin: 20px;
+    transition: box-shadow 1s;
+  }
+    .postbox:hover {
+      box-shadow: unset;
+    }
 
-.is-sticky {
+.aside.is-sticky {
   position: sticky;
   top: 0
+}
+.postbox.is-note {
+  background-color: var( --red );
+  color: var( --background-color )
+}
+.postbox.is-info {
+  background-color: var( --light-blue );
+  color: var( --background-color )
+}
+.postbox.is-aside {
+  border: 1px solid var( --dark );
+  /* color: var( --background-color ) */
 }

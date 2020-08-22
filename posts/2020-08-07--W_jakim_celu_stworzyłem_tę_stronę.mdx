@@ -7,26 +7,26 @@ published: true
 ---
 
 Kilka lat już temu zrodził się we mnie pomysł pomocy znajomym poprzez kanał na YouTubie lub bloga.
-Myśl ta rosła we mnie aż do dzisiaj [patrz: data dodania posta ([odpowiedni dopełniacz?](https://sjp.pwn.pl/poradnia/haslo/post;7717.html))]
+Myśl ta sukcesywnie rosła we mnie aż do dzisiaj [patrz: data dodania posta ([odpowiedni dopełniacz?](https://sjp.pwn.pl/poradnia/haslo/post;7717.html))]
 
 Często miałem w głowie taką myśl, że prowadzenie archiwum swoich zawodowych przemyśleń może się kiedyś do czegoś przydać.
 Taka forma utrwalenia informacji byłaby dla mnie:
- * miejscem w które mogę z łatwoscią odesłąć kogoś do napisanego tekstu
- * publiczną wersją tworoznych sprawozdań (tych wyprodukowanych na ścieżce edukacji lub przez własną chęć opisu *czegoś*)
+ * miejscem w które mogę z łatwością odesłać kogoś do napisanego tekstu
+ * publiczną wersją tworzonych sprawozdań (tych wyprodukowanych na ścieżce edukacji lub przez własną chęć opisu *czegoś*)
  * kolejnym punktem rozwoju społeczności (a nawet dwóch -- tej małej i tej dużej)
  * jedną z form portfolio -- wiele jest takich rzeczy, które nadawałyby się na krótki wpis i mały pokaz
-   a ostatecznie po stworzeniu nigdzie nie trafiły (czyli przepadły)
+   a ostatecznie po stworzeniu nigdzie nie trafiły (i/więc przepadły)
 
-[Kilka](https://sjp.pl/kilka) (lub lepiej [parę](https://sjp.pl/kilka)) lat już temu dowiedziałęm się o konkursie [Daj się poznać](https://devstyle.pl/daj-sie-poznac/)
-lecz moje dowiedzenie się nastąpiło już za późno aby wystartować, jak i jestem pewny że nic by z tego nie wyszło.
-Teraz natomiast (w przeciwieństwie do siebie sprzed lat) robię wiecej różności którymi mógłym się podzielić ze swiatem,
-więc czemu by nie podjać próby.
-Napisałem prostą templatkę (mimo poprzednich linków nie okresliłbym się jako purysta) w Gatsbym i napisałem ten inicjujący post.
+[Kilka](https://sjp.pl/kilka) (lub lepiej [parę](https://sjp.pl/kilka)) lat już temu dowiedziałem się o konkursie [Daj się poznać](https://devstyle.pl/daj-sie-poznac/)
+lecz moje dowiedzenie się nastąpiło już za późno aby wystartować. Jestem jednak pewny że nic by z tego ówcześnie nie wyszło.
+Teraz natomiast (w przeciwieństwie do siebie sprzed lat) robię wiecej różności którymi mógłym się podzielić ze światem,
+więc czemu by nie podjąć próby.
+Stworzyłem więc prostą templatkę (mimo poprzednich linków nie określiłbym się jako purysta) w Gatsbym i napisałem ten inicjujący post.
 
-## "Do dzisiaj" lecz postów już trochę jest
+## Istniejące już starsze posty
 
 Nietrudno jest zauważyć, że nie jest to pierwszy wpis, lecz któryś już z kolei.
-Pozwoliłem sobie zastosować się do popularnej (raczej; na pewno za moim zdaniem dobrej)
+Pozwoliłem sobie zastosować się do popularnej (raczej; na pewno moim zdaniem dobrej)
 zasady mówiącej o tym aby napisać kilka treści przed przystąpieniem do publikowania.
 Tak więc po napisaniu już czytanego przez Ciebie teraz tekstu i kolejnych poprawkach szablonu
 (ten post jest mimo wszystko testem dla poprawnego wyświetlania markdowna z JSXem)
@@ -49,13 +49,27 @@ Mam w głowie różne pomysły ale dopiero po ich zrealizowaniu (a z tym bywa r�
 Będąc przy wyglądzie (czyli patrząc na to, ze to strona gościa od IT to potraktuję "szablon" jako jeden z elementów wyglądu)
 to może to być dobre miejsce na nieco bardziej nachalne przetestowanie kliku elementów szablonu.
 
-<div style={{ backgroundColor:`red` }}>
-  Okienko zauważalnie ważniejszej od reszty informacji! Pamiętaj, że ten natłok wsyzstkiego jest uzasadniony testami!
-</div>
-<div style={{ backgroundColor:`grey` }}>
+<Note>
+  Okienko zauważalnie ważniejszej od reszty informacji! Pamiętaj, że ten natłok wszystkiego jest uzasadniony testami!
+</Note>
+<Aside>
   Odpowiednie okienko do umieszczenia dygresji. Mógłbym tu napisać o tym,
-  że wspomniana wcześniej małą społeczność znajduje się na deepwebowym serwerze Discord który prowadzę.
-</div>
-<div style={{ backgroundColor:`blue` }}>
-  Box dodatkowej informacji, Tak po prostu, informacja o prostokącie z informacją.
-</div>
+  że wspomniana wcześniej mała społeczność znajduje się na deepwebowym serwerze Discord który prowadzę.
+</Aside>
+<Info>
+  Box dodatkowej informacji. Tak po prostu, informacja o prostokącie informacyjnym.
+</Info>
+
+Jestem wielce ciekawy (przynajmniej w momencie pisania tego zdania),
+czy kiedykolwiek przydadzą mi się wszystkie te 3 rodzaje boxów.
+Bez wzgledu na to coraz bardziej mi się to pisanie podoba.
+Wylewanie się w eter może być całkiem przyjemne.
+Ciekaw jestem takze jak wyglada taki `inlineowy blok kodu`, który w tym zdaniu sprawdzam (a jak widać, na etapie czytania tego nawiasu ta ciekawość została już zaspokojona).
+
+```js
+const codedStr = `Jeśli mowa o kodzie, to jakby wyglądał właściwy kod`
+  .split( `` )
+  .map( char => char.charCodeAt( 0 ) )
+  .map( code => code.toString( 32 ) )
+  .join( `` )
+```
