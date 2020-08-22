@@ -1,6 +1,8 @@
 import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 
+import styles from "./posts.module.css"
+
 /**
  * @typedef {Object} Node
  * @property {string} id
@@ -49,17 +51,15 @@ export default () => {
   for (const { id, excerpt, frontmatter, fields } of nodes) {
     const { date, author, categories, title } = frontmatter
 
-    console.log( fields )
-
-    excerpts.push( <article key={id} className="posts_entries-entry">
-      <article className="posts_entries-main">
-        <h3 className="posts_entries-title"><Link to={fields.slug}>{title}</Link></h3>
-        <div className="posts_entries-content">{excerpt}</div>
+    excerpts.push( <article key={id} className={styles.entry}>
+      <article className={styles.main}>
+        <h3 className={styles.title}><Link to={fields.slug}>{title}</Link></h3>
+        <div className={styles.content}>{excerpt}</div>
       </article>
-      <aside className="posts_entries-aside" >
-        <span className="posts_entries-author">{author}</span>
-        <time className="posts_entries-date" dateTime={date}>{date.replace( /-/g, `.` )}</time>
-        <span className="posts_entries-categories">{categories.split( /, /g ).join( `  •  ` )}</span>
+      <aside className={styles.aside}>
+        <span className={styles.author}>{author}</span>
+        <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
+        <span className={styles.categories}>{categories.split( /, /g ).join( `  •  ` )}</span>
       </aside>
     </article> )
   }

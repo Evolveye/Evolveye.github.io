@@ -5,10 +5,13 @@ import Header from "./header"
 import Aside from "./aside"
 import Footer from "./footer"
 
-export default ({ children }) => <div className="homepage">
+import "./normalize.css"
+import styles from "./layout.module.css"
+
+export default ({ children }) => <div className={styles.layout}>
   <SEO title="Home" />
   <Header />
   <Aside />
-  <main className="main">{children}</main>
+  <main className={styles.main}>{children}</main>
   <Footer />
 </div>

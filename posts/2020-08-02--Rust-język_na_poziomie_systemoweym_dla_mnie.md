@@ -5,7 +5,7 @@ published: true
 categories: języki komputerowe, rust, react
 ---
 
-Kilka lat temu za czasó technikum, kolega z klasy zaczepił mnie i zapytał czy słyszałęm o tkaim śmiesznym języku "Rust" tj. rdza.
+Kilka lat temu za czasów technikum, kolega z klasy zaczepił mnie i zapytał czy słyszałęm o tkaim śmiesznym języku "Rust" tj. rdza.
 Na tamten czas jednak w zasadzie poza przeglądarką mało co mnie interesowało więc odpowiedziałem ze nie.
 Wspólnie popatrzeliśmy na śmieszności i dziwadztwa tego języka -- jak to nastoleni specjaliści.
 

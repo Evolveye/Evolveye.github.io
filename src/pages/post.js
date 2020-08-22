@@ -1,26 +1,22 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Layout from "../components/layout"
+import Post from "../components/post"
 
-export default ({ data }) => {
-  const { frontmatter, body } = data.mdx
-
-  return <Layout>
-    <h1>{frontmatter.title}</h1>
-    <p>{frontmatter.date}</p>
-    <MDXRenderer>{body}</MDXRenderer>
-  </Layout>
-}
+export default ({ data }) => <Layout>
+  <Post mdxData={data.mdx} />
+</Layout>
 
 export const query = graphql`
-  query PostsBySlug($slug: String!) {
-    mdx(fields: { slug: { eq: $slug } }) {
+  query PostsBySlug( $slug:String! ) {
+    mdx( fields:{ slug:{ eq:$slug } } ) {
       body
       frontmatter {
         title
-        date(formatString: "YYYY MMMM Do")
+        author
+        date( formatString:"DD-MM-YYYY" )
+        categories
       }
     }
   }

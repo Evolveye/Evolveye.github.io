@@ -1,0 +1,75 @@
+
+.entry {
+  position: relative;
+  display: flex;
+}
+.entry:not( :last-child ) .main::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 80%;
+  /* left: calc( 50% - 150px ); */
+  left: 50%;
+  bottom: 0;
+  transform: translateX( -50% );
+  border-bottom: 1px solid var( --grey );
+}
+.aside {
+  position: relative;
+  display: grid;
+  grid-template:
+    "author     date" 92px
+    "categories categories" /
+     1fr        100px;
+  width: calc( 50vw - 500px - 100px );
+  min-width: 300px;
+  color: var( --grey );
+  align-self: start;
+  order: 1;
+}
+  .author {
+    grid-area: author;
+    display: none;
+    align-self: end;
+    text-align: right;
+    padding-right: 20px;
+  }
+  .date {
+    grid-area: date;
+    align-self: end;
+  }
+  .categories {
+    grid-area: categories;
+    padding: 23px 20px 0 0;
+    text-align: right;
+  }
+.main {
+  position: relative;
+  width: 1000px;
+  max-width: 50%;
+  padding: 60px 20px;
+  order: 2;
+}
+  .main::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 60px;
+    display: block;
+    height: calc( 100% - 120px + 10px );
+    width: 7px;
+    background-color: var( --green );
+  }
+  .title {
+    width: max-content;
+    margin-bottom: 20px;
+    padding: 0 100px 0 20px;
+    font-size: 30px;
+    font-weight: normal;
+    color: var( --cyan );
+  }
+
+.is-sticky {
+  position: sticky;
+  top: 0
+}
