@@ -20,7 +20,7 @@
   --light-blue: #0494ff;
   --yellow: #d6ba32;
   --background-color: #f7f7f7;
-  --aside-color: #f1efef;
+  --aside-color: #ddd;
 }
 
 body {
@@ -94,7 +94,8 @@ li:not( [class] )::before {
 }
 
 code:not( [class] ) {
-  background-color: var( --dark-grey );
-  color: var( --background-color );
+  background-color: var( --aside-color );
+  font-family: monospace;
+  /* color: var( --aside-color ); */
   padding: 2px 4px;
 }
