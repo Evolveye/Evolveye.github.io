@@ -19,7 +19,8 @@
   display: grid;
   grid-template:
     "author     date" 92px
-    "categories categories" /
+    "categories categories"
+    "nav        nav" /
      1fr        100px;
   width: calc( 50vw - 500px - 100px );
   min-width: 300px;
@@ -42,6 +43,10 @@
     grid-area: categories;
     padding: 23px 20px 0 0;
     text-align: right;
+  }
+  .nav {
+    grid-area: nav;
+    display: flex;
   }
 .main {
   position: relative;
