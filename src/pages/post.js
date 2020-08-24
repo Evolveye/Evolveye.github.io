@@ -4,12 +4,9 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import Post from "../components/post"
 
-export default ({ data, pageContext }) => {
-  console.log( 123, pageContext )
-return <Layout>
+export default ({ data, pageContext }) => <Layout>
   <Post mdxData={data.mdx} previous={pageContext.previous} next={pageContext.next} />
 </Layout>
-}
 
 export const query = graphql`
   query PostsBySlug( $slug:String! ) {

@@ -99,3 +99,9 @@
   border: 1px solid var( --dark );
   /* color: var( --background-color ) */
 }
+.postbox.is-pre {
+  font-size: 15px;
+}
+.postbox.is-pre .line {
+  margin: 5px 0;
+}
