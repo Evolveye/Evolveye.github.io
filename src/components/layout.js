@@ -4,7 +4,7 @@ import SEO from "./seo"
 import Aside from "./aside"
 import Footer from "./footer"
 
-import "./normalize.css"
+import "./sanitize.css"
 import styles from "./layout.module.css"
 
 export default ({ children }) => <div className={styles.layout}>

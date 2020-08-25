@@ -72,16 +72,17 @@ ul:not( [class] ), ol:not( [class] ) {
   font-size: 30px;
   font-weight: normal;
 }
-h2:not( [class] ) {
-  font-weight: normal;
+.h2, h2:not( [class] ) {
   margin: 30px 0 15px;
   padding: 0 100px 0 20px;
+  font-weight: normal;
+  font-size: 25px;
 }
 /*
-h3:not( [class] ) {}
-h4:not( [class] ) {}
-h5:not( [class] ) {}
-h6:not( [class] ) {}
+.h3, h3:not( [class] ) {}
+.h4, h4:not( [class] ) {}
+.h5, h5:not( [class] ) {}
+.h6, h6:not( [class] ) {}
 */
 
 li:not( [class] ) {
