@@ -35,6 +35,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+}
+
 a {
   color: var( --light-blue );
   text-decoration: unset;
@@ -61,10 +65,12 @@ ul:not( [class] ), ol:not( [class] ) {
   margin-bottom: 2em;
 }
 
-h1:not( [class] ) {
-  font-weight: normal;
+.h1, h1:not( [class] ) {
+  width: max-content;
   margin-bottom: 20px;
   padding: 0 100px 0 20px;
+  font-size: 30px;
+  font-weight: normal;
 }
 h2:not( [class] ) {
   font-weight: normal;

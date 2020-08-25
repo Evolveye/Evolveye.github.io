@@ -3,11 +3,11 @@
 
   display: grid;
   grid-template:
-    "header header header" 0
-    "aside  main   main"
-    "footer footer  footer";
+    "header header header"
+    "aside  main   empty"
+    "footer footer footer";
 
-  grid-template-columns: 200px 400px 1fr;
+  grid-template-columns: 200px 1fr 200px;
 }
 .main {
   grid-area: main;

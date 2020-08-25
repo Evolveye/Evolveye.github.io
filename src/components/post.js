@@ -44,21 +44,32 @@ const shortcodes = {
 export default ({ mdxData:{ frontmatter, body }, previous=null, next=null }) => {
   const { date, author, categories, title } = frontmatter
 
-  return <article className={styles.entry}>
-    <article className={styles.main}>
-      <h1 className={styles.title}>{title}</h1>
-      <MDXProvider className={styles.content} components={shortcodes} >
-        <MDXRenderer>{body}</MDXRenderer>
-      </MDXProvider>
-    </article>
-    <aside className={`${styles.aside} ${styles.isSticky}`}>
-      <span className={styles.author}>{author}</span>
-      <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
-      <span className={styles.categories}>{categories.split( /, /g ).join( `  •  ` )}</span>
-      <nav className={styles.nav}>
-        {previous && <Link className={styles.previous} to={previous.fields.slug}>{previous.frontmatter.title}</Link>}
-        {next && <Link className={styles.next} to={next.fields.slug}>{next.frontmatter.title}</Link>}
-      </nav>
-    </aside>
-  </article>
+  return <>
+    <section className={styles.post}>
+      <aside className={`${styles.meta} ${styles.isSticky}`}>
+        <span className={styles.author}>{author}</span>
+        <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
+        <span className={styles.categories}>{categories.split( /, /g ).join( `  •  ` )}</span>
+      </aside>
+      <article className={styles.content}>
+        <h1>{title}</h1>
+        <MDXProvider components={shortcodes} >
+          <MDXRenderer>{body}</MDXRenderer>
+        </MDXProvider>
+      </article>
+      <aside className={`${styles.tableOfContent} ${styles.isSticky}`} />
+    </section>
+    <nav className={styles.adjacentPosts}>
+      {
+        previous && <div className={`${styles.adjacentPostsItem} ${styles.previous}`}>
+          <Link to={previous.fields.slug}>{previous.frontmatter.title}</Link>
+        </div>
+      }
+      {
+        next && <div className={`${styles.adjacentPostsItem} ${styles.next}`}>
+          <Link to={next.fields.slug}>{next.frontmatter.title}</Link>
+        </div>
+      }
+    </nav>
+  </>
 }

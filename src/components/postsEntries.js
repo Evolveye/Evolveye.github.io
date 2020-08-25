@@ -51,16 +51,17 @@ export default () => {
   for (const { id, excerpt, frontmatter, fields } of nodes) {
     const { date, author, categories, title } = frontmatter
 
-    excerpts.push( <article key={id} className={styles.entry}>
-      <article className={styles.main}>
-        <h3 className={styles.title}><Link to={fields.slug}>{title}</Link></h3>
-        <div className={styles.content}>{excerpt}</div>
-      </article>
-      <aside className={styles.aside}>
+    excerpts.push( <article key={id} className={styles.post}>
+      <aside className={styles.meta}>
         <span className={styles.author}>{author}</span>
         <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
         <span className={styles.categories}>{categories.split( /, /g ).join( `  •  ` )}</span>
       </aside>
+      <article className={styles.content}>
+        <h3 className="h1"><Link to={fields.slug}>{title}</Link></h3>
+        <p>{excerpt}</p>
+      </article>
+      <aside className={styles.tableOfContent} />
     </article> )
   }
 
