@@ -81,26 +81,26 @@ export default () => {
   const [ showMail, setMailVisibility ] = useState( false )
   const columns = []
   const links = [
-    {
+    { name: `GitHub`,
       fluid: dataFromQuery.githubLogo.childImageSharp.fluid,
       addresses: [
         { address:`https://github.com/Evolveye`, name:`Profile` },
         { address:`https://github.com/Evolveye?tab=repositories`, name:`Repositories` },
       ]
     },
-    {
+    { name: `LinkedIn`,
       fluid: dataFromQuery.linkedinLogo.childImageSharp.fluid,
       addresses: [ { address:`https://github.com/Evolveye`, name:`Profile` }, ]
     },
   ]
 
-  for (const { fluid, addresses } of links) {
+  for (const { name, fluid, addresses } of links) {
     const anchors = []
 
-    addresses.forEach( ({ address, name }) => anchors.push( <a className={styles.link} href={address}>{name}</a> ) )
+    addresses.forEach( ({ address, name }) => anchors.push( <a key={name} className={styles.link} href={address}>{name}</a> ) )
 
-    columns.push( <div className={styles.column}>
-      <Img fluid={fluid} className={styles.logo} />
+    columns.push( <div className={styles.column} key={name}>
+      <Img fluid={fluid} className={styles.logo} alt={name} />
       <div className={styles.links}>{anchors}</div>
     </div> )
   }

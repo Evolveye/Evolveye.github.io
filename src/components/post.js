@@ -8,37 +8,33 @@ import { MDXProvider } from "@mdx-js/react"
 import styles from "./posts.module.css"
 
 const shortcodes = {
-  Note: ({children, ...props}) => <note {...props} className={`${styles.postbox} ${styles.isNote}`}>{children}</note>,
+  Note: ({children, ...props}) => <strong {...props} className={`${styles.postbox} ${styles.isNote}`}>{children}</strong>,
   Info: ({children, ...props}) => <mark {...props} className={`${styles.postbox} ${styles.isInfo}`}>{children}</mark>,
   Aside: ({children, ...props}) => <i {...props} className={`${styles.postbox} ${styles.isAside}`}>{children}</i>,
-  pre({ children:{ props } }) {
-    const language = props.className?.match( /language-(.*)/ )[ 1 ]
-    console.log( language )
-    return <Highlight
-      {...defaultProps}
-      code={props.children.trim()}
-      language={props.className?.match( /language-(.*)/ )[ 1 ]}
-      theme={theme}
-    >
-      {({
-        className,
-        style,
-        tokens,
-        getLineProps,
-        getTokenProps,
-      }) => (
-        <pre className={`${styles.postbox} ${styles.isPre} ${className}`} style={style}>
-          {tokens.map((line, i) => (
-            <div {...getLineProps({ line, key: i, className:styles.line })}>
-              {line.map((token, key) => (
-                <span {...getTokenProps({ token, key })} />
-              ))}
-            </div>
-          ))}
-        </pre>
-      )}
-    </Highlight>
-  }
+  pre: ({ children:{ props } }) => <Highlight
+    {...defaultProps}
+    code={props.children.trim()}
+    language={props.className?.match( /language-(.*)/ )[ 1 ]}
+    theme={theme}
+  >
+    {({
+      className,
+      style,
+      tokens,
+      getLineProps,
+      getTokenProps,
+    }) => (
+      <pre className={`${styles.postbox} ${styles.isPre} ${className}`} style={style}>
+        {tokens.map((line, i) => (
+          <div {...getLineProps({ line, key: i, className:styles.line })}>
+            {line.map((token, key) => (
+              <span {...getTokenProps({ token, key })} />
+            ))}
+          </div>
+        ))}
+      </pre>
+    )}
+  </Highlight>
 }
 
 export default ({ mdxData:{ frontmatter, body }, previous=null, next=null }) => {
