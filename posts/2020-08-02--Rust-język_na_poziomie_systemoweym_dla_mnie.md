@@ -1,7 +1,8 @@
 ---
-title: Rust - język poziomu systemowego w moim guście
-date: 2020-01-02
 published: true
+title: Rust - język poziomu systemowego w moim guście
+author: Paweł Stolarski
+date: 2020-08-02
 categories: Rozmaitości
 tags: języki komputerowe, rust, react
 ---

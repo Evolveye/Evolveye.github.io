@@ -24,34 +24,24 @@
 
 
 
-.meta {
-  position: relative;
-  top: -15px;
-  left: 40px;
-  display: flex;
-  color: var( --grey );
-  font-size: 13px;
-}
-  .meta > * {
-    margin-right: 25px;
-  }
-  .author {
-    align-self: end;
-  }
-  .date {
-    display: block;
-  }
-
-
-
 .content {
   grid-area: content;
   position: relative;
   width: 1000px;
   max-width: 50vw;
   padding: 20px;
-  font-size: 14px;
 }
+  .meta {
+    position: relative;
+    top: -15px;
+    left: 40px;
+    display: flex;
+    color: var( --grey );
+    font-size: 13px;
+  }
+    .meta > * {
+      margin-right: 25px;
+    }
   .content::before {
     content: "";
     position: absolute;
@@ -68,11 +58,7 @@
     display: block;
     padding: 20px;
     margin: 20px;
-    transition: box-shadow 1s;
   }
-    .postbox:hover {
-      box-shadow: unset;
-    }
   .tags,
   .adjacentPosts {
     display: flex;
@@ -109,6 +95,9 @@
 .is-sticky {
   position: sticky;
   top: 0;
+}
+.post.is-entry {
+  font-size: 14px;
 }
 .postbox.is-note {
   background-color: var( --red );

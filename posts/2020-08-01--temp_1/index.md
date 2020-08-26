@@ -1,7 +1,8 @@
 ---
-title: Wpis tymczasowy 1
-date: 2020-08-01
 published: true
+title: Wpis tymczasowy 1
+author: Paweł Stolarski
+date: 2020-08-01
 categories: Rozmaitości
 ---
 

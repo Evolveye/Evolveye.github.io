@@ -5,7 +5,12 @@ import Layout from "../components/layout"
 import Post from "../components/post"
 
 export default ({ data, pageContext }) => <Layout>
-  <Post mdxData={data.mdx} previous={pageContext.previous} next={pageContext.next} />
+  <Post
+    frontmatter={data.mdx.frontmatter}
+    body={data.mdx.body}
+    previous={pageContext.previous}
+    next={pageContext.next}
+  />
 </Layout>
 
 export const query = graphql`
