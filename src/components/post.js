@@ -38,23 +38,31 @@ const shortcodes = {
 }
 
 export default ({ mdxData:{ frontmatter, body }, previous=null, next=null }) => {
-  const { date, author, categories, title } = frontmatter
+  const { date, author, categories, tags=``, title } = frontmatter
 
   return <>
-    <section className={styles.post}>
-      <aside className={`${styles.meta} ${styles.isSticky}`}>
-        <span className={styles.author}>{author}</span>
-        <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
-        <span className={styles.categories}>{categories.split( /, /g ).join( `  •  ` )}</span>
-      </aside>
+    <article className={styles.post}>
+      <aside className={`${styles.meta} ${styles.isSticky}`}></aside>
       <article className={styles.content}>
         <h1>{title}</h1>
+        <aside className={`${styles.meta}`}>
+          <span className={styles.author}>{author}</span>
+          <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
+          <article className={styles.categories}>
+            {categories.split( /, /g ).map( category => <Link key={category} className={styles.category} to="/">{category}</Link> )}
+          </article>
+        </aside>
         <MDXProvider components={shortcodes} >
           <MDXRenderer>{body}</MDXRenderer>
         </MDXProvider>
       </article>
       <aside className={`${styles.tableOfContent} ${styles.isSticky}`} />
-    </section>
+    </article>
+    {
+      tags && <article className={styles.tags}>
+        {tags.split( /, /g ).map( tag => <Link key={tag} className={styles.tag} to="/">{tag}</Link> )}
+      </article>
+    }
     <nav className={styles.adjacentPosts}>
       {
         previous && <div className={`${styles.adjacentPostsItem} ${styles.previous}`}>

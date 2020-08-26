@@ -2,7 +2,7 @@
 title: Wpis tymczasowy 1
 date: 2020-08-01
 published: true
-categories: nic konkretnego
+categories: Rozmaitości
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis consequat nisl ac sodales. Aliquam hendrerit varius dapibus. Aenean vestibulum magna in congue dignissim. Phasellus pharetra justo sem, eget pharetra quam venenatis at. Vivamus non placerat augue. Donec eget dictum turpis. Nullam eu felis augue. Pellentesque et sem at leo bibendum malesuada ac eu elit. Proin at lectus in magna feugiat facilisis sed vitae eros. Vivamus ac erat ultrices, viverra velit consequat, fringilla ipsum.

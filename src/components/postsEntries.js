@@ -52,13 +52,16 @@ export default () => {
     const { date, author, categories, title } = frontmatter
 
     excerpts.push( <article key={id} className={styles.post}>
-      <aside className={styles.meta}>
-        <span className={styles.author}>{author}</span>
-        <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
-        <span className={styles.categories}>{categories.split( /, /g ).join( `  •  ` )}</span>
-      </aside>
+      <aside className={styles.meta} />
       <article className={styles.content}>
         <h3 className="h1"><Link to={fields.slug}>{title}</Link></h3>
+        <aside className={`${styles.meta}`}>
+          <span className={styles.author}>{author}</span>
+          <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
+          <article className={styles.categories}>
+            {categories.split( /, /g ).map( category => <Link key={category} className={styles.category} to="/">{category}</Link> )}
+          </article>
+        </aside>
         <p>{excerpt}</p>
       </article>
       <aside className={styles.tableOfContent} />

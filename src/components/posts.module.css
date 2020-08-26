@@ -1,14 +1,15 @@
 .post {
   display: flex;
   justify-content: center;
+  font-size: 17px;
 }
-.post:not( :last-of-type ) .content::after {
+.post:not( :first-of-type ) .content::after {
   content: "";
   position: absolute;
   display: block;
   width: 80%;
   left: 50%;
-  bottom: 0;
+  top: 0;
   transform: translateX( -50% );
   border-bottom: 1px solid var( --grey );
 }
@@ -24,29 +25,21 @@
 
 
 .meta {
-  display: grid;
-  grid-template:
-    "author     date" 92px
-    "categories categories"/
-     1fr        100px;
+  position: relative;
+  top: -15px;
+  left: 40px;
+  display: flex;
   color: var( --grey );
-  align-self: start;
+  font-size: 13px;
 }
+  .meta > * {
+    margin-right: 25px;
+  }
   .author {
-    grid-area: author;
-    display: none;
     align-self: end;
-    text-align: right;
-    padding-right: 20px;
   }
   .date {
-    grid-area: date;
-    align-self: end;
-  }
-  .categories {
-    grid-area: categories;
-    padding: 23px 20px 0 0;
-    text-align: right;
+    display: block;
   }
 
 
@@ -57,16 +50,15 @@
   width: 1000px;
   max-width: 50vw;
   padding: 60px 20px;
-  font-size: 17px;
 }
   .content::before {
     content: "";
     position: absolute;
-    left: -5px;
+    left: -4px;
     top: 60px;
     display: block;
     height: calc( 100% - 120px + 10px );
-    width: 7px;
+    width: 8px;
     background-color: var( --green );
   }
   .postbox {
@@ -78,10 +70,11 @@
     .postbox:hover {
       box-shadow: unset;
     }
+  .tags,
   .adjacentPosts {
     display: flex;
     width: 1000px;
-    margin: 0 auto;
+    margin: 25px auto;
   }
     .adjacentPostsItem {
       flex-grow: 1;
@@ -96,6 +89,18 @@
       .next::before {
         content: "Następny: "
       }
+    .tag {
+      display: block;
+      padding: 10px;
+      margin: 0 0 10px 10px;
+      width: max-content;
+      background-color: var( --dark-grey );
+      color: var( --background-color );
+      transition: background-color 0.15s;
+    }
+    .tag:hover {
+      background-color: var( --green );
+    }
 
 
 .is-sticky {

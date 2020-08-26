@@ -17,6 +17,7 @@ export const query = graphql`
         author
         date( formatString:"DD-MM-YYYY" )
         categories
+        tags
       }
     }
   }

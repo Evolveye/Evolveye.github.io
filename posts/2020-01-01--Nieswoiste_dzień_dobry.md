@@ -1,7 +1,7 @@
 ---
 title: Nieswoiste dzień dobry
 date: 2020-01-01
-categories: nic konkretnego, uprzejmości
+categories: Rozmaitości
 author: Paweł Stolarski
 published: true
 ---
