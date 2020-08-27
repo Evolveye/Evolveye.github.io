@@ -84,18 +84,18 @@ export default class Post extends React.Component {
     if (!author) throw new Error( `Every post should have author! Post "${title}" haven't!` )
     if (!categories) throw new Error( `Every post should have minimum one category! Post "${title}"` )
 
+    const titleContent = titleLinkAddress ? <Link to={titleLinkAddress}>{title}</Link> : title
+
     return <>
       <article {...restProps} className={`${styles.post} ${isEntry ? styles.isEntry : ``}`}>
         {/* <aside className={`${styles.meta} ${styles.isSticky}`}></aside> */}
         <article className={styles.content}>
-          <h1>
-            {titleLinkAddress ? <Link to={titleLinkAddress}>{title}</Link> : title}
-          </h1>
+          {isEntry ? <h3 class="h1">{titleContent}</h3> : <h1>{titleContent}</h1>}
           <aside className={styles.meta}>
             <span className={styles.author}>{author}</span>
             <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
             <article className={styles.categories}>
-              {categories.split( /, /g ).map( category => <Link key={category} className={styles.category} to="/">{category}</Link> )}
+              {categories.map( category => <Link key={category} className={styles.category} to={`/category/${category}`}>{category}</Link> )}
             </article>
           </aside>
           {
@@ -111,7 +111,7 @@ export default class Post extends React.Component {
 
       {
         tags && <article className={styles.tags}>
-          {tags.split( /, /g ).map( tag => <Link key={tag} className={styles.tag} to="/">{tag}</Link> )}
+          {tags.map( tag => <Link key={tag} className={styles.tag} to={`/tag/${tag}`}>{tag}</Link> )}
         </article>
       }
 
@@ -119,11 +119,11 @@ export default class Post extends React.Component {
         !isEntry &&<nav className={styles.adjacentPosts}>
           {
             previous && <div className={`${styles.adjacentPostsItem} ${styles.previous}`}>
-              <Link to={previous.fields.slug}>{previous.frontmatter.title}</Link>
+              <Link to={`/post/${previous.fields.slug}`}>{previous.frontmatter.title}</Link>
             </div>
           }{
             next && <div className={`${styles.adjacentPostsItem} ${styles.next}`}>
-              <Link to={next.fields.slug}>{next.frontmatter.title}</Link>
+              <Link to={`/post/${next.fields.slug}`}>{next.frontmatter.title}</Link>
             </div>
           }
         </nav>

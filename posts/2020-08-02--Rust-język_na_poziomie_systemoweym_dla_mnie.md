@@ -3,8 +3,8 @@ published: true
 title: Rust - język poziomu systemowego w moim guście
 author: Paweł Stolarski
 date: 2020-08-02
-categories: Rozmaitości
-tags: języki komputerowe, rust, react
+categories: [Rozmaitości]
+tags: [języki komputerowe, rust, react]
 ---
 
 Kilka lat temu za czasów technikum, kolega z klasy zaczepił mnie i zapytał czy słyszałem o takim śmiesznym języku "Rust" tj. rdza.
