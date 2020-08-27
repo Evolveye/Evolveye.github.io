@@ -4,9 +4,9 @@ const { createFilePath } = require( `gatsby-source-filesystem` )
 const path = require(`path`)
 
 const templates = {
-  post: path.resolve( 'src/pages/post.js' ),
-  searchTag: path.resolve( 'src/pages/search-tag.js' ),
-  searchCategory: path.resolve( 'src/pages/search-category.js' ),
+  post: path.resolve( 'src/templates/post.js' ),
+  searchTag: path.resolve( 'src/templates/search-tag.js' ),
+  searchCategory: path.resolve( 'src/templates/search-category.js' ),
 }
 
 /**
