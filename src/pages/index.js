@@ -1,29 +1,58 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Post from "../components/post"
 
 /**
- * @typedef {Object} Node
- * @property {string} id
- * @property {string} excerpt
- * @property {Object} frontmatter
- * @property {string} frontmatter.date
- * @property {string} frontmatter.title
- * @property {string} frontmatter.author
- * @property {string} frontmatter.categories
- * @property {Object} fields
- * @property {string} fields.slug
+ * @module
+ * @param {Object} param0
+ * @param {Object} param0.data
+ * @param {Object} param0.data.allMdx
+ * @param {Object[]} param0.data.allMdx.nodes
+ * @param {string} param0.data.allMdx.nodes.id
+ * @param {string} param0.data.allMdx.nodes.excerpt
+ * @param {Object} param0.data.allMdx.nodes.frontmatter
+ * @param {string} param0.data.allMdx.nodes.frontmatter.date
+ * @param {string} param0.data.allMdx.nodes.frontmatter.title
+ * @param {string} param0.data.allMdx.nodes.frontmatter.author
+ * @param {string} param0.data.allMdx.nodes.frontmatter.categories
+ * @param {string} param0.data.allMdx.nodes.frontmatter.tags
+ * @param {Object} param0.data.allMdx.nodes.fields
+ * @param {string} param0.data.allMdx.nodes.fields.slug
  */
+export default ({ data }) => {
+  const posts = data.allMdx.nodes
+  const { tags, categories } = posts.reduce( (obj, { frontmatter:{ tags, categories } }) => {
+    tags && tags.forEach( tag => obj.tags.add( tag ) )
+    categories.forEach( category => obj.categories.add( category ) )
 
-/**
- * @typedef {Object} PostData
- * @property {Object} allMdx
- * @property {Node[]} allMdx.nodes
- */
+    return obj
+  }, {
+    tags: new Set(),
+    categories: new Set()
+  } )
 
-const query = graphql`query Posts {
+  console.log( tags, categories )
+
+  return <Layout className="homepage">
+    <section>
+      <article>{categories}</article>
+      <article>{tags}</article>
+    </section>
+    <section>
+      {posts.map( ({ id, excerpt, frontmatter:{ tags, ...fm}, fields }) => <Post
+        key={id}
+        titleLinkAddress={`/post/${fields.slug}`}
+        frontmatter={fm}
+        body={excerpt}
+        isEntry={true}
+      /> )}
+    </section>
+  </Layout>
+}
+
+export const query = graphql`query Posts {
   allMdx(
     sort: { fields:frontmatter___date, order:DESC },
     filter: { frontmatter:{ published:{ eq:true } } }
@@ -36,6 +65,7 @@ const query = graphql`query Posts {
         author
         date( formatString:"DD-MM-YYYY" )
         categories
+        tags
       }
       fields {
         slug
@@ -43,18 +73,3 @@ const query = graphql`query Posts {
     }
   }
 }`
-
-export default () => {
-  /** @type {PostData} */
-  const postsData = useStaticQuery( query )
-
-  return <Layout className="homepage">
-    {postsData.allMdx.nodes.map( ({ id, excerpt, frontmatter, fields }) => <Post
-      key={id}
-      titleLinkAddress={`/post/${fields.slug}`}
-      frontmatter={frontmatter}
-      body={excerpt}
-      isEntry={true}
-    /> )}
-  </Layout>
-}

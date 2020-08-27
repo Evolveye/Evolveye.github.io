@@ -8,15 +8,6 @@ import { MDXProvider } from "@mdx-js/react"
 
 import styles from "./posts.module.css"
 
-/**
- * @typedef {Object} Frontmatter
- * @property {Object} frontmatter
- * @property {string} frontmatter.
- * @property {string} frontmatter.
- * @property {string} frontmatter.
- * @property {string} frontmatter.
- */
-
 const shortcodes = {
   Note: ({children, ...props}) => <strong {...props} className={`${styles.postbox} ${styles.isNote}`}>{children}</strong>,
   Info: ({children, ...props}) => <mark {...props} className={`${styles.postbox} ${styles.isInfo}`}>{children}</mark>,
@@ -90,7 +81,7 @@ export default class Post extends React.Component {
       <article {...restProps} className={`${styles.post} ${isEntry ? styles.isEntry : ``}`}>
         {/* <aside className={`${styles.meta} ${styles.isSticky}`}></aside> */}
         <article className={styles.content}>
-          {isEntry ? <h3 class="h1">{titleContent}</h3> : <h1>{titleContent}</h1>}
+          {isEntry ? <h3 className="h1">{titleContent}</h3> : <h1>{titleContent}</h1>}
           <aside className={styles.meta}>
             <span className={styles.author}>{author}</span>
             <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
