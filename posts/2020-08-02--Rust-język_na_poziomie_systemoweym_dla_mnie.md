@@ -5,6 +5,11 @@ author: Paweł Stolarski
 date: 2020-08-02
 categories: [Rozmaitości]
 tags: [języki komputerowe, rust, react]
+sneakPeek: '
+  Jako że "leniwy programista to dobry programista", to lubuję się w językach cechujących się pewną prostotą i przemyślanym podejsciem.
+  Z tej przyczyny przysiadłem przy JSie jak i od zawsze odrzucałem nieprzyjemnego dla mnie C++.
+  Po kilku latach programistycznej praktyki drugi juz raz spojrzałem na Rusta i cóż -- wpasował się.
+'
 ---
 
 Kilka lat temu za czasów technikum, kolega z klasy zaczepił mnie i zapytał czy słyszałem o takim śmiesznym języku "Rust" tj. rdza.

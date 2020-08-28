@@ -47,11 +47,11 @@ export default ({ data }) => {
       </article>
     </section>
     <section>
-      {posts.map( ({ id, excerpt, frontmatter:{ tags, ...fm}, fields }) => <Post
+      {posts.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm}, fields }) => <Post
         key={id}
         titleLinkAddress={`/post/${fields.slug}`}
         frontmatter={fm}
-        body={excerpt}
+        body={sneakPeek || excerpt}
         isEntry={true}
       /> )}
     </section>
@@ -71,6 +71,7 @@ export const query = graphql`query Posts {
         title
         author
         date( formatString:"DD-MM-YYYY" )
+        sneakPeek
         categories
         tags
       }
