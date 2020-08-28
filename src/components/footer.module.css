@@ -11,14 +11,22 @@
   flex-flow: row;
 }
   .column {
+    position: relative;
     flex-grow: 1;
     flex-basis: 0;
     padding: 10px 40px;
   }
-  .column:not( :last-child ) {
-    /* content: "";
-    display: block; */
-    border-right: 1px solid var( --grey );
+  .column:not( :last-child )::after {
+    /* border-right: 1px solid var( --grey ); */
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    height: 100%;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #fff;
+    background-color: var( --green );
   }
     .logo {
       width: 32px;

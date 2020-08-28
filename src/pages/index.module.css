@@ -1,0 +1,29 @@
+.homepage {
+  display: flex;
+  justify-content: center;
+}
+
+.empty,
+.collections {
+  flex-basis: 0;
+  flex-grow: 1;
+  padding: 20px;
+  max-width: 400px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: normal;
+}
+
+.collections {
+  text-align: right;
+}
+  .collection {
+    margin-bottom: 100px;
+  }
+    .item {
+      margin-left: 10px;
+      width: max-content;
+      white-space: nowrap;
+    }

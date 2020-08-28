@@ -1,6 +1,6 @@
 ---
 published: true
-title: Wpis tymczasowy 1
+title: Nieswoiste dzień dobry
 author: Paweł Stolarski
 date: 2020-01-01
 categories: [Rozmaitości]

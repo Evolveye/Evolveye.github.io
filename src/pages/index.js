@@ -1,8 +1,10 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import Post from "../components/post"
+
+import styles from "./index.module.css"
 
 /**
  * @module
@@ -33,12 +35,16 @@ export default ({ data }) => {
     categories: new Set()
   } )
 
-  console.log( tags, categories )
-
-  return <Layout className="homepage">
-    <section>
-      <article>{categories}</article>
-      <article>{tags}</article>
+  return <Layout className={styles.homepage}>
+    <section className={styles.collections}>
+      <article className={styles.collection}>
+        <h2 className={styles.title}>Kategorie</h2>
+        {[ ...categories ].map( category => <Link key={category}className={styles.item} to={`/category/${category}`}> {category}</Link> )}
+      </article>
+      <article className={styles.collection}>
+        <h2 className={styles.title}>Tagi</h2>
+        {[ ...tags ].map( tag => <Link key={tag} className={styles.item} to={`/category/${tag}`}> {tag}</Link> )}
+      </article>
     </section>
     <section>
       {posts.map( ({ id, excerpt, frontmatter:{ tags, ...fm}, fields }) => <Post
@@ -49,6 +55,7 @@ export default ({ data }) => {
         isEntry={true}
       /> )}
     </section>
+    <aside className={styles.empty} />
   </Layout>
 }
 

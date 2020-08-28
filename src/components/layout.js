@@ -7,9 +7,9 @@ import Footer from "./footer"
 import "./sanitize.css"
 import styles from "./layout.module.css"
 
-export default ({ children }) => <div className={styles.layout}>
+export default ({ className, children }) => <div className={styles.layout}>
   <SEO title="Home" />
   {/* <Aside /> */}
-  <main className={styles.main}>{children}</main>
+  <main className={`${styles.main} ${className}`}>{children}</main>
   <Footer />
 </div>
