@@ -123,7 +123,7 @@ code:not( [class] ) {
 \*/
 
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background-color: #1a1a20;
     --aside-color: #4a4a51;
@@ -132,4 +132,4 @@ code:not( [class] ) {
     --separator-light-color: #444;
     --separator-dark-color: #000;
   }
-}
+} */

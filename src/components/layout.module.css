@@ -7,9 +7,21 @@
     "main"
     "footer"/
     1fr;
+  background-color: var( --background-color );
+  color: var( --text-color );
+  transition: all 0.2s;
 }
 
 .main {
   grid-area: main;
   min-height: calc( 100vh - 200px - 380px );
+}
+
+.layout.is-dark {
+  --background-color: #1a1a20;
+  --aside-color: #4a4a51;
+  --text-color: #f7f7f7;
+
+  --separator-light-color: #444;
+  --separator-dark-color: #000;
 }

@@ -16,13 +16,19 @@
   border-bottom: 1px solid var( --separator-light-color );
 }
 
-.empty,
-.avatar {
-  display: block;
+.aside,
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   flex-basis: 0;
   flex-grow: 1;
-  max-width: 200px;
+  padding-right: 50px;
+}
+
+.avatar {
   max-height: 200px;
+  max-width: 200px;
 }
 
 .nav {
