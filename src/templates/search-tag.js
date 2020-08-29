@@ -1,20 +1,31 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import Post from "../components/post"
 
-export default ({ data, pageContext }) => <Layout>
-  Przeszukiwanie po tagu {pageContext.category}: {data.allMdx.nodes.length}
-  {
-    data.allMdx.nodes.map( ({ id, excerpt, frontmatter, fields }) => <Post
-      key={id}
-      titleLinkAddress={`/post/${fields.slug}`}
-      frontmatter={frontmatter}
-      body={excerpt}
-      isEntry={true}
-    /> )
-  }
+import styles from "./search.module.css"
+
+export default ({ data, pageContext }) => <Layout className={styles.searchPage}>
+  <section className={styles.info}>
+    <h2 className={styles.title}>O wynikach</h2>
+    <ul>
+      <li>Przeszukiwany tag: <Link to={`/tag/${pageContext.tag}`}>{pageContext.tag}</Link></li>
+      <li>Ilość wyników: {data.allMdx.nodes.length}</li>
+    </ul>
+  </section>
+  <section className={styles.posts}>
+    {
+      data.allMdx.nodes.map( ({ id, excerpt, frontmatter, fields }) => <Post
+        key={id}
+        titleLinkAddress={`/post/${fields.slug}`}
+        frontmatter={frontmatter}
+        body={excerpt}
+        isEntry={true}
+      /> )
+    }
+  </section>
+  <aside className={styles.empty} />
 </Layout>
 
 export const query = graphql`

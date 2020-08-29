@@ -43,10 +43,10 @@ export default ({ data }) => {
       </article>
       <article className={styles.collection}>
         <h2 className={styles.title}>Tagi</h2>
-        {[ ...tags ].map( tag => <Link key={tag} className={styles.item} to={`/category/${tag}`}> {tag}</Link> )}
+        {[ ...tags ].map( tag => <Link key={tag} className={styles.item} to={`/tag/${tag}`}> {tag}</Link> )}
       </article>
     </section>
-    <section>
+    <section className={styles.posts}>
       {posts.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm}, fields }) => <Post
         key={id}
         titleLinkAddress={`/post/${fields.slug}`}
