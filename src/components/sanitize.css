@@ -9,23 +9,27 @@
 
 :root {
   --dark: #1d1d1d;
-  /* --dark: #272727; */
-  --grey: #777;
   --dark-grey: #555;
-  /* --green: #56932d; */
-  /* --dark-green: #579c2f; */
+  --grey: #777;
   --green: #62a01b;
   --red: #dd3b29;
   --blue: #0070ba;
   --light-blue: #0494ff;
   --yellow: #d6ba32;
+  --white: #f7f7f7;
+
   --background-color: #f7f7f7;
   --aside-color: #ddd;
+  --text-color: #111;
+
+  --separator-light-color: #fff;
+  --separator-dark-color: #ddd;
 }
 
 body {
   font-family: Lato;
   background-color: var( --background-color );
+  color: var( --text-color )
 }
 
 body,
@@ -61,6 +65,7 @@ a.is-noDecorative:hover {
  *   Mostly used inside content/post content (html version of markdown)
  *
 \*/
+
 
 p:not( [class] ),
 ul:not( [class] ), ol:not( [class] ) {
@@ -108,4 +113,23 @@ code:not( [class] ) {
   font-family: monospace;
   /* color: var( --aside-color ); */
   padding: 2px 4px;
+}
+
+
+/*\
+ *
+ *   Media queryies
+ *
+\*/
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1a1a20;
+    --aside-color: #4a4a51;
+    --text-color: #f7f7f7;
+
+    --separator-light-color: #444;
+    --separator-dark-color: #000;
+  }
 }

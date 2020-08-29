@@ -24,14 +24,17 @@
     top: 0;
     display: block;
     height: 100%;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #fff;
+    border-left: 1px solid var( --separator-dark-color );
+    border-right: 1px solid var( --separator-light-color );
     background-color: var( --green );
   }
     .logo {
-      width: 32px;
-      height: 32px;
+      width: 42px;
+      height: 42px;
       margin: 10px auto;
+      background-color: white;
+      border: 5px solid white;
+      border-radius: 5px;
     }
     .text {
       display: block;

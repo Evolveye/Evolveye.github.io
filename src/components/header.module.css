@@ -12,8 +12,8 @@
   bottom: 0;
   display: block;
   width: 100%;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #fff;
+  border-top: 1px solid var( --separator-dark-color );
+  border-bottom: 1px solid var( --separator-light-color );
 }
 
 .empty,

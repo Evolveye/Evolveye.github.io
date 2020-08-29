@@ -80,7 +80,7 @@ export default class Post extends React.Component {
     return <>
       <article {...restProps} className={`${styles.post} ${isEntry ? styles.isEntry : ``}`}>
         {/* <aside className={`${styles.meta} ${styles.isSticky}`}></aside> */}
-        <article className={styles.content}>
+        <article className={`${styles.content} is-separated-left`}>
           {isEntry ? <h3 className="h1">{titleContent}</h3> : <h1>{titleContent}</h1>}
           <aside className={styles.meta}>
             <span className={styles.author}>{author}</span>

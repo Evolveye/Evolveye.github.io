@@ -8,8 +8,8 @@
     "footer"/
     1fr;
 }
+
 .main {
   grid-area: main;
-  background-color: var( --background-color );
-  min-height: calc( 100vh - 200px - 370px );
+  min-height: calc( 100vh - 200px - 380px );
 }

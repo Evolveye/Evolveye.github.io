@@ -52,14 +52,15 @@
     /* width: 8px; */
     /* height: calc( 100% - 70px + 10px ); */
     height: 100%;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #fff;
+    border-left: 1px solid var( --separator-dark-color );
+    border-right: 1px solid var( --separator-light-color );
     background-color: var( --green );
   }
   .postbox {
     display: block;
     padding: 20px;
     margin: 20px;
+    color: var( --white );
   }
   .tags,
   .adjacentPosts {
@@ -86,7 +87,7 @@
       margin: 0 0 10px 10px;
       width: max-content;
       background-color: var( --dark-grey );
-      color: var( --background-color );
+      color: var( --white );
       transition: background-color 0.15s;
     }
     .tag:hover {
@@ -103,11 +104,9 @@
 }
 .postbox.is-note {
   background-color: var( --red );
-  color: var( --background-color );
 }
 .postbox.is-info {
   background-color: var( --light-blue );
-  color: var( --background-color );
 }
 .postbox.is-aside {
   border: 1px solid var( --dark );
