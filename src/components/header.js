@@ -5,5 +5,5 @@ import Avatar from "./avatar"
 import styles from "./header.module.css"
 
 export default () => <header className={styles.header}>
-  <Avatar />
+  <Avatar className={styles.avatar}/>
 </header>

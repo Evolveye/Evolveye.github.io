@@ -1,5 +1,7 @@
 import React from "react"
 
+import avatar from "../images/blue_avatar.png"
+
 export default class EvolveyeAvatar extends React.Component {
   static originalWidth = 440
   static originalHeight = 440
@@ -38,31 +40,10 @@ export default class EvolveyeAvatar extends React.Component {
     z
   `
 
-  static shapeModifier(factor, forceRandom) {
-    const random = i => .5 * (Math.random() > .5 ? 1 : -1) * (i < 10 ? 5 : 1)
-    const pathFragments = this.originalPath.match( /\w[-. \d\n]+/g ).map( fragment => ({
-      symbol: fragment.charAt( 0 ),
-      data: fragment.match( /[-.\d]+/g )?.map( numStr => Number( numStr ) )
-    }))
-
-    return pathFragments.map( ({ symbol, data=[] }) => {
-      if (symbol === `c` && (!factor || forceRandom)) {
-        return `c` + data.map( (num, i) => (num + random( i )) * (factor || 1) ).join( ` ` )
-      }
-
-      return symbol + ` ` + (factor ? data.map( num => num * factor ) : data).join( ` ` )
-    } ).reduce( (str, line) => `${str} ${line}`, ``)
-  }
-
-  constructor( props ) {
-    super( props )
-
-    this.state = {
-      interval: 1,
-      animationInterval: null,
-    }
-
-    this.ref = React.createRef()
+  ref = React.createRef()
+  state = {
+    interval: 1,
+    animationInterval: null,
   }
 
   async componentDidMount() {
@@ -76,7 +57,7 @@ export default class EvolveyeAvatar extends React.Component {
     const factor = svgBoundings.width / EvolveyeAvatar.originalWidth
 
     const pupilCX = 298 * factor
-    const pupilCY = 179 * factor
+    const pupilCY = 209 * factor // 179 -> 209
     const pupilRX = 44 * factor
     const pupilRY = 60 * factor
 
@@ -89,7 +70,7 @@ export default class EvolveyeAvatar extends React.Component {
     reshape()
 
     white.setAttribute( `cx`, 254 * factor )
-    white.setAttribute( `cy`, 189 * factor )
+    white.setAttribute( `cy`, 219 * factor ) // 189 -> 219
     white.setAttribute( `rx`, 114 * factor )
     white.setAttribute( `ry`, 123 * factor )
 
@@ -115,14 +96,36 @@ export default class EvolveyeAvatar extends React.Component {
   }
 
   render = () => <svg
-    className="evolveye_avatar"
+    {...this.props}
     width={EvolveyeAvatar.originalWidth}
     height={EvolveyeAvatar.originalHeight}
     ref={this.ref}
-    >
-    <path d={this.state.path} style={{ transition:`${this.state.interval}s` }} fill="#0042cc"/>
+  >
+    <defs>
+      <pattern id="background_avatar" patternUnits="userSpaceOnUse" width="100%" height="100%">
+        <image href={avatar} x="0" y="0" width="100%" height="100%" />
+      </pattern>
+    </defs>
+    {/* <path d={this.state.path} style={{ transition:`${this.state.interval}s` }} fill="#0042cc"/> */}
+    <path d={this.state.path} style={{ transition:`${this.state.interval}s` }} fill="url( #background_avatar )"/>
 
     <ellipse cx={0} cy={0} rx={0} ry={0} fill="#fff"/>
     <ellipse cx={0} cy={0} rx={0} ry={0} fill="#000"/>
   </svg>
+
+  static shapeModifier(factor, forceRandom) {
+    const random = i => .5 * (Math.random() > .5 ? 1 : -1) * (i < 10 ? 5 : 1)
+    const pathFragments = this.originalPath.match( /\w[-. \d\n]+/g ).map( fragment => ({
+      symbol: fragment.charAt( 0 ),
+      data: fragment.match( /[-.\d]+/g )?.map( numStr => Number( numStr ) )
+    }))
+
+    return pathFragments.map( ({ symbol, data=[] }) => {
+      if (symbol === `c` && (!factor || forceRandom)) {
+        return `c` + data.map( (num, i) => (num + random( i )) * (factor || 1) ).join( ` ` )
+      }
+
+      return symbol + ` ` + (factor ? data.map( num => num * factor ) : data).join( ` ` )
+    } ).reduce( (str, line) => `${str} ${line}`, ``)
+  }
 }
