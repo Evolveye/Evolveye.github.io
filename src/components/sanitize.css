@@ -50,6 +50,9 @@ a {
 a:hover {
   border-bottom-color: var( --border-color );
 }
+a.is-noDecorative:hover {
+  border-bottom-color: transparent;
+}
 
 
 /*\

@@ -1,8 +1,37 @@
 .header {
   grid-area: header;
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
-.avatar {
-  width: 200px;
-  height: 200px;
+.header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #fff;
 }
+
+.empty,
+.avatar {
+  display: block;
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 1000px;
+  max-width: 50vw;
+}
+  .link {
+    margin-left: 25px;
+  }
