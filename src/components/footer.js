@@ -50,12 +50,13 @@ const queryForLightTheme = graphql`
   }
 `
 
-export default () => {
+export default ({ themeChanger }) => {
   /** @type {QueryData} */
   const dataFromQuery = useStaticQuery( queryForLightTheme )
   const { author } = dataFromQuery.site.siteMetadata
 
   const [ showMail, setMailVisibility ] = useState( false )
+  const theme = localStorage.getItem( `theme` )
   const columns = []
   const links = [
     { name: `GitHub`,
@@ -95,6 +96,12 @@ export default () => {
             >moc.liamg@wap.iksralots</span>
           : <button className={styles.text} onClick={() => setMailVisibility( true )}>Click to see mail</button>
         }
+      </div>
+      <div className={styles.column}>
+        <label className={`${styles.text} ${styles.themeChanger}`}>
+          <input type="checkbox" checked={theme === `dark`} onChange={e => themeChanger( e.target.checked )} />
+          Ciemny motyw
+        </label>
       </div>
     </div>
     <p className={styles.copyright}>

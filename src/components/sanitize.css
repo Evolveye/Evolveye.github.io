@@ -29,7 +29,8 @@
 body {
   font-family: Lato;
   background-color: var( --background-color );
-  color: var( --text-color )
+  color: var( --text-color );
+  max-width: 100vw;
 }
 
 body,
@@ -74,9 +75,9 @@ ul:not( [class] ), ol:not( [class] ) {
 }
 
 .h1, h1:not( [class] ) {
-  width: max-content;
+  max-width: max-content;
   margin-bottom: 20px;
-  padding: 0 100px 0 20px;
+  padding: 0 20px;
   font-size: 30px;
   font-weight: normal;
 }
@@ -123,13 +124,9 @@ code:not( [class] ) {
 \*/
 
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: #1a1a20;
-    --aside-color: #4a4a51;
-    --text-color: #f7f7f7;
-
-    --separator-light-color: #444;
-    --separator-dark-color: #000;
+@media screen and (max-width: 1000px) {
+  .h1, h1:not( [class] ) {
+    padding: 0;
+    font-size: 24px;
   }
-} */
+}

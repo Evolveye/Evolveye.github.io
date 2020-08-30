@@ -10,6 +10,7 @@
   background-color: var( --background-color );
   color: var( --text-color );
   transition: all 0.2s;
+  max-width: calc( 100vw - 0px );
 }
 
 .main {

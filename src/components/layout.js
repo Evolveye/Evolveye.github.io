@@ -21,8 +21,8 @@ export default class Layout extends React.Component {
 
   render = () => <div className={`${styles.layout} ${this.state.theme}`}>
     <SEO title="Home" />
-    <Header themeChanger={this.changeTheme}/>
+    <Header/>
     <main className={`${styles.main} ${this.props.className}`}>{this.props.children}</main>
-    <Footer />
+    <Footer themeChanger={this.changeTheme} />
   </div>
 }

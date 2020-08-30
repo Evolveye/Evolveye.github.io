@@ -7,8 +7,8 @@
 .collections {
   flex-basis: 0;
   flex-grow: 1;
-  padding: 20px;
-  max-width: 400px;
+  padding: 30px;
+  width: 400px;
 }
 
 .title {
@@ -27,3 +27,44 @@
       width: max-content;
       white-space: nowrap;
     }
+
+.posts {
+  overflow: hidden;
+}
+
+
+
+@media screen and (max-width: 1500px) {
+  .homepage {
+    justify-content: unset;
+  }
+  .empty {
+    display: none;
+  }
+  .posts {
+    width: calc( 100vw - 400px - 20px );
+  }
+}
+@media screen and (max-width: 1000px) {
+  .homepage {
+    flex-flow: wrap-reverse;
+  }
+  .collections {
+    position: relative;
+    width: 100%;
+    text-align: left;
+  }
+  .collections::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-top: 1px solid var( --separator-dark-color );
+    border-bottom: 1px solid var( --separator-light-color );
+  }
+  .posts {
+    width: 100%
+  }
+}

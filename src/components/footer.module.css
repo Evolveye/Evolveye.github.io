@@ -9,6 +9,7 @@
 .columns {
   display: flex;
   flex-flow: row;
+  flex-wrap: wrap;
 }
   .column {
     position: relative;
@@ -57,10 +58,25 @@
         color: var( --grey );
         font-weight: bold;
       }
+    .themeChanger {
+      padding-top: 52px;
+    }
 
 
 .copyright {
   padding-bottom: 1em;
   text-align: center;
   color: var( --grey );
+}
+
+
+
+@media screen and (max-width: 1500px) {
+  .columns {
+    margin-top: 0;
+  }
+  .column {
+    flex-basis: unset;
+    width: 100%;
+  }
 }

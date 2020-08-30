@@ -4,14 +4,15 @@
   font-size: 17px;
 }
 .post:not( :first-of-type ) .content::after {
-  /* content: ""; */
+  content: "";
   position: absolute;
   display: block;
   width: 80%;
   left: 50%;
   top: 0;
   transform: translateX( -50% );
-  border-bottom: 1px solid var( --grey );
+  border-top: 1px solid var( --separator-dark-color );
+  border-bottom: 1px solid var( --separator-light-color );
 }
 
 
@@ -28,8 +29,8 @@
   grid-area: content;
   position: relative;
   width: 1000px;
-  max-width: 50vw;
-  padding: 20px;
+  max-width: calc( 100vw - 20px );
+  padding: 30px;
 }
   .meta {
     position: relative;
@@ -95,6 +96,7 @@
     }
 
 
+
 .is-sticky {
   position: sticky;
   top: 0;
@@ -117,4 +119,21 @@
 }
 .postbox.is-pre .line {
   margin: 5px 0;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+  .content {
+    padding: 30px 0;
+  }
+  .content::before {
+    display: none;
+  }
+  .meta {
+    left: 10px;
+  }
+  .meta > * {
+    margin-right: 15px;
+  }
 }

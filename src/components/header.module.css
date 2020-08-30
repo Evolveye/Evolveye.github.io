@@ -41,3 +41,26 @@
   .link {
     margin-left: 25px;
   }
+
+
+
+@media screen and (max-width: 1000px) {
+  .homepage {
+    flex-flow: wrap-reverse;
+  }
+  .aside {
+    display: none;
+  }
+  .nav {
+    flex-grow: 2;
+    width: unset;
+    max-width: unset;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .link {
+    margin: 5px;
+    width: 100%;
+  }
+}
