@@ -18,7 +18,7 @@ export default ({ data, pageContext }) => <Layout className={styles.searchPage}>
     {
       data.allMdx.nodes.map( ({ id, excerpt, frontmatter, fields }) => <Post
         key={id}
-        titleLinkAddress={`/post/${fields.slug}`}
+        titleLinkAddress={`/post${fields.slug}`}
         frontmatter={frontmatter}
         body={excerpt}
         isEntry={true}

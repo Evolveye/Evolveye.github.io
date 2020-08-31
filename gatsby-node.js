@@ -82,7 +82,7 @@ exports.createPages = async ({ actions, graphql }) => {
     if (!post.fields.slug) return
 
     createPage( {
-      path: `/post/${post.fields.slug}`,
+      path: `/post${post.fields.slug}`,
       component: templates.post,
       context: {
         slug: post.fields.slug,
