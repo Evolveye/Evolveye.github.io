@@ -110,11 +110,11 @@ export default class Post extends React.Component {
         !isEntry &&<nav className={styles.adjacentPosts}>
           {
             previous && <div className={`${styles.adjacentPostsItem} ${styles.previous}`}>
-              <Link to={`/post/${previous.fields.slug}`}>{previous.frontmatter.title}</Link>
+              <Link to={`/post${previous.fields.slug}`}>{previous.frontmatter.title}</Link>
             </div>
           }{
             next && <div className={`${styles.adjacentPostsItem} ${styles.next}`}>
-              <Link to={`/post/${next.fields.slug}`}>{next.frontmatter.title}</Link>
+              <Link to={`/post${next.fields.slug}`}>{next.frontmatter.title}</Link>
             </div>
           }
         </nav>
