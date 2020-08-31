@@ -12,11 +12,11 @@ sneakPeek: '
 '
 ---
 
-Kilka lat temu za czasów technikum, kolega z klasy zaczepił mnie i zapytał czy słyszałem o takim śmiesznym języku "Rust" tj. rdza.
-Na tamten czas jednak w zasadzie poza przeglądarką mało co mnie interesowało więc odpowiedziałem ze nie.
-Wspólnie popatrzeliśmy na śmieszności i dziwadztwa tego języka -- jak to nastoleni specjaliści.
+Kilka lat temu za czasów technikum, kolega z klasy zaczepił mnie i zapytał czy słyszałem o takim śmiesznym języku rdzy,
+tj Ruście (albo Raście, wiadomo o co chodzi). Na tamten czas jednak w zasadzie poza przeglądarką mało co mnie interesowało więc odpowiedziałem że nie
+i wspólnie jako nastoletni specjaliści zaczęliśmy śmieszki ze składni wspomnianego języka.
 
-Teraz jednak (a w zasadzie kilka miesięcy temu) gdy rozpocząłem czytanie [tutorialo-dokumentacji](https://doc.rust-lang.org/book/)
+Teraz jednak (a w zasadzie na początku tegoż dziwnego roku 2020) gdy rozpocząłem czytanie [tutorialo-dokumentacji](https://doc.rust-lang.org/book/)
 stałem się wielkim fanem tego języka. Samo czytanie tej "książki" było dla mnie przyjemnością a odkrywanie kolejnych elementów języka
 i tego dlaczego są one napisane tak a nie inaczej przyprawiało mnie o zdumienie.
 
@@ -25,17 +25,22 @@ i tego dlaczego są one napisane tak a nie inaczej przyprawiało mnie o zdumieni
 Zanim powstał Rust, niepokonanym królem był C++ (królem wydajnościowym przy obiektowym, zrozumiałym wydaniu).
 Jako że ja poznałem C++ po wielu latach od jego wydania, i po tym gdy znałem (po prostu znałem; niekoniecznie dobrze)
 już takie języki jak chociażby JS, python, Java, SQL, to taki C++ wydawał mi się dobitnie zaznaczać swoją starość.
-Dla mnie, język ten jest nieprzyjemny ponieważ trzeba zadbać o wiele rzeczy które inne języki (czy też ich srodowisko) robią samodzielnie. Tak dla przykładu:
+Dla mnie, język ten jest nieprzyjemny ponieważ trzeba zadbać o wiele rzeczy które inne języki (czy też ich środowisko) robią samodzielnie. Tak dla przykładu:
  * [przepełnienie bufora](https://en.wikipedia.org/wiki/Buffer_overflow) ([pl](https://pl.wikipedia.org/wiki/Przepełnienie_bufora))
  * [wycieki pamięci](https://en.wikipedia.org/wiki/Memory_leak) ([pl](https://pl.wikipedia.org/wiki/Wyciek_pamięci)) -- brak garbage collectora :kot:
  * [podwójna dealokacja](https://stackoverflow.com/questions/21057393/what-does-double-free-mean) (znalazłem tylko z angielska)
  * [naruszenie bezpieczeństwa pamięci](https://en.wikipedia.org/wiki/Segmentation_fault) ([pl](https://pl.wikipedia.org/wiki/Naruszenie_ochrony_pamięci)) -- np. odwołanie do nulla
 
 Do powyższej listy dodałbym także składnię (nie jest kwestią bezpieczeństwa, stąd umieszczam poza listą),
-która wygląda jak materiał z wieloma łatami -- tak jakby dodawano ją bez namyślunku).
-Jako, ze lubuję się w językach (nazwijmy to) nowoczesnych,
-to ilosć rzeczy o których trzeba pamiętać jak i niewygodna składnia skutecznie mnie zniechęcają.
+która wygląda jak połatany różnymi materiałami element ubioru -- jakby bez namyślunku (który tam oczywiscie jest, a zywczjanie do mnie nie przemawia)
 
-W kontrze (jak sie tego można było spodziewać) staje Rust.
-Tak jak C++ jest to *[system programming language](https://en.wikipedia.org/wiki/System_programming_language)*,
-czyli w skrócie jest to język wydajny o dużych możliwosciach. Każdy z przytoczonych problemów rozwiązuje już w czasie kompilacji. Aby podsycić ciekawość dodam, ze jest to język obiektowy a nie posiada klas :O, nulli :O, ani bloku try/catch :O.
+W kontrze (jak sie tego można było spodziewać) staje Rust. Tak jak C++ jest to *[system programming language](https://en.wikipedia.org/wiki/System_programming_language)*,
+czyli w skrócie jest to język wydajny o dużych możliwosciach. Każdy z przytoczonych problemów rozwiązuje już w czasie kompilacji.
+Aby podsycić ciekawość dodam, ze jest to język obiektowy a nie posiada klas :O, nulli :O, ani bloku try/catch :O.
+
+Dlaczego w ogóle mi On potrzebny? Cóż, poza wysoce abstrakcyjnym JavaScriptem chcę znać też język poziomu systemowego.
+Gdybym chciał napisać program stawiajac na wydajność, to użyłbym właśnie takiego języka.
+Oczywiście, ktoś mógły podnieść głos, że Node.js jest przecież wydajny więc o co mi chodzi.
+Posłużę się tu grafiką przedstawiajacą wydajności różnych bibliotek obsługujących ruch sieciowy:
+
+![Średnio aktualne porównanie wydajności Node.js w stosunku do innych środowisk](./2020-08-02-Rust-język_poziomu_systemowego_dla_mnie/uWS.png)
