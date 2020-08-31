@@ -28,10 +28,6 @@
       white-space: nowrap;
     }
 
-.posts {
-  overflow: hidden;
-}
-
 
 
 @media screen and (max-width: 1500px) {

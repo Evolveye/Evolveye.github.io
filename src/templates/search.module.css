@@ -16,3 +16,24 @@
   font-weight: normal;
   margin-bottom: 20px;
 }
+
+@media screen and (max-width: 1000px) {
+  .searchPage {
+    flex-flow: wrap-reverse;
+  }
+  .info {
+    position: relative;
+    width: 100%;
+    text-align: left;
+  }
+  .info::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-top: 1px solid var( --separator-dark-color );
+    border-bottom: 1px solid var( --separator-light-color );
+  }
+}

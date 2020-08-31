@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   font-size: 17px;
+  overflow: hidden;
 }
 .post:not( :first-of-type ) .content::after {
   content: "";
@@ -67,6 +68,7 @@
   .adjacentPosts {
     display: flex;
     width: 1000px;
+    max-width: calc( 100vw - 20px );
     margin: 25px auto;
   }
     .adjacentPostsItem {
@@ -116,6 +118,7 @@
 }
 .postbox.is-pre {
   font-size: 15px;
+  overflow: auto;
 }
 .postbox.is-pre .line {
   margin: 5px 0;
