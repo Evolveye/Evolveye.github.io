@@ -43,4 +43,4 @@ Gdybym chciał napisać program stawiajac na wydajność, to użyłbym właśnie
 Oczywiście, ktoś mógły podnieść głos, że Node.js jest przecież wydajny więc o co mi chodzi.
 Posłużę się tu grafiką przedstawiajacą wydajności różnych bibliotek obsługujących ruch sieciowy:
 
-![Średnio aktualne porównanie wydajności Node.js w stosunku do innych środowisk](./2020-08-02-Rust-język_poziomu_systemowego_dla_mnie/uWS.png)
+![Średnio aktualne porównanie wydajności Node.js w stosunku do innych środowisk](./uWS.png)
