@@ -42,5 +42,4 @@ Dlaczego w ogóle mi On potrzebny? Cóż, poza wysoce abstrakcyjnym JavaScriptem
 Gdybym chciał napisać program stawiajac na wydajność, to użyłbym właśnie takiego języka.
 Oczywiście, ktoś mógły podnieść głos, że Node.js jest przecież wydajny więc o co mi chodzi.
 Posłużę się tu grafiką przedstawiajacą wydajności różnych bibliotek obsługujących ruch sieciowy:
-
 ![Średnio aktualne porównanie wydajności Node.js w stosunku do innych środowisk](./uWS.png)

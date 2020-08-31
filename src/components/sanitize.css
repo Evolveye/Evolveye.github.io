@@ -59,6 +59,15 @@ a.is-noDecorative:hover {
   border-bottom-color: transparent;
 }
 
+figure {
+  margin: 20px 40px;
+}
+figcaption {
+  color: var( --grey );
+  font-size: 14px;
+  text-align: center;
+}
+
 
 /*\
  *
