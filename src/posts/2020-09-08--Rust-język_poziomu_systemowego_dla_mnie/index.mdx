@@ -1,8 +1,8 @@
 ---
 published: true
-title: Rust - język poziomu systemowego w moim guście
+title: Rust -- język poziomu systemowego w moim guście
 author: Paweł Stolarski
-date: 2020-08-02
+date: 2020-09-08 16:00:00
 categories: [Rozmaitości]
 tags: [języki komputerowe, rust, react]
 sneakPeek: '
@@ -20,7 +20,7 @@ Teraz jednak (a w zasadzie na początku tegoż dziwnego roku 2020) gdy rozpoczą
 stałem się wielkim fanem tego języka. Samo czytanie tej "książki" było dla mnie przyjemnością a odkrywanie kolejnych elementów języka
 i tego dlaczego są one napisane tak a nie inaczej przyprawiało mnie o zdumienie.
 
-## Dlaczego Rust a nie C++
+## Dlaczego Rust
 
 Zanim powstał Rust, niepokonanym królem był C++ (królem wydajnościowym przy obiektowym, zrozumiałym wydaniu).
 Jako że ja poznałem C++ po wielu latach od jego wydania, i po tym gdy znałem (po prostu znałem; niekoniecznie dobrze)
@@ -36,6 +36,13 @@ która wygląda jak połatany różnymi materiałami element ubioru -- jakby bez
 
 W kontrze (jak sie tego można było spodziewać) staje Rust. Tak jak C++ jest to *[system programming language](https://en.wikipedia.org/wiki/System_programming_language)*,
 czyli w skrócie jest to język wydajny o dużych możliwosciach. Każdy z przytoczonych problemów rozwiązuje już w czasie kompilacji.
+Wielkim atutem Rusta jest odpowiednik znanych garbage collectorów -- `ownership`, czyli własność(?)/przynależność(?).
+Zbieracz nieużytków jest takim elementem środowiska, który co jakis czas skanuje pamięć i wyrzuca z niej "śmieci",
+czyli zwalnia nieużywane już miejsca pamięci. System przynależności w Ruście eliminuje potrzebę "skanowania" pamięci.
+Każdy element języka, który należy przechowywać w pamięci posiada swój włąsny czas życia (lifetime).
+Każde takie pole jest przypisane do jakiegoś posiadacza. Każda klamra zamykajaca blok kodyu ma zdolność
+do wywoływania funkcji `drop` na danych których przestrzeń użytkowa dobiega końca.
+Gdy są one kasowane, wszystkie posiadane dane również powinny zostac usunięte. Tak to w uproszczeniu by działało.
 Aby podsycić ciekawość dodam, ze jest to język obiektowy a nie posiada klas :O, nulli :O, ani bloku try/catch :O.
 
 Dlaczego w ogóle mi On potrzebny? Cóż, poza wysoce abstrakcyjnym JavaScriptem chcę znać też język poziomu systemowego.
@@ -43,3 +50,23 @@ Gdybym chciał napisać program stawiajac na wydajność, to użyłbym właśnie
 Oczywiście, ktoś mógły podnieść głos, że Node.js jest przecież wydajny więc o co mi chodzi.
 Posłużę się tu grafiką przedstawiajacą wydajności różnych bibliotek obsługujących ruch sieciowy:
 ![Średnio aktualne porównanie wydajności Node.js w stosunku do innych środowisk](./uWS.png)
+
+<Note>
+  Dane te są od dawna nieaktualne, a zamieszcam je tu jedynie poglądowo.
+</Note>
+
+Na powyższej grafice `WS (Node.js)` jest bliski temu ile można wycisnąć z samego Node. Nie jest to zbyt szybko.
+Czy Byłoby sensowne aby za pomocą JSa renderować grafikę trójwymiarową
+w 60 klatkach na sekundę na Twoim własnym osobistym komputerze? Moim zdaniem nie.
+
+Dodatkowo wydaje mi się, ze mozę to być język który będzie tylko zyskiwać.
+Nie jednokroć pojawiały się głosy o [przepisaniu części Windowsa na Rusta](https://msrc-blog.microsoft.com/2019/11/07/using-rust-in-windows/),
+czy o powstajacym [Deno pisanym w ruscie](https://deno.land/).
+Wiecej, można przeczytać pod pierwszym znalezionym linkiem z google, [team queście](https://teamquest.pl/blog/1376_czy-rust-to-nowe-c)
+
+## Plany
+
+Na moment pisania tego tekstu w planach mam robienie w Ruscie backendu dla gier multiplayer,
+oraz zrobienie pracy inżynierskiej. Tak wyjdzie, czas pokaże.
+
+Gdybyś chciał poczytać wiecej o Ruscie, a [książka](https://doc.rust-lang.org/book/) CI nie odpowiada -- pisz śmiało.
