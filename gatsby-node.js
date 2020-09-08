@@ -93,11 +93,20 @@ exports.createPages = async ({ actions, graphql }) => {
   } )
 }
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
+exports.onCreateNode = async ({ node, actions, getNode }) => {
   if (node.internal.type === `Mdx`) {
     const { createNodeField } = actions
-    const value = createFilePath({ node, getNode })
+    const { date, title } = node.frontmatter
+    const performedDate = date.split( `T` )[ 0 ]
+    const performedTitle = title.replace( /: *|\|/g, `-` )
+      .replace( / /g, `_` )
+      .replace( /\\|\/|\*/g, `` )
+      .replace( /\?/g, `.` )
+      .replace( /</g, `(` )
+      .replace( />/g, `)` )
 
-    createNodeField( { name:`slug`, node, value } )
+    // const value = createFilePath({ node, getNode })
+
+    createNodeField( { name:`slug`, node, value:`/${performedDate}/${performedTitle}` } )
   }
 }

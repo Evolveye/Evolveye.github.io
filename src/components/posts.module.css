@@ -114,7 +114,7 @@
 }
 .postbox.is-aside {
   border: 1px solid var( --dark );
-  /* color: var( --background-color ) */
+  color: var( --text-color )
 }
 .postbox.is-pre {
   font-size: 15px;
@@ -122,6 +122,12 @@
 }
 .postbox.is-pre .line {
   margin: 5px 0;
+}
+.postbox code {
+  background-color: var( --dark-grey );
+}
+.postbox :last-child {
+  margin-bottom: 0
 }
 
 

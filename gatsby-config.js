@@ -27,7 +27,7 @@ module.exports = {
             options: {
               maxWidth: 1000,
               showCaptions: true,
-              markdownCaptions: true,
+              // markdownCaptions: true,   not working
             },
           },
         ],

@@ -55,7 +55,7 @@ a {
 a:hover {
   border-bottom-color: var( --border-color );
 }
-a.is-noDecorative:hover {
+a.is-noText:hover {
   border-bottom-color: transparent;
 }
 

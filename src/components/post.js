@@ -102,7 +102,7 @@ export default class Post extends React.Component {
 
       {
         tags && <article className={styles.tags}>
-          {tags.map( tag => <Link key={tag} className={styles.tag} to={`/tag/${tag}`}>{tag}</Link> )}
+          {tags.map( tag => <Link key={tag} className={`${styles.tag} is-noText`} to={`/tag/${tag}`}>{tag}</Link> )}
         </article>
       }
 

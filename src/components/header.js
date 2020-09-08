@@ -11,7 +11,7 @@ export default ({ themeChanger }) => {
 
   return <header className={styles.header}>
     <h1 className={styles.title}>
-      <Link to="/" className="is-noDecorative"><Avatar className={styles.avatar} /></Link>
+      <Link to="/" className="is-noText"><Avatar className={styles.avatar} /></Link>
     </h1>
     <nav className={styles.nav}>
       <Link to="/" className={styles.link}>O blogu</Link>
