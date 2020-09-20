@@ -1,12 +1,16 @@
 import React from "react"
 // import PropTypes from "prop-types"
 import { Link } from "gatsby"
-import Highlight, { defaultProps } from "prism-react-renderer"
+import Highlight, { defaultProps, Prism } from "prism-react-renderer"
 import theme from "prism-react-renderer/themes/vsDark"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
 
 import styles from "./posts.module.css"
+
+(typeof global !== "undefined" ? global : window).Prism = Prism
+
+require( `prismjs/components/prism-rust` )
 
 const shortcodes = {
   Note: ({children, ...props}) => <strong {...props} className={`${styles.postbox} ${styles.isNote}`}>{children}</strong>,
