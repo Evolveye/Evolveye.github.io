@@ -84,6 +84,9 @@
       .next::before {
         content: "Następny: "
       }
+    .category {
+      margin-right: 10px;
+    }
     .tag {
       display: block;
       padding: 10px;
@@ -113,7 +116,7 @@
   background-color: var( --light-blue );
 }
 .postbox.is-aside {
-  border: 1px solid var( --dark );
+  border: 1px solid var( --text-color );
   color: var( --text-color )
 }
 .postbox.is-pre {
