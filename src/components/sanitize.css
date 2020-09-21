@@ -84,15 +84,6 @@ pre {
  *
 \*/
 
-.postbox {
-  display: block;
-  padding: 20px;
-  margin: 20px;
-  color: var( --white );
-}
-.postbox.is-pre .line {
-  margin: 5px 0;
-}
 
 p:not( [class] ),
 ul:not( [class] ), ol:not( [class] ) {
