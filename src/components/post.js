@@ -13,9 +13,6 @@ import styles from "./posts.module.css"
 require( `prismjs/components/prism-rust` )
 
 const shortcodes = {
-  Note: ({children, ...props}) => <strong {...props} className={`${styles.postbox} ${styles.isNote}`}>{children}</strong>,
-  Info: ({children, ...props}) => <mark {...props} className={`${styles.postbox} ${styles.isInfo}`}>{children}</mark>,
-  Aside: ({children, ...props}) => <i {...props} className={`${styles.postbox} ${styles.isAside}`}>{children}</i>,
   pre: ({ children:{ props } }) => <Highlight
     {...defaultProps}
     code={props.children.trim()}
@@ -31,7 +28,7 @@ const shortcodes = {
     }) => (
       <pre className={`${styles.postbox} ${styles.isPre} ${className}`} style={style}>
         {tokens.map((line, i) => (
-          <div {...getLineProps({ line, key: i, className:styles.line })}>
+          <div {...getLineProps({ line, key:i })}>
             {line.map((token, key) => (
               <span {...getTokenProps({ token, key })} />
             ))}

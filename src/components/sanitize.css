@@ -31,11 +31,13 @@ body {
   background-color: var( --background-color );
   color: var( --text-color );
   max-width: 100vw;
+  font-size: 17px;
 }
 
 body,
-div, p,
 ul, ol,
+div, p,
+blockquote,
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
@@ -68,6 +70,12 @@ figcaption {
   text-align: center;
 }
 
+pre {
+  font-size: 15px;
+  overflow: auto;
+  line-height: 24px;
+}
+
 
 /*\
  *
@@ -76,6 +84,15 @@ figcaption {
  *
 \*/
 
+.postbox {
+  display: block;
+  padding: 20px;
+  margin: 20px;
+  color: var( --white );
+}
+.postbox.is-pre .line {
+  margin: 5px 0;
+}
 
 p:not( [class] ),
 ul:not( [class] ), ol:not( [class] ) {
@@ -123,6 +140,30 @@ code:not( [class] ) {
   font-family: monospace;
   /* color: var( --aside-color ); */
   padding: 2px 4px;
+}
+
+em:not( [class] ):only-child,
+strong:not( [class] ):only-child,
+blockquote:not( [class] ) p:only-child {
+  display: block;
+  padding: 20px;
+  margin: 20px;
+  color: var( --background-color );
+}
+em:not( [class] ):only-child code:not( [class] ),
+strong:not( [class] ):only-child code:not( [class] ),
+blockquote:not( [class] ) p:only-child code:not( [class] ) {
+  background-color: var( --dark-grey );
+}
+em:not( [class] ):only-child {
+  border: 1px solid var( --aside-color );
+  color: var( --text-color );
+}
+strong:not( [class] ):only-child {
+  background-color: var( --red );
+}
+blockquote:not( [class] ) p:only-child {
+  background-color: var( --light-blue );
 }
 
 

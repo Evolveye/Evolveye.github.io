@@ -106,33 +106,6 @@
   position: sticky;
   top: 0;
 }
-.post.is-entry {
-  font-size: 14px;
-}
-.postbox.is-note {
-  background-color: var( --red );
-}
-.postbox.is-info {
-  background-color: var( --light-blue );
-}
-.postbox.is-aside {
-  border: 1px solid var( --text-color );
-  color: var( --text-color )
-}
-.postbox.is-pre {
-  font-size: 15px;
-  overflow: auto;
-}
-.postbox.is-pre .line {
-  margin: 5px 0;
-}
-.postbox code {
-  background-color: var( --dark-grey );
-}
-.postbox :last-child {
-  margin-bottom: 0
-}
-
 
 
 @media screen and (max-width: 1000px) {
