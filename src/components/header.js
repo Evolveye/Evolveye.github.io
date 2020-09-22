@@ -16,7 +16,6 @@ export default ({ themeChanger }) => {
     <nav className={styles.nav}>
       <Link to="/" className={styles.link}>O blogu</Link>
       <Link to="/" className={styles.link}>O autorze</Link>
-      <Link to="/" className={styles.link}>Dostępność (accessibility)</Link>
       <Link to="/" className={styles.link}>Polityka prywatności</Link>
     </nav>
     <aside className={styles.aside}>

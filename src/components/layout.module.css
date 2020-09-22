@@ -4,6 +4,7 @@
   display: grid;
   grid-template:
     "header"
+    "banner"
     "main"
     "footer"/
     1fr;

@@ -81,13 +81,13 @@ export default class Post extends React.Component {
     return <>
       <article {...restProps} className={`${styles.post} ${isEntry ? styles.isEntry : ``}`}>
         {/* <aside className={`${styles.meta} ${styles.isSticky}`}></aside> */}
-        <article className={`${styles.content} is-separated-left`}>
+        <article className={`neumorphizm-white ${styles.content} is-separated-left`}>
           {isEntry ? <h3 className="h1">{titleContent}</h3> : <h1>{titleContent}</h1>}
           <aside className={styles.meta}>
             <span className={styles.author}>{author}</span>
             <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
             <article className={styles.categories}>
-              {categories.map( category => <Link key={category} className={styles.category} to={`/category/${category}`}>{category}</Link> )}
+              {categories.map( category => <Link key={category} className={`neumorphizm${styles.category}`} to={`/category/${category}`}>{category}</Link> )}
             </article>
           </aside>
           {
@@ -103,7 +103,7 @@ export default class Post extends React.Component {
 
       {
         tags && <article className={styles.tags}>
-          {tags.map( tag => <Link key={tag} className={`${styles.tag} is-noText`} to={`/tag/${tag}`}>{tag}</Link> )}
+          {tags.map( tag => <Link key={tag} className={`box ${styles.tag} is-noText`} to={`/tag/${tag}`}>{tag}</Link> )}
         </article>
       }
 

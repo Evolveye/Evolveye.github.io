@@ -44,20 +44,20 @@
     .meta > * {
       margin-right: 25px;
     }
-  .content::before {
+  /* .content::before {
     content: "";
     position: absolute;
     left: 0;
-    /* left: -4px; */
-    /* top: 60px; */
+    /* left: -4px; * /
+    /* top: 60px; * /
     display: block;
-    /* width: 8px; */
-    /* height: calc( 100% - 70px + 10px ); */
+    /* width: 8px; * /
+    /* height: calc( 100% - 70px + 10px ); * /
     height: 100%;
     border-left: 1px solid var( --separator-dark-color );
     border-right: 1px solid var( --separator-light-color );
     background-color: var( --green );
-  }
+  } */
   .postbox {
     display: block;
     padding: 20px;
@@ -88,12 +88,7 @@
       margin-right: 10px;
     }
     .tag {
-      display: block;
-      padding: 10px;
       margin: 0 0 10px 10px;
-      width: max-content;
-      background-color: var( --dark-grey );
-      color: var( --white );
       transition: background-color 0.15s;
     }
     .tag:hover {

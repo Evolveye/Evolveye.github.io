@@ -1,0 +1,24 @@
+
+
+.banner {
+  height: calc( 100vh );
+}
+.wrapper {
+  display: flex;
+  width: max-content;
+  margin: calc( 50vh - 180px ) auto;
+}
+  .photo {
+    width: 300px;
+  }
+  .about {
+    display: flex;
+    flex-flow: column;
+  }
+    .title {
+      background-color: var( --green );
+    }
+    .description {
+      flex: 1;
+      letter-spacing: 1px;
+    }
