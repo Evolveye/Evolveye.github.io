@@ -89,7 +89,8 @@ pre {
 
 
 p:not( [class] ),
-ul:not( [class] ), ol:not( [class] ) {
+.ul, ul:not( [class] ),
+.ol, ol:not( [class] ) {
   line-height: 1.7em;
   margin-bottom: 2em;
 }
@@ -127,7 +128,7 @@ li:not( [class] )::before {
   content: "¤";
   position: absolute;
   left: -20px;
-  top: 1px;
+  top: -1px;
   color: var( --green );
   font-weight: bold;
   font-size: 20px;
@@ -199,7 +200,7 @@ blockquote:not( [class] ) p:only-child {
      8px 8px 12px 0 #8882 inset,
     -8px -8px 12px 0 #fff inset;
 }
-.box {
+.box, a.box {
   display: block;
   padding: 10px;
   width: max-content;

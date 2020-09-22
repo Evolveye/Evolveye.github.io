@@ -22,6 +22,7 @@
 .meta {
   flex-basis: 0;
   flex-grow: 1;
+  margin: 10px 0;
 }
 
 
@@ -38,6 +39,9 @@
   .title {
     margin: 0;
   }
+    .title:hover {
+      color: var( --light-blue );
+    }
     .titleLink::after {
       content: "";
       position: absolute;

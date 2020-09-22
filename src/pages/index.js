@@ -5,6 +5,7 @@ import"../components/sanitize.css"
 import Banner from "../components/banner"
 import Projects from "../components/projects"
 import LastBlogpostsEntries from "../components/lastBlogposts"
+import Footer from "../components/footer"
 
 
 export default () => {
@@ -13,5 +14,6 @@ export default () => {
     <Banner />
     <Projects />
     <LastBlogpostsEntries />
+    <Footer />
   </>
 }

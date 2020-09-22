@@ -54,14 +54,14 @@ function validateProps( props ) {
   return props
 }
 
-export default () => {
+export default props => {
   const {
     frontmatter,
     body,
     previous = null,
     next = null,
     ...restProps
-  } = validateProps( this.props )
+  } = validateProps( props )
 
   const { title, date, author, categories, tags=`` } = frontmatter
 

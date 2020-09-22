@@ -62,7 +62,7 @@ export default () => {
   //   categories: new Set()
   // } )
 
-  return <section>
+  return <section className={styles.blogposts}>
     <h2 className={`box ${styles.sectionTitle}`}>Moje ostatnie wpisy</h2>
 
     {

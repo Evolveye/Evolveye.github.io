@@ -75,11 +75,11 @@ export default ({ themeChanger }) => {
   for (const { name, fluid, addresses } of links) {
     const anchors = []
 
-    addresses.forEach( ({ address, name }) => anchors.push( <a key={name} className={styles.link} href={address}>{name}</a> ) )
+    addresses.forEach( ({ address, name }) => anchors.push( <li key={name}><a className={styles.link} href={address}>{name}</a></li> ) )
 
     columns.push( <div className={styles.column} key={name}>
-      <Img fluid={fluid} className={styles.logo} alt={name} />
-      <div className={styles.links}>{anchors}</div>
+      <div className={`neumorphizm-white ${styles.logo}`}><Img fluid={fluid} alt={name} /></div>
+      <ul className={`ul ${styles.links}`}>{anchors}</ul>
     </div> )
   }
 
@@ -87,7 +87,7 @@ export default ({ themeChanger }) => {
     <div className={styles.columns}>
       {columns}
       <div className={styles.column}>
-        <Img fluid={dataFromQuery.envelopeIcon.childImageSharp.fluid} className={styles.logo} />
+      <div className={`neumorphizm-white ${styles.logo}`}><Img fluid={dataFromQuery.envelopeIcon.childImageSharp.fluid} /></div>
         {
           showMail
           ? <span
@@ -97,12 +97,12 @@ export default ({ themeChanger }) => {
           : <button className={styles.text} onClick={() => setMailVisibility( true )}>Click to see mail</button>
         }
       </div>
-      <div className={styles.column}>
+      {/* <div className={styles.column}>
         <label className={`${styles.text} ${styles.themeChanger}`}>
           <input type="checkbox" checked={theme === `dark`} onChange={e => themeChanger( e.target.checked )} />
           Ciemny motyw
         </label>
-      </div>
+      </div> */}
     </div>
     <p className={styles.copyright}>
       Copyright {new Date().getFullYear()} ©
