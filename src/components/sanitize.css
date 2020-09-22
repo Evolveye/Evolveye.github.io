@@ -93,23 +93,22 @@ ul:not( [class] ), ol:not( [class] ) {
   margin-bottom: 2em;
 }
 
-.h1, h1:not( [class] ) {
+.h1, h1 {
   max-width: max-content;
   margin-bottom: 20px;
   padding: 0 20px;
   font-size: 30px;
-  font-weight: normal;
+  font-weight: bold;
 }
-.h2, h2:not( [class] ) {
+.h2, h2 {
   margin: 30px 0 15px;
   padding: 0 100px 0 20px;
-  font-weight: normal;
+  font-weight: bold;
   font-size: 25px;
 }
-.h3, h3:not( [class] ) {
+.h3, h3 {
   margin: 30px 0 15px 20px;
-  padding: 0 100px 0 20px;
-  font-family: monospace;
+  padding: 0 30px;
   font-size: 25px;
 }
 /*
@@ -196,6 +195,7 @@ blockquote:not( [class] ) p:only-child {
   padding: 10px;
   width: max-content;
   background-color: var( --dark-grey );
+  font-family: monospace;
   color: var( --white );
 }
 

@@ -6,6 +6,7 @@ import styles from "./layout.module.css"
 import SEO from "./seo"
 import Header from "./header"
 import Banner from "./banner"
+import Projects from "./projects"
 import Footer from "./footer"
 
 export default class Layout extends React.Component {
@@ -24,6 +25,7 @@ export default class Layout extends React.Component {
     <SEO title="Home" />
     {/* <Header /> */}
     <Banner />
+    <Projects />
     <main className={`${styles.main} ${this.props.className}`}>{this.props.children}</main>
     <Footer themeChanger={this.changeTheme} />
   </div>

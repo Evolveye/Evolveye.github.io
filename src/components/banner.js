@@ -19,7 +19,7 @@ const query = graphql`
   query Banner {
     photo: file( relativePath:{ eq:"photo.png" } ) {
       childImageSharp {
-        fluid( maxWidth:500 ) {
+        fluid( maxWidth:400 ) {
           ...GatsbyImageSharpFluid
         }
       }
@@ -31,22 +31,25 @@ export default () => {
   /** @type {QueryData} */
   const queryData = useStaticQuery( query )
 
-  return <article className={styles.banner}>
+  return <section className={styles.banner}>
     <div className={styles.wrapper}>
       <Img className={`neumorphizm-white ${styles.photo}`} fluid={queryData.photo.childImageSharp.fluid} />
-      <section className={styles.about}>
-        <h1 className={`h3 box ${styles.title}`}>Paweł Stolarski</h1>
-        <div className={` ${styles.description}`}>
+
+      <article>
+        <h1 className={`h1 box ${styles.title}`}>Paweł Stolarski</h1>
+
+        <div className={styles.description}>
           <p>
             Jestem typem naukowca, programistą eksperymentatorem.<br />
             Lubię bawić się kodem i wiedzieć co, jak, i dlaczego działa.
           </p>
+
           <p>
             Jeśli czegoś związnego z oprogramowaniem potrzebuję, to zwyczajnie to robię.<br />
             Jeśli jest to wyzwanie, lub coś nowego -- tylko mnie to zachęca.
           </p>
         </div>
-      </section>
+      </article>
     </div>
-  </article>
+  </section>
 }

@@ -11,14 +11,9 @@
   .photo {
     width: 300px;
   }
-  .about {
-    display: flex;
-    flex-flow: column;
+  .description {
+    letter-spacing: 1px;
   }
     .title {
       background-color: var( --green );
-    }
-    .description {
-      flex: 1;
-      letter-spacing: 1px;
     }
