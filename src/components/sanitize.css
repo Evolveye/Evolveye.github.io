@@ -56,11 +56,12 @@ a {
 
   --border-color: var( --light-blue )
 }
-a:hover {
-  border-bottom-color: var( --border-color );
+a.is-not-decorative {
+  color: inherit;
+  border-bottom: unset;
 }
-a.is-noText:hover {
-  border-bottom-color: transparent;
+a:not( .is-not-decorative ):hover {
+  border-bottom-color: var( --border-color );
 }
 
 figure {
@@ -189,6 +190,14 @@ blockquote:not( [class] ) p:only-child {
      8px 8px 12px 0 #8881 inset,
     -8px -8px 12px 0 #fff inset;
   background-color: #fff;
+  transition: box-shadow 0.1s;
+}
+.neumorphizm-white.is-hoverable:hover {
+  box-shadow:
+     8px 8px 12px 0 transparent,
+    -8px -8px 12px 0 transparent,
+     8px 8px 12px 0 #8882 inset,
+    -8px -8px 12px 0 #fff inset;
 }
 .box {
   display: block;

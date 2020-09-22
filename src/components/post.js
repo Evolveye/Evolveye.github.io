@@ -39,87 +39,95 @@ const shortcodes = {
   </Highlight>
 }
 
-export default class Post extends React.Component {
-  // static propTypes = {
-  //   frontmatter: PropTypes.shape( {
-  //     date: PropTypes.string.isRequired,
-  //     title: PropTypes.string.isRequired,
-  //     author: PropTypes.string.isRequired,
-  //     categories: PropTypes.string.isRequired,        // it doesn't work, anybody know why?
-  //     tags: PropTypes.string,
-  //   } ).isRequired,
-  //   body: PropTypes.string.isRequired,
-  //   shouldBodyBeRendered: PropTypes.bool,
-  //   titleLinkAddress: PropTypes.string,
-  //   previous: PropTypes.string,
-  //   next: PropTypes.string,
-  // }
+function validateProps( props ) {
+  const { frontmatter, body } = props
+  const { title, date, author, categories } = frontmatter
 
-  render = () => {
-    const {
-      frontmatter,
-      body,
-      isEntry = false,
-      titleLinkAddress = ``,
-      previous = null,
-      next = null,
-      ...restProps
-    } = this.props
+  if (!body) throw new Error( `Body property is required! (just add "body={...}" property)` )
+  if (!frontmatter) throw new Error( `Frontmatter property is required! (just add "frontmatter={...}" property)` )
 
-    const { title, date, author, categories, tags=`` } = frontmatter
+  if (!title) throw new Error( `Every post should have title!` )
+  if (!date) throw new Error( `Every post should have publication date! Post "${title}" haven't!` )
+  if (!author) throw new Error( `Every post should have author! Post "${title}" haven't!` )
+  if (!categories) throw new Error( `Every post should have minimum one category! Post "${title}"` )
 
-    if (!body) throw new Error( `Body property is required! (just add "body={...}" property)` )
-    if (!frontmatter) throw new Error( `Frontmatter property is required! (just add "frontmatter={...}" property)` )
+  return props
+}
 
-    if (!title) throw new Error( `Every post should have title!` )
-    if (!date) throw new Error( `Every post should have publication date! Post "${title}" haven't!` )
-    if (!author) throw new Error( `Every post should have author! Post "${title}" haven't!` )
-    if (!categories) throw new Error( `Every post should have minimum one category! Post "${title}"` )
+export default () => {
+  const {
+    frontmatter,
+    body,
+    previous = null,
+    next = null,
+    ...restProps
+  } = validateProps( this.props )
 
-    const titleContent = titleLinkAddress ? <Link to={titleLinkAddress}>{title}</Link> : title
+  const { title, date, author, categories, tags=`` } = frontmatter
 
-    return <>
-      <article {...restProps} className={`${styles.post} ${isEntry ? styles.isEntry : ``}`}>
-        {/* <aside className={`${styles.meta} ${styles.isSticky}`}></aside> */}
-        <article className={`neumorphizm-white ${styles.content} is-separated-left`}>
-          {isEntry ? <h3 className="h1">{titleContent}</h3> : <h1>{titleContent}</h1>}
-          <aside className={styles.meta}>
-            <span className={styles.author}>{author}</span>
-            <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
-            <article className={styles.categories}>
-              {categories.map( category => <Link key={category} className={`neumorphizm${styles.category}`} to={`/category/${category}`}>{category}</Link> )}
-            </article>
-          </aside>
-          {
-            isEntry ? body : (
-              <MDXProvider components={shortcodes} >
-                <MDXRenderer>{body}</MDXRenderer>
-              </MDXProvider>
-            )
-          }
+  return <article>
+    <section {...restProps} className={`neumorphizm-white ${styles.content}`}>
+      <h1>{title}</h1>
+
+      <aside className={styles.meta}>
+        <span className={styles.author}>{author}</span>
+
+        <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
+
+        <article className={styles.categories}>
+          {categories.map( category => <Link key={category} className={`${styles.category}`} to={`/category/${category}`}>{category}</Link> )}
         </article>
-        {/* <aside className={`${styles.tableOfContent} ${styles.isSticky}`} /> */}
+      </aside>
+
+       <MDXProvider components={shortcodes} >
+         <MDXRenderer>{body}</MDXRenderer>
+       </MDXProvider>
+    </section>
+
+    {
+      tags && <nav className={styles.tags}>
+        {tags.map( tag => <Link key={tag} className={`box ${styles.tag} is-not-decorative`} to={`/tag/${tag}`}>{tag}</Link> )}
+      </nav>
+    }
+
+    <nav className={styles.adjacentPosts}>
+      {
+        previous && <div className={`${styles.adjacentPostsItem} ${styles.previous}`}>
+          <Link to={`/post${previous.fields.slug}`}>{previous.frontmatter.title}</Link>
+        </div>
+      }{
+        next && <div className={`${styles.adjacentPostsItem} ${styles.next}`}>
+          <Link to={`/post${next.fields.slug}`}>{next.frontmatter.title}</Link>
+        </div>
+      }
+    </nav>
+  </article>
+}
+
+export const BlogpostEntry = props => {
+  const {
+    frontmatter,
+    body,
+    titleLinkAddress = ``,
+    ...restProps
+  } = validateProps( props )
+
+  const { title, date, author, categories } = frontmatter
+  const titleContent = titleLinkAddress ? <Link to={titleLinkAddress} className={`${styles.titleLink} is-not-decorative`}>{title}</Link> : title
+
+  return <article {...restProps} className={`neumorphizm-white is-hoverable ${styles.blogpost} ${styles.isEntry}`}>
+    <h3 className={styles.title}>{titleContent}</h3>
+
+    <aside className={styles.meta}>
+      <span className={styles.author}>{author}</span>
+
+      <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
+
+      <article className={styles.categories}>
+        {categories.map( category => <Link key={category} className={`${styles.category}`} to={`/category/${category}`}>{category}</Link> )}
       </article>
+    </aside>
 
-      {
-        tags && <article className={styles.tags}>
-          {tags.map( tag => <Link key={tag} className={`box ${styles.tag} is-noText`} to={`/tag/${tag}`}>{tag}</Link> )}
-        </article>
-      }
-
-      {
-        !isEntry &&<nav className={styles.adjacentPosts}>
-          {
-            previous && <div className={`${styles.adjacentPostsItem} ${styles.previous}`}>
-              <Link to={`/post${previous.fields.slug}`}>{previous.frontmatter.title}</Link>
-            </div>
-          }{
-            next && <div className={`${styles.adjacentPostsItem} ${styles.next}`}>
-              <Link to={`/post${next.fields.slug}`}>{next.frontmatter.title}</Link>
-            </div>
-          }
-        </nav>
-      }
-    </>
-  }
+    <p>{body}</p>
+  </article>
 }
