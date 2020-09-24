@@ -1,12 +1,39 @@
 .nav {
   position: sticky;
-  top: 0;
+  top: 30px;
+  margin-left: 30px;
+  height: 0;
 }
 .itemList {}
 .item {
+  position: relative;
   width: 100px;
   height: 100px;
 }
 .link {
   display: block;
+  margin: 0;
 }
+  .link:hover + .title {
+    displaY: block;
+  }
+  .title {
+    displaY: none;
+    position: absolute;
+    left: calc( 100% + 15px );
+    top: calc( 50% - 16px );
+    width: max-content;
+    padding: 7px 12px;
+    border-radius: 5px;
+    background-color: black;
+    color: var( --white );
+  }
+    .title::before {
+      position: absolute;
+      left: -10px;
+      top: 50%;
+      transform: translateY( -50% );
+      content: "";
+      border: 5px solid transparent;
+      border-right-color: black;
+    }

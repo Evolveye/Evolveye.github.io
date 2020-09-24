@@ -31,9 +31,6 @@ const projectsData = [
   { title: `Strona domowa`,
     fluidName: `avatar`,
   },
-  { title: `Strona blogowa`,
-    fluidName: `avatar`,
-  },
 ]
 
 export default () => {
@@ -44,10 +41,11 @@ export default () => {
     <ul className={styles.itemList}>
       {
         projectsData.map( ({ title, fluidName }) => (
-          <li key={title} className={`neumorphizm-white is-hoverable ${styles.item}`}>
-            <Link to="/" className={`is-not-decorative ${styles.link}`}>
+          <li key={title} className={styles.item}>
+            <Link to="/" className={`neumorphizm-white is-hoverable is-not-decorative ${styles.link}`}>
               <Img fluid={queryData[ fluidName ].childImageSharp.fluid} alt={`${title} icon`} />
             </Link>
+            <div className={styles.title}>{title}</div>
           </li>
         ) )
       }
