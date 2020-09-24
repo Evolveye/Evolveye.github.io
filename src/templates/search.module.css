@@ -5,10 +5,13 @@
 
 .empty,
 .info {
+  position: sticky;
+  top: 30px;
   flex-basis: 0;
   flex-grow: 1;
   padding: 20px;
   max-width: 400px;
+  height: max-content;
 }
 
 .title {
