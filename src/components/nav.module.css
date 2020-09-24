@@ -5,7 +5,9 @@
   height: 0;
   z-index: 10;
 }
-.itemList {}
+.itemList {
+  width: max-content;
+}
 .item {
   position: relative;
   width: 100px;
