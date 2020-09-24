@@ -3,12 +3,6 @@
   flex-wrap: wrap;
 }
 
-.sectionTitle {
-  background-color: var( --red );
-  margin: 0 auto 50px;
-  padding: 10px 100px;
-}
-
   .project {
     display: flex;
     width: max-content;

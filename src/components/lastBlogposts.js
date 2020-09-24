@@ -63,7 +63,7 @@ export default () => {
   // } )
 
   return <section className={styles.blogposts}>
-    <h2 className={`box ${styles.sectionTitle}`}>Moje ostatnie wpisy</h2>
+    <h2 className={`boxed-title is-blue ${styles.sectionTitle}`}>Moje ostatnie wpisy</h2>
 
     {
       posts.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm}, fields }) => <BlogpostEntry

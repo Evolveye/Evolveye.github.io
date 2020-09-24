@@ -101,7 +101,7 @@ export default () => {
   const queryData = useStaticQuery( query )
 
   return <section>
-    <h2 className={`h2 box ${styles.sectionTitle}`}>Wyróżniona aktywność</h2>
+    <h2 className={`h2 boxed-title is-red`}>Wyróżniona aktywność</h2>
 
     <div className={styles.projectsWrapper}>
       {

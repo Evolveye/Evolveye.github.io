@@ -211,6 +211,8 @@ blockquote:not( [class] ) p:only-child {
 .neumorphizm-white.is-hoverable:hover > * {
   transform: scale( .98 );
 }
+
+.boxed-title,
 .box, a.box {
   display: block;
   padding: 10px;
@@ -220,6 +222,19 @@ blockquote:not( [class] ) p:only-child {
   color: var( --white );
 }
 
+.boxed-title {
+  margin: 100px auto 50px;
+  padding: 10px 100px;
+}
+.boxed-title.is-red {
+  background-color: var( --red );
+}
+.boxed-title.is-green {
+  background-color: var( --green );
+}
+.boxed-title.is-blue {
+  background-color: var( --blue );
+}
 
 /*\
  *

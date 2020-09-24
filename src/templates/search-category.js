@@ -7,24 +7,27 @@ import { BlogpostEntry } from "../components/post"
 import styles from "./search.module.css"
 
 export default ({ data, pageContext }) =>
-  <Layout className={styles.searchPage}>
-    <aside className={styles.empty} />
-    <section className={styles.posts}>
-      {
-        data.allMdx.nodes.map( ({ id, excerpt, frontmatter, fields }) => <BlogpostEntry
-          key={id}
-          titleLinkAddress={`/post${fields.slug}`}
-          frontmatter={frontmatter}
-          body={excerpt}
-        /> )
-      }
-    </section>
-    <section className={styles.info}>
-      <h2 className={styles.title}>O wynikach</h2>
-      <ul>
-        <li>Przeszukiwana kategoria: <Link to={`/category/${pageContext.category}`}>{pageContext.category}</Link></li>
-        <li>Ilość wyników: {data.allMdx.nodes.length}</li>
-      </ul>
+  <Layout>
+    <h1 className="boxed-title is-blue">Przeszukiwanie kategorii</h1>
+    <section className={styles.searchPage}>
+      <aside className={styles.empty} />
+      <article className={styles.posts}>
+        {
+          data.allMdx.nodes.map( ({ id, excerpt, frontmatter, fields }) => <BlogpostEntry
+            key={id}
+            titleLinkAddress={`/post${fields.slug}`}
+            frontmatter={frontmatter}
+            body={excerpt}
+          /> )
+        }
+      </article>
+      <article className={styles.info}>
+        <h2 className={styles.title}>O wynikach</h2>
+        <ul>
+          <li>Przeszukiwana kategoria: <Link to={`/category/${pageContext.category}`}>{pageContext.category}</Link></li>
+          <li>Ilość wyników: {data.allMdx.nodes.length}</li>
+        </ul>
+      </article>
     </section>
   </Layout>
 
