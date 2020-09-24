@@ -2,11 +2,12 @@
 
 .banner {
   height: 100vh;
+  padding-top: calc( 50vh - 180px );
 }
 .wrapper {
   display: flex;
   width: max-content;
-  margin: calc( 50vh - 180px ) auto;
+  margin: 0 auto;
 }
   .photo {
     width: 300px;

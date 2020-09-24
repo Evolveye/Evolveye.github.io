@@ -1,9 +1,10 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
-import styles from "./lastBlogposts.module.css"
+import"../components/sanitize.css"
 
-import { BlogpostEntry } from "./post"
+import Layout from "../components/layout"
+import { BlogpostEntry } from "../components/post"
 
 /**
  * @typedef {Object} QueryData
@@ -22,11 +23,10 @@ import { BlogpostEntry } from "./post"
  * @property {string} data.allMdx.nodes.fields.slug
  */
 
-const query = graphql`query Posts {
+const query = graphql`query BlogHome {
   allMdx(
     sort: { fields:frontmatter___date, order:DESC },
     filter: { frontmatter:{ published:{ eq:true } } },
-    limit: 4,
   ) {
     nodes {
       id
@@ -52,26 +52,18 @@ export default () => {
 
 
   const posts = queryData.allMdx.nodes
-  // const { tags, categories } = posts.reduce( (obj, { frontmatter:{ tags, categories } }) => {
-  //   tags && tags.forEach( tag => obj.tags.add( tag ) )
-  //   categories.forEach( category => obj.categories.add( category ) )
 
-  //   return obj
-  // }, {
-  //   tags: new Set(),
-  //   categories: new Set()
-  // } )
-
-  return <section className={styles.blogposts}>
-    <h2 className={`boxed-title is-blue ${styles.sectionTitle}`}>Moje ostatnie wpisy</h2>
-
-    {
-      posts.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm }, fields }) => <BlogpostEntry
-        key={id}
-        titleLinkAddress={`/post${fields.slug}`}
-        frontmatter={fm}
-        body={sneakPeek || excerpt}
-      /> )
-    }
-  </section>
+  return <Layout>
+    <h1 className="boxed-title is-green">Ostatnio dodane wpisy</h1>
+    <section>
+      {
+        posts.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm}, fields }) => <BlogpostEntry
+          key={id}
+          titleLinkAddress={`/post${fields.slug}`}
+          frontmatter={fm}
+          body={sneakPeek || excerpt}
+        /> )
+      }
+    </section>
+  </Layout>
 }
