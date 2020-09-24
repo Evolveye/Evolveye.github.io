@@ -115,19 +115,21 @@ export const BlogpostEntry = props => {
   const { title, date, author, categories } = frontmatter
   const titleContent = titleLinkAddress ? <Link to={titleLinkAddress} className={`${styles.titleLink} is-not-decorative`}>{title}</Link> : title
 
-  return <article {...restProps} className={`neumorphizm-white is-hoverable ${styles.blogpost} ${styles.isEntry}`}>
-    <h3 className={styles.title}>{titleContent}</h3>
+  return <article {...restProps} className={`neumorphizm-white is-hoverable ${styles.entry}`}>
+    <div class={styles.neumorphizmTransformFix}>
+      <h3 className={styles.title}>{titleContent}</h3>
 
-    <aside className={styles.meta}>
-      <span className={styles.author}>{author}</span>
+      <aside className={styles.meta}>
+        <span className={styles.author}>{author}</span>
 
-      <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
+        <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
 
-      <article className={styles.categories}>
-        {categories.map( category => <Link key={category} className={`${styles.category}`} to={`/category/${category}`}>{category}</Link> )}
-      </article>
-    </aside>
+        <article className={styles.categories}>
+          {categories.map( category => <Link key={category} className={`${styles.category}`} to={`/category/${category}`}>{category}</Link> )}
+        </article>
+      </aside>
 
-    <p>{body}</p>
+      <p>{body}</p>
+    </div>
   </article>
 }

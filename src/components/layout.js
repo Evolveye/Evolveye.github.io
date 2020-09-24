@@ -4,7 +4,7 @@ import ".//sanitize.css"
 import styles from "./layout.module.css"
 
 import SEO from "./seo"
-// import Header from "./header"
+import Header from "./header"
 import Footer from "./footer"
 
 export default class Layout extends React.Component {
@@ -21,7 +21,7 @@ export default class Layout extends React.Component {
 
   render = () => <div className={`${styles.layout} ${this.state.theme}`}>
     <SEO title="Home" />
-    {/* <Header /> */}
+    <Header />
     <main className={`${styles.main} ${this.props.className}`}>{this.props.children}</main>
     <Footer themeChanger={this.changeTheme} />
   </div>

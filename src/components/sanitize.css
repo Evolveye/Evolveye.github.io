@@ -88,6 +88,9 @@ pre {
 \*/
 
 
+ul[class], ol[class] {
+  padding: 0;
+}
 p:not( [class] ),
 .ul, ul:not( [class] ),
 .ol, ol:not( [class] ) {
@@ -119,10 +122,12 @@ p:not( [class] ),
 .h6, h6:not( [class] ) {}
 */
 
+li {
+  list-style: none;
+}
 li:not( [class] ) {
   position: relative;
   margin-bottom: 1em;
-  list-style: none;
 }
 li:not( [class] )::before {
   content: "¤";
@@ -199,6 +204,12 @@ blockquote:not( [class] ) p:only-child {
     -8px -8px 12px 0 transparent,
      8px 8px 12px 0 #8882 inset,
     -8px -8px 12px 0 #fff inset;
+}
+.neumorphizm-white.is-hoverable > * {
+  transition: all 0.1s;
+}
+.neumorphizm-white.is-hoverable:hover > * {
+  transform: scale( .98 );
 }
 .box, a.box {
   display: block;
