@@ -146,28 +146,19 @@ code:not( [class] ) {
   padding: 2px 4px;
 }
 
-em:not( [class] ):only-child,
-strong:not( [class] ):only-child,
-blockquote:not( [class] ) p:only-child {
-  display: block;
-  padding: 20px;
-  margin: 20px;
-  color: var( --background-color );
+blockquote:not( [class] ) {
+  position: relative;
+  padding: 30px;
+  padding-left: 110px;
+  font-style: italic;
 }
-em:not( [class] ):only-child code:not( [class] ),
-strong:not( [class] ):only-child code:not( [class] ),
-blockquote:not( [class] ) p:only-child code:not( [class] ) {
-  background-color: var( --dark-grey );
-}
-em:not( [class] ):only-child {
-  border: 1px solid var( --aside-color );
-  color: var( --text-color );
-}
-strong:not( [class] ):only-child {
-  background-color: var( --red );
-}
-blockquote:not( [class] ) p:only-child {
-  background-color: var( --light-blue );
+blockquote:not( [class] )::before {
+  content: "❞";
+  position: absolute;
+  left: -30px;
+  top: -60px;
+  font-size: 200px;
+  color: #0001;
 }
 
 
@@ -217,6 +208,7 @@ blockquote:not( [class] ) p:only-child {
   display: block;
   padding: 10px;
   width: max-content;
+  max-width: 100%;
   background-color: var( --dark-grey );
   font-family: monospace;
   color: var( --white );
@@ -226,12 +218,15 @@ blockquote:not( [class] ) p:only-child {
   margin: 100px auto 50px;
   padding: 10px 100px;
 }
+.box.is-red,
 .boxed-title.is-red {
   background-color: var( --red );
 }
+.box.is-green,
 .boxed-title.is-green {
   background-color: var( --green );
 }
+.box.is-blue,
 .boxed-title.is-blue {
   background-color: var( --blue );
 }

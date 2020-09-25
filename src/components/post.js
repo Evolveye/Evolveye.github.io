@@ -13,6 +13,9 @@ import styles from "./posts.module.css"
 require( `prismjs/components/prism-rust` )
 
 const shortcodes = {
+  Note: ({children, ...props}) => <strong {...props} className={`box is-red ${styles.box}`}>{children}</strong>,
+  Info: ({children, ...props}) => <mark {...props} className={`box is-blue ${styles.box}`}>{children}</mark>,
+  Aside: ({children, ...props}) => <i {...props} className={`box ${styles.box}`}>{children}</i>,
   pre: ({ children:{ props } }) => <Highlight
     {...defaultProps}
     code={props.children.trim()}

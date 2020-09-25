@@ -110,7 +110,9 @@ Frontend z kolei ma pełnić jedynie funkcje interpretacyjne tego co dostał z s
 Nie może być po stronie clienta zawarta żadna logika która moze wpłynąć na serwer.
 Client powinien móc jedynie wysyłać sygnały że podjął jakieś działania.
 
-*Oczywiście jest to spore uproszczenie. Client co prawda nie powinien wykonywac logiki, która wpłwyałaby na serwer, lecz powinien wykopnywać logikę wpływajacą na samego siebie. Jest to bardzo pomocne przy pracy z interfejsami sieciowymi. Umożliwia eliminację lagów.*
+<Aside>
+  Oczywiście jest to spore uproszczenie. Client co prawda nie powinien wykonywac logiki, która wpłwyałaby na serwer, lecz powinien wykopnywać logikę wpływajacą na samego siebie. Jest to bardzo pomocne przy pracy z interfejsami sieciowymi. Umożliwia eliminację lagów.
+</Aside>
 
 Do rysowania planszy najprościej będzie wykorzystać "nołdowe" (node-owe(?)) moduły `react-three-fiber` oraz `drei`.
 Moduły te dostarczają kolejnej niesamowitej warstwy abstrakcji do abstrakcji dostarczanej przez three.js,
@@ -131,9 +133,11 @@ Zdaję sobie oczywiście sprawę z tego, że nie ejst to wzorcowe podejscie.
 Uważam jednak, że jest to podejscie wystarczajaco dobre dla małej, skromnej aplikacji -- warto przypomnieć,
 że koniec końców to nie będzie gra. Front będzie tu jedynie pełnić podstawowe działania komunikacyjne z serwerem.
 
-> Dalszą część wpisu będę kontynuować w czasie przeszłym --
+<Info>
+  Dalszą część wpisu będę kontynuować w czasie przeszłym --
   tekst do tego momentu był wstępem organizacyjnym pisanym przed przystąpieniem do pracy
   a jego dalsze części zostały napisane juz po fakcie.
+</Info>
 
 
 ## To samo słodkie, czyli tworzenie -- ale w skrócie
