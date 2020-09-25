@@ -1,4 +1,5 @@
 .layout {
+  grid-area: layout;
   --entry-aside-width: 500px;
 
   display: grid;

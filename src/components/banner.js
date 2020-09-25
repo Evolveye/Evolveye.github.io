@@ -35,10 +35,10 @@ export default () => {
     <div className={styles.wrapper}>
       <Img className={`neumorphizm-white ${styles.photo}`} fluid={queryData.photo.childImageSharp.fluid} />
 
-      <article>
-        <h1 className={`h1 box ${styles.title}`}>Paweł Stolarski</h1>
+      <article className={styles.description}>
+        <h1 className={`boxed-title is-green ${styles.title}`}>Paweł Stolarski</h1>
 
-        <div className={styles.description}>
+        <div className={styles.content}>
           <p>
             Jestem typem naukowca, programistą eksperymentatorem.<br />
             Lubię bawić się kodem i wiedzieć co, jak, i dlaczego działa.

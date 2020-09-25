@@ -1,12 +1,12 @@
-
-
 .banner {
-  height: 100vh;
+  grid-area: banner;
+  min-height: 100vh;
   padding-top: calc( 50vh - 180px );
 }
 .wrapper {
   display: flex;
-  width: max-content;
+  max-width: 100%;
+  flex-wrap: wrap;
   margin: 0 auto;
 }
   .photo {
@@ -16,5 +16,19 @@
     letter-spacing: 1px;
   }
     .title {
-      background-color: var( --green );
+      margin-left: 0;
+      padding: 10px;
     }
+
+@media screen and (max-width:750px) {
+  .banner {
+    padding: 10px;
+  }
+    .photo {
+      margin: 30px auto;
+    }
+    .title {
+      margin: 0 auto 10px;
+      width: 100%;
+    }
+}
