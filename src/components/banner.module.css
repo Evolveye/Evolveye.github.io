@@ -5,8 +5,8 @@
 }
 .wrapper {
   display: flex;
+  width: max-content;
   max-width: 100%;
-  flex-wrap: wrap;
   margin: 0 auto;
 }
   .photo {
@@ -20,15 +20,27 @@
       padding: 10px;
     }
 
+
 @media screen and (max-width:750px) {
   .banner {
     padding: 10px;
   }
-    .photo {
-      margin: 30px auto;
+    .wrapper {
+      flex-wrap: wrap;
     }
-    .title {
-      margin: 0 auto 10px;
-      width: 100%;
-    }
+      .photo {
+        margin: calc( 50vh - 180px - 68px - 28px ) auto;
+      }
+      .description {
+        width: 100%;
+        letter-spacing: 1px;
+      }
+        .title {
+          margin: 0 auto 10px;
+          width: 100%;
+        }
+        .content {
+          padding-top: 30px;
+          text-align: center;
+        }
 }
