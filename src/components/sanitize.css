@@ -44,6 +44,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+ul, ol {
+  padding: 0;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-size: inherit;
 }
@@ -62,6 +66,10 @@ a.is-not-decorative {
 }
 a:not( .is-not-decorative ):hover {
   border-bottom-color: var( --border-color );
+}
+
+button {
+  width: max-content;
 }
 
 figure {
@@ -88,8 +96,9 @@ pre {
 \*/
 
 
-ul[class], ol[class] {
-  padding: 0;
+.ul, ul:not( [class] ),
+.ol, ol:not( [class] ) {
+  padding-left: 35px;
 }
 p:not( [class] ),
 .ul, ul:not( [class] ),

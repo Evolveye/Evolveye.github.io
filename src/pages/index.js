@@ -14,5 +14,5 @@ export default () => <div className={styles.page}>
   <Banner />
   <Projects />
   <LastBlogpostsEntries />
-  {/* <Footer /> */}
+  <Footer />
 </div>

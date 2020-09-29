@@ -60,11 +60,22 @@
 
 
 @media screen and (max-width: 1000px) {
-  .columns {
-    margin-top: 0;
+  .footer {
+    padding-top: 100px;
   }
-  .column {
-    flex-basis: unset;
-    width: 100%;
-  }
+    .columns {
+      margin-top: 0;
+    }
+    .column {
+      display: flex;
+      flex-basis: unset;
+      width: 100%;
+    }
+      .links, .text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 50%;
+        margin: 0;
+      }
 }

@@ -62,13 +62,13 @@ export default ({ themeChanger }) => {
     { name: `GitHub`,
       fluid: dataFromQuery.githubLogo.childImageSharp.fluid,
       addresses: [
-        { address:`https://github.com/Evolveye`, name:`Profile` },
-        { address:`https://github.com/Evolveye?tab=repositories`, name:`Repositories` },
+        { address:`https://github.com/Evolveye`, name:`Profil` },
+        { address:`https://github.com/Evolveye?tab=repositories`, name:`Repozytoria` },
       ]
     },
     { name: `LinkedIn`,
       fluid: dataFromQuery.linkedinLogo.childImageSharp.fluid,
-      addresses: [ { address:`https://github.com/Evolveye`, name:`Profile` }, ]
+      addresses: [ { address:`https://github.com/Evolveye`, name:`Profil` }, ]
     },
   ]
 
@@ -94,7 +94,9 @@ export default ({ themeChanger }) => {
               className={styles.text}
               style={{ unicodeBidi:`bidi-override`, direction:`rtl` }}
             >moc.liamg@wap.iksralots</span>
-          : <button className={styles.text} onClick={() => setMailVisibility( true )}>Click to see mail</button>
+          : <div className={styles.text}>
+              <button onClick={() => setMailVisibility( true )}>Kliknij aby zobaczyć mail</button>
+            </div>
         }
       </div>
       {/* <div className={styles.column}>
