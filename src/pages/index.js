@@ -13,6 +13,6 @@ export default () => <div className={styles.page}>
   <Nav />
   <Banner />
   <Projects />
-  {/* <LastBlogpostsEntries /> */}
+  <LastBlogpostsEntries />
   {/* <Footer /> */}
 </div>

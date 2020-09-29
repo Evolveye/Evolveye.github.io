@@ -67,6 +67,7 @@ export default () => {
 
     {
       posts.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm }, fields }) => <BlogpostEntry
+        className={styles.entry}
         key={id}
         titleLinkAddress={`/post${fields.slug}`}
         frontmatter={fm}
