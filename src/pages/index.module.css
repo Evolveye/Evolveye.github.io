@@ -1,10 +1,11 @@
-.page {
-  display: grid;
-  grid-template:
-                "nav" 0px
-             "banner" 100vh
-           "projects" max-content
-    "blogPostEntries" max-content
-             "footer" max-content
-  / 100%;
+@media screen and (min-width:750px) {
+  .page {
+    display: grid;
+    grid-template:
+      "nav    banner"
+      "nav    projects"
+      "nav    blogPostEntries"
+      "footer footer"           /
+       140px;
+  }
 }

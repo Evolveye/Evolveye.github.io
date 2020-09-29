@@ -1,16 +1,18 @@
 .banner {
   grid-area: banner;
-  min-height: 100vh;
+  height: 100%;
   padding-top: calc( 50vh - 180px );
 }
 .wrapper {
   display: flex;
-  width: max-content;
-  max-width: 100%;
   margin: 0 auto;
+  max-width: max-content;
 }
   .photo {
-    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
+    min-height: 356px;
+    max-height: 356px;
   }
   .description {
     letter-spacing: 1px;
@@ -18,6 +20,9 @@
     .title {
       margin-left: 0;
       padding: 10px;
+    }
+    .content {
+      padding-right: 30px;
     }
 
 
