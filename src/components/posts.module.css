@@ -28,7 +28,6 @@
 
 .entry,
 .content {
-  grid-area: content;
   position: relative;
   width: min( 1000px, 100vw - 20px );
   padding: 30px;
@@ -134,7 +133,7 @@
 
 @media screen and (max-width: 1000px) {
   .content {
-    padding: 30px 0;
+    padding: 30px 15px;
   }
   .content::before {
     display: none;

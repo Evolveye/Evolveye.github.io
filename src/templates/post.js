@@ -1,11 +1,13 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+import styles from "./post.module.css"
+
 import Nav from "../components/nav"
 import Footer from "../components/footer"
 import Post from "../components/post"
 
-export default ({ data, pageContext }) => <>
+export default ({ data, pageContext }) => <div className={styles.main}>
   {/* <Header /> */}
   <Nav />
   <Post
@@ -15,7 +17,7 @@ export default ({ data, pageContext }) => <>
     next={pageContext.next}
   />
   <Footer />
-</>
+</div>
 
 export const query = graphql`
   query PostsBySlug( $slug:String! ) {

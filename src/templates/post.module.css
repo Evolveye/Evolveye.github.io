@@ -1,12 +1,8 @@
-.main {
-  grid-area: content;
-}
-
 @media screen and (min-width:750px) {
-  .page {
+  .main {
     display: grid;
     grid-template:
-      "nav    content"
+      "nav    main"
       "footer footer"           /
        140px;
   }

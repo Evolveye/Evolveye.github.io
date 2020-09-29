@@ -7,22 +7,9 @@ import SEO from "./seo"
 import Nav from "./nav"
 import Footer from "./footer"
 
-export default class Layout extends React.Component {
-  state = {
-    theme: localStorage.getItem( `theme` ) === `dark` ? styles.isDark : ``,
-  }
-
-  changeTheme = isDark => {
-    const theme = isDark ? `dark` : ``
-    this.setState( { theme:(theme === `dark` ? styles.isDark : ``) } )
-
-    localStorage.setItem( `theme`, theme )
-  }
-
-  render = () => <div className={`${styles.layout} ${this.state.theme}`}>
+export default props => <div className={`${styles.page}`}>
     <SEO title="Home" />
     <Nav />
-    <main className={`${styles.main} ${this.props.className}`}>{this.props.children}</main>
-    <Footer themeChanger={this.changeTheme} />
+    <main className={`${styles.main} ${props.className}`}>{props.children}</main>
+    <Footer />
   </div>
-}

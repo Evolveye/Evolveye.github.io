@@ -63,12 +63,13 @@ export default props => {
     body,
     previous = null,
     next = null,
+    className = ``,
     ...restProps
   } = validateProps( props )
 
   const { title, date, author, categories, tags=`` } = frontmatter
 
-  return <article>
+  return <article className={className}>
     <section {...restProps} className={`neumorphizm-white ${styles.content}`}>
       <h1>{title}</h1>
 
