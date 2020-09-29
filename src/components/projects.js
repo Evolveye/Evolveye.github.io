@@ -106,7 +106,7 @@ export default () => {
     <div className={styles.projectsWrapper}>
       {
         projectsData.map( ({ title, fluidName, description }) => (
-          <article className={styles.project}>
+          <article key={title} className={styles.project}>
             <div className={`neumorphizm-white ${styles.projectIconWrapper}`}>
               <Img className={styles.projectIcon} fluid={queryData[ fluidName ].childImageSharp.fluid} />
             </div>

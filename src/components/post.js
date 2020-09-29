@@ -120,7 +120,7 @@ export const BlogpostEntry = props => {
   const titleContent = titleLinkAddress ? <Link to={titleLinkAddress} className={`${styles.titleLink} is-not-decorative`}>{title}</Link> : title
 
   return <article {...restProps} className={`neumorphizm-white is-hoverable ${styles.entry} ${className}`}>
-    <div class={styles.neumorphizmTransformFix}>
+    <div className={styles.neumorphizmTransformFix}>
       <h3 className={styles.title}>{titleContent}</h3>
 
       <aside className={styles.meta}>
