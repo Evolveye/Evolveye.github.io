@@ -12,7 +12,7 @@ import Footer from "../components/footer"
 export default () => <div className={styles.page}>
   <Nav />
   <Banner />
-  {/* <Projects />
-  <LastBlogpostsEntries />
-  <Footer /> */}
+  <Projects />
+  {/* <LastBlogpostsEntries /> */}
+  {/* <Footer /> */}
 </div>

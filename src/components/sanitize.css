@@ -206,19 +206,19 @@ blockquote:not( [class] )::before {
 .boxed-title,
 .box, a.box {
   display: block;
-  padding: 10px;
   width: max-content;
   max-width: 100%;
+  padding: 10px;
   background-color: var( --dark-grey );
   font-family: monospace;
   text-align: center;
   color: var( --white );
 }
 
-/* .boxed-title {
+.boxed-title {
   margin: 100px auto 50px;
   padding: 10px 100px;
-} */
+}
 .box.is-red,
 .boxed-title.is-red {
   background-color: var( --red );
@@ -240,7 +240,11 @@ blockquote:not( [class] )::before {
 
 
 @media screen and (max-width: 750px) {
+  .boxed-title,
   .h1, h1:not( [class] ) {
     width: 95%;
+  }
+  .boxed-title {
+    padding: 10px;
   }
 }
