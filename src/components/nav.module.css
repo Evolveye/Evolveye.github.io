@@ -33,14 +33,14 @@
     .itemList {
       justify-content: space-evenly;
     }
-        .link {
+      .link {
           width: 50px;
           height: 50px;
           margin: 0 auto;
-        }
-        .title {
+      }
+      .title {
           color: var( --light-blue );
-        }
+      }
 }
 
 
@@ -84,4 +84,10 @@
             border: 5px solid transparent;
             border-right-color: black;
           }
+}
+@media screen and (max-width:1550px) {
+  .link {
+    width: 75px;
+    height: 75px;
+  }
 }
