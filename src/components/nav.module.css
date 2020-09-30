@@ -44,7 +44,7 @@
 }
 
 
-@media screen and (min-width:750px) {
+@media screen and (min-width:751px) {
   .nav {
     position: sticky;
     top: 30px;
