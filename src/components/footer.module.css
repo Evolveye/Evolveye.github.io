@@ -27,7 +27,7 @@
     height: 100%;
     border-left: 1px solid var( --separator-dark-color );
     border-right: 1px solid var( --separator-light-color );
-    background-color: var( --green );
+    /* background-color: var( --green ); */
   }
     .logo {
       width: 50px;
