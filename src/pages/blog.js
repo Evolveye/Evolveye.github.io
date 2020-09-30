@@ -8,19 +8,18 @@ import { BlogpostEntry } from "../components/post"
 
 /**
  * @typedef {Object} QueryData
- * @property {Object} data
- * @property {Object} data.allMdx
- * @property {Object[]} data.allMdx.nodes
- * @property {string} data.allMdx.nodes.id
- * @property {string} data.allMdx.nodes.excerpt
- * @property {Object} data.allMdx.nodes.frontmatter
- * @property {string} data.allMdx.nodes.frontmatter.date
- * @property {string} data.allMdx.nodes.frontmatter.title
- * @property {string} data.allMdx.nodes.frontmatter.author
- * @property {string} data.allMdx.nodes.frontmatter.categories
- * @property {string} data.allMdx.nodes.frontmatter.tags
- * @property {Object} data.allMdx.nodes.fields
- * @property {string} data.allMdx.nodes.fields.slug
+ * @property {Object} allMdx
+ * @property {Object[]} allMdx.nodes
+ * @property {string} allMdx.nodes.id
+ * @property {string} allMdx.nodes.excerpt
+ * @property {Object} allMdx.nodes.frontmatter
+ * @property {string} allMdx.nodes.frontmatter.date
+ * @property {string} allMdx.nodes.frontmatter.title
+ * @property {string} allMdx.nodes.frontmatter.author
+ * @property {string} allMdx.nodes.frontmatter.categories
+ * @property {string} allMdx.nodes.frontmatter.tags
+ * @property {Object} allMdx.nodes.fields
+ * @property {string} allMdx.nodes.fields.slug
  */
 
 const query = graphql`query BlogHome {
@@ -46,24 +45,19 @@ const query = graphql`query BlogHome {
   }
 }`
 
-export default () => {
-  /** @type {QueryData} */
-  const queryData = useStaticQuery( query )
-
-
-  const posts = queryData.allMdx.nodes
-
-  return <Layout>
+export default () =>
+  <Layout title="Blog page">
     <h1 className="boxed-title is-green">Ostatnio dodane wpisy</h1>
     <section>
       {
-        posts.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm}, fields }) => <BlogpostEntry
-          key={id}
-          titleLinkAddress={`/post${fields.slug}`}
-          frontmatter={fm}
-          body={sneakPeek || excerpt}
-        /> )
+        /** @type {QueryData} */ (useStaticQuery( query )).allMdx.nodes.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm}, fields }) =>
+          <BlogpostEntry
+            key={id}
+            titleLinkAddress={`/post${fields.slug}`}
+            frontmatter={fm}
+            body={sneakPeek || excerpt}
+          />
+        )
       }
     </section>
   </Layout>
-}

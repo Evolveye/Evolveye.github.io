@@ -1,18 +1,13 @@
 import React from "react"
 
-import styles from "./index.module.css"
-import"../components/sanitize.css"
-
-import Nav from "../components/nav"
+import Layuout from "../components/layout"
 import Banner from "../components/banner"
 import Projects from "../components/projects"
 import LastBlogpostsEntries from "../components/lastBlogposts"
-import Footer from "../components/footer"
 
-export default () => <div className={styles.page}>
-  <Nav />
-  <Banner />
-  <Projects />
-  <LastBlogpostsEntries />
-  <Footer />
-</div>
+export default () =>
+  <Layuout title="Homepage">
+    <Banner />
+    <Projects />
+    <LastBlogpostsEntries />
+  </Layuout>

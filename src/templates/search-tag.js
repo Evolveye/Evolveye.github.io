@@ -7,7 +7,7 @@ import { BlogpostEntry } from "../components/post"
 import styles from "./search.module.css"
 
 export default ({ data, pageContext }) =>
-  <Layout>
+  <Layout title={`Tag ${pageContext.tag}`}>
     <h1 className="boxed-title is-blue">Przeszukiwanie tagu</h1>
     <section className={styles.searchPage}>
       <aside className={styles.empty} />

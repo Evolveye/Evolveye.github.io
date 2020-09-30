@@ -1,9 +1,9 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
-import styles from "./lastBlogposts.module.css"
-
 import { BlogpostEntry } from "./post"
+
+import styles from "./lastBlogposts.module.css"
 
 /**
  * @typedef {Object} QueryData

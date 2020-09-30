@@ -45,11 +45,11 @@ const projectsData = [
   },
 ]
 
-export default () => {
+export default ({ className }) => {
   /** @type {QueryData} */
   const queryData = useStaticQuery( query )
 
-  return <nav className={styles.nav}>
+  return <nav className={`${className} ${styles.nav}`}>
     <ul className={styles.itemList}>
       {
         projectsData.map( ({ title, fluidName, address }) => (
