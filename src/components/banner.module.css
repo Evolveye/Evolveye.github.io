@@ -1,6 +1,6 @@
 .banner {
   grid-area: banner;
-  min-height: 100vh;
+  height: 100%;
   padding-top: calc( 50vh - 180px );
 }
 .wrapper {
