@@ -70,7 +70,7 @@ export default props => {
   const { title, date, author, categories, tags=`` } = frontmatter
 
   return <article className={className}>
-    <section {...restProps} className={`neumorphizm-white ${styles.content}`}>
+    <section {...restProps} className={`neumorphizm ${styles.content}`}>
       <h1>{title}</h1>
 
       <aside className={styles.meta}>
@@ -120,7 +120,7 @@ export const BlogpostEntry = props => {
   const { title, date, author, categories } = frontmatter
   const titleContent = titleLinkAddress ? <Link to={titleLinkAddress} className={`${styles.titleLink} is-not-decorative`}>{title}</Link> : title
 
-  return <article {...restProps} className={`neumorphizm-white is-hoverable ${styles.entry} ${className}`}>
+  return <article {...restProps} className={`neumorphizm is-hoverable ${styles.entry} ${className}`}>
     <div className={styles.neumorphizmTransformFix}>
       <h3 className={styles.title}>{titleContent}</h3>
 

@@ -50,13 +50,12 @@ const queryForLightTheme = graphql`
   }
 `
 
-export default ({ themeChanger }) => {
+export default ({ theme, themeChanger }) => {
   /** @type {QueryData} */
   const dataFromQuery = useStaticQuery( queryForLightTheme )
   const { author } = dataFromQuery.site.siteMetadata
 
   const [ showMail, setMailVisibility ] = useState( false )
-  const theme = localStorage.getItem( `theme` )
   const columns = []
   const links = [
     { name: `GitHub`,
@@ -90,21 +89,23 @@ export default ({ themeChanger }) => {
       <div className={`neumorphizm-white ${styles.logo}`}><Img fluid={dataFromQuery.envelopeIcon.childImageSharp.fluid} /></div>
         {
           showMail
-          ? <span
+          ?
+            <span
               className={styles.text}
               style={{ unicodeBidi:`bidi-override`, direction:`rtl` }}
             >moc.liamg@wap.iksralots</span>
-          : <div className={styles.text}>
+          :
+            <div className={styles.text}>
               <button onClick={() => setMailVisibility( true )}>Kliknij aby zobaczyć mail</button>
             </div>
         }
       </div>
-      {/* <div className={styles.column}>
+      <div className={styles.column}>
         <label className={`${styles.text} ${styles.themeChanger}`}>
           <input type="checkbox" checked={theme === `dark`} onChange={e => themeChanger( e.target.checked )} />
           Ciemny motyw
         </label>
-      </div> */}
+      </div>
     </div>
     <p className={styles.copyright}>
       Copyright {new Date().getFullYear()} ©

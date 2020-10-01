@@ -7,10 +7,43 @@ import Seo from "./seo"
 import Nav from "./nav"
 import Footer from "./footer"
 
-export default ({ className, children, title }) =>
-  <div className={styles.layout}>
-    <Seo title={title} />
-    <Nav className={styles.nav} />
-    <main className={`${styles.main} ${className}`}>{children}</main>
-    <Footer className={styles.footer} />
-  </div>
+export default class Layout extends React.Component {
+  state = {
+    theme: window?.localStorage.getItem( `theme` )
+      || (window?.matchMedia( `(prefers-color-scheme: dark)` ).matches ? `dark` : `light`)
+      || `light`
+  }
+
+  componentDidMount() {
+    this.toggleTheme( this.state.theme === `dark` )
+  }
+
+  toggleTheme = isDarkTheme => {
+    const theme = (isDarkTheme ? `dark` : `light`)
+
+    if (window) localStorage.setItem( `theme`, theme )
+    if (document) {
+      if (theme === `dark`) {
+        document.body.classList.add( `is-dark` )
+        document.body.classList.remove( `is-light` )
+      } else {
+        document.body.classList.remove( `is-dark` )
+        document.body.classList.add( `is-light` )
+      }
+    }
+
+    this.setState( { theme } )
+  }
+
+  render = () =>
+    <div className={styles.layout}>
+      <Seo title={this.props.title} />
+      <Nav className={styles.nav} />
+      <main className={`${styles.main} ${this.props.className}`}>{this.props.children}</main>
+      <Footer
+        className={styles.footer}
+        theme={this.state.theme}
+        themeChanger={this.toggleTheme}
+      />
+    </div>
+}
