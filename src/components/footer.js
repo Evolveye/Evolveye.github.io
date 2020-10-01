@@ -57,60 +57,104 @@ export default ({ theme, themeChanger }) => {
 
   const [ showMail, setMailVisibility ] = useState( false )
   const columns = []
+
+  const classname = `neumorphizm-white ${styles.icon}`
   const links = [
     { name: `GitHub`,
-      fluid: dataFromQuery.githubLogo.childImageSharp.fluid,
-      addresses: [
-        { address:`https://github.com/Evolveye`, name:`Profil` },
-        { address:`https://github.com/Evolveye?tab=repositories`, name:`Repozytoria` },
-      ]
+      data: {
+        fluid: `githubLogo`,
+        links: [
+          { address:`https://github.com/Evolveye`, name:`Profil` },
+          { address:`https://github.com/Evolveye?tab=repositories`, name:`Repozytoria` },
+        ],
+      },
     },
     { name: `LinkedIn`,
-      fluid: dataFromQuery.linkedinLogo.childImageSharp.fluid,
-      addresses: [ { address:`https://github.com/Evolveye`, name:`Profil` }, ]
+      data: {
+        fluid: `linkedinLogo`,
+        links: [ { address:`https://github.com/Evolveye`, name:`Profil` }, ],
+      },
+    },
+    { name: `Mail`,
+      type: `content`,
+      data: {
+        fluid: `envelopeIcon`,
+        content: <>{
+          showMail ?
+            <span
+              className={styles.text}
+              style={{ unicodeBidi:`bidi-override`, direction:`rtl`, textAlign:`left` }}
+            >
+              moc.liamg@wap.iksralots
+            </span>
+          :
+            <button className={`neumorphizm-white is-hoverable`} style={{ margin:0 }}onClick={() => setMailVisibility( true )}>
+              Kliknij aby zobaczyć mail
+            </button>
+        }</>,
+      }
+    },
+    { name: `Zmień motyw kolorystyczny`,
+      type: `checkbox`,
+      data: {
+        checked: theme === `dark`,
+        onChange: e => themeChanger( e.target.checked ),
+      }
     },
   ]
 
-  for (const { name, fluid, addresses } of links) {
+  for (const { name, type=`links`, data } of links) {
     const anchors = []
 
-    addresses.forEach( ({ address, name }) => anchors.push( <li key={name}><a className={styles.link} href={address}>{name}</a></li> ) )
+    if (type === `links`) {
+      const { fluid, links } = data
 
-    columns.push( <div className={styles.column} key={name}>
-      <div className={`neumorphizm-white ${styles.logo}`}><Img fluid={fluid} alt={name} /></div>
-      <ul className={`ul ${styles.links}`}>{anchors}</ul>
-    </div> )
+      links.forEach( ({ address, name }) => anchors.push( <li key={name}><a className={styles.link} href={address}>{name}</a></li> ) )
+
+      columns.push(
+        <div className={styles.column} key={name}>
+          <div className={classname}>
+            <Img fluid={dataFromQuery[ fluid ].childImageSharp.fluid} alt={name} />
+          </div>
+          <ul className={`ul ${styles.links}`}>
+            {anchors}
+          </ul>
+        </div>
+      )
+    } else if (type === `content`) {
+      const { fluid, content } = data
+
+      columns.push(
+        <div className={styles.column} key={name}>
+          <div className={classname}>
+            <Img fluid={dataFromQuery[ fluid ].childImageSharp.fluid} alt={name} />
+          </div>
+          <div className={styles.text}>
+            {content}
+          </div>
+        </div>
+      )
+    } else if (type === `checkbox`) {
+      const { checked, onChange } = data
+
+      columns.push(
+        <label className={styles.column} key={name}>
+          <input type="checkbox" checked={checked} onChange={onChange} className={classname} />
+          <div className={styles.text}>
+            {name}
+          </div>
+        </label>
+      )
+    }
   }
 
   return <footer className={styles.footer}>
-    <div className={styles.columns}>
+    <address className={styles.columns}>
       {columns}
-      <div className={styles.column}>
-      <div className={`neumorphizm-white ${styles.logo}`}><Img fluid={dataFromQuery.envelopeIcon.childImageSharp.fluid} /></div>
-        {
-          showMail
-          ?
-            <span
-              className={styles.text}
-              style={{ unicodeBidi:`bidi-override`, direction:`rtl` }}
-            >moc.liamg@wap.iksralots</span>
-          :
-            <div className={styles.text}>
-              <button onClick={() => setMailVisibility( true )}>Kliknij aby zobaczyć mail</button>
-            </div>
-        }
-      </div>
-      <div className={styles.column}>
-        <label className={`${styles.text} ${styles.themeChanger}`}>
-          <input type="checkbox" checked={theme === `dark`} onChange={e => themeChanger( e.target.checked )} />
-          Ciemny motyw
-        </label>
-      </div>
-    </div>
+    </address>
+
     <p className={styles.copyright}>
-      Copyright {new Date().getFullYear()} ©
-      {` Evolveye • ${author} `}
-      {/* <a href="https://www.gatsbyjs.org">Gatsby</a> */}
+      Copyright {new Date().getFullYear()} © {` Evolveye • ${author} `}
     </p>
   </footer>
 }

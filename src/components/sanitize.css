@@ -98,6 +98,16 @@ pre {
   line-height: 24px;
 }
 
+button,
+input[type="checkbox"], input[type="radio"] {
+  cursor: pointer;
+  border: 1px solid var( --dark );
+}
+
+address {
+  font-style: unset;
+}
+
 
 /*\
  *
