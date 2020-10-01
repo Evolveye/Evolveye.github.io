@@ -210,17 +210,18 @@ blockquote:not( [class] )::before {
     -8px -8px 12px 0 #fff;
   border-radius: 30px;
 }
-.neumorphizm.is-hoverable:hover {
+.neumorphizm.is-hoverable:hover,
+.neumorphizm-white.is-hoverable:hover {
   box-shadow:
-     8px 8px 12px 0 transparent,
-    -8px -8px 12px 0 transparent,
      8px 8px 12px 0 #8882 inset,
     -8px -8px 12px 0 #fff inset;
 }
-.neumorphizm.is-hoverable > * {
+.neumorphizm.is-hoverable > *,
+.neumorphizm-white.is-hoverable > * {
   transition: all 0.1s;
 }
-.neumorphizm.is-hoverable:hover > * {
+.neumorphizm.is-hoverable:hover > *,
+.neumorphizm-white.is-hoverable:hover > * {
   transform: scale( .98 );
 }
 .neumorphizm-white {
