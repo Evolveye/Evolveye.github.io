@@ -7,10 +7,13 @@ import Seo from "./seo"
 import Nav from "./nav"
 import Footer from "./footer"
 
+const windowExist = typeof window !== `undefined`
+const documentExist = typeof document !== `undefined`
+
 export default class Layout extends React.Component {
   state = {
-    theme: window?.localStorage.getItem( `theme` )
-      || (window?.matchMedia( `(prefers-color-scheme: dark)` ).matches ? `dark` : `light`)
+    theme: (windowExist && localStorage.getItem( `theme` ))
+      || (windowExist && matchMedia( `(prefers-color-scheme: dark)` ).matches ? `dark` : `light`)
       || `light`
   }
 
@@ -21,8 +24,8 @@ export default class Layout extends React.Component {
   toggleTheme = isDarkTheme => {
     const theme = (isDarkTheme ? `dark` : `light`)
 
-    if (window) localStorage.setItem( `theme`, theme )
-    if (document) {
+    if (windowExist) localStorage.setItem( `theme`, theme )
+    if (documentExist) {
       if (theme === `dark`) {
         document.body.classList.add( `is-dark` )
         document.body.classList.remove( `is-light` )
