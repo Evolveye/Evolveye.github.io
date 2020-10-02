@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
+import Link from "./link"
 
 import { BlogpostEntry } from "./post"
 
@@ -49,7 +50,7 @@ const query = graphql`query Posts {
 const translation = {
   title: {
     pl: `Moje ostatnie wpisy`,
-    en: `English`,
+    en: `My recent entries`,
   }
 }
 
@@ -79,6 +80,10 @@ export default ({ langKey }) => {
 
   return <section className={styles.blogposts}>
     <h2 className={`boxed-title is-blue ${styles.sectionTitle}`}>{translation.title[ langKey ]}</h2>
-    {langKey === `pl` ? postsEntries : <p className={styles.noEnglishEntries}>English</p>}
+    {langKey === `pl` ? postsEntries :
+      <p className={styles.noEnglishEntries}>
+        Oops. This content is exclusive for polish readers. If you wanna be one of them, just click <Link langKey="pl" to="/"> that link</Link>.
+      </p>
+    }
   </section>
 }
