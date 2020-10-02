@@ -41,10 +41,11 @@ export default class Layout extends React.Component {
   render = () =>
     <div className={styles.layout}>
       <Seo title={this.props.title} />
-      <Nav className={styles.nav} />
+      <Nav className={styles.nav} langKey={this.props.langKey} />
       <main className={`${styles.main} ${this.props.className}`}>{this.props.children}</main>
       <Footer
         className={styles.footer}
+        langKey={this.props.langKey}
         theme={this.state.theme}
         themeChanger={this.toggleTheme}
       />

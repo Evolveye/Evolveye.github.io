@@ -6,8 +6,8 @@ import { BlogpostEntry } from "../components/post"
 
 import styles from "./search.module.css"
 
-export default ({ data, pageContext }) =>
-  <Layout title={`Tag ${pageContext.tag}`}>
+export default ({ data, pageContext:{ langKey, tag } }) =>
+  <Layout title={`Tag ${tag}`} langKey={langKey}>
     <h1 className="boxed-title is-blue">Przeszukiwanie tagu</h1>
     <section className={styles.searchPage}>
       <aside className={styles.empty} />
@@ -24,7 +24,7 @@ export default ({ data, pageContext }) =>
       <article className={styles.info}>
         <h2 className={styles.title}>O wynikach</h2>
         <ul>
-          <li>Przeszukiwany tag: <Link to={`/tag/${pageContext.tag}`}>{pageContext.tag}</Link></li>
+          <li>Przeszukiwany tag: <Link to={`/tag/${tag}`}>{tag}</Link></li>
           <li>Ilość wyników: {data.allMdx.nodes.length}</li>
         </ul>
       </article>

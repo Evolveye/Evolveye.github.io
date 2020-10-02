@@ -27,7 +27,26 @@ const query = graphql`
   }
 `
 
-export default () => {
+const translation = {
+  en: <>
+    <p>
+      English
+    </p>
+  </>,
+  pl: <>
+    <p>
+      Jestem typem naukowca, programistą eksperymentatorem.<br />
+      Lubię bawić się kodem i wiedzieć co, jak, i dlaczego działa.
+    </p>
+
+    <p>
+      Jeśli czegoś związnego z oprogramowaniem potrzebuję, to zwyczajnie to robię.<br />
+      Jeśli jest to wyzwanie, lub coś nowego -- tylko mnie to zachęca.
+    </p>
+  </>,
+}
+
+export default ({ langKey }) => {
   /** @type {QueryData} */
   const queryData = useStaticQuery( query )
 
@@ -39,15 +58,7 @@ export default () => {
         <h1 className={`boxed-title is-green ${styles.title}`}>Paweł Stolarski</h1>
 
         <div className={styles.content}>
-          <p>
-            Jestem typem naukowca, programistą eksperymentatorem.<br />
-            Lubię bawić się kodem i wiedzieć co, jak, i dlaczego działa.
-          </p>
-
-          <p>
-            Jeśli czegoś związnego z oprogramowaniem potrzebuję, to zwyczajnie to robię.<br />
-            Jeśli jest to wyzwanie, lub coś nowego -- tylko mnie to zachęca.
-          </p>
+          {translation[ langKey ]}
         </div>
       </article>
     </div>

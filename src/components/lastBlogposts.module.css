@@ -1,2 +1,6 @@
 /* .blogposts {} */
 /* .entry {} */
+
+.noEnglishEntries {
+  text-align: center;
+}

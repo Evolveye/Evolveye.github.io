@@ -46,11 +46,16 @@ const query = graphql`query Posts {
   }
 }`
 
-export default () => {
+const translation = {
+  title: {
+    pl: `Moje ostatnie wpisy`,
+    en: `English`,
+  }
+}
+
+export default ({ langKey }) => {
   /** @type {QueryData} */
   const queryData = useStaticQuery( query )
-
-
   const posts = queryData.allMdx.nodes
   // const { tags, categories } = posts.reduce( (obj, { frontmatter:{ tags, categories } }) => {
   //   tags && tags.forEach( tag => obj.tags.add( tag ) )
@@ -62,17 +67,18 @@ export default () => {
   //   categories: new Set()
   // } )
 
-  return <section className={styles.blogposts}>
-    <h2 className={`boxed-title is-blue ${styles.sectionTitle}`}>Moje ostatnie wpisy</h2>
+  const postsEntries = posts.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm }, fields }) =>
+    <BlogpostEntry
+      className={styles.entry}
+      key={id}
+      titleLinkAddress={`/post${fields.slug}`}
+      frontmatter={fm}
+      body={sneakPeek || excerpt}
+    />
+  )
 
-    {
-      posts.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm }, fields }) => <BlogpostEntry
-        className={styles.entry}
-        key={id}
-        titleLinkAddress={`/post${fields.slug}`}
-        frontmatter={fm}
-        body={sneakPeek || excerpt}
-      /> )
-    }
+  return <section className={styles.blogposts}>
+    <h2 className={`boxed-title is-blue ${styles.sectionTitle}`}>{translation.title[ langKey ]}</h2>
+    {langKey === `pl` ? postsEntries : <p className={styles.noEnglishEntries}>English</p>}
   </section>
 }

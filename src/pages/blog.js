@@ -45,14 +45,15 @@ const query = graphql`query BlogHome {
   }
 }`
 
-export default () =>
-  <Layout title="Blog page">
+export default ({ pageContext:{ langKey=`en` }={} }) =>
+  <Layout title="Blog" langKey={langKey}>
     <h1 className="boxed-title is-green">Ostatnio dodane wpisy</h1>
     <section>
       {
         /** @type {QueryData} */ (useStaticQuery( query )).allMdx.nodes.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm}, fields }) =>
           <BlogpostEntry
             key={id}
+            langKey={langKey}
             titleLinkAddress={`/post${fields.slug}`}
             frontmatter={fm}
             body={sneakPeek || excerpt}

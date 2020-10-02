@@ -1,6 +1,8 @@
 import React from "react"
-import { graphql, Link, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
+
+import Link from "./link"
 
 import styles from "./nav.module.css"
 
@@ -35,29 +37,38 @@ const query = graphql`
 `
 
 const projectsData = [
-  { title: `Strona domowa`,
+  {
+    title: {
+      pl: `Strona domowa`,
+      en: `English`,
+    },
     fluidName: `avatar`,
     address: `/`,
   },
-  { title: `Blog`,
+  {
+    title: {
+      pl: `Blog`,
+      en: `English`,
+    },
     fluidName: `quote`,
     address: `/blog/`,
+    polishOnly: true,
   },
 ]
 
-export default ({ className }) => {
+export default ({ langKey, className }) => {
   /** @type {QueryData} */
   const queryData = useStaticQuery( query )
 
   return <nav className={`${className} ${styles.nav}`}>
     <ul className={styles.itemList}>
       {
-        projectsData.map( ({ title, fluidName, address }) => (
-          <li key={title} className={styles.item}>
-            <Link to={address} className={`neumorphizm-white is-hoverable is-not-decorative ${styles.link}`}>
-              <Img fluid={queryData[ fluidName ].childImageSharp.fluid} alt={`${title} icon`} />
+        projectsData.map( ({ title, fluidName, address, polishOnly }) => polishOnly && langKey !== `pl` ? null : (
+          <li key={title[ langKey ]} className={styles.item}>
+            <Link langKey={langKey} to={address} className={`neumorphizm-white is-hoverable is-not-decorative ${styles.link}`}>
+              <Img fluid={queryData[ fluidName ].childImageSharp.fluid} alt={`${title[ langKey ]} icon`} />
             </Link>
-            <div className={styles.title}>{title}</div>
+            <div className={styles.title}>{title[ langKey ]}</div>
           </li>
         ) )
       }

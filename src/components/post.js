@@ -1,6 +1,6 @@
 import React from "react"
 // import PropTypes from "prop-types"
-import { Link } from "gatsby"
+import Link from "./link"
 import Highlight, { defaultProps, Prism } from "prism-react-renderer"
 import theme from "prism-react-renderer/themes/vsDark"
 import { MDXRenderer } from "gatsby-plugin-mdx"
@@ -59,6 +59,7 @@ function validateProps( props ) {
 
 export default props => {
   const {
+    langKey,
     frontmatter,
     body,
     previous = null,
@@ -79,7 +80,16 @@ export default props => {
         <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
 
         <article className={styles.categories}>
-          {categories.map( category => <Link key={category} className={`${styles.category}`} to={`/category/${category}`}>{category}</Link> )}
+          {categories.map( category =>
+            <Link
+              key={category}
+              langKey={langKey}
+              className={`${styles.category}`}
+              to={`/category/${category}`}
+            >
+              {category}
+            </Link>
+          )}
         </article>
       </aside>
 
@@ -90,18 +100,27 @@ export default props => {
 
     {
       tags && <nav className={styles.tags}>
-        {tags.map( tag => <Link key={tag} className={`box ${styles.tag} is-not-decorative`} to={`/tag/${tag}`}>{tag}</Link> )}
+        {tags.map( tag =>
+          <Link
+            key={tag}
+            langKey={langKey}
+            className={`box ${styles.tag} is-not-decorative`}
+            to={`/tag/${tag}`}
+          >
+            {tag}
+          </Link>
+        )}
       </nav>
     }
 
     <nav className={styles.adjacentPosts}>
       {
         previous && <div className={`${styles.adjacentPostsItem} ${styles.previous}`}>
-          <Link to={`/post${previous.fields.slug}`}>{previous.frontmatter.title}</Link>
+          <Link langKey={langKey} to={`/post${previous.fields.slug}`}>{previous.frontmatter.title}</Link>
         </div>
       }{
         next && <div className={`${styles.adjacentPostsItem} ${styles.next}`}>
-          <Link to={`/post${next.fields.slug}`}>{next.frontmatter.title}</Link>
+          <Link langKey={langKey} to={`/post${next.fields.slug}`}>{next.frontmatter.title}</Link>
         </div>
       }
     </nav>
@@ -110,6 +129,7 @@ export default props => {
 
 export const BlogpostEntry = props => {
   const {
+    langKey,
     frontmatter,
     body,
     titleLinkAddress = ``,
@@ -130,7 +150,16 @@ export const BlogpostEntry = props => {
         <time className={styles.date} dateTime={date}>{date.replace( /-/g, `.` )}</time>
 
         <article className={styles.categories}>
-          {categories.map( category => <Link key={category} className={`${styles.category}`} to={`/category/${category}`}>{category}</Link> )}
+          {categories.map( category =>
+            <Link
+              key={category}
+              langKey={langKey}
+              className={`${styles.category}`}
+              to={`/category/${category}`}
+            >
+              {category}
+            </Link>
+          )}
         </article>
       </aside>
 

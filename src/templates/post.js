@@ -4,13 +4,13 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import Post from "../components/post"
 
-export default ({ data, pageContext }) =>
-  <Layout title={data.mdx.frontmatter.title}>
+export default ({ data, pageContext:{ langKey, previous, next } }) =>
+  <Layout title={data.mdx.frontmatter.title} langKey={langKey}>
     <Post
       frontmatter={data.mdx.frontmatter}
       body={data.mdx.body}
-      previous={pageContext.previous}
-      next={pageContext.next}
+      previous={previous}
+      next={next}
     />
   </Layout>
 

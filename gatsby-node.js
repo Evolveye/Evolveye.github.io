@@ -4,13 +4,15 @@ const { createFilePath } = require( `gatsby-source-filesystem` )
 const path = require(`path`)
 
 const templates = {
+  blog: path.resolve( 'src/pages/blog.js' ),
+  index: path.resolve( 'src/pages/index.js' ),
   post: path.resolve( 'src/templates/post.js' ),
   searchTag: path.resolve( 'src/templates/search-tag.js' ),
   searchCategory: path.resolve( 'src/templates/search-category.js' ),
 }
 
 /**
- * @typedef {Object} QueryData
+ * @typedef {Object} PostsQueryData
  * @property {Error[]} errors
  * @property {Object} data
  * @property {Object} data.allMdx
@@ -22,36 +24,39 @@ const templates = {
  * @property {string[]} data.allMdx.nodes.frontmatter.tags
  * @property {string[]} data.allMdx.nodes.frontmatter.categories
  */
-
-exports.createPages = async ({ actions, graphql }) => {
-  const { createPage } = actions
-  const query = `query {
-    allMdx(
-      sort:{ fields:frontmatter___date, order:DESC }
-      filter:{ frontmatter:{ published:{ eq:true } } }
-    ) {
-      nodes {
-        fields {
-          slug
-        }
-        frontmatter {
-          title
-          tags
-          categories
-        }
+const postsQuery = `query {
+  allMdx(
+    sort:{ fields:frontmatter___date, order:DESC }
+    filter:{ frontmatter:{ published:{ eq:true } } }
+  ) {
+    nodes {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        tags
+        categories
       }
     }
-  }`
+  }
+}`
 
-  /** @type {QueryData} */
-  const queryData = await graphql( query )
-  const { errors, data } = queryData
+exports.createPages = async ({ actions:{ createPage }, graphql }) => {
+
+
+  //
+  // Perform data
+  //
+
+
+  /** @type {PostsQueryData} */
+  const postsQueryData = await graphql( postsQuery )
+  const { errors, data } = postsQueryData
 
   if (errors) throw errors
 
   const posts = data.allMdx.nodes
-
-  // Create search pages
   const { tags, categories } = posts.reduce( (obj, { frontmatter:{ tags, categories } }) => {
     tags?.forEach( tag => obj.tags.add( tag ) )
     categories.forEach( category => obj.categories.add( category ) )
@@ -62,38 +67,66 @@ exports.createPages = async ({ actions, graphql }) => {
     categories: new Set()
   } )
 
-  tags.forEach( tag => createPage( {
-    path: `/tag/${tag}`,
-    component: templates.searchTag,
-    context: { tag, tags },
-  } ) )
 
-  categories.forEach( category => createPage( {
-    path: `/category/${category}`,
-    component: templates.searchCategory,
-    context: { category, categories },
-  } ) )
+  //
+  // Create pages for every language
+  //
 
-  // Create post pages
-  posts.forEach( (post, index) => {
-    const previous = index === posts.length - 1 ? null : posts[ index + 1 ]
-    const next = index === 0 ? null : posts[ index - 1 ]
 
-    if (!post.fields.slug) return
+  const defaultLangKey = `en`
+  for (const langKey of [ `en`, `pl` ]) {
+    const urlStart = langKey === defaultLangKey ? `/` : `/${langKey}/`
 
-    createPage( {
-      path: `/post${post.fields.slug}`,
-      component: templates.post,
-      context: {
-        slug: post.fields.slug,
-        previous,
-        next,
-      },
+    tags.forEach( tag => createPage( {
+      path: `${urlStart}tag/${tag}`,
+      component: templates.searchTag,
+      context: { langKey, tag, tags },
+    } ) )
+
+    categories.forEach( category => createPage( {
+      path: `${urlStart}category/${category}`,
+      component: templates.searchCategory,
+      context: { category, categories },
+    } ) )
+
+    posts.forEach( (post, index) => {
+      const previous = index === posts.length - 1 ? null : posts[ index + 1 ]
+      const next = index === 0 ? null : posts[ index - 1 ]
+
+      if (!post.fields.slug) return
+
+      createPage( {
+        path: `${urlStart}post${post.fields.slug}`,
+        component: templates.post,
+        context: {
+          langKey,
+          slug: post.fields.slug,
+          previous,
+          next,
+        },
+      } )
     } )
-  } )
+
+    if (langKey !== defaultLangKey) {
+      createPage( {
+        path: `${urlStart}`,
+        component: templates.index,
+        context: { langKey },
+      } )
+      createPage( {
+        path: `${urlStart}blog/`,
+        component: templates.blog,
+        context: { langKey },
+      } )
+    }
+  }
 }
 
-exports.onCreateNode = async ({ node, actions, getNode }) => {
+exports.onCreatePage = async ({ actions:{ deletePage }, page }) => {
+  if (/blog/.test( page.path )) deletePage( page )
+}
+
+exports.onCreateNode = async ({ node, actions }) => {
   if (node.internal.type === `Mdx`) {
     const { createNodeField } = actions
     const { date, title } = node.frontmatter
@@ -104,8 +137,6 @@ exports.onCreateNode = async ({ node, actions, getNode }) => {
       .replace( /\?/g, `.` )
       .replace( /</g, `(` )
       .replace( />/g, `)` )
-
-    // const value = createFilePath({ node, getNode })
 
     createNodeField( { name:`slug`, node, value:`/${performedDate}/${performedTitle}` } )
   }

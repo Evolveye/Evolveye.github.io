@@ -50,7 +50,7 @@ const queryForLightTheme = graphql`
   }
 `
 
-export default ({ theme, themeChanger }) => {
+export default ({ langKey, theme, themeChanger }) => {
   /** @type {QueryData} */
   const dataFromQuery = useStaticQuery( queryForLightTheme )
   const { author } = dataFromQuery.site.siteMetadata
@@ -64,15 +64,17 @@ export default ({ theme, themeChanger }) => {
       data: {
         fluid: `githubLogo`,
         links: [
-          { address:`https://github.com/Evolveye`, name:`Profil` },
-          { address:`https://github.com/Evolveye?tab=repositories`, name:`Repozytoria` },
+          { address:`https://github.com/Evolveye`, name: langKey === `pl` ? `Profil` : `English` },
+          { address:`https://github.com/Evolveye?tab=repositories`, name: langKey === `pl` ? `Repozytoria` : `English` },
         ],
       },
     },
     { name: `LinkedIn`,
       data: {
         fluid: `linkedinLogo`,
-        links: [ { address:`https://github.com/Evolveye`, name:`Profil` }, ],
+        links: [
+          { address:`https://github.com/Evolveye`, name: langKey === `pl` ? `Profil` : `English` }
+        ],
       },
     },
     { name: `Mail`,
@@ -89,12 +91,12 @@ export default ({ theme, themeChanger }) => {
             </span>
           :
             <button className={`neumorphizm-white is-hoverable`} style={{ margin:0 }}onClick={() => setMailVisibility( true )}>
-              Kliknij aby zobaczyć mail
+              {langKey === `pl` ? `Kliknij aby zobaczyć mail` : `English`}
             </button>
         }</>,
       }
     },
-    { name: `Zmień motyw kolorystyczny`,
+    { name: langKey === `pl` ? `Zmień motyw kolorystyczny` : `English`,
       type: `checkbox`,
       data: {
         checked: theme === `dark`,
