@@ -40,7 +40,7 @@ const translation = {
   </>,
   pl: <>
     <p>
-      If I need something related with software, I just do it.<br />
+      Jestem typem naukowca, programistą eksperymentatorem.<br />
       Lubię bawić się kodem i wiedzieć co, jak, i dlaczego działa.
     </p>
     <p>
