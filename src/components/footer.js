@@ -64,8 +64,8 @@ export default ({ langKey, theme, themeChanger }) => {
       data: {
         fluid: `githubLogo`,
         links: [
-          { address:`https://github.com/Evolveye`, name: langKey === `pl` ? `Profil` : `English` },
-          { address:`https://github.com/Evolveye?tab=repositories`, name: langKey === `pl` ? `Repozytoria` : `English` },
+          { address:`https://github.com/Evolveye`, name: langKey === `pl` ? `Profil` : `Profile` },
+          { address:`https://github.com/Evolveye?tab=repositories`, name: langKey === `pl` ? `Repozytoria` : `Repositories` },
         ],
       },
     },
@@ -73,7 +73,7 @@ export default ({ langKey, theme, themeChanger }) => {
       data: {
         fluid: `linkedinLogo`,
         links: [
-          { address:`https://github.com/Evolveye`, name: langKey === `pl` ? `Profil` : `English` }
+          { address:`https://github.com/Evolveye`, name: langKey === `pl` ? `Profil` : `Profile` }
         ],
       },
     },
@@ -91,12 +91,12 @@ export default ({ langKey, theme, themeChanger }) => {
             </span>
           :
             <button className={`neumorphizm-white is-hoverable`} style={{ margin:0 }}onClick={() => setMailVisibility( true )}>
-              {langKey === `pl` ? `Kliknij aby zobaczyć mail` : `English`}
+              {langKey === `pl` ? `Kliknij aby zobaczyć mail` : `Click to show the mail`}
             </button>
         }</>,
       }
     },
-    { name: langKey === `pl` ? `Zmień motyw kolorystyczny` : `English`,
+    { name: langKey === `pl` ? `Kliknij aby zmienić motyw strony` : `Click to change color theme`,
       type: `checkbox`,
       data: {
         checked: theme === `dark`,
