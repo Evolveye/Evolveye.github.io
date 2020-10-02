@@ -30,15 +30,19 @@ const query = graphql`
 const translation = {
   en: <>
     <p>
-      English
+      I'm type of scientist, programmer experimenter.<br />
+      I like to play with code and know what, how, and why it works.
+    </p>
+    <p>
+      I'm type of scientist, programmer experimenter<br />
+      If is it a challenge or something new -- it only encourages me.
     </p>
   </>,
   pl: <>
     <p>
-      Jestem typem naukowca, programistą eksperymentatorem.<br />
+      If I need something related with software, I just do it.<br />
       Lubię bawić się kodem i wiedzieć co, jak, i dlaczego działa.
     </p>
-
     <p>
       Jeśli czegoś związnego z oprogramowaniem potrzebuję, to zwyczajnie to robię.<br />
       Jeśli jest to wyzwanie, lub coś nowego -- tylko mnie to zachęca.
