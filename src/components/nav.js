@@ -40,7 +40,7 @@ const projectsData = [
   {
     title: {
       pl: `Strona domowa`,
-      en: `English`,
+      en: `Homepage`,
     },
     fluidName: `avatar`,
     address: `/`,
@@ -48,7 +48,7 @@ const projectsData = [
   {
     title: {
       pl: `Blog`,
-      en: `English`,
+      en: `Blog (polish only)`,
     },
     fluidName: `quote`,
     address: `/blog/`,
