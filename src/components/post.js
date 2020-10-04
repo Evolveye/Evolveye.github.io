@@ -138,7 +138,9 @@ export const BlogpostEntry = props => {
   } = validateProps( props )
 
   const { title, date, author, categories } = frontmatter
-  const titleContent = titleLinkAddress ? <Link to={titleLinkAddress} className={`${styles.titleLink} is-not-decorative`}>{title}</Link> : title
+  const titleContent = titleLinkAddress
+    ? <Link langKey={langKey} to={titleLinkAddress} className={`${styles.titleLink} is-not-decorative`}>{title}</Link>
+    : title
 
   return <article {...restProps} className={`neumorphizm is-hoverable ${styles.entry} ${className}`}>
     <div className={styles.neumorphizmTransformFix}>

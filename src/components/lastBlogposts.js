@@ -70,8 +70,9 @@ export default ({ langKey }) => {
 
   const postsEntries = posts.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm }, fields }) =>
     <BlogpostEntry
-      className={styles.entry}
       key={id}
+      langKey={langKey}
+      className={styles.entry}
       titleLinkAddress={`/post${fields.slug}`}
       frontmatter={fm}
       body={sneakPeek || excerpt}

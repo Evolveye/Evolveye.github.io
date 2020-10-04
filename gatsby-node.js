@@ -86,7 +86,7 @@ exports.createPages = async ({ actions:{ createPage }, graphql }) => {
     categories.forEach( category => createPage( {
       path: `${urlStart}category/${category}`,
       component: templates.searchCategory,
-      context: { category, categories },
+      context: { langKey, category, categories },
     } ) )
 
     posts.forEach( (post, index) => {

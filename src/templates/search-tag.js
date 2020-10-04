@@ -6,9 +6,9 @@ import { BlogpostEntry } from "../components/post"
 
 import styles from "./search.module.css"
 
-export default ({ data, pageContext:{ langKey, tag } }) =>
+export default ({ data, pageContext:{ langKey=`en`, tag } }) =>
   <Layout title={`Tag ${tag}`} langKey={langKey}>
-    <h1 className="boxed-title is-blue">Przeszukiwanie tagu</h1>
+    <h1 className="boxed-title is-blue">{langKey === `pl` ? `Przeszukiwanie tagu` : `Searching the tag`}</h1>
     <section className={styles.searchPage}>
       <aside className={styles.empty} />
       <article className={styles.posts}>

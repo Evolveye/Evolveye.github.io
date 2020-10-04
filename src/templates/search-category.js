@@ -1,14 +1,15 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import { BlogpostEntry } from "../components/post"
+import Link from "../components/link"
 
 import styles from "./search.module.css"
 
-export default ({ data, pageContext:{ langKey, category } }) =>
+export default ({ data, pageContext:{ langKey=`en`, category } }) =>
   <Layout title={`Kategoria ${category}`} langKey={langKey}>
-    <h1 className="boxed-title is-blue">Przeszukiwanie kategorii</h1>
+    <h1 className="boxed-title is-blue">{langKey === `pl` ? `Przeszukiwanie kategorii` : `Searching the category`}</h1>
     <section className={styles.searchPage}>
       <aside className={styles.empty} />
       <article className={styles.posts}>
@@ -22,10 +23,18 @@ export default ({ data, pageContext:{ langKey, category } }) =>
         }
       </article>
       <article className={styles.info}>
-        <h2 className={styles.title}>O wynikach</h2>
+        <h2 className={styles.title}>{langKey === `pl` ? `O wynikach` : `About results`}</h2>
         <ul>
-          <li>Przeszukiwana kategoria: <Link to={`/category/${category}`}>{category}</Link></li>
-          <li>Ilość wyników: {data.allMdx.nodes.length}</li>
+          <li>
+            {langKey === `pl` ? `Przeszukiwana kategoria:` : `Search category:`}
+            {` `}
+            <Link langKey={langKey} to={`/category/${category}`}>{category}</Link>
+          </li>
+          <li>
+            {langKey === `pl` ? `Ilość wyników:` : `Results count:`}
+            {` `}
+            {data.allMdx.nodes.length}
+          </li>
         </ul>
       </article>
     </section>
