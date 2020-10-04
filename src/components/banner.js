@@ -34,7 +34,7 @@ const translation = {
       I like to play with code and know what, how, and why it works.
     </p>
     <p>
-      I'm type of scientist, programmer experimenter<br />
+      If I need something related to software, I just do it.<br />
       If is it a challenge or something new -- it only encourages me.
     </p>
   </>,
