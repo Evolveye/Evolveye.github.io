@@ -45,20 +45,26 @@ const query = graphql`query BlogHome {
   }
 }`
 
-export default ({ pageContext:{ langKey=`en` }={} }) =>
-  <Layout title="Blog" langKey={langKey}>
+export default ({ pageContext:{ langKey=`en` }={} }) => {
+  /** @type {QueryData} */
+  const queryData = useStaticQuery( query )
+
+  return <Layout title="Blog" langKey={langKey}>
     <h1 className="boxed-title is-green">Ostatnio dodane wpisy</h1>
     <section>
-      {
-        /** @type {QueryData} */ (useStaticQuery( query )).allMdx.nodes.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm}, fields }) =>
-          <BlogpostEntry
-            key={id}
-            langKey={langKey}
-            titleLinkAddress={`/post${fields.slug}`}
-            frontmatter={fm}
-            body={sneakPeek || excerpt}
-          />
-        )
+      { !queryData.length
+        ?
+          <p style={{ textAlign:`center` }}>{langKey === `pl` ? `Postów jak na razie brak ;/` : `Currently, no posts here ;/`}</p>
+        :
+          queryData.allMdx.nodes.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm}, fields }) =>
+            <BlogpostEntry
+              key={id}
+              langKey={langKey}
+              titleLinkAddress={`/post${fields.slug}`}
+              frontmatter={fm}
+              body={sneakPeek || excerpt}
+            />
+          )
       }
     </section>
-  </Layout>
+  </Layout>}

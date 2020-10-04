@@ -134,15 +134,16 @@ const projectsData = [
         Wiele małych dzieł przepadło z tej racji że nie miałem kiedys konta github,
         lub nie widziałem sensu we wrzucaniu nań projektów. W końcu do tego,
         że postanowiłem zrobić sobie stronę z której byłbym zadowolony, a na której mógłbym
-        prowadzić swojego devloga. Więcej treści na temat strony to niczym treść o tutejszym blogu,
-        o którym wiecej napisałem <a href="/">pod tym linkiem</a>.
+        prowadzić swojego devloga.
+        {/* Więcej treści na temat strony to niczym treść o tutejszym blogu,
+        o którym wiecej napisałem <a href="/">pod tym linkiem</a>. */}
       </>,
       en: <>
         I program basically everyday. I have many ideas, the willingness to learn even more.
         Many small works have been lost because I didn't have Github account, or saw no point
         to upload projects to it. Finally, I decided to make a website that I would be happy about,
         and where I could run my devlog (polish only, sorry; but maybe in the future...).
-        If you know polish, you can look <a href="/">here</a>.
+        {/* If you know polish, you can look <a href="/">here</a>. */}
       </>,
     }
   },

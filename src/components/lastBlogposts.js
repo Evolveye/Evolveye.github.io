@@ -68,21 +68,23 @@ export default ({ langKey }) => {
   //   categories: new Set()
   // } )
 
-  const postsEntries = posts.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm }, fields }) =>
-    <BlogpostEntry
-      key={id}
-      langKey={langKey}
-      className={styles.entry}
-      titleLinkAddress={`/post${fields.slug}`}
-      frontmatter={fm}
-      body={sneakPeek || excerpt}
-    />
-  )
+  const postsEntries = !posts.length
+    ? <p className={styles.info}>{langKey === `pl` ? `Postów jak na razie brak ;/` : `Currently, no posts here ;/`}</p>
+    : posts.map( ({ id, excerpt, frontmatter:{ tags, sneakPeek, ...fm }, fields }) =>
+      <BlogpostEntry
+        key={id}
+        langKey={langKey}
+        className={styles.entry}
+        titleLinkAddress={`/post${fields.slug}`}
+        frontmatter={fm}
+        body={sneakPeek || excerpt}
+      />
+    )
 
   return <section className={styles.blogposts}>
     <h2 className={`boxed-title is-blue ${styles.sectionTitle}`}>{translation.title[ langKey ]}</h2>
     {langKey === `pl` ? postsEntries :
-      <p className={styles.noEnglishEntries}>
+      <p className={styles.info}>
         Oops. This content is exclusive for polish readers. If you wanna be one of them, just click <Link langKey="pl" to="/"> that link</Link>.
       </p>
     }
