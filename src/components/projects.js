@@ -70,7 +70,7 @@ const projectsData = [
       en: <>
         I like to mark a things I create with specific logo -- <a href="https://codecactu.github.io/">the Cactu brand</a>.
         Perhaps someday somebody will want to make something with me under common sign,
-        so I consider signing the projects with a trademark connected with my name appropriate.
+        so I consider it appropriate to sign the projects with a trademark connected with my name.
         In addition, the logo has been prepared so that it is easy to reproduce with vector graphics
         (it was made in that graphic). It makes marking creations with it (for example, by inserting into footer)
         very easy, unlike to my non-vector eye-like avatar.

@@ -73,7 +73,7 @@ const projectsData = [
 const languages = [
   {
     title: {
-      en: `Homepage (polish)`,
+      en: `Polish version`,
     },
     onlyLangKey: `en`,
     fluidName: `pl`,
@@ -81,7 +81,7 @@ const languages = [
   },
   {
     title: {
-      pl: `Strona domowa (angielska)`,
+      pl: `Wersja angielska`,
     },
     onlyLangKey: `pl`,
     fluidName: `en`,

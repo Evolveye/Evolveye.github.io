@@ -46,6 +46,7 @@
         }
         .content {
           padding-top: 30px;
+          padding-right: 0;
           text-align: center;
         }
 }

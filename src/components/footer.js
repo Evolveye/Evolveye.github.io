@@ -83,10 +83,7 @@ export default ({ langKey, theme, themeChanger }) => {
         fluid: `envelopeIcon`,
         content: <>{
           showMail ?
-            <span
-              className={styles.text}
-              style={{ unicodeBidi:`bidi-override`, direction:`rtl`, textAlign:`left` }}
-            >
+            <span style={{ unicodeBidi:`bidi-override`, direction:`rtl`, textAlign:`left` }}>
               moc.liamg@wap.iksralots
             </span>
           :
