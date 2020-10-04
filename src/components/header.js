@@ -1,27 +1,70 @@
 import React from "react"
-import { Link } from "gatsby"
-
-import Avatar from "./avatar"
+import { useStaticQuery, graphql } from "gatsby"
+import Img from "gatsby-image"
 
 import styles from "./header.module.css"
 
-export default ({ themeChanger }) => {
-  // const theme = localStorage.getItem( `theme` )
+ /**
+ * @typedef {Object} QueryFlow
+ * @property {Object} childImageSharp
+ * @property {Object} childImageSharp.fluid
+ */
 
-  return <header className={styles.header}>
-    <h1 className={styles.title}>
-      <Link to="/" className="is-not-decorative"><Avatar className={styles.avatar} /></Link>
-    </h1>
-    <nav className={styles.nav}>
-      <Link to="/" className={styles.link}>O blogu</Link>
-      <Link to="/" className={styles.link}>O autorze</Link>
-      <Link to="/" className={styles.link}>Polityka prywatności</Link>
-    </nav>
-    <aside className={styles.aside}>
-      {/* <label>
-        <input type="checkbox" checked={theme === `dark`} onChange={e => themeChanger( e.target.checked )} />
-        Ciemny motyw
-      </label> */}
-    </aside>
+/**
+ * @typedef {Object} QueryData
+ * @property {QueryFlow} photo
+ */
+
+const query = graphql`
+  query Banner {
+    photo: file( relativePath:{ eq:"photo.png" } ) {
+      childImageSharp {
+        fluid( maxWidth:400 ) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
+
+const translation = {
+  en: <>
+    <p>
+      I'm type of scientist, programmer experimenter.<br />
+      I like to play with code and know what, how, and why it works.
+    </p>
+    <p>
+      If I need something related to software, I just do it.<br />
+      If is it a challenge or something new -- it only encourages me.
+    </p>
+  </>,
+  pl: <>
+    <p>
+      Jestem typem naukowca, programistą eksperymentatorem.<br />
+      Lubię bawić się kodem i wiedzieć co, jak, i dlaczego działa.
+    </p>
+    <p>
+      Jeśli czegoś związnego z oprogramowaniem potrzebuję, to zwyczajnie to robię.<br />
+      Jeśli jest to wyzwanie, lub coś nowego -- tylko mnie to zachęca.
+    </p>
+  </>,
+}
+
+export default ({ langKey }) => {
+  /** @type {QueryData} */
+  const queryData = useStaticQuery( query )
+
+  return <header className={styles.banner}>
+    <div className={styles.wrapper}>
+      <Img className={`neumorphizm-white ${styles.photo}`} fluid={queryData.photo.childImageSharp.fluid} />
+
+      <article className={styles.description}>
+        <h1 className={`boxed-title is-green ${styles.title}`}>Paweł Stolarski</h1>
+
+        <div className={styles.content}>
+          {translation[ langKey ]}
+        </div>
+      </article>
+    </div>
   </header>
 }
