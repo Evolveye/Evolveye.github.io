@@ -1,6 +1,7 @@
 .projectsWrapper {
   display: flex;
   flex-wrap: wrap;
+  max-width: 2700px;
 }
 
   .project {
