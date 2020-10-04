@@ -13,7 +13,6 @@
     display: grid;
     grid-template:
       "nav    main"
-      "footer footer"           /
-       140px;
+      "footer footer";
   }
 }
