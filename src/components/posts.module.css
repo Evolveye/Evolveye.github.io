@@ -90,6 +90,8 @@
   .tags,
   .adjacentPosts {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     width: 1000px;
     max-width: calc( 100vw - 20px );
     margin: 25px auto;

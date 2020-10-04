@@ -52,7 +52,7 @@ export default ({ pageContext:{ langKey=`en` }={} }) => {
   return <Layout title="Blog" langKey={langKey}>
     <h1 className="boxed-title is-green">Ostatnio dodane wpisy</h1>
     <section>
-      { !queryData.length
+      { !queryData.allMdx.nodes.length
         ?
           <p style={{ textAlign:`center` }}>{langKey === `pl` ? `Postów jak na razie brak ;/` : `Currently, no posts here ;/`}</p>
         :
