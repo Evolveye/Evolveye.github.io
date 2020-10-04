@@ -1,0 +1,44 @@
+.projectsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 2700px;
+}
+
+  .project {
+    display: flex;
+    max-width: max-content;
+    margin: 0 auto;
+  }
+    .description {
+      padding: 10px;
+      max-width: 750px;
+      letter-spacing: 1px;
+    }
+
+    .project-icon-wrapper {
+      min-width: 300px;
+      max-width: 300px;
+      min-height: 300px;
+      max-height: 300px;
+      padding: 20px;
+    }
+      .project-icon {
+        border-radius: 30px;
+      }
+
+
+@media screen and (max-width:750px) {
+  .project {
+    flex-wrap: wrap;
+  }
+    .project-icon-wrapper {
+      margin: 0 auto;
+    }
+}
+
+@media screen and (min-width:751px) {
+  .project:nth-child( odd ) {
+    text-align: right;
+    flex-direction: row-reverse;
+  }
+}
