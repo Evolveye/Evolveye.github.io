@@ -34,6 +34,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop -p 80 -H 0.0.0.0",
+    "develop3k": "gatsby develop -p 3000 -H 0.0.0.0",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
