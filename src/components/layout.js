@@ -42,7 +42,7 @@ export default class Layout extends React.Component {
     <div className={styles.layout}>
       <Seo title={this.props.title} />
       <Nav className={styles.nav} langKey={this.props.langKey} />
-      <main className={`${styles.main} ${this.props.className}`}>{this.props.children}</main>
+      <main className={`${styles.main} ${this.props.className || ``}`}>{this.props.children}</main>
       <Footer
         className={styles.footer}
         langKey={this.props.langKey}
