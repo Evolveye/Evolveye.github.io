@@ -29,7 +29,7 @@
 .entry,
 .content {
   position: relative;
-  width: min( 1000px, 100vw - 20px );
+  max-width: min( 1000px, 100vw - 20px );
   padding: 30px;
   margin: 50px auto;
   overflow: hidden;
