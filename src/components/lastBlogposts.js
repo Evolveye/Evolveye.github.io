@@ -82,7 +82,7 @@ export default ({ langKey }) => {
     )
 
   return <section className={styles.blogposts}>
-    <h2 className={`boxed-title is-blue ${styles.sectionTitle}`}>{translation.title[ langKey ]}</h2>
+    <h2 className={`boxed-title is-green ${styles.sectionTitle}`}>{translation.title[ langKey ]}</h2>
     {langKey === `pl` ? postsEntries :
       <p className={styles.info}>
         Oops. This content is exclusive for polish readers. If you wanna be one of them, just click <Link langKey="pl" to="/"> that link</Link>.

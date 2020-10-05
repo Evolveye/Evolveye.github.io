@@ -36,6 +36,12 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    { resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `small projects`,
+        path: `${__dirname}/src/small_projects`,
+      },
+    },
     { resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Evolveye's personal website`,
