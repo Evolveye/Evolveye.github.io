@@ -1,0 +1,21 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+  .item {
+    width: 200px;
+    height: 400px;
+  }
+    .title {
+      padding: 0;
+      margin: 10px 0;
+    }
+
+
+@media screen and (max-width:750px) {
+  .item {
+    width: calc( 50% - 30px );
+    margin: 15px;
+  }
+}

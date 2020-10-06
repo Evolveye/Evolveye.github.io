@@ -6,6 +6,7 @@ const path = require(`path`)
 const templates = {
   blog: path.resolve( 'src/pages/blog.js' ),
   index: path.resolve( 'src/pages/index.js' ),
+  scp: path.resolve( 'src/templates/scp.js' ),
   post: path.resolve( 'src/templates/post.js' ),
   searchTag: path.resolve( 'src/templates/search-tag.js' ),
   searchCategory: path.resolve( 'src/templates/search-category.js' ),
@@ -23,6 +24,9 @@ const templates = {
  * @property {string} data.allMdx.nodes.frontmatter.title
  * @property {string[]} data.allMdx.nodes.frontmatter.tags
  * @property {string[]} data.allMdx.nodes.frontmatter.categories
+ * @property {Object} data.allScp
+ * @property {Object[]} data.allScp.nodes
+ * @property {string} data.allScp.nodes.relativeDirectory
  */
 const postsQuery = `query {
   allMdx(
@@ -38,6 +42,11 @@ const postsQuery = `query {
         tags
         categories
       }
+    }
+  }
+  allScp: allFile( filter:{ sourceInstanceName:{ eq:"single component projects" } } ) {
+    nodes {
+      relativeDirectory
     }
   }
 }`
@@ -67,7 +76,6 @@ exports.createPages = async ({ actions:{ createPage }, graphql }) => {
     categories: new Set()
   } )
 
-
   //
   // Create pages for every language
   //
@@ -87,6 +95,13 @@ exports.createPages = async ({ actions:{ createPage }, graphql }) => {
       path: `${urlStart}category/${category}`,
       component: templates.searchCategory,
       context: { langKey, category, categories },
+    } ) )
+
+    console.log( data.allScp.nodes.map( ({ relativeDirectory }) => `${urlStart}scp/${relativeDirectory.replace( / /g, `-` ).toLowerCase()}` ) )
+    data.allScp.nodes.forEach( ({ relativeDirectory }) => createPage( {
+      path: `${urlStart}scp/${relativeDirectory.replace( / /g, `_` ).toLowerCase()}`,
+      component: templates.scp,
+      context: { langKey, scp:relativeDirectory },
     } ) )
 
     posts.forEach( (post, index) => {

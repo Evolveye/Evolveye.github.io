@@ -1,8 +1,8 @@
 import React from "react"
 
 export const title = {
-  pl: `Gif creator`,
-  en: `Kreator gifów`,
+  en: `Gif creator`,
+  pl: `Kreator gifów`,
 }
 
 export const description = {

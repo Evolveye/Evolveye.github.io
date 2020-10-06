@@ -38,8 +38,8 @@ module.exports = {
     },
     { resolve: `gatsby-source-filesystem`,
       options: {
-        name: `small projects`,
-        path: `${__dirname}/src/small_projects`,
+        name: `single component projects`,
+        path: `${__dirname}/src/scp`,
       },
     },
     { resolve: `gatsby-plugin-manifest`,

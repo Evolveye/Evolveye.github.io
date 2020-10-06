@@ -1,7 +1,8 @@
 import React from "react"
 
-import styles from "./smallProjects.module.css"
+import styles from "./scp.module.css"
 
+import Link from "./link"
 import LoadingBox from "./loadingBox"
 
 export default class SimpleProjects  extends React.Component {
@@ -10,7 +11,7 @@ export default class SimpleProjects  extends React.Component {
   }
 
   componentDidMount() {
-    import( `../small_projects/gif_creator/index.js` ).then( project => {
+    import( `../scp/gif_creator/index.js` ).then( project => {
       this.setState( old => ({ projects:[ ...old.projects, project ] }) )
     } )
   }
@@ -27,19 +28,18 @@ export default class SimpleProjects  extends React.Component {
       else {
         const { title, description } = projects[ i - 1 ]
         const section = `@default`
+        const toAddress = `/scp/${title.en.replace( / /g, `_` ).toLowerCase()}`
 
         if (!(section in sections)) sections[ section ] = []
 
         sections[ section ].push(
-          <article className={className} key={title[ langKey ]}>
-            <h3>{title[ langKey ]}</h3>
+          <article className={`${className} is-hoverable`} key={title[ langKey ]}>
+            <h3 className={styles.title}><Link langKey={langKey} to={toAddress}>{title[ langKey ]}</Link></h3>
             <p>{description[ langKey ]}</p>
           </article>
         )
       }
     }
-
-    console.log()
 
     return <section>
       <h2 className={`h2 boxed-title is-blue`}>

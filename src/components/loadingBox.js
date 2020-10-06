@@ -5,24 +5,19 @@ import React from "react"
 export default class LoadingBox extends React.Component {
   static colors = [ `#f8cf07`, `#43c243`, `#be3922` ]
 
-  constructor( props ) {
-    super( props )
+  ref = React.createRef()
+  ctx = null
+  contentHeight = 0
+  padding = 0
 
-    this.state = {
-      objects: [],
-    }
-
-    this.contentHeight = 0
-
-    this.ref = React.createRef()
-    /** @type {CanvasRenderingContext2D} */
-    this.ctx = null
+  state = {
+    objects: []
   }
 
   configureObject( object={}, randomX=false ) {
     const { floor, random } = Math
 
-    object.x = randomX ? floor( random() * (this.ref.current.width - 40) ) + 20 : 22
+    object.x = randomX ? floor( random() * (this.ref.current.width - 40) ) + this.padding : this.padding + 2
     object.y = (floor( random() * (this.contentHeight / 30 - 1) ) + 1) * 30
     object.color = LoadingBox.colors[ floor( random() * LoadingBox.colors.length ) ]
 
@@ -55,18 +50,18 @@ export default class LoadingBox extends React.Component {
 
     if (!canvas) return
 
-    const { ctx, contentHeight } = this
+    const { ctx, contentHeight, padding } = this
     const { width, height } = canvas
 
     ctx.clearRect( 0, 0, width, height )
 
-    this.ctx.fillStyle = `#000a`
+    this.ctx.fillStyle = `#0002`
 
     for (let i = 1; i <= Math.floor( contentHeight / 30 ); i++) {
-      ctx.fillRect( 20, height - 30 * i, width - 40, 20 )
+      ctx.fillRect( padding, height - 30 * i, width - padding * 2, 20 )
     }
 
-    if (this.props.title) ctx.fillRect( 40, 20, 110, 20 )
+    if (this.props.title) ctx.fillRect( padding * 1.5, 20, 110, 20 )
 
     this.state.objects.forEach( obj => {
       const { x, y, color } = obj
@@ -81,12 +76,12 @@ export default class LoadingBox extends React.Component {
       ctx.arc( x, calculatedY + 4, 3, 0, Math.PI * 2 )
       ctx.fill()
 
-      if (x >= width - 22) this.configureObject( obj )
+      if (x >= width - (padding + 2)) this.configureObject( obj )
       else obj.x += 2
     } )
 
     requestAnimationFrame( this.animate )
   }
 
-  render = () => <canvas className={`loading_box ${this.props.className || ``}`} ref={this.ref} />
+  render = () => <canvas className={`${this.props.className || ``} loading_box`} ref={this.ref} />
 }
