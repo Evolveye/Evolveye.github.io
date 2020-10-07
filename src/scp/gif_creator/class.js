@@ -50,7 +50,7 @@ export default class Gif {
     // APPLICATION EXTENSION
     if ( imageData.length > 1 ) {
       const loops = Infinity
-      this.bufferData += ` 21 FF 0B 4E 45 54 53 43 41 50 45 32 2E 30 03 01 ${loops == Infinity ? "00 00" : Gif.get2ByteCode( loops )} 00`
+      this.bufferData += ` 21 FF 0B 4E 45 54 53 43 41 50 45 32 2E 30 03 01 ${loops === Infinity ? "00 00" : Gif.get2ByteCode( loops )} 00`
     }
 
     imageData.forEach( data => {
@@ -90,20 +90,20 @@ export default class Gif {
     let sequence = flattedImage[ 0 ]
     let length = 2 ** realGlobalColorTableSize - 1
 
-    for (let code = 0; flattedImage[ code ] != `EiO`;) {
+    for (let code = 0; flattedImage[ code ] !== `EiO`;) {
       let founded = true
       let k = code + 1
 
       while (founded && k <= flattedImage.length) {
         const nextSequence = flattedImage.slice( code, k ).join( `` )
 
-        if (codeTable.indexOf( nextSequence ) != -1) {
+        if (codeTable.indexOf( nextSequence ) !== -1) {
           sequence = nextSequence
           k += 1
         } else {
           const index = codeTable.indexOf( sequence )
 
-          if (codeTable.length > 2 ** length && codeStream[ codeStream.length - 1 ].index != index ) length++
+          if (codeTable.length > 2 ** length && codeStream[ codeStream.length - 1 ].index !== index ) length++
 
           codeTable.push( nextSequence )
           codeStream.push( { length, index } )
@@ -197,7 +197,7 @@ export class Png {
       const length = Png.bufferToNum( buffer.slice( i,     i + 4 ) )
       const type = buffer.slice( i + 4, i + 8 ).toString()
       const data = buffer.slice( i + 8, i + 8 + length )
-      const crc = buffer.slice( i + 8 + length, i + 8 + length + 4 )
+      // const crc = buffer.slice( i + 8 + length, i + 8 + length + 4 )
 
       if (type === `IHDR`) {
         this.header.width = Png.bufferToNum( data.slice( 0, 4 ) )
@@ -211,16 +211,16 @@ export class Png {
         this.data.windowSize = data[ 0 ] >> 4
         this.data.method = data[ 0 ] & 15
         this.data.level = data[ 1 ] >> 6
-        this.data.dict = data[ 1 ] >> 5 & 1
+        this.data.dict = (data[ 1 ] >> 5) & 1
         this.data.checksum = Png.bufferToNum( data.slice( 0, 2 ) ) % 31
         this.data.lastBlock = data[ 3 ] & 1
-        this.data.blockType = data[ 3 ] >> 1 & 3
+        this.data.blockType = (data[ 3 ] >> 1) & 3
         this.data.dataLength = Png.bufferToNum( data.slice( 3, 5 ).reverse() )
         this.data.length = Png.bufferToNum( data.slice( 5, 7 ).reverse() )
         this.data.lineFilter = data[ 7 ]
 
         //...and problem, because I have weird values in buffer
-           console.log( data )
+        // console.log( data )
         // <Buffer 18 57 63 cf f8 f0 c0 1f 00 05 00 01 ff>
       } else if (type === `IEND`) {
       }

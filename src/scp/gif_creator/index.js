@@ -54,7 +54,7 @@ export const getComponent = () => {
 
   return <>
     <div style={divStyle}>
-      <img src={gif.getSrc()} width={100} height={100} style={{ imageRendering:`pixelated` }} />
+      <img src={gif.getSrc()} alt="Generated from array GIF" width={100} height={100} style={{ imageRendering:`pixelated` }} />
       <p style={pStyle}>
         {
           `
