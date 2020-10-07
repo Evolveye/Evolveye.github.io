@@ -31,7 +31,7 @@ export default class ScpPage extends React.Component {
           }
         </p>
         <div className={styles.wrapper}>
-          {this.state.project && <this.state.project.Component canvasClass={styles.canvas} uiClass={styles.ui} />}
+          {this.state.project && <this.state.project.Component langKey={langKey} canvasClass={styles.canvas} uiClass={styles.ui} />}
         </div>
       </article>
       <Scp langKey={langKey} />

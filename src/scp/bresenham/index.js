@@ -64,7 +64,7 @@ export class Component extends React.Component {
     this.ctx = canvas.getContext( `2d` )
     this.draw()
   }
-  /** @param {React.MouseEvent} e */
+  /** @param {React.PointerEvent} e */
   handlePointerMove = e => {
     const { layerX, layerY } = e.nativeEvent
 
@@ -85,7 +85,7 @@ export class Component extends React.Component {
     ctx.lineTo( x, y )
     ctx.stroke()
   }
-  /** @param {React.MouseEvent} e */
+  /** @param {React.PointerEvent} e */
   handlePointerDown = e => {
     const { layerX, layerY } = e.nativeEvent
 
@@ -95,7 +95,7 @@ export class Component extends React.Component {
     this.mouse.x = layerX
     this.mouse.y = layerY
   }
-  /** @param {React.MouseEvent} e */
+  /** @param {React.PointerEvent} e */
   handlePointerUp = e => {
     const { layerX, layerY } = e.nativeEvent
 

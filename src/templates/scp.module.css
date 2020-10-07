@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   min-height: 500px;
+  user-select: none;
 }
   .ui {
     text-align: center;

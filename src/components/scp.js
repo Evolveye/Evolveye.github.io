@@ -6,10 +6,12 @@ import Link from "./link"
 
 import * as scp_gifCreator from "../scp/gif_creator"
 import * as scp_bresenham from "../scp/bresenham"
+import * as scp_quadtree from "../scp/quadtree"
 
 const scpPackage = [
   { name:`gif_creator`, scp:scp_gifCreator },
   { name:`bresenham`,   scp:scp_bresenham },
+  { name:`quadtree`,   scp:scp_quadtree },
 ]
 
 export default ({ langKey }) =>
