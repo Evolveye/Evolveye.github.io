@@ -12,7 +12,7 @@ export const description = {
   en: `Simple GIFs creator made when I wanted to learn how are builded .gif files formats`,
 }
 
-export const getComponent = () => {
+export const Component = () => {
   const gif = new Gif( { w:`FF FF FF`, r:`FF 00 00`, b:`00 00 FF`, k:`00 00 00` }, [
     [
       [ `r`,`r`,`r`,`r`,`r`,`b`,`b`,`b`,`b`,`b` ],

@@ -3,26 +3,21 @@ import Scp from "../components/scp"
 
 import Layout from "../components/layout"
 
+import styles from "./scp.module.css"
+
 export default class ScpPage extends React.Component {
   state = {
     project: null
   }
 
   componentDidMount() {
-    import( `../scp/gif_creator/index.js` ).then( project => {
+    import( `../scp/${this.props.pageContext.scp}/index.js` ).then( project => {
       this.setState( ({ project }) )
     } )
   }
 
   render = () => {
     const { langKey, scp } = this.props.pageContext
-    const componentStyle = {
-      display: `flex`,
-      flexWrap: `wrap`,
-      alignItems: `center`,
-      justifyContent: `center`,
-      minHeight: `500px`,
-    }
 
     return <Layout title={scp} langKey={langKey}>
       <article>
@@ -35,8 +30,8 @@ export default class ScpPage extends React.Component {
               `That project cannot be adjusted for the screen on wchich you are viewing this page`
           }
         </p>
-        <div style={componentStyle}>
-          {this.state.project && this.state.project.getComponent()}
+        <div className={styles.wrapper}>
+          {this.state.project && <this.state.project.Component canvasClass={styles.canvas} uiClass={styles.ui} />}
         </div>
       </article>
       <Scp langKey={langKey} />

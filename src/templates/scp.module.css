@@ -1,0 +1,20 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+}
+  .ui {
+    text-align: center;
+  }
+    .ui > * {
+      margin: 0 15px;
+    }
+  .canvas {
+    width: calc( 100% - 42px );
+    height: 100%;
+    border: 1px solid #aaa;
+    margin: 20px;
+  }

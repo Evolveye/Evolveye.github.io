@@ -104,6 +104,22 @@ input[type="checkbox"], input[type="radio"] {
   border: 1px solid var( --dark );
 }
 
+:focus {
+  position: relative;
+  outline: none;
+}
+:focus::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  width: calc( 100% + 10px );
+  height: calc( 100% + 10px );
+  border: 1px dashed var( --blue );
+  border-radius: inherit;
+  z-index: -1;
+}
+
 address {
   font-style: unset;
 }
@@ -210,6 +226,13 @@ blockquote:not( [class] )::before {
     -8px -8px 12px 0 #fff;
   border-radius: 30px;
 }
+button.neumorphizm,
+button.neumorphizm-white {
+  margin: 5px;
+}
+
+button.neumorphizm:active,
+button.neumorphizm-white:active,
 .neumorphizm.is-hoverable:hover,
 .neumorphizm-white.is-hoverable:hover {
   box-shadow:
@@ -220,6 +243,8 @@ blockquote:not( [class] )::before {
 .neumorphizm-white.is-hoverable > * {
   transition: all 0.1s;
 }
+button.neumorphizm:active > *,
+button.neumorphizm-white:active > *,
 .neumorphizm.is-hoverable:hover > *,
 .neumorphizm-white.is-hoverable:hover > * {
   transform: scale( .98 );

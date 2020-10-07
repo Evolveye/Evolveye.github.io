@@ -87,7 +87,7 @@ export default ({ langKey, theme, themeChanger }) => {
               moc.liamg@wap.iksralots
             </span>
           :
-            <button className={`neumorphizm-white is-hoverable`} style={{ margin:0 }}onClick={() => setMailVisibility( true )}>
+            <button className={`neumorphizm-white`} style={{ margin:0 }}onClick={() => setMailVisibility( true )}>
               {langKey === `pl` ? `Kliknij aby zobaczyć mail` : `Click to show the mail`}
             </button>
         }</>,
