@@ -108,7 +108,7 @@ input[type="checkbox"], input[type="radio"] {
   position: relative;
   outline: none;
 }
-:focus::after {
+:focus:not( [id*="gatsby"] )::after {
   content: "";
   position: absolute;
   left: -6px;
