@@ -97,7 +97,6 @@ exports.createPages = async ({ actions:{ createPage }, graphql }) => {
       context: { langKey, category, categories },
     } ) )
 
-    console.log( data.allScp.nodes.map( ({ relativeDirectory }) => `${urlStart}scp/${relativeDirectory.replace( / /g, `-` ).toLowerCase()}` ) )
     data.allScp.nodes.forEach( ({ relativeDirectory }) => createPage( {
       path: `${urlStart}scp/${relativeDirectory.replace( / /g, `_` ).toLowerCase()}`,
       component: templates.scp,
