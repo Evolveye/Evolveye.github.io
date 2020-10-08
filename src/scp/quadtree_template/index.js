@@ -9,8 +9,8 @@ export const title = {
 }
 
 export const description = {
-  pl: `Struktura potrafiąca przechowywać ogrom punktów i potrafiaca je zwórcić z wielkiej przestrzeni z wydajnością O(log(n))`,
-  en: `Simple GIFs creator made when I wanted to learn how are builded .gif files formats`,
+  pl: `Struktura przechowujaca referencje do figur geometrycznych (w obecnej implementacji jedynie linii)`,
+  en: `The structure that stores references to geometric figures (in current implementation only points)`,
 }
 
 export class Component extends React.Component {
