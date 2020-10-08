@@ -46,7 +46,15 @@ export const Component = () => {
     letterSpacing: `1px`
   }
 
-  return<>
+  return <>
+    <p>
+      {
+        this.langKey === `pl` ?
+          `Gif ten został stworzony z kodu obok.`
+        :
+          `This gif, was created from code beside.`
+        }
+    </p>
     <img src={gif.getSrc()} alt="Generated from array GIF" width={100} height={100} style={{ imageRendering:`pixelated` }} />
     <p style={pStyle}>
       {

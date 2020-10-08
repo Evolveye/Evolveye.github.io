@@ -145,6 +145,14 @@ export class Component extends React.Component {
           Resolution {` `}
           <input type="number" defaultValue={this.rectSideLength} onChange={this.handleChangeWidth} min={1} max={30} />
         </label>
+        <p>
+          {
+            this.langKey === `pl` ?
+              `Narysuj linię na poniższej wyznaczonej przestrzni.`
+            :
+              `Draw a line on highlighted area below.`
+            }
+        </p>
       </article>
       <canvas
         ref={this.handleRef}

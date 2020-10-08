@@ -21,6 +21,8 @@ export class Component extends React.Component {
   isMeshShowed = true
   objects = []
 
+  langKey = this.props.langKey
+
   /** @param {HTMLCanvasElement} canvas */
   handleRef = canvas => {
     if (!canvas) return
@@ -147,6 +149,14 @@ export class Component extends React.Component {
           Mesh {` `}
           <input type="checkbox" defaultChecked={true} onChange={this.handleToggleMesh} />
         </label>
+        <p>
+          {
+            this.langKey === `pl` ?
+              `Narysuj linię na poniższej wyznaczonej przestrzni.`
+            :
+              `Draw a line on highlighted area below.`
+            }
+        </p>
       </article>
       <canvas
         ref={this.handleRef}

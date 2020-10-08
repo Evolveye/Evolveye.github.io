@@ -141,6 +141,14 @@ export class Component extends React.Component {
             </>
           }
         </p>
+        <p>
+          {
+            this.langKey === `pl` ?
+              `Ustaw punkt na poniższej wyznaczonej przestrzni.`
+            :
+              `Set a point on highlighted area below.`
+            }
+        </p>
       </article>
       <canvas
         ref={this.handleRef}

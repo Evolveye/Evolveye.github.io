@@ -26,6 +26,7 @@ export default ({ langKey }) =>
         scpPackage.map( ({ name, scp:{ title, description } }) =>
           <article className={`neumorphizm ${styles.item} is-hoverable`} key={name}>
             <h3 className={styles.title}>
+              {/* <img className={styles.thumbnail} /> */}
               <Link langKey={langKey} to={`/scp/${name}`}>{title[ langKey ]}</Link>
             </h3>
             <p>{description[ langKey ]}</p>
