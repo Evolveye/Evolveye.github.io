@@ -104,11 +104,11 @@ input[type="checkbox"], input[type="radio"] {
   border: 1px solid var( --dark );
 }
 
-:focus {
+:focus:not( .is-not-focus ) {
   position: relative;
   outline: none;
 }
-:focus:not( [id*="gatsby"] )::after {
+:focus:not( [id*="gatsby"], .is-not-focus )::before {
   content: "";
   position: absolute;
   left: -6px;

@@ -139,7 +139,7 @@ export const BlogpostEntry = props => {
 
   const { title, date, author, categories } = frontmatter
   const titleContent = titleLinkAddress
-    ? <Link langKey={langKey} to={titleLinkAddress} className={`${styles.titleLink} is-not-decorative`}>{title}</Link>
+    ? <Link langKey={langKey} to={titleLinkAddress} className={`${styles.titleLink} is-not-decorative is-not-focus`}>{title}</Link>
     : title
 
   return <article {...restProps} className={`neumorphizm is-hoverable ${styles.entry} ${className}`}>
@@ -156,7 +156,7 @@ export const BlogpostEntry = props => {
             <Link
               key={category}
               langKey={langKey}
-              className={`${styles.category}`}
+              className={styles.category}
               to={`/category/${category}`}
             >
               {category}
