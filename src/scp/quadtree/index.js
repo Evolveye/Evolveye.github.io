@@ -127,6 +127,9 @@ export class Component extends React.Component {
         <button className="neumorphizm-white" onClick={() => this.generate( 100 )}>
           {this.langKey === `pl` ? `Dogeneruj 100 punktów` : `Generate 100 points`}
         </button>
+        <button className="neumorphizm-white" onClick={() => this.generate( 1000 )}>
+          {this.langKey === `pl` ? `Dogeneruj 1000 punktów` : `Generate 1000 points`}
+        </button>
         <button className="neumorphizm-white" onClick={this.handleLeavesModeChange}>
           {this.langKey === `pl` ? `Zmień tryb przechowywania liści` : `Switch leaves store mode`}
         </button>
