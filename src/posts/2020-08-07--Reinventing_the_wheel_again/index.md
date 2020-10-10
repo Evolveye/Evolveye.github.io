@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "Jednym commitem pisząc: Reinventing the wheel again"
 author: Paweł Stolarski
 date: 2020-08-07
@@ -80,3 +80,22 @@ gdyż obecnie większość stron to pojedyncze okna które łatwo dopasować do 
 
 
 ## Podejście drugie -- mniej lecz więcej
+
+
+W drugim podejściu zdecydowałem o tym aby `paddingi` i `marginy` były duże.
+Cała stronę podzieliłem na sekcje, jak to się obecnie dość często robi.
+Każda jedna sekcja to pojedynczy komponent (strona robiona przy pomocy [gatsbiego](https://www.gatsbyjs.com/)).
+Całość wyszła raczej dobrze.
+
+![Zbyt wysoki screen drugiej wersji wyglądu strony](./strona_2.png)
+
+Jak widać, tym razem postawnowiłem pobawić się wypukłościami. uważam tę decyzję za dobrą,
+ponieważ teraz wiele elementó strony zdaje się być bliższa użytkownikowi -- elementy "płaskie"
+zdaja się być wmurowane w strukturę strony, ot treści statyczne. Podoba mi się, i tak miało być.
+
+Tak jak wspominałem wcześniej, skrzystałem z neumorfizmu -- cieni które sprawiaja wrażenie wypukłości.
+Wypukłosci, a nie unoszenia się lub bycia przytwierdzonym do tła tak jak to ma miejsce we flat czy material designach.
+
+Przez zastosowane podejscie na ekranie widac mniej, chociaż patrząc na całość jest zdecydowanie więcej.
+I to na tyle `wiecej`, ze jestem w stanie teraz umieścić na stronie dowolną rzecz.
+Różnicę między wersja pierwsza a obecna widać raczej od razu, i w zasadzie dalszy komentarz jest zbędny.
