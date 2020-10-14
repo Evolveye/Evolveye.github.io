@@ -9,6 +9,12 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-remark-images`,
+    { resolve: `gatsby-plugin-gtag`,
+      options: {
+        trackingId: `UA-180563465-1`,
+        head: true,
+      },
+    },
     { resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
