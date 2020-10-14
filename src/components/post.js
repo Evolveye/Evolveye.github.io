@@ -70,6 +70,8 @@ export default props => {
 
   const { title, date, author, categories, tags=`` } = frontmatter
 
+  console.log( langKey )
+
   return <article className={className}>
     <section {...restProps} className={`neumorphizm ${styles.content}`}>
       <h1>{title}</h1>

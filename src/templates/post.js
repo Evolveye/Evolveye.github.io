@@ -7,6 +7,7 @@ import Post from "../components/post"
 export default ({ data, pageContext:{ langKey, previous, next } }) =>
   <Layout title={data.mdx.frontmatter.title} langKey={langKey}>
     <Post
+      langKey={langKey}
       frontmatter={data.mdx.frontmatter}
       body={data.mdx.body}
       previous={previous}

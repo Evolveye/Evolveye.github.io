@@ -8,7 +8,7 @@ import Link from "../components/link"
 import styles from "./search.module.css"
 
 export default ({ data, pageContext:{ langKey=`en`, category } }) =>
-  <Layout title={`Kategoria ${category}`} langKey={langKey}>
+  <Layout title={`${langKey === `pl` ? `Kategoria` : `Category`} ${category}`} langKey={langKey}>
     <h1 className="boxed-title is-blue">{langKey === `pl` ? `Przeszukiwanie kategorii` : `Searching the category`}</h1>
     <section className={styles.searchPage}>
       <aside className={styles.empty} />
@@ -44,7 +44,10 @@ export const query = graphql`
   query PostsByCategory( $category:String! ) {
     allMdx(
       sort: { fields:frontmatter___date, order:DESC },
-      filter:{ frontmatter:{ categories:{ in:[$category] } } }
+      filter:{ frontmatter:{
+        published:{ eq:true },
+        categories:{ in:[$category] }
+      } }
     ) {
       nodes {
         id

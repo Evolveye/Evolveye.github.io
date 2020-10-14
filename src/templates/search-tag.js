@@ -1,8 +1,9 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import { BlogpostEntry } from "../components/post"
+import Link from "../components/link"
 
 import styles from "./search.module.css"
 
@@ -15,6 +16,7 @@ export default ({ data, pageContext:{ langKey=`en`, tag } }) =>
         {
           data.allMdx.nodes.map( ({ id, excerpt, frontmatter, fields }) => <BlogpostEntry
             key={id}
+            langKey={langKey}
             titleLinkAddress={`/post${fields.slug}`}
             frontmatter={frontmatter}
             body={excerpt}
@@ -22,10 +24,18 @@ export default ({ data, pageContext:{ langKey=`en`, tag } }) =>
         }
       </article>
       <article className={styles.info}>
-        <h2 className={styles.title}>O wynikach</h2>
+        <h2 className={styles.title}>{langKey === `pl` ? `O wynikach` : `About results`}</h2>
         <ul>
-          <li>Przeszukiwany tag: <Link to={`/tag/${tag}`}>{tag}</Link></li>
-          <li>Ilość wyników: {data.allMdx.nodes.length}</li>
+          <li>
+            {langKey === `pl` ? `Przeszukiwany tag:` : `Search tag:`}
+            {` `}
+            <Link langKey={langKey} to={`/tag/${tag}`}>{tag}</Link>
+          </li>
+          <li>
+            {langKey === `pl` ? `Ilość wyników:` : `Results count:`}
+            {` `}
+            {data.allMdx.nodes.length}
+          </li>
         </ul>
       </article>
     </section>
@@ -35,7 +45,10 @@ export const query = graphql`
   query PostsByTag( $tag:String! ) {
     allMdx(
       sort: { fields:frontmatter___date, order:DESC },
-      filter:{ frontmatter:{ tags:{ in:[$tag] } } }
+      filter:{ frontmatter:{
+        published:{ eq:true },
+        tags:{ in:[$tag] }
+      } }
     ) {
       nodes {
         id
