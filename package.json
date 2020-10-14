@@ -1,9 +1,13 @@
 {
   "name": "gatsby-starter-default",
   "private": true,
+<<<<<<< HEAD
+  "homepage": "https://evolveye.github.io",
+=======
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+>>>>>>> dev-gatsby
   "dependencies": {
     "@mdx-js/mdx": "^1.6.16",
     "@mdx-js/react": "^1.6.16",
@@ -33,6 +37,14 @@
   ],
   "license": "0BSD",
   "scripts": {
+<<<<<<< HEAD
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b master -d build"
+=======
     "build": "gatsby build",
     "develop": "gatsby develop -p 80 -H 0.0.0.0",
     "develop3k": "gatsby develop -p 3000 -H 0.0.0.0",
@@ -42,6 +54,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+>>>>>>> dev-gatsby
   },
   "repository": {
     "type": "git",
