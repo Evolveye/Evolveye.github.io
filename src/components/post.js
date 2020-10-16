@@ -5,6 +5,7 @@ import Highlight, { defaultProps, Prism } from "prism-react-renderer"
 import theme from "prism-react-renderer/themes/vsDark"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
+import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
 
 import styles from "./posts.module.css"
 
@@ -12,6 +13,11 @@ import styles from "./posts.module.css"
 
 require( `prismjs/components/prism-rust` )
 
+const getDisqusConfig = (title, date) => ({
+  url: `https://evolveye.github.io/${window.location.pathname}`,
+  identifier: date,
+  title,
+})
 const shortcodes = {
   Note: ({children, ...props}) => <strong {...props} className={`box is-red ${styles.box}`}>{children}</strong>,
   Info: ({children, ...props}) => <mark {...props} className={`box is-blue ${styles.box}`}>{children}</mark>,
@@ -70,8 +76,6 @@ export default props => {
 
   const { title, date, author, categories, tags=`` } = frontmatter
 
-  console.log( langKey )
-
   return <article className={className}>
     <section {...restProps} className={`neumorphizm ${styles.content}`}>
       <h1>{title}</h1>
@@ -126,6 +130,8 @@ export default props => {
         </div>
       }
     </nav>
+
+    <Disqus className={styles.comments} config={getDisqusConfig( title, date )} />
   </article>
 }
 

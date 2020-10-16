@@ -15,6 +15,11 @@ module.exports = {
         head: true,
       },
     },
+    { resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `evolveye`,
+      },
+    },
     { resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,

@@ -119,6 +119,10 @@
     .tag:hover {
       background-color: var( --green );
     }
+    .comments {
+      width: 800px;
+      margin: 0 auto;
+    }
 
 
 .is-sticky {
