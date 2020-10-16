@@ -13,11 +13,11 @@ import styles from "./posts.module.css"
 
 require( `prismjs/components/prism-rust` )
 
-const getDisqusConfig = (title, date) => ({
+const getDisqusConfig = (title, date) => typeof window !== `undefined` && {
   url: `https://evolveye.github.io/${window.location.pathname}`,
   identifier: date,
   title,
-})
+}
 const shortcodes = {
   Note: ({children, ...props}) => <strong {...props} className={`box is-red ${styles.box}`}>{children}</strong>,
   Info: ({children, ...props}) => <mark {...props} className={`box is-blue ${styles.box}`}>{children}</mark>,
