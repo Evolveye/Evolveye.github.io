@@ -49,6 +49,10 @@ cokolwiek zrobić i to spisać. Możliwe, że będzie to także zależeć od teg
 
 Jedyne co mi pozostaje na ten moment to napisać: **Witam gorąco; cieszy mnie, że to czytasz**.
 
+A gdy o publikacjach mowa, to w oparciu o doświadczenie (niekoniecznie blogowego)
+polecam narzędzie do optymalizacji grafik [Tinypng](https://tinypng.com/) oraz [languagetool]() do sprawdzania pisowni.
+Z tychrze narzędzi korzystam i korzystać zamierzam podczas tutejszego rozpisywania się.
+
 
 ## Niedługo o procesie tworzenia strony
 
@@ -57,7 +61,7 @@ Na pierwszy ogień krótko zdecydowałem się opisać to, w jaki sposób powstaw
 Darowałem sobie opis perypetii i historii więc treść dotyczy jedynie tego,
 co widać na dzień publikacji tegoż posta.
 
-Czego by nie mówić, efekt końcowy mnie zadowala.
+Czego by nie mówić, efekt mnie zadowala.
 Setki z dostępności nie zdobyłem umyślnie, kwestia "widzimisię" w kwestii kolorowych nagłówków.
 Jedna usterka to ten 1% wydajności.
 
@@ -128,7 +132,7 @@ Mam poczucie, że niejeden element wymaga jeszcze poprawy.
   * Jednak rzeczą, którą najbardziej chciałbym zrobić, jest dynamiczne tło. Proste, skromne, lecz ciekawe.
     Pomysł już mam, teraz czekać na determinację i przypływ chęci.
   * Font/krój, szczegóły, bajery, tło...
-    Podoba mi się też to jak jest prowadzony [blog Discorda na Medium](https://blog.discord.com/). Możliwe, że zacięgnę tamtejszy `blockquete`.
+    Podoba mi się też to, jak jest prowadzony [blog Discorda na Medium](https://blog.discord.com/). Możliwe, że zacięgnę tamtejszy `blockquete`.
 
 Więcej zmian pewnie wyjdzie w przyszłości, a nie mam też na celu sporządzać sobie tutaj pełnej listy tego, co można by zmienić i ulepszyć,
 ponieważ można by było to napisać o wszystkich elementach strony w mniejszym lub większym stopniu.
