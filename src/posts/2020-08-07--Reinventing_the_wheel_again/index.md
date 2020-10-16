@@ -47,7 +47,7 @@ Cóż, najważniejsze, że blog nie jest stroną główną. W związku z tym spo
 jednego posta na 2 tygodnie. Czas ten jest na tyle optymalny, że będę w stanie w tym czasie
 cokolwiek zrobić i to spisać. Możliwe, że będzie to także zależeć od tego, czy znajdą się czytelnicy.
 
-Jedyne co mi pozostaje na ten moment to napisać: Witam gorąco, cieszy mnie że to czytasz.
+Jedyne co mi pozostaje na ten moment to napisać: **Witam gorąco; cieszy mnie, że to czytasz**.
 
 
 ## Niedługo o procesie tworzenia strony
@@ -66,7 +66,7 @@ na dodatkowe elementy (których nie ma) albo wyglądały jak strona organizacji.
 
 Tę stronę początkowo zrobiłem jako odświeżoną wersję [bloga Comandeera](https://blog.comandeer.pl/).
 Nie ukrywam, że trochę się nim sugerowałem. Nie jest to jednak jedyna inspiracja --
-spoglądałem również na [devstyle.pl](https://devstyle.pl/) oraz na świeżo założoną [Postać normalną](https://postacnormalna.pl/).
+spoglądałem również na [devstyle.pl](https://devstyle.pl/) oraz na niedawno powstałą [Postać normalną](https://postacnormalna.pl/).
 
 ![Pierwszy wygląd strony](./blog_1.png)
 
@@ -110,22 +110,19 @@ Różnicę między wersja pierwsza a obecna widać raczej od razu i w zasadzie d
 
 
 Mam poczucie, że niejeden element wymaga jeszcze poprawy.
-Tak na przykład na stronie wpisów brakuje mi nawigacji po nagłówkach --
-implikuje to także linki przy nagłówkach, które dodałyby hashe do strony
-([kotwice](https://pomoc.home.pl/baza-wiedzy/kotwice-wewnetrzne-i-zewnetrzne-odsylacze-na-stronie-www)).
-
-Samym wpisom być może dodam miniaturki, aby lepiej prezentowały się `zajawki`.
-
-Dodatkowo mam pewien problem z nawigacją całej witryny oraz stylami neumorfizmu.
-Prawdopodobnie przepiszę plik sanitize na SASS -- w prostszy sposób będę mógł zorganizować
-ciemny i jasny motyw, jak i powtarzające się fragmenty CSSa
-(mixiny nie są nadal wspierane, a @apply zostało zastąpione dziwnym mechanizmem `partów`).
-
-Na uwagę zasługuje także sekcja z projektami-różnościami,
-ponieważ przydatna byłaby możliwość dodawania tam dowolnego typu odnośnika (nie tylko do projektów jedno-komponentowych)
-
-Jednak rzeczą, którą najbardziej chciałbym zrobić, jest dynamiczne tło. Proste, skromne, lecz ciekawe.
-Pomysł już mam, teraz czekać na determinację i przypływ chęci.
+  * Na stronie wpisów brakuje mi nawigacji po nagłówkach --
+    implikuje to także linki przy nagłówkach, które dodałyby hashe do strony
+    ([kotwice](https://pomoc.home.pl/baza-wiedzy/kotwice-wewnetrzne-i-zewnetrzne-odsylacze-na-stronie-www)).
+  * Samym wpisom być może dodam miniaturki, aby lepiej prezentowały się `zajawki`.
+  * Prawdopodobnie przepiszę plik sanitize na SASS -- w prostszy sposób będę mógł zorganizować
+    ciemny i jasny motyw, jak i powtarzające się fragmenty CSSa
+    (mixiny nie są nadal wspierane, a @apply zostało zastąpione dziwnym mechanizmem `partów`).
+  * Na uwagę zasługuje także sekcja z projektami-różnościami,
+    ponieważ przydatna byłaby możliwość dodawania tam dowolnego typu odnośnika (nie tylko do projektów jedno-komponentowych)
+  * Jednak rzeczą, którą najbardziej chciałbym zrobić, jest dynamiczne tło. Proste, skromne, lecz ciekawe.
+    Pomysł już mam, teraz czekać na determinację i przypływ chęci.
+  * Font/krój, szczegóły, bajery, tło...
+    Podoba mi się też to jak jest prowadzony [blog Discorda na Medium](https://blog.discord.com/). Możliwe, że zacięgnę tamtejszy `blockquete`.
 
 Więcej zmian pewnie wyjdzie w przyszłości, a nie mam też na celu sporządzać sobie tutaj pełnej listy tego, co można by zmienić i ulepszyć,
 ponieważ można by było to napisać o wszystkich elementach strony w mniejszym lub większym stopniu.
