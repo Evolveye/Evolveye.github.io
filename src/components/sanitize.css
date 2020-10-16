@@ -89,7 +89,6 @@ figure {
   margin: 20px 40px;
 }
 figcaption {
-  color: var( --grey );
   font-size: 14px;
   text-align: center;
 }
@@ -292,7 +291,7 @@ button.neumorphizm-white:active > *,
 @media (prefers-color-scheme: dark) {
   body:not( .is-light ) {
     --background-color: #22222c;
-    --aside-color: #2c2c38;
+    --aside-color: #4e4e64;
     --text-color: #faf9f9;
 
     --separator-light-color: #343442;
