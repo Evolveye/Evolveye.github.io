@@ -57,6 +57,12 @@ Na pierwszy ogień krótko zdecydowałem się opisać to, w jaki sposób powstaw
 Darowałem sobie opis perypetii i historii więc treść dotyczy jedynie tego,
 co widać na dzień publikacji tegoż posta.
 
+Czego by nie mówić, efekt końcowy mnie zadowala.
+Setki z dostępności nie zdobyłem umyślnie, kwestia "widzimisię" w kwestii kolorowych nagłówków.
+Jedna usterka to ten 1% wydajności.
+
+![Wynik działania testera "lighthouse" z narzędzi deweloperskich chromium](./lighthouse.png)
+
 
 ### Wygląd wstępny, czyli pomyłka
 
