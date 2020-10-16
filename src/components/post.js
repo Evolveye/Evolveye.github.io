@@ -5,7 +5,7 @@ import Highlight, { defaultProps, Prism } from "prism-react-renderer"
 import theme from "prism-react-renderer/themes/vsDark"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
-import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
+import { Disqus } from 'gatsby-plugin-disqus'
 
 import styles from "./posts.module.css"
 
@@ -77,7 +77,7 @@ export default props => {
   const { title, date, author, categories, tags=`` } = frontmatter
 
   return <article className={className}>
-    <section {...restProps} className={`neumorphizm ${styles.content}`}>
+    <section {...restProps} className={`${styles.content}`}>
       <h1>{title}</h1>
 
       <aside className={styles.meta}>

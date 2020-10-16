@@ -34,6 +34,10 @@
   margin: 50px auto;
   overflow: hidden;
 }
+.content {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
 .entry {
   padding: 0;
 }
